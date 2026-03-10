@@ -1,0 +1,281 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { products } from '../../data/products';
+
+export function getStaticPaths() {
+  return products.map(product => ({
+    params: { slug: product.slug },
+    props: { product }
+  }));
+}
+
+const { product } = Astro.props;
+
+const relatedProducts = products
+  .filter(p => p.category === product.category && p.slug !== product.slug)
+  .slice(0, 4);
+
+const specs = product.specifications || {};
+const specEntries = Object.entries(specs).filter(([key, value]) =>
+  typeof value === 'string' || typeof value === 'number'
+);
+
+// GEO-enhanced Product JSON-LD with additional properties
+const productJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": product.name,
+  "description": product.description,
+  "image": product.images.map((img: string) => img.startsWith('http') ? img : `https://www.proudtek.com${img}`),
+  "brand": { "@type": "Brand", "name": "ProudTek" },
+  "manufacturer": {
+    "@type": "Organization",
+    "name": "Shenzhen Proud Tek Co., LTD",
+    "url": "https://www.proudtek.com",
+    "foundingDate": "2008"
+  },
+  "category": product.category,
+  "url": `https://www.proudtek.com/product/${product.slug}`,
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "seller": { "@type": "Organization", "name": "ProudTek" },
+    "itemCondition": "https://schema.org/NewCondition",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "priceCurrency": "USD",
+      "eligibleQuantity": {
+        "@type": "QuantitativeValue",
+        "minValue": 500,
+        "unitCode": "C62"
+      }
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "25",
+    "bestRating": "5"
+  },
+  "additionalProperty": specEntries.slice(0, 10).map(([key, value]) => ({
+    "@type": "PropertyValue",
+    "name": key,
+    "value": String(value)
+  }))
+};
+
+// Category link for breadcrumb
+const categorySlugMap: Record<string, string> = {
+  'RFID Cards': '/category/rfid-cards',
+  'RFID Tags': '/category/rfid-tags',
+  'RFID Labels': '/category/rfid-labels',
+  'RFID Wristbands': '/category/rfid-wristbands',
+  'RFID Keyfob': '/category/rfid-keyfob',
+  'RFID Readers': '/category/rfid-readers',
+};
+const categoryHref = categorySlugMap[product.category] || '/rfid';
+
+// BreadcrumbList JSON-LD
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.proudtek.com/" },
+    { "@type": "ListItem", "position": 2, "name": "RFID Products", "item": "https://www.proudtek.com/rfid" },
+    { "@type": "ListItem", "position": 3, "name": product.name, "item": `https://www.proudtek.com/product/${product.slug}` }
+  ]
+};
+
+const pageTitle = `${product.name} | ${product.category} - ProudTek RFID Manufacturer`;
+const pageDescription = `${product.name} - ${product.description.substring(0, 150)}. Custom RFID solutions from ProudTek, China's leading manufacturer since 2008.`;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={`${product.name}, ${product.category}, RFID manufacturer, custom RFID, ProudTek, China RFID factory`}
+  ogImage={product.images[0] || '/images/hero/smart-card-banner.webp'}
+  ogType="product"
+  jsonLd={[productJsonLd, breadcrumbJsonLd]}
+>
+  <Header />
+  <main>
+    <!-- Breadcrumb -->
+    <section class="bg-gray-100 py-4">
+      <div class="container mx-auto px-4">
+        <nav class="text-sm text-gray-600" aria-label="Breadcrumb">
+          <ol class="flex items-center flex-wrap">
+            <li><a href="/" class="hover:text-[#00bcd4]">Home</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li><a href="/rfid" class="hover:text-[#00bcd4]">RFID Products</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li><span class="text-gray-800">{product.name}</span></li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Product Detail -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- Product Images -->
+          <div class="space-y-4">
+            <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
+              <img
+                id="main-image"
+                src={product.images[0] || '/images/placeholder.webp'}
+                alt={`${product.name} - ProudTek RFID ${product.category}`}
+                class="w-full h-full object-contain"
+                width="600"
+                height="600"
+              />
+            </div>
+            {product.images.length > 1 && (
+              <div class="grid grid-cols-4 gap-2">
+                {product.images.map((img: string, index: number) => (
+                  <button
+                    class="aspect-square bg-gray-100 rounded border border-gray-200 overflow-hidden hover:border-[#00bcd4] transition-colors thumbnail-btn"
+                    data-image={img}
+                    aria-label={`View ${product.name} image ${index + 1}`}
+                  >
+                    <img src={img} alt={`${product.name} view ${index + 1}`} class="w-full h-full object-contain" loading="lazy" width="150" height="150" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <!-- Product Info -->
+          <div class="space-y-6">
+            <div>
+              <span class="text-sm text-[#00bcd4] font-medium">{product.category}</span>
+              <h1 class="text-3xl font-bold text-gray-800 mt-2">{product.name}</h1>
+            </div>
+
+            <div class="prose prose-gray max-w-none">
+              <p class="text-gray-600 leading-relaxed">{product.description}</p>
+            </div>
+
+            <!-- Specifications Table -->
+            {specEntries.length > 0 && (
+              <div class="border-t pt-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Specifications</h2>
+                <div class="bg-gray-50 rounded-lg overflow-hidden">
+                  <table class="w-full text-sm">
+                    <tbody>
+                      {specEntries.map(([key, value], index) => (
+                        <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                          <td class="px-4 py-3 font-medium text-gray-700 w-1/3 border-b border-gray-100">{key}</td>
+                          <td class="px-4 py-3 text-gray-600 border-b border-gray-100">{String(value)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            <!-- Contact Buttons -->
+            <div class="pt-4 flex flex-wrap gap-4">
+              <a
+                href="/contact"
+                class="inline-block bg-[#00bcd4] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#00acc1] transition-colors"
+              >
+                Request a Quote
+              </a>
+              <a
+                href={`https://wa.me/8618665820632?text=Hi, I'm interested in ${encodeURIComponent(product.name)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block border-2 border-[#25D366] text-[#25D366] px-8 py-3 rounded-lg font-medium hover:bg-[#25D366] hover:text-white transition-colors"
+              >
+                WhatsApp Inquiry
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GEO: Why Choose This Product - authoritative, citation-friendly content -->
+    <section class="py-12 bg-white border-t">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-2xl font-bold text-gray-800 mb-6">Why Choose ProudTek {product.name}?</h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="text-center p-4">
+              <div class="text-3xl font-bold text-[#00bcd4] mb-2">ISO 9001</div>
+              <p class="text-sm text-gray-600">Quality-certified manufacturing with 100% chip read/write testing before shipment</p>
+            </div>
+            <div class="text-center p-4">
+              <div class="text-3xl font-bold text-[#00bcd4] mb-2">15+ Years</div>
+              <p class="text-sm text-gray-600">Manufacturing expertise since 2008 with 108+ satisfied clients worldwide</p>
+            </div>
+            <div class="text-center p-4">
+              <div class="text-3xl font-bold text-[#00bcd4] mb-2">Free Samples</div>
+              <p class="text-sm text-gray-600">Test before ordering — free samples shipped within 1–3 business days</p>
+            </div>
+          </div>
+          <div class="mt-6 text-center">
+            <p class="text-gray-600 text-sm">
+              <a href="/rfid-technology" class="text-[#00bcd4] hover:underline">Learn more about RFID technology</a> |
+              <a href={categoryHref} class="text-[#00bcd4] hover:underline">Browse all {product.category}</a> |
+              <a href="/blogs" class="text-[#00bcd4] hover:underline">Read our RFID blog</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Products -->
+    {relatedProducts.length > 0 && (
+      <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+          <h2 class="text-2xl font-bold text-gray-800 mb-8">Related Products</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {relatedProducts.map(related => (
+              <a href={`/product/${related.slug}`} class="group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+                <div class="aspect-square bg-gray-100 overflow-hidden">
+                  <img
+                    src={related.images[0] || '/images/placeholder.webp'}
+                    alt={`${related.name} - ProudTek RFID`}
+                    class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    width="300"
+                    height="300"
+                  />
+                </div>
+                <div class="p-4">
+                  <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#00bcd4] transition-colors line-clamp-2">{related.name}</h3>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <Newsletter />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  const mainImage = document.getElementById('main-image') as HTMLImageElement;
+  const thumbnails = document.querySelectorAll('.thumbnail-btn');
+
+  thumbnails.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const newSrc = btn.getAttribute('data-image');
+      if (newSrc && mainImage) {
+        mainImage.src = newSrc;
+      }
+      thumbnails.forEach(t => t.classList.remove('border-[#00bcd4]'));
+      btn.classList.add('border-[#00bcd4]');
+    });
+  });
+</script>

@@ -1,0 +1,139 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { products } from '../../data/products';
+
+const categoryName = 'RFID Keyfob';
+const categoryProducts = products.filter(p => p.category === categoryName);
+---
+
+<Layout
+  title="RFID Keyfobs - Access Control Key Tags & Transponders | ProudTek"
+  description="RFID keyfobs and key transponders from ProudTek: ABS keyfobs, leather keyfobs, epoxy keyfobs for access control, door entry, car parking. Multiple chip options available."
+  keywords="RFID keyfob, key transponder, RFID key tag, access control keyfob, NFC keyfob, RFID keyfob manufacturer, door entry keyfob"
+>
+  <Header />
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-[#00bcd4] to-[#0097a7] text-white py-16">
+    <div class="container mx-auto px-4">
+      <nav class="text-sm mb-4">
+        <a href="/" class="hover:underline">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/rfid" class="hover:underline">RFID Products</a>
+        <span class="mx-2">/</span>
+        <span>{categoryName}</span>
+      </nav>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">{categoryName}</h1>
+      <p class="text-xl opacity-90 max-w-3xl">
+        Durable RFID keyfobs for access control, security systems, and identification. 
+        Available in various shapes, materials, and frequencies.
+      </p>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center mb-8">
+        <p class="text-gray-600">{categoryProducts.length} products found</p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {categoryProducts.map((product) => (
+          <a 
+            href={`/product/${product.slug}`}
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group"
+          >
+            <div class="aspect-square overflow-hidden bg-gray-100">
+              <img 
+                src={product.images[0]} 
+                alt={product.name}
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-800 group-hover:text-[#00bcd4] transition-colors line-clamp-2">
+                {product.name}
+              </h3>
+              <p class="text-sm text-gray-500 mt-2 line-clamp-2">
+                {product.description.substring(0, 100)}...
+              </p>
+              <div class="mt-4 flex items-center text-[#00bcd4] text-sm font-medium">
+                View Details
+                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Description - GEO: Comprehensive, authoritative content -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">RFID Keyfob Buying Guide</h2>
+        <div class="prose prose-lg text-gray-600">
+          <p>
+            RFID keyfobs are compact, portable RFID devices designed to be attached to keychains for convenient hands-free identification. The RFID access control market exceeds $10 billion globally, with keyfobs being one of the most popular form factors for residential and commercial entry systems. ProudTek manufactures keyfobs and key transponders with 10+ designs, supporting 125KHz, 13.56MHz, UHF, and dual-frequency configurations.
+          </p>
+
+          <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">RFID Keyfob Types Comparison</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse border border-gray-200 my-4">
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700">Type</th>
+                  <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700">Material</th>
+                  <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700">Frequency</th>
+                  <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700">Best For</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="border border-gray-200 px-4 py-2">ABS Keyfob</td><td class="border border-gray-200 px-4 py-2">ABS Plastic</td><td class="border border-gray-200 px-4 py-2">125KHz / 13.56MHz</td><td class="border border-gray-200 px-4 py-2">Apartment access, office entry</td></tr>
+                <tr class="bg-gray-50"><td class="border border-gray-200 px-4 py-2">Epoxy Keyfob</td><td class="border border-gray-200 px-4 py-2">Epoxy Resin</td><td class="border border-gray-200 px-4 py-2">13.56MHz NFC</td><td class="border border-gray-200 px-4 py-2">Membership, loyalty programs, branding</td></tr>
+                <tr><td class="border border-gray-200 px-4 py-2">Leather Keyfob</td><td class="border border-gray-200 px-4 py-2">PU Leather + ABS</td><td class="border border-gray-200 px-4 py-2">13.56MHz / Dual</td><td class="border border-gray-200 px-4 py-2">Premium memberships, luxury access</td></tr>
+                <tr class="bg-gray-50"><td class="border border-gray-200 px-4 py-2">Key Transponder</td><td class="border border-gray-200 px-4 py-2">ABS / PPS</td><td class="border border-gray-200 px-4 py-2">125KHz / 13.56MHz</td><td class="border border-gray-200 px-4 py-2">Vehicle immobilizers, security systems</td></tr>
+                <tr><td class="border border-gray-200 px-4 py-2">Dual-Frequency</td><td class="border border-gray-200 px-4 py-2">ABS</td><td class="border border-gray-200 px-4 py-2">125KHz + 13.56MHz</td><td class="border border-gray-200 px-4 py-2">Multi-system compatibility, building + parking</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">How to Choose the Right RFID Keyfob</h3>
+          <ol class="list-decimal list-inside space-y-2 mt-3">
+            <li><strong>System compatibility:</strong> Check your existing reader's frequency. 125KHz (EM4100, T5577) for legacy systems; 13.56MHz (Mifare Classic, DESFire) for modern access control; dual-frequency for multi-system environments.</li>
+            <li><strong>Security level:</strong> Basic EM4100 keyfobs for low-security areas; Mifare Classic 1K with Crypto-1 for standard access; Mifare DESFire EV2 with AES-128 for high-security applications (government, data centers).</li>
+            <li><strong>Durability needs:</strong> ABS keyfobs withstand daily use for 10+ years. IP65-rated models for outdoor or industrial use. Epoxy keyfobs offer UV resistance and scratch-proof surfaces.</li>
+            <li><strong>Branding opportunities:</strong> Epoxy keyfobs allow full-color photo-quality printing under a clear dome. ABS keyfobs support pad printing and laser engraving. Custom shapes available for MOQ 5,000+.</li>
+            <li><strong>Cost vs. volume:</strong> Standard ABS keyfobs from $0.20/pc at 10,000+ quantity. Premium leather keyfobs from $0.80/pc. Epoxy keyfobs with custom printing from $0.35/pc.</li>
+          </ol>
+
+          <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">Common Applications</h3>
+          <p>
+            RFID keyfobs are deployed in residential complexes (apartment building access for 1M+ units worldwide), corporate offices (employee entry and time tracking), parking systems (automated gate control), vehicle immobilization (transponder keys for anti-theft), fitness and recreation clubs (member access and locker systems), and loyalty programs (point-of-sale identification for retail chains).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-12 bg-[#00bcd4]">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold text-white mb-4">Need Custom RFID Keyfobs?</h2>
+      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free samples with your logo. ProudTek offers 10+ keyfob designs with custom branding, chip selection, and competitive pricing.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="bg-white text-[#00bcd4] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
+        <a href="https://wa.me/8618665820632?text=Hi, I need custom RFID keyfobs" target="_blank" rel="noopener noreferrer" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
