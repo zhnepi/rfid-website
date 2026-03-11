@@ -74,7 +74,6 @@ export const products: Product[] = [
     specifications: {"Product Name": "RFID Card Inlay", "Material": "PVC, ABS", "Thickness": "HF: 0.5mm, 0.45mm, 0.4mm; LF: 0.5mm, 0.55mm", "Layout": "2x5, 3x6, 3x7, 3x8, 4x5, 4x6, 4x7, 4x8, 4x10, 6x8", "Frequency": "125KHz, 13.56MHz", "Chip (HF)": "NXP Mifare Classic 1K EV1, NXP Mifare 4k, Ultralight EV1, Ultralight C, Ntag213, Desfire (2k, 4k, 8k), iCode SLIX, Legic, FM11RF08", "Chip (LF)": "TK4100, EM4200, EM4305, EM4450, ATA5577, Hitag2, Hitag S256, etc.", "Packing": "200 sheets / Carton"},
     images: [
       "/images/products/rfid-prelam-2x5.webp",
-      "/images/products/rfid-card-inlay.webp",
       "https://rfidak.com/wp-content/uploads/2022/12/smart-card-inlay-5x5-1.webp",
       "https://rfidak.com/wp-content/uploads/2022/12/rfid-card-inlay-combi.webp"
     ],
