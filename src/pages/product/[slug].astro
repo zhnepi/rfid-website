@@ -182,103 +182,70 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
       </div>
     </section>
 
-    <!-- Tabbed: Specifications / Key Features / Applications -->
-    <section class="py-12 bg-gray-50" id="product-tabs-section">
-      <div class="container mx-auto px-4">
-        <div class="max-w-5xl mx-auto">
-          <!-- Tab Navigation -->
-          <div class="flex border-b border-gray-200 mb-8 overflow-x-auto" role="tablist">
-            {specEntries.length > 0 && (
-              <button
-                role="tab"
-                aria-selected="true"
-                aria-controls="tab-specifications"
-                class="product-tab active-tab px-6 py-3 text-sm font-semibold whitespace-nowrap border-b-2 border-[#00bcd4] text-[#00bcd4] transition-colors"
-                data-tab="specifications"
-              >
-                <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
-                Specifications
-              </button>
-            )}
-            {product.features && product.features.length > 0 && (
-              <button
-                role="tab"
-                aria-selected="false"
-                aria-controls="tab-features"
-                class="product-tab px-6 py-3 text-sm font-semibold whitespace-nowrap border-b-2 border-transparent text-gray-500 hover:text-gray-700 transition-colors"
-                data-tab="features"
-              >
-                <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                Key Features
-              </button>
-            )}
-            {product.applications && product.applications.length > 0 && (
-              <button
-                role="tab"
-                aria-selected="false"
-                aria-controls="tab-applications"
-                class="product-tab px-6 py-3 text-sm font-semibold whitespace-nowrap border-b-2 border-transparent text-gray-500 hover:text-gray-700 transition-colors"
-                data-tab="applications"
-              >
-                <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-                Applications
-              </button>
-            )}
+    <!-- Specifications -->
+    {specEntries.length > 0 && (
+      <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+          <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Specifications</h2>
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+              <table class="w-full text-sm">
+                <tbody>
+                  {specEntries.map(([key, value], index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50/70'}>
+                      <td class="px-6 py-3.5 font-medium text-gray-800 w-1/3 border-b border-gray-100">{key}</td>
+                      <td class="px-6 py-3.5 text-gray-600 border-b border-gray-100">{String(value)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-
-          <!-- Tab Panels -->
-          <!-- Specifications Panel -->
-          {specEntries.length > 0 && (
-            <div id="tab-specifications" class="product-tab-panel" role="tabpanel">
-              <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                <table class="w-full text-sm">
-                  <tbody>
-                    {specEntries.map(([key, value], index) => (
-                      <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50/70'}>
-                        <td class="px-6 py-3.5 font-medium text-gray-800 w-1/3 border-b border-gray-100">{key}</td>
-                        <td class="px-6 py-3.5 text-gray-600 border-b border-gray-100">{String(value)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-
-          <!-- Features Panel -->
-          {product.features && product.features.length > 0 && (
-            <div id="tab-features" class="product-tab-panel hidden" role="tabpanel">
-              <div class="grid md:grid-cols-2 gap-4">
-                {product.features.map((feature: string) => (
-                  <div class="flex items-start gap-3 bg-white p-5 rounded-xl shadow-sm">
-                    <svg class="w-5 h-5 text-[#00bcd4] mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="text-gray-700">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <!-- Applications Panel -->
-          {product.applications && product.applications.length > 0 && (
-            <div id="tab-applications" class="product-tab-panel hidden" role="tabpanel">
-              <div class="grid md:grid-cols-2 gap-4">
-                {product.applications.map((app: string) => (
-                  <div class="flex items-start gap-3 bg-white p-5 rounded-xl shadow-sm hover:shadow-md hover:border-[#00bcd4] border border-transparent transition-all">
-                    <svg class="w-5 h-5 text-[#00bcd4] mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                    <span class="text-gray-700">{app}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
-      </div>
-    </section>
+      </section>
+    )}
+
+    <!-- Key Features -->
+    {product.features && product.features.length > 0 && (
+      <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+          <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Key Features</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+              {product.features.map((feature: string) => (
+                <div class="flex items-start gap-3 bg-gray-50 p-5 rounded-xl">
+                  <svg class="w-5 h-5 text-[#00bcd4] mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-gray-700">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Applications -->
+    {product.applications && product.applications.length > 0 && (
+      <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+          <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Applications</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+              {product.applications.map((app: string) => (
+                <div class="flex items-start gap-3 bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                  <svg class="w-5 h-5 text-[#00bcd4] mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                  <span class="text-gray-700">{app}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
 
     <!-- GEO: Why Choose This Product - authoritative, citation-friendly content -->
     <section class="py-12 bg-white border-t">
@@ -359,34 +326,4 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
     });
   });
 
-  // Product detail tabs
-  const tabs = document.querySelectorAll('.product-tab');
-  const panels = document.querySelectorAll('.product-tab-panel');
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const targetId = 'tab-' + tab.getAttribute('data-tab');
-
-      // Deactivate all tabs
-      tabs.forEach(t => {
-        t.classList.remove('active-tab', 'border-[#00bcd4]', 'text-[#00bcd4]');
-        t.classList.add('border-transparent', 'text-gray-500');
-        t.setAttribute('aria-selected', 'false');
-      });
-
-      // Activate clicked tab
-      tab.classList.add('active-tab', 'border-[#00bcd4]', 'text-[#00bcd4]');
-      tab.classList.remove('border-transparent', 'text-gray-500');
-      tab.setAttribute('aria-selected', 'true');
-
-      // Hide all panels, show target
-      panels.forEach(panel => {
-        if (panel.id === targetId) {
-          panel.classList.remove('hidden');
-        } else {
-          panel.classList.add('hidden');
-        }
-      });
-    });
-  });
 </script>
