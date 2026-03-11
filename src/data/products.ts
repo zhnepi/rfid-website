@@ -75,7 +75,6 @@ export const products: Product[] = [
     images: [
       "/images/products/rfid-prelam-2x5.webp",
       "/images/products/rfid-card-inlay.webp",
-      "https://rfidak.com/wp-content/uploads/2022/12/RFID-card-inaly-2x5-TK4100.webp",
       "https://rfidak.com/wp-content/uploads/2022/12/smart-card-inlay-5x5-1.webp",
       "https://rfidak.com/wp-content/uploads/2022/12/rfid-card-inlay-combi.webp"
     ],
