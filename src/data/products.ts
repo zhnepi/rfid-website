@@ -52,23 +52,33 @@ export const products: Product[] = [
     detailSections: [
       {
         title: "125KHz RFID Prelam",
+        image: "https://rfidak.com/wp-content/uploads/2022/12/RFID-card-inaly-2x5-TK4100.webp",
         content: "125KHz RFID prelam meets the protocol ISO11784/11785. The most commonly used chips are TK4100, EM4200, and T5577. The popular layout is 2x5. The thickness is 0.5/0.55mm, which is a little thicker than 13.56MHz resulting from its thicker antenna."
       },
       {
         title: "13.56MHz Smart Card Inlay",
+        image: "https://rfidak.com/wp-content/uploads/2022/12/smart-card-inlay-5x5-1.webp",
         content: "13.56MHz smart card inlay is the core part of producing HF cards. Different lamination and punching machines require different layouts. Popular layouts include 3x7 and 3x8. Thickness is available from 0.4–0.5mm. Antenna dimension is 73x44mm or customized. Default frequency is 14.3±0.3MHz."
       },
       {
         title: "RFID Card Inlay Combi",
+        image: "https://rfidak.com/wp-content/uploads/2022/12/rfid-card-inlay-lf-ufh.webp",
         content: "The combi card contains 2 or 3 RFID chips on one card unit. The combi card inlay is a semi-product to produce combi cards. It is much more complicated to produce as it requires consideration for space, chip interference, and optimizing read/write performance for each RFID unit. Examples include TK4100+Mifare Classic 1K EV1, EM4200+Ultralight EV1, and Ultralight C+UCODE 8. Card thickness ranges from 0.5mm to 0.6mm."
       },
       {
         title: "Smart Card Inlay Dual Interface",
+        image: "https://rfidak.com/wp-content/uploads/2022/12/smart-card-inlay-dual-interface.webp",
         content: "Dual interface card inlay is prelam specially designed for dual interface CPU chip cards, which support both contact and contactless communication. It is controlled by CPU to switch between contact and contactless working modes. ProudTek dual interface card inlay combines reliability, durability, and perfect electrical performance, and is compliant with diversified standards."
       }
     ],
     specifications: {"Product Name": "RFID Card Inlay", "Material": "PVC, ABS", "Thickness": "HF: 0.5mm, 0.45mm, 0.4mm; LF: 0.5mm, 0.55mm", "Layout": "2x5, 3x6, 3x7, 3x8, 4x5, 4x6, 4x7, 4x8, 4x10, 6x8", "Frequency": "125KHz, 13.56MHz", "Chip (HF)": "NXP Mifare Classic 1K EV1, NXP Mifare 4k, Ultralight EV1, Ultralight C, Ntag213, Desfire (2k, 4k, 8k), iCode SLIX, Legic, FM11RF08", "Chip (LF)": "TK4100, EM4200, EM4305, EM4450, ATA5577, Hitag2, Hitag S256, etc.", "Packing": "200 sheets / Carton"},
-    images: ["/images/products/RFID-card-inaly-2x5-TK4100-500x500.webp", "/images/products/rfid-card-inlay.webp"],
+    images: [
+      "/images/products/rfid-prelam-2x5.webp",
+      "/images/products/rfid-card-inlay.webp",
+      "https://rfidak.com/wp-content/uploads/2022/12/RFID-card-inaly-2x5-TK4100.webp",
+      "https://rfidak.com/wp-content/uploads/2022/12/smart-card-inlay-5x5-1.webp",
+      "https://rfidak.com/wp-content/uploads/2022/12/rfid-card-inlay-combi.webp"
+    ],
     category: "RFID Cards",
     slug: "rfid-card-inlay"
   },
