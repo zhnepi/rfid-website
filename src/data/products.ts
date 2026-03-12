@@ -828,22 +828,26 @@ export const products: Product[] = [
     name: "Textile RFID Laundry Tag",
     description: "Textile RFID laundry tags are also called RFID linen tags. Proud Tek textile RFID laundry tags are perfect for laundry tracking of garments, uniforms, bed linens, towels, and any other items that go through laundering or dry cleaning on periodic basis. The RFID laundry tag offers a cost-effective solution for industrial laundering applications and plays a vital duty in laundry management, enabling inventory visibility throughout the supply chain. The great durability of this tag even enables it to work for years and be reused in different unit garments, which greatly saves the owner's cost.",
     features: [
-      "Soft fabric construction blends seamlessly with garments — completely unnoticeable to wearers",
+      "Survives 200+ industrial wash cycles — proven durability for long-term deployment",
+      "Outstanding high-temperature resistance up to 180℃ for drying and ironing",
+      "High pressure resistant — withstands up to 60 bar in industrial water extractors",
+      "Long reading range of about 6 meters with UHF technology",
+      "Bulk reading ability — hundreds of tags can be read simultaneously for fast inventory",
+      "Soft and flexible fabric construction — blends seamlessly with garments, unnoticeable to wearers",
       "Ultra-lightweight at 0.6g — no impact on garment comfort or drape",
-      "Reading distance up to 6 meters for rapid bulk scanning",
       "20-year data retention for multi-year garment lifecycle tracking",
       "Heat-sealable for fast and permanent attachment to textiles",
       "Reusable across different garments — transfer tags when garments are retired"
     ],
     applications: [
-      "Industrial laundry — track garments through commercial washing facilities at scale",
-      "Hotel and resort linen management — monitor sheets, towels, and tablecloths",
-      "Hospital and healthcare — track scrubs, gowns, and patient linens for infection control",
-      "Uniform rental companies — automate inventory counting and invoicing",
-      "Airline linen management — track blankets, pillowcases, and headrest covers",
-      "Cruise ship housekeeping — manage cabin linen across multiple decks and categories"
+      "Laundry management and tracking — industrial laundries, laundry shops, and residential laundry services collect, clean, and disinfect garments, flat linen, bed sheets, tablecloths, and other textile assets",
+      "Textile and clothes rental industry — clothing or costume rental of mats, linens, uniforms, and garments for consistent rental management",
+      "Hospitality industry — hotels and SPA clubs manage bed linen, towels, clothing, pillowcases, and uniforms through collection, sterilization, washing, ironing, folding, packing, sorting, and distribution",
+      "Hospital and healthcare — track scrubs, gowns, and patient linens for infection control compliance",
+      "Uniform rental companies — automate inventory counting, sorting, and invoicing",
+      "Airline and cruise ship linen management — track blankets, pillowcases, headrest covers, and cabin linens"
     ],
-    specifications: {"Product Name":"Fabric RFID Laundry Tag","Dimension":"70x15mm, 70x10mm, 58x15mm, 55x10mm, 36x15mm","Material":"Fabric","Compliance":"EPC Class1 Gen2, ISO18000-6C","Frequency":"865MHz to 960MHz (Global)","Power Supply Mode":"Passive","Chip":"NXP Ucode 8, Ucode 9","Data Retention":"20 years","Polarization":"Line polarization","Weight":"About 0.6g/pc","Color":"White","Reading distance":"Up to 6 meters","Storage temperature":"-40°C~ +110°C","Operating temperature":"-25°C~ +110°C","Pressure Resistance":"60 bars","Chemical Resistance":"Normal common chemicals in washing processes","Installing":"Sewing, Heat sealing/Patching, Hanging"},
+    specifications: {"Product Name":"Fabric RFID Laundry Tag","Dimension":"70x15mm, 70x10mm, 58x15mm, 55x10mm, 36x15mm","Material":"Fabric","Compliance":"EPC Class1 Gen2, ISO18000-6C","Frequency":"865MHz to 960MHz (Global)","Power Supply Mode":"Passive","Chip":"NXP Ucode 8, Ucode 9","Data Retention":"20 years","Polarization":"Line polarization","Weight":"About 0.6g/pc","Color":"White","Reading distance":"Up to 6 meters","Storage temperature":"-40°C~ +110°C","Operating temperature":"-25°C~ +110°C","Electronic Performance":"Washing: 90°C 15min; Drying: 180°C 30min; Ironing: 180°C 15sec; Water Extractor: 60 bar 80sec; Sterilization: 135°C 20min","Pressure Resistance":"60 bars","Chemical Resistance":"Normal common chemicals in washing processes","Installing":"Sewing; Heat sealing/Patching (0.6~0.8 Mpa, 215°C, 18sec); Hanging (for tags with hole)"},
     images: ["https://rfidak.com/wp-content/uploads/2022/10/textile-laundry-tag.webp","https://rfidak.com/wp-content/uploads/2022/10/rfid-tag-for-laundry.webp","https://rfidak.com/wp-content/uploads/2022/10/fabric-rfid-tag.webp","https://rfidak.com/wp-content/uploads/2022/10/rfid-hotel-linen.webp"],
     category: "RFID Tags",
     slug: "textile-rfid-laundry-tag"
