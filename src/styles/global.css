@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
-/* Local Font Faces — self-hosted Google Fonts (latin subset) */
+/* ─── Self-hosted Google Fonts ─── */
+
+/* Poppins — body / UI text */
 @font-face {
   font-family: 'Poppins';
   font-style: normal;
@@ -41,6 +43,26 @@
   src: url('/fonts/poppins-700-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+/* Playfair Display — luxury serif for headings */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/playfair-display-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/playfair-display-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Dancing Script — decorative accent (kept for legacy) */
 @font-face {
   font-family: 'Dancing Script';
   font-style: normal;
@@ -58,31 +80,368 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* Custom Theme Colors */
+/* ─── Luxury Theme Colors ─── */
 @theme {
-  --color-primary: #00bcd4;
-  --color-primary-dark: #00acc1;
-  --color-secondary: #0097a7;
-  --color-accent: #26c6da;
-  --color-dark: #263238;
-  --color-gray-light: #f5f5f5;
+  --color-primary: #c9a84c;
+  --color-primary-dark: #b8943f;
+  --color-primary-light: #d4b85e;
+  --color-secondary: #1a1a2e;
+  --color-accent: #e8d48b;
+  --color-dark: #0d0d0d;
+  --color-dark-surface: #141414;
+  --color-dark-card: #1a1a1a;
+  --color-dark-border: #2a2a2a;
+  --color-gray-light: #fafaf8;
+  --color-cream: #f7f5f0;
+  --color-warm-gray: #e8e5df;
 }
 
-/* Base Styles */
+:root {
+  --brand-ink: #0d0d0d;
+  --brand-ink-soft: #1f2937;
+  --brand-copy: #4b5563;
+  --brand-line: rgba(17, 24, 39, 0.08);
+  --brand-line-strong: rgba(201, 168, 76, 0.18);
+  --brand-shadow-panel: 0 18px 40px rgba(15, 23, 42, 0.08);
+  --brand-shadow-lift: 0 26px 56px rgba(15, 23, 42, 0.14);
+  --brand-radius-panel: 1.5rem;
+  --brand-radius-control: 1rem;
+}
+
+/* ─── Base Styles ─── */
 html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Poppins', system-ui, -apple-system, sans-serif;
-  color: #333;
+  color: #2a2a2a;
+  background-color: #fafaf8;
+  word-break: normal;
+  overflow-wrap: break-word;
+  -webkit-hyphens: none;
+  hyphens: none;
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid #c9a84c;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(13, 13, 13, 0.35);
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.brand-hero-band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(201, 168, 76, 0.16), transparent 32%),
+    linear-gradient(135deg, rgba(13, 13, 13, 0.98) 0%, rgba(20, 20, 20, 0.96) 56%, rgba(26, 26, 46, 0.9) 100%);
+}
+
+.brand-hero-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.08), transparent),
+    radial-gradient(circle at bottom right, rgba(201, 168, 76, 0.08), transparent 28%);
+  pointer-events: none;
+}
+
+.brand-panel,
+.brand-panel-soft,
+.brand-panel-dark {
+  border-radius: var(--brand-radius-panel);
+}
+
+.brand-panel {
+  border: 1px solid var(--brand-line);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--brand-shadow-panel);
+}
+
+.brand-panel-soft {
+  border: 1px solid var(--brand-line-strong);
+  background: linear-gradient(180deg, rgba(201, 168, 76, 0.08) 0%, rgba(247, 245, 240, 0.96) 100%);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
+}
+
+.brand-panel-dark {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0.98) 0%, rgba(13, 13, 13, 0.95) 100%);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+}
+
+.brand-panel-link {
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-panel-link:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201, 168, 76, 0.32);
+  box-shadow: var(--brand-shadow-lift);
+}
+
+.brand-chip,
+.brand-chip-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brand-chip {
+  border: 1px solid var(--brand-line-strong);
+  background: rgba(201, 168, 76, 0.08);
+  color: #8a6d25;
+}
+
+.brand-chip-dark {
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  background: rgba(201, 168, 76, 0.08);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.accent-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.accent-link:hover {
+  color: var(--color-primary-dark);
+}
+
+.cta-primary,
+.cta-secondary,
+.cta-secondary-dark,
+.cta-whatsapp {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  border-radius: var(--brand-radius-control);
+  padding: 0.9rem 1.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.cta-primary:hover,
+.cta-secondary:hover,
+.cta-secondary-dark:hover,
+.cta-whatsapp:hover {
+  transform: translateY(-1px);
+}
+
+.cta-primary {
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, #d4b85e 0%, #c9a84c 38%, #b8943f 100%);
+  color: var(--brand-ink);
+  box-shadow: 0 14px 34px rgba(201, 168, 76, 0.22);
+}
+
+.cta-primary:hover {
+  box-shadow: 0 18px 40px rgba(201, 168, 76, 0.28);
+}
+
+.cta-secondary {
+  border: 1px solid rgba(17, 24, 39, 0.1);
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--brand-ink-soft);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+.cta-secondary:hover {
+  border-color: rgba(201, 168, 76, 0.28);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.1);
+}
+
+.cta-secondary-dark {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.cta-secondary-dark:hover {
+  border-color: rgba(201, 168, 76, 0.34);
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.cta-whatsapp {
+  border: 1px solid transparent;
+  background: #1b8f53;
+  color: white;
+  box-shadow: 0 14px 34px rgba(27, 143, 83, 0.22);
+}
+
+.cta-whatsapp:hover {
+  background: #167445;
+  box-shadow: 0 18px 40px rgba(22, 116, 69, 0.26);
+}
+
+.field-control {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: var(--brand-radius-control);
+  background: white;
+  padding: 0.9rem 1rem;
+  color: var(--brand-ink-soft);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.field-control::placeholder {
+  color: #6b7280;
+}
+
+.field-control:hover {
+  border-color: rgba(201, 168, 76, 0.32);
+}
+
+.field-control:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.6);
+}
+
+.brand-icon-shell-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.74);
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.brand-icon-shell-dark:hover {
+  transform: translateY(-1px);
+  border-color: rgba(201, 168, 76, 0.28);
+  background: rgba(201, 168, 76, 0.08);
+  color: var(--color-primary);
+}
+
+/* Luxury serif headings */
+h1, h2, .font-display {
+  font-family: 'Playfair Display', 'Georgia', serif;
 }
 
 .font-script {
   font-family: 'Dancing Script', cursive;
 }
 
-/* Hero Slider Animation */
+.font-serif {
+  font-family: 'Playfair Display', 'Georgia', serif;
+}
+
+/* ─── Copy Safety ─── */
+.copy-safe,
+.copy-safe :where(h1, h2, h3, h4, h5, h6, p, li, span, a, summary, td, th) {
+  word-break: normal;
+  overflow-wrap: break-word;
+  -webkit-hyphens: none;
+  hyphens: none;
+  text-wrap: pretty;
+}
+
+.copy-safe :where(h1, h2, h3) {
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.copy-safe :where(h4, h5, h6, summary) {
+  line-height: 1.3;
+}
+
+.copy-safe :where(p, li, td, th) {
+  line-height: 1.7;
+}
+
+/* ─── Luxury Typography Utilities ─── */
+.eyebrow-label {
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.eyebrow-label-wide {
+  letter-spacing: 0.3em;
+}
+
+.title-balance {
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.card-copy {
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+@supports (content-visibility: auto) {
+  .defer-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 960px;
+  }
+}
+
+/* ─── Luxury Gold Gradient Text ─── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #c9a84c 0%, #e8d48b 50%, #c9a84c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Luxury Divider ─── */
+.luxury-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+  margin: 1rem auto;
+}
+
+.luxury-divider-left {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* ─── Hero Slider Animation ─── */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -92,56 +451,192 @@ body {
   animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Custom Button Styles */
+/* ─── Elegant Ken Burns Effect ─── */
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+.animate-ken-burns {
+  animation: kenBurns 12s ease-in-out infinite alternate;
+}
+
+/* ─── Scroll Reveal Animations ─── */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.reveal,
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js .reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ─── Luxury Button Styles ─── */
 .btn-primary {
-  background-color: var(--color-primary);
+  background: linear-gradient(135deg, #c9a84c, #b8943f);
   color: white;
-  padding: 12px 30px;
-  border-radius: 4px;
+  padding: 14px 36px;
+  border-radius: 0;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-weight: 500;
-  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #b8943f, #a07e30);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .btn-primary:hover {
-  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201, 168, 76, 0.3);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-outline-gold {
+  border: 1px solid #c9a84c;
+  color: #c9a84c;
+  padding: 14px 36px;
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-outline-gold:hover {
+  background-color: #c9a84c;
+  color: #0d0d0d;
   transform: translateY(-2px);
 }
 
-/* Section Styles */
+/* ─── Section Styles ─── */
 .section-title {
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 2.8rem;
+  font-weight: 400;
   color: var(--color-dark);
   margin-bottom: 1rem;
+  letter-spacing: -0.01em;
 }
 
 .section-subtitle {
   color: var(--color-primary);
-  font-size: 0.875rem;
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.25em;
   margin-bottom: 0.5rem;
 }
 
-/* Card Hover Effect */
+/* ─── Luxury Card Effects ─── */
 .product-card {
-  transition: all 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(201, 168, 76, 0.08);
 }
 
 .product-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(201, 168, 76, 0.15);
 }
 
-/* Testimonial Styles */
+/* ─── Luxury Card Style ─── */
+.luxury-card {
+  background: white;
+  border: 1px solid rgba(201, 168, 76, 0.1);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-card:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Dark Luxury Card ─── */
+.luxury-card-dark {
+  background: var(--color-dark-card);
+  border: 1px solid var(--color-dark-border);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-card-dark:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Testimonial Styles ─── */
 .testimonial-quote {
+  font-family: 'Playfair Display', 'Georgia', serif;
   font-style: italic;
-  color: var(--color-primary);
-  font-size: 1.25rem;
+  color: var(--color-dark);
+  font-size: 1.35rem;
   line-height: 1.8;
 }
 
-/* WhatsApp Button Pulse Animation */
+/* ─── Gold Accent Line ─── */
+.gold-accent-line {
+  position: relative;
+}
+
+.gold-accent-line::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #c9a84c, transparent);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gold-accent-line:hover::after {
+  width: 100%;
+}
+
+/* ─── WhatsApp Button Pulse Animation ─── */
 @keyframes whatsapp-pulse {
   0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
   70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
@@ -150,4 +645,67 @@ body {
 
 .whatsapp-pulse {
   animation: whatsapp-pulse 2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js .reveal,
+  .js .reveal.revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  .whatsapp-pulse {
+    animation: none;
+  }
+}
+
+/* ─── Luxury Image Overlay ─── */
+.luxury-overlay {
+  background: linear-gradient(135deg, rgba(13, 13, 13, 0.75) 0%, rgba(13, 13, 13, 0.4) 50%, rgba(201, 168, 76, 0.08) 100%);
+}
+
+/* ─── Smooth Image Zoom ─── */
+.img-luxury-zoom {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .img-luxury-zoom {
+  transform: scale(1.06);
+}
+
+/* ─── Selection Colour ─── */
+::selection {
+  background-color: rgba(201, 168, 76, 0.2);
+  color: #0d0d0d;
+}
+
+/* ─── Scrollbar (Webkit) ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9a84c;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4b85e;
 }

@@ -1,247 +1,110 @@
 ---
+import { solutionPages } from '../data/solutions';
+import { getSolutionComparisonLinks } from '../utils/comparisons';
+
 const applications = [
   {
     name: 'Access Control',
-    description: 'Smart cards & keyfobs for secure entry',
-    image: 'https://images.unsplash.com/photo-1558002038-1055907df827?w=800&q=85',
-    href: '/category/rfid-cards',
+    description: 'RFID cards and keyfobs for offices, apartments, campuses, hospitals, and smart buildings.',
+    image: '/images/products/ticket-smart-card.webp',
+    href: '/solutions/access-control-rfid',
+    solutionSlug: 'access-control-rfid',
   },
   {
-    name: 'RFID Retails',
-    description: 'Inventory tracking & anti-theft solutions',
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=85',
-    href: '/category/rfid-labels',
+    name: 'Hotels and Resorts',
+    description: 'Hotel key cards, wristbands, and guest credentials for room access, lockers, and cashless spend.',
+    image: '/images/products/RFID-SIlicone-wristbands-006.webp',
+    href: '/solutions/hotel-access-rfid',
+    solutionSlug: 'hotel-access-rfid',
   },
   {
-    name: 'RFID Hotel',
-    description: 'Keycard systems & guest experience',
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=85',
-    href: '/category/rfid-cards',
+    name: 'Laundry and Linen Tracking',
+    description: 'Textile, silicone, and PPS laundry tags for uniforms, towels, sheets, and reusable garments.',
+    image: '/images/products/textile-RFID-laundry-tag-heat-seal.webp',
+    href: '/solutions/laundry-linen-rfid',
+    solutionSlug: 'laundry-linen-rfid',
   },
   {
-    name: 'RFID Events',
-    description: 'Wristbands & badges for seamless access',
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=85',
-    href: '/category/rfid-wristbands',
+    name: 'Libraries and Media',
+    description: 'Library labels and book tags that support circulation, shelving, and self-check workflows.',
+    image: '/images/products/library-rfid-tags.webp',
+    href: '/solutions/library-media-rfid',
+    solutionSlug: 'library-media-rfid',
   },
   {
-    name: 'RFID Laundry',
-    description: 'Durable tags for industrial washing',
-    image: 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=800&q=85',
-    href: '/category/rfid-tags',
+    name: 'Industrial Asset Tracking',
+    description: 'On-metal tags, pallet tags, PCB tags, and rugged transponders for tools, machinery, and containers.',
+    image: '/images/products/Printable-RFID-metal-tag.webp',
+    href: '/solutions/industrial-asset-tracking-rfid',
+    solutionSlug: 'industrial-asset-tracking-rfid',
   },
   {
-    name: 'RFID Industry',
-    description: 'Asset tracking & manufacturing automation',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=85',
-    href: '/category/rfid-tags',
+    name: 'Retail, Events, and NFC',
+    description: 'NFC stickers, labels, and wristbands for promotions, attendance, anti-counterfeit, and smart interactions.',
+    image: '/images/products/nfc-sticker.webp',
+    href: '/solutions/event-nfc-rfid',
+    solutionSlug: 'event-nfc-rfid',
   },
-];
+].map((application) => {
+  const solutionPage = solutionPages[application.solutionSlug];
+
+  return {
+    ...application,
+    topComparison: solutionPage ? getSolutionComparisonLinks(application.solutionSlug, solutionPage.productSlugs, 1)[0] : undefined,
+  };
+});
 ---
 
 <section class="py-20 bg-white">
   <div class="container mx-auto px-4">
-    <div class="text-center mb-12">
-      <p class="text-[#00bcd4] text-sm uppercase tracking-widest mb-2">RFID Applications...</p>
-      <h2 class="text-3xl font-semibold text-gray-800">What RFID application are you looking for?</h2>
+    <div class="text-center mb-12 max-w-3xl mx-auto">
+      <p class="eyebrow-label eyebrow-label-wide text-[#c9a84c] mb-2">Application Coverage</p>
+      <h2 class="title-balance text-3xl md:text-4xl font-semibold text-gray-900">RFID solutions organized by real buying scenarios</h2>
+      <p class="card-copy text-gray-600 mt-4">
+        Start here when the workflow is clear but the right product family still is not. These solution hubs help narrow the shortlist before buyers jump into products, samples or compatibility checks.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {applications.map((app) => (
+        <article class="copy-safe group overflow-hidden rounded-[1.75rem] border border-gray-200 bg-white shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <a href={app.href} class="block">
+            <div class="aspect-[5/4] overflow-hidden bg-slate-100">
+              <img
+                src={app.image}
+                alt={app.name}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
+                width="560"
+                height="448"
+              />
+            </div>
+          </a>
+          <div class="p-6">
+            <a href={app.href} class="block">
+              <h3 class="copy-safe title-balance text-xl font-semibold text-gray-900">{app.name}</h3>
+            </a>
+            <p class="copy-safe card-copy text-sm text-gray-600 mt-3">{app.description}</p>
+            <div class="mt-5 flex items-center justify-between gap-3 border-t border-gray-100 pt-4">
+              {app.topComparison ? (
+                <a href={`/compare/${app.topComparison.slug}`} class="min-w-0 text-xs font-medium text-[#c9a84c] transition-colors hover:text-[#b8943f]">
+                  <span class="block truncate">Compare: {app.topComparison.name}</span>
+                </a>
+              ) : (
+                <span class="text-xs text-gray-400">Use-case buying path</span>
+              )}
+              <a href={app.href} class="inline-flex shrink-0 items-center text-sm font-medium text-[#c9a84c]">
+                Explore solution
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
-
-  <!-- Full-width expanding panels -->
-  <div class="app-panels" id="appPanels">
-    {applications.map((app, index) => (
-      <a
-        href={app.href}
-        class="app-panel"
-        data-index={index}
-      >
-        <img
-          src={app.image}
-          alt={app.name}
-          class="app-panel-img"
-          loading="lazy"
-        />
-        <!-- Light gradient overlay - much brighter than before -->
-        <div class="app-panel-overlay"></div>
-        <!-- Content -->
-        <div class="app-panel-content">
-          <h3 class="app-panel-title">{app.name}</h3>
-          <p class="app-panel-desc">{app.description}</p>
-          <span class="app-panel-cta">
-            Explore
-            <svg xmlns="http://www.w3.org/2000/svg" class="app-panel-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </span>
-        </div>
-      </a>
-    ))}
-  </div>
 </section>
-
-<style>
-  .app-panels {
-    display: flex;
-    width: 100%;
-    height: 420px;
-    overflow: hidden;
-  }
-
-  .app-panel {
-    position: relative;
-    flex: 1;
-    overflow: hidden;
-    cursor: pointer;
-    transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    text-decoration: none;
-  }
-
-  /* On hover of the container, shrink all panels... */
-  .app-panels:hover .app-panel {
-    flex: 0.5;
-  }
-
-  /* ...except the hovered one, which expands */
-  .app-panels:hover .app-panel:hover {
-    flex: 3;
-  }
-
-  .app-panel-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .app-panel:hover .app-panel-img {
-    transform: scale(1.05);
-  }
-
-  /* Very light overlay for brighter images */
-  .app-panel-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.1) 40%,
-      rgba(0, 0, 0, 0.02) 100%
-    );
-    transition: background 0.4s ease;
-  }
-
-  .app-panel:hover .app-panel-overlay {
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.05) 50%,
-      rgba(0, 0, 0, 0) 100%
-    );
-  }
-
-  /* Content positioned at bottom */
-  .app-panel-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 24px 20px;
-    color: white;
-    z-index: 2;
-  }
-
-  .app-panel-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    white-space: nowrap;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    transition: font-size 0.4s ease;
-  }
-
-  .app-panel:hover .app-panel-title {
-    font-size: 1.5rem;
-  }
-
-  .app-panel-desc {
-    font-size: 0.875rem;
-    margin-top: 4px;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.4s ease 0.1s, max-height 0.4s ease 0.1s;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  }
-
-  .app-panel:hover .app-panel-desc {
-    opacity: 1;
-    max-height: 40px;
-  }
-
-  .app-panel-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 8px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
-    color: #00bcd4;
-  }
-
-  .app-panel:hover .app-panel-cta {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .app-panel-arrow {
-    width: 16px;
-    height: 16px;
-    transition: transform 0.3s ease;
-  }
-
-  .app-panel:hover .app-panel-arrow {
-    transform: translateX(4px);
-  }
-
-  /* Mobile: stack vertically with smaller height */
-  @media (max-width: 768px) {
-    .app-panels {
-      flex-direction: column;
-      height: auto;
-    }
-
-    .app-panel {
-      height: 140px;
-      flex: none !important;
-      transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .app-panels:hover .app-panel {
-      flex: none;
-      height: 100px;
-    }
-
-    .app-panels:hover .app-panel:hover {
-      flex: none;
-      height: 280px;
-    }
-
-    .app-panel-title {
-      font-size: 1rem;
-    }
-
-    .app-panel:hover .app-panel-title {
-      font-size: 1.25rem;
-    }
-
-    .app-panel-content {
-      padding: 16px;
-    }
-  }
-</style>

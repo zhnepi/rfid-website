@@ -1,0 +1,551 @@
+
+> proudtek-rfid@0.0.1 dev
+> astro dev --host 127.0.0.1 --port 4322
+
+[2m22:52:49[22m [34m[types][39m Generated [2m2ms[22m
+[2m22:52:49[22m [34m[content][39m Syncing content
+[2m22:52:49[22m [34m[content][39m Astro config changed
+[2m22:52:49[22m [34m[content][39m Clearing content store
+[2m22:52:49[22m [34m[content][39m Synced content
+[2m22:52:49[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+
+[42m[1m astro [22m[49m [32mv5.18.1[39m [2mready in[22m 1047 [2mms[22m
+
+[2m┃[22m Local    [36mhttp://127.0.0.1:4322/[39m
+
+[2m22:52:49[22m [32mwatching for file changes...[39m
+[2m22:53:16[22m [34m[200][39m / [2m5175ms[22m
+[2m22:54:05[22m [34m[200][39m / [2m22ms[22m
+[2m22:55:15[22m [34m[200][39m /quality-control [2m12ms[22m
+[2m22:55:42[22m [34m[200][39m /blogs [2m50ms[22m
+[2m22:55:49[22m [34m[200][39m /rfid-technology [2m6ms[22m
+[2m22:55:51[22m [34m[200][39m /products [2m46ms[22m
+[2m22:55:52[22m [34m[200][39m /about [2m11ms[22m
+[2m22:55:53[22m [34m[200][39m /contact [2m13ms[22m
+[2m22:56:14[22m [34m[200][39m /rfid [2m13ms[22m
+[2m22:59:44[22m [34m[200][39m /blogs [2m91ms[22m
+[2m23:01:33[22m [34m[200][39m / [2m25ms[22m
+[2m23:01:33[22m [34m[200][39m /contact [2m52ms[22m
+[2m23:01:33[22m [34m[200][39m / [2m32ms[22m
+[2m23:02:23[22m [34m[200][39m /contact [2m21ms[22m
+[2m23:02:23[22m [34m[200][39m / [2m33ms[22m
+[2m23:02:23[22m [34m[200][39m /products [2m45ms[22m
+[2m23:08:56[22m [34m[200][39m / [2m13ms[22m
+[2m23:16:45[22m [34m[200][39m /blogs [2m17ms[22m
+[2m23:16:46[22m [34m[200][39m /rfid-technology [2m6ms[22m
+[2m23:16:47[22m [34m[200][39m /products [2m16ms[22m
+[2m23:16:48[22m [34m[200][39m /about [2m8ms[22m
+[2m23:16:49[22m [34m[200][39m / [2m9ms[22m
+[2m23:23:22[22m [34m[200][39m /contact [2m13ms[22m
+[2m23:28:30[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m23:28:30[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m23:29:03[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m23:29:03[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m23:29:40[22m [34m[watch][39m src/pages/contact.astro
+[2m23:29:40[22m [34m[watch][39m src/pages/contact.astro
+[2m23:31:12[22m [34m[watch][39m src/pages/contact.astro
+[2m23:31:12[22m [34m[watch][39m src/pages/contact.astro
+[2m23:32:34[22m [34m[watch][39m src/pages/contact.astro
+[2m23:32:34[22m [34m[watch][39m src/pages/contact.astro
+[2m23:32:49[22m [34m[watch][39m src/pages/contact.astro
+[2m23:32:49[22m [34m[watch][39m src/pages/contact.astro
+[2m23:32:57[22m [34m[watch][39m src/data/contactThemes.ts
+[2m23:32:57[22m [34m[watch][39m src/data/contactThemes.ts
+[2m23:33:22[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m23:33:22[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m23:34:03[22m [34m[200][39m / [2m4316ms[22m
+[2m23:34:03[22m [34m[200][39m / [2m4317ms[22m
+[2m23:34:03[22m [34m[200][39m /contact [2m47ms[22m
+[2m23:34:21[22m [34m[200][39m /contact [2m4ms[22m
+[2m23:34:22[22m [34m[200][39m / [2m6ms[22m
+[2m23:34:23[22m [34m[200][39m / [2m6ms[22m
+[2m23:34:48[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m23:34:48[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m23:39:44[22m [34m[200][39m / [2m1260ms[22m
+[2m23:40:22[22m [34m[200][39m /contact [2m9ms[22m
+[2m23:41:42[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m23:41:42[22m [34m[watch][39m src/components/HeroSlider.astro
+[31m[1m23:41:43[22m [ERROR][39m Could not import `/src/components/HeroSlider.astro`.
+  [1mHint:[22m
+[33m    This is often caused by a typo in the import path. Please make sure the file exists.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/failed-to-load-module-ssr/[24m[39m
+  [1mStack trace:[22m
+[2m    at loadAndTransform (file:///C:/Users/znpjl/Desktop/rfidak/node_modules/astro/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:35729:17)
+    at async handleInvoke (file:///C:/Users/znpjl/Desktop/rfidak/node_modules/astro/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:39002:22)[22m
+[2m23:41:44[22m [34m[200][39m /contact [2m1053ms[22m
+[2m23:42:33[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m23:42:33[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m23:42:35[22m [34m[200][39m /contact [2m968ms[22m
+[2m23:42:35[22m [34m[200][39m / [2m19ms[22m
+[2m23:42:39[22m [34m[watch][39m src/data/contactThemes.ts
+[2m23:42:39[22m [34m[watch][39m src/data/contactThemes.ts
+[2m23:42:42[22m [34m[200][39m /contact [2m15ms[22m
+[2m23:42:42[22m [34m[200][39m / [2m978ms[22m
+[2m23:46:19[22m [34m[watch][39m src/pages/contact.astro
+[2m23:46:19[22m [34m[watch][39m src/pages/contact.astro
+[2m23:46:23[22m [34m[200][39m /contact [2m1368ms[22m
+[31m[1m23:46:23[22m [ERROR][39m contactFastStartRoutes is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Users\znpjl\Desktop\rfidak\src\pages\contact.astro:197:16)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[2m23:46:23[22m [34m[200][39m / [2m1396ms[22m
+[2m23:47:30[22m [34m[watch][39m src/pages/contact.astro
+[2m23:47:30[22m [34m[watch][39m src/pages/contact.astro
+[2m23:47:35[22m [34m[200][39m /contact [2m94ms[22m
+[31m[1m23:47:35[22m [ERROR][39m contactFastStartRoutes is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Users\znpjl\Desktop\rfidak\src\pages\contact.astro:194:16)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[2m23:47:35[22m [34m[200][39m / [2m2829ms[22m
+[2m23:47:40[22m [34m[200][39m /contact [2m13ms[22m
+[31m[1m23:47:40[22m [ERROR][39m contactFastStartRoutes is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Users\znpjl\Desktop\rfidak\src\pages\contact.astro:194:16)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[2m23:47:46[22m [34m[watch][39m src/pages/contact.astro
+[2m23:47:46[22m [34m[watch][39m src/pages/contact.astro
+[2m23:48:01[22m [34m[watch][39m src/pages/contact.astro
+[2m23:48:01[22m [34m[watch][39m src/pages/contact.astro
+[2m23:48:11[22m [34m[watch][39m src/pages/contact.astro
+[2m23:48:11[22m [34m[watch][39m src/pages/contact.astro
+[2m23:48:24[22m [34m[watch][39m src/pages/contact.astro
+[2m23:48:24[22m [34m[watch][39m src/pages/contact.astro
+[2m23:50:46[22m [34m[200][39m / [2m910ms[22m
+[2m23:50:46[22m [34m[200][39m / [2m911ms[22m
+[2m23:52:18[22m [34m[200][39m /contact [2m14ms[22m
+[2m23:52:35[22m [34m[200][39m /blogs [2m14ms[22m
+[2m00:57:52[22m Configuration file updated. Restarting...
+[2m00:57:52[22m [34m[watch][39m package.json
+[2m00:57:52[22m [34m[watch][39m package.json
+[2m00:57:53[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m00:58:08[22m [34m[content][39m Syncing content
+[2m00:58:20[22m [34m[content][39m Synced content
+[2m00:58:20[22m [34m[types][39m Generated [2m27.80s[22m
+[2m00:58:21[22m [34m[vite][39m Re-optimizing dependencies because lockfile has changed
+[2m00:59:32[22m Configuration file updated. Restarting...
+[31m[config][39m Astro found issue(s) with your configuration:
+
+[31m! The [34moutput: "hybrid"[31m option has been removed. Use [34moutput: "static"[31m (the default) instead, which now behaves the same way.[39m
+
+[31m[1m00:59:32[22m [ERROR][39m Continuing with previous valid configuration
+
+[2m01:00:29[22m Configuration file updated. Restarting...
+[31m[config][39m Astro found issue(s) with your configuration:
+
+[31m! The [34moutput: "hybrid"[31m option has been removed. Use [34moutput: "static"[31m (the default) instead, which now behaves the same way.[39m
+
+[31m[1m01:00:29[22m [ERROR][39m Continuing with previous valid configuration
+
+[33m[1m01:01:44[22m [WARN] [config][39m This project contains server-rendered routes, but no adapter is installed. This is fine for development, but an adapter will be required to build your site for production.
+[2m01:05:49[22m Configuration file updated. Restarting...
+[2m01:05:49[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m01:05:53[22m [34m[content][39m Syncing content
+[2m01:05:53[22m [34m[content][39m Astro config changed
+[2m01:05:53[22m [34m[content][39m Clearing content store
+[2m01:05:53[22m [34m[content][39m Synced content
+[2m01:05:53[22m [34m[types][39m Generated [2m4.48s[22m
+[2m01:05:55[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/404.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/about/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/authors/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/blogs/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/certifications/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/compare/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/contact/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/markets/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/products/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/quality-control/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/rfid/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/rfid-glossary/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/rfid-technology/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/sample-policy/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/shipping-and-incoterms/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/solutions/index.html
+[2m01:06:08[22m [34m[watch][39m .vercel/output/static/thank-you/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/authors/proudtek-rfid-editorial-team/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/battery-passport-rfid-nfc-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/anti-metal-rfid-tags-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/digital-product-passport-nfc-rfid-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/dscsa-rfid-pharma-traceability-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/fsma-204-rfid-food-traceability-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/hf-vs-uhf-rfid-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/hotel-key-card-rfid-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/medical-device-rfid-udi-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/mifare-cards/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/mifare-classic-vs-desfire/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/nfc-tags-business-use-cases/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/qr-vs-nfc-vs-rfid-dpp-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/nfc-anti-counterfeit-tags-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/rfid-access-control-cards-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/rfid-baggage-tracking-airports-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/rfid-frequency-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/rfid-fresh-food-retail-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/rfid-keyfob-buying-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/rfid-labels-vs-hard-tags/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/rfid-retail-inventory-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/rfid-returns-reverse-logistics-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/rfid-types/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/rfid-vs-barcode/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/sunrise-2027-2d-barcodes-vs-rfid-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/blogs/textile-dpp-qr-nfc-rfid-guide/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/category/rfid-cards/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/category/rfid-labels/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/category/rfid-keyfob/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/category/rfid-readers/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/category/rfid-wristbands/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/category/rfid-tags/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/compare/hf-vs-uhf-rfid/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/compare/lf-vs-hf-rfid/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/compare/mifare-classic-vs-desfire/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/compare/mifare-plus-vs-desfire/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/compare/pvc-rfid-cards-vs-paper-cards/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/compare/rfid-cards-vs-keyfobs/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/compare/rfid-labels-vs-hard-tags/index.html
+[2m01:06:09[22m [34m[watch][39m .vercel/output/static/compare/textile-vs-silicone-laundry-tags/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/markets/europe-laundry-rfid-tags/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/markets/north-america-rfid-cards/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/markets/middle-east-anti-metal-rfid-tags/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/high-temperature-rfid-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/key-transponder/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/library-rfid-tags/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/mini-rfid-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/nfc-coin/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/nfc-epoxy-card/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/nfc-sticker/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/pallet-rfid-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/pps-laundry-tag-rfid-button/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-cable-tie-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-card-inlay/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-cards/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-ceramic-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-clamshell-card/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-clear-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-fpc-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-glass-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-jewellery-tags/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-keyfob/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-metal-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-paper-card/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-nail-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-pcb/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-pcb-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-reader-writer/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-tyre-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-waste-bin-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-silicone-wristband/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/silicone-laundry-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-wood-card-2/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/spring-rfid-tire-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/tamper-proof-rfid-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/rfid-windshield-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/textile-rfid-laundry-tag/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/uhf-library-label/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/product/uhf-sticker/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/solutions/event-nfc-rfid/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/solutions/hotel-access-rfid/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/solutions/access-control-rfid/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/solutions/industrial-asset-tracking-rfid/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/solutions/library-media-rfid/index.html
+[2m01:06:10[22m [34m[watch][39m .vercel/output/static/solutions/laundry-linen-rfid/index.html
+[2m02:13:57[22m Configuration file updated. Restarting...
+[2m02:13:59[22m [34m[vite][39m Re-optimizing dependencies because lockfile has changed
+[2m02:14:07[22m [34m[content][39m Syncing content
+[2m02:14:07[22m [34m[content][39m Astro config changed
+[2m02:14:07[22m [34m[content][39m Clearing content store
+[2m02:14:09[22m [34m[content][39m Synced content
+[2m02:14:09[22m [34m[types][39m Generated [2m10.74s[22m
+[2m02:14:21[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m02:14:50[22m Configuration file updated. Restarting...
+[2m02:14:50[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m02:14:58[22m [34m[content][39m Syncing content
+[2m02:15:01[22m [34m[content][39m Synced content
+[2m02:15:01[22m [34m[types][39m Generated [2m10.78s[22m
+[2m02:15:02[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m02:16:04[22m [34m[watch][39m .vercel/output/static/404.html
+[2m02:16:04[22m [34m[watch][39m .vercel/output/static/index.html
+[2m02:16:04[22m [34m[watch][39m .vercel/output/static/about/index.html
+[2m02:16:04[22m [34m[watch][39m .vercel/output/static/blogs/index.html
+[2m02:16:04[22m [34m[watch][39m .vercel/output/static/authors/index.html
+[2m02:16:04[22m [34m[watch][39m .vercel/output/static/contact/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/compare/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/certifications/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/markets/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/products/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/quality-control/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/rfid/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/rfid-glossary/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/rfid-technology/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/sample-policy/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/shipping-and-incoterms/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/solutions/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/thank-you/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/battery-passport-rfid-nfc-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/digital-product-passport-nfc-rfid-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/dscsa-rfid-pharma-traceability-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/hf-vs-uhf-rfid-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/fsma-204-rfid-food-traceability-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/hotel-key-card-rfid-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/anti-metal-rfid-tags-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/mifare-cards/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/medical-device-rfid-udi-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/nfc-tags-business-use-cases/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/nfc-anti-counterfeit-tags-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/mifare-classic-vs-desfire/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/qr-vs-nfc-vs-rfid-dpp-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/rfid-access-control-cards-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/rfid-frequency-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/rfid-baggage-tracking-airports-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/rfid-fresh-food-retail-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/rfid-keyfob-buying-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/rfid-retail-inventory-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/rfid-labels-vs-hard-tags/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/rfid-vs-barcode/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/rfid-returns-reverse-logistics-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/rfid-types/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/sunrise-2027-2d-barcodes-vs-rfid-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/blogs/textile-dpp-qr-nfc-rfid-guide/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/authors/proudtek-rfid-editorial-team/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/compare/hf-vs-uhf-rfid/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/compare/pvc-rfid-cards-vs-paper-cards/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/compare/lf-vs-hf-rfid/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/compare/mifare-classic-vs-desfire/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/compare/mifare-plus-vs-desfire/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/compare/rfid-labels-vs-hard-tags/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/compare/textile-vs-silicone-laundry-tags/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/compare/rfid-cards-vs-keyfobs/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/category/rfid-keyfob/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/category/rfid-cards/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/category/rfid-labels/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/category/rfid-readers/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/category/rfid-tags/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/category/rfid-wristbands/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/markets/europe-laundry-rfid-tags/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/markets/north-america-rfid-cards/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/markets/middle-east-anti-metal-rfid-tags/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/high-temperature-rfid-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/library-rfid-tags/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/key-transponder/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/mini-rfid-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/nfc-coin/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/nfc-epoxy-card/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/pallet-rfid-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/nfc-sticker/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/pps-laundry-tag-rfid-button/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-card-inlay/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-cable-tie-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-cards/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-ceramic-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-clamshell-card/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-clear-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-fpc-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-glass-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-metal-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-jewellery-tags/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-keyfob/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-nail-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-paper-card/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-pcb/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-reader-writer/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-silicone-wristband/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-pcb-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-tyre-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-waste-bin-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-windshield-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/rfid-wood-card-2/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/silicone-laundry-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/spring-rfid-tire-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/uhf-library-label/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/tamper-proof-rfid-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/textile-rfid-laundry-tag/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/product/uhf-sticker/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/solutions/access-control-rfid/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/solutions/event-nfc-rfid/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/solutions/industrial-asset-tracking-rfid/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/solutions/hotel-access-rfid/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/solutions/laundry-linen-rfid/index.html
+[2m02:16:07[22m [34m[watch][39m .vercel/output/static/solutions/library-media-rfid/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/404.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/about/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/authors/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/blogs/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/certifications/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/contact/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/compare/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/products/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/rfid-glossary/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/rfid/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/quality-control/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/rfid-technology/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/markets/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/shipping-and-incoterms/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/sample-policy/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/solutions/index.html
+[2m02:16:27[22m [34m[watch][39m .vercel/output/static/thank-you/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/authors/proudtek-rfid-editorial-team/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/battery-passport-rfid-nfc-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/anti-metal-rfid-tags-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/digital-product-passport-nfc-rfid-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/dscsa-rfid-pharma-traceability-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/hf-vs-uhf-rfid-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/fsma-204-rfid-food-traceability-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/hotel-key-card-rfid-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/medical-device-rfid-udi-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/mifare-cards/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/mifare-classic-vs-desfire/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/nfc-anti-counterfeit-tags-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/nfc-tags-business-use-cases/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/qr-vs-nfc-vs-rfid-dpp-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/rfid-baggage-tracking-airports-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/rfid-frequency-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/rfid-access-control-cards-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/rfid-fresh-food-retail-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/rfid-keyfob-buying-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/rfid-retail-inventory-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/rfid-labels-vs-hard-tags/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/rfid-returns-reverse-logistics-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/rfid-types/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/rfid-vs-barcode/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/sunrise-2027-2d-barcodes-vs-rfid-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/blogs/textile-dpp-qr-nfc-rfid-guide/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/category/rfid-cards/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/category/rfid-keyfob/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/category/rfid-labels/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/category/rfid-readers/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/category/rfid-tags/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/category/rfid-wristbands/index.html
+[2m02:16:28[22m [34m[watch][39m .vercel/output/static/compare/hf-vs-uhf-rfid/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/compare/lf-vs-hf-rfid/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/compare/pvc-rfid-cards-vs-paper-cards/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/compare/mifare-classic-vs-desfire/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/compare/mifare-plus-vs-desfire/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/compare/textile-vs-silicone-laundry-tags/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/compare/rfid-cards-vs-keyfobs/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/compare/rfid-labels-vs-hard-tags/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/product/high-temperature-rfid-tag/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/product/key-transponder/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/product/mini-rfid-tag/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/product/library-rfid-tags/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/product/nfc-coin/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/product/nfc-epoxy-card/index.html
+[2m02:16:29[22m [34m[watch][39m .vercel/output/static/product/nfc-sticker/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/pallet-rfid-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-cable-tie-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/pps-laundry-tag-rfid-button/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-card-inlay/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-cards/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-ceramic-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-clamshell-card/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-clear-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-glass-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-fpc-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-metal-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-paper-card/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-nail-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-jewellery-tags/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-pcb/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-reader-writer/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-pcb-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-silicone-wristband/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-tyre-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-waste-bin-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-windshield-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/silicone-laundry-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/spring-rfid-tire-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-wood-card-2/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/tamper-proof-rfid-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/textile-rfid-laundry-tag/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/uhf-library-label/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/uhf-sticker/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/markets/middle-east-anti-metal-rfid-tags/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/markets/europe-laundry-rfid-tags/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/markets/north-america-rfid-cards/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/solutions/access-control-rfid/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/solutions/hotel-access-rfid/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/solutions/event-nfc-rfid/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/product/rfid-keyfob/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/solutions/industrial-asset-tracking-rfid/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/solutions/laundry-linen-rfid/index.html
+[2m02:16:30[22m [34m[watch][39m .vercel/output/static/solutions/library-media-rfid/index.html
+[2m02:33:49[22m Configuration file added. Restarting...
+[2m02:33:49[22m [34m[vite][39m changed tsconfig file detected: C:/Users/znpjl/Desktop/rfidak/.claude/worktrees/competent-chaplygin/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[2m02:33:54[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m02:34:01[22m [34m[content][39m Syncing content
+[2m02:34:01[22m [34m[content][39m Astro config changed
+[2m02:34:01[22m [34m[content][39m Clearing content store
+[2m02:34:05[22m [34m[content][39m Synced content
+[2m02:34:05[22m [34m[types][39m Generated [2m12.15s[22m
+[2m02:56:13[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/404.html
+[2m02:56:13[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/index.html
+[2m02:56:13[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/about/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/blogs/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/contact/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/products/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/rfid/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/rfid-technology/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/blogs/covid-rfid-laundry/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/blogs/mifare-cards/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/blogs/mifare-classic-vs-desfire/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/blogs/nfc-tags-business-use-cases/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/blogs/nfc-technology/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/blogs/rfid-frequency-guide/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/blogs/rfid-supply-chain/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/blogs/rfid-types/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/blogs/rfid-vs-barcode/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/category/rfid-cards/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/category/rfid-keyfob/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/category/rfid-labels/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/category/rfid-readers/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/category/rfid-tags/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/category/rfid-wristbands/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/high-temperature-rfid-tag/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/key-transponder/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/nfc-coin/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/library-rfid-tags/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/mini-rfid-tag/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/nfc-epoxy-card/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/nfc-sticker/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/pallet-rfid-tag/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/pps-laundry-tag-rfid-button/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-cable-tie-tag/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-card-inlay/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-cards/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-clamshell-card/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-ceramic-tag/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-clear-tag/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-fpc-tag/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-glass-tag/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-jewellery-tags/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-keyfob/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-nail-tag/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-metal-tag/index.html
+[2m02:56:14[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-paper-card/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-pcb/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-pcb-tag/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-reader-writer/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-silicone-wristband/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-tyre-tag/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-waste-bin-tag/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-windshield-tag/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/rfid-wood-card-2/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/silicone-laundry-tag/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/spring-rfid-tire-tag/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/tamper-proof-rfid-tag/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/textile-rfid-laundry-tag/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/uhf-library-label/index.html
+[2m02:56:15[22m [34m[watch][39m .claude/worktrees/competent-chaplygin/dist/product/uhf-sticker/index.html

@@ -1,0 +1,4 @@
+[31m[1m02:14:58[22m [ERROR][39m transport was disconnected, cannot call "fetchModule"
+  [1mStack trace:[22m
+[2m    at C:\Users\znpjl\Desktop\rfidak\node_modules\astro\node_modules\vite\dist\node\module-runner.js:548:17
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m

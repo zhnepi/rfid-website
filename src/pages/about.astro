@@ -3,231 +3,286 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
+import { getIntentContactHref } from '../utils/contact';
 
-const advantages = [
+const valueProps = [
   {
-    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-    </svg>`,
-    title: 'Stable RFID Chip Supply Chain',
-    description: 'Proud Tek is with stable chip supply of Desfire EV2 2k/4k/8k chips, Mifare plus S/X 2k chips, Mifare 1k/4k chips, and many other chips that is short in the market.',
+    title: 'Manufacturing focus',
+    description: 'RFID cards, tags, labels, wristbands, keyfobs and reader products supplied for OEM, sourcing and project-led deployments.',
   },
   {
-    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path>
-    </svg>`,
-    title: 'Exclusive Customization Service',
-    description: 'Proud Tek is experienced in customizing products based on application requirements. We are able to customize the material, color, size, and shape exclusively.',
+    title: 'Customization support',
+    description: 'Chip matching, print finishing, numbering, encoding, packaging and format selection for buyers who need more than a standard catalog item.',
   },
   {
-    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-    </svg>`,
-    title: 'Strict Quality Control',
-    description: 'Proud Tek fulfills quality checking from material to end products. Every single product is going through QC checking after each production procedure.',
+    title: 'Sample-first workflow',
+    description: 'Useful for import buyers and system integrators who want to verify compatibility before scaling into repeat production.',
   },
   {
-    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
-    </svg>`,
-    title: 'Responsible After-sales Service',
-    description: 'We take care of you while you take care of your business. We are responsible for each product we are supplying and are supportive with every aftersales problem.',
-  },
-  {
-    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-    </svg>`,
-    title: 'Competitive Price',
-    description: 'Proud Tek is supplying RFID products in large quantity globally, which enable us to lower our material purchasing cost and provide our customers with better price.',
-  },
-  {
-    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-    </svg>`,
-    title: 'Professionalism',
-    description: 'We are consistent, effective and agile. Proud Tek team work in RFID since 2008, experience and expertise allow us to provide professional solution to clients.',
-  },
-  {
-    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-    </svg>`,
-    title: 'Fast Delivery',
-    description: '100% on-time delivery guarantee. DHL, UPS, FedEx, aircargo, seaway, rich shipping channels.',
-  },
-  {
-    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-    </svg>`,
-    title: 'Free Sample',
-    description: 'Client can feel free to request free sample from us.',
+    title: 'Practical communication',
+    description: 'Built for teams that need clear answers around protocol, material, lead time and application fit before placing an order.',
   },
 ];
 
-const stats = [
-  { value: '15', label: 'Years of experience' },
-  { value: '+108', label: 'Customers served' },
-  { value: '99%', label: 'On-time Delivery' },
-  { value: '99%', label: 'Positive feedback' },
+const processSteps = [
+  {
+    step: '1',
+    title: 'Review the use case',
+    description: 'We start with the reader type, chip requirement, target environment and final application so the product recommendation is grounded in real usage.',
+  },
+  {
+    step: '2',
+    title: 'Match the product format',
+    description: 'Cards, labels, hard tags, wristbands or keyfobs are selected based on read distance, mounting surface, wear conditions and user flow.',
+  },
+  {
+    step: '3',
+    title: 'Confirm samples and customization',
+    description: 'Before mass production, buyers can validate print, encoding, material and performance using samples or pilot quantities.',
+  },
+  {
+    step: '4',
+    title: 'Move into production',
+    description: 'Once the sample path is approved, production planning, packaging and shipment can be aligned with the order schedule.',
+  },
 ];
+
+const buyerProfiles = [
+  'Distributors building a stable RFID product line',
+  'System integrators matching chips to installed readers',
+  'Hotels, clubs and campuses needing contactless credentials',
+  'Laundry and textile operators requiring washable tags',
+  'Retail, logistics and industrial teams rolling out tracking labels or hard tags',
+  'Buyers comparing factory support before long-term procurement',
+];
+
+const categoryLinks = [
+  { href: '/category/rfid-cards', label: 'RFID cards', description: 'Smart cards, hotel key cards, clamshell cards and custom credential formats.' },
+  { href: '/category/rfid-tags', label: 'RFID tags', description: 'Industrial, laundry, anti-metal, pallet and asset tracking tag options.' },
+  { href: '/category/rfid-labels', label: 'RFID labels', description: 'Printable UHF labels, NFC stickers and tamper-evident solutions.' },
+  { href: '/category/rfid-wristbands', label: 'RFID wristbands', description: 'Event, resort, healthcare and guest-experience wearable credentials.' },
+];
+
+const aboutFaqs = [
+  {
+    question: 'What does ProudTek mainly manufacture?',
+    answer: 'ProudTek focuses on RFID cards, tags, labels, wristbands, keyfobs and related reader hardware for sourcing, OEM and project-based applications.',
+  },
+  {
+    question: 'Can ProudTek support custom RFID projects, not only standard catalog items?',
+    answer: 'Yes. Many projects require chip matching, print customization, numbering, encoding or special materials. ProudTek can help buyers move from requirements into sampling, compatibility checks and production planning.',
+  },
+  {
+    question: 'Who is the About page most useful for?',
+    answer: 'It is especially useful for buyers, distributors and integrators who want to understand manufacturing scope, customization support and how the team approaches RFID project communication.',
+  },
+  {
+    question: 'Where should I go after reading the About page?',
+    answer: 'Most buyers move next to the RFID technology guide, the category pages or the contact page, depending on whether they still need technical background, product shortlisting or a sample discussion.',
+  },
+];
+
+const siteURL = 'https://www.proudtek.com';
+const canonicalURL = `${siteURL}/about`;
+const aboutContactHref = getIntentContactHref('samples');
+
+const aboutPageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  '@id': `${canonicalURL}#about-page`,
+  url: canonicalURL,
+  name: 'About ProudTek',
+  description: 'Brand and manufacturing overview for ProudTek, an RFID supplier based in Shenzhen, China.',
+  isPartOf: { '@id': `${siteURL}/#website` },
+  about: { '@id': `${siteURL}/#organization` },
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteURL}/` },
+    { '@type': 'ListItem', position: 2, name: 'About', item: canonicalURL },
+  ],
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: aboutFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
 ---
 
 <Layout
-  title="About ProudTek - Leading RFID Card & Tag Manufacturer Since 2008 | Shenzhen China"
-  description="Learn about ProudTek (Shenzhen Proud Tek Co., LTD), a professional RFID manufacturer since 2008. We offer RFID cards, smart cards, RFID tags with strict quality control, competitive pricing, and fast delivery worldwide."
-  keywords="ProudTek, RFID manufacturer, Shenzhen RFID factory, RFID company China, smart card manufacturer, RFID supplier"
+  title="About ProudTek - RFID Manufacturing Partner in Shenzhen, China"
+  description="Learn about ProudTek, an RFID manufacturer in Shenzhen focused on cards, tags, labels, wristbands, keyfobs and project-based customization support."
+  keywords="About ProudTek, RFID manufacturer Shenzhen, RFID factory China, custom RFID supplier, RFID OEM manufacturer"
+  canonicalURL={canonicalURL}
+  jsonLd={[aboutPageJsonLd, breadcrumbJsonLd, faqJsonLd]}
 >
   <Header />
   <main>
-    <!-- Hero Section -->
-    <section class="bg-[#00bcd4] py-20">
-      <div class="container mx-auto px-4 text-center">
-        <h1 class="text-5xl md:text-6xl font-script text-white">About Us</h1>
-      </div>
-    </section>
-    
-    <!-- Company Introduction -->
-    <section class="py-20 bg-white">
+    <section class="bg-gradient-to-br from-[#c9a84c] via-[#b8943f] to-[#008fa1] py-20 text-white">
       <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-2 gap-12">
-          <!-- Left Column -->
-          <div>
-            <p class="text-[#00bcd4] text-sm uppercase tracking-widest mb-2">RFID Professionals</p>
-            <h2 class="text-3xl font-semibold text-gray-800 mb-6">10 Years RFID Cards Factory</h2>
-            <p class="text-gray-600 leading-relaxed mb-4">
-              Founded in 2008, and located in Shenzhen, Proud Tek has grown rapidly as one of the leading manufacturers of RFID cards. Combining craftsmanship and high-tech equipment, We are offering comprehensive production service, providing RFID card inlay, RFID white cards, RFID Printing cards, RFID cards with magnetism bar, RFID die-cut cards, RFID black cards with PVC/PET/ABS of incomparable quality, with monthly production capacity up to 5 million.
-            </p>
-            <p class="text-gray-600 leading-relaxed mb-4">
-              Proud Tek is offering our clients qualified products at competitive prices. We are purchasing brand-new materials from China's top 5 suppliers, and insisting QC after each production procedure to guarantee each piece of the cards is QC passed.
-            </p>
-            <p class="text-gray-600 leading-relaxed">
-              We've successfully supported tens of countries' bus and metro systems with ticketing cards. Hundreds of hotels, hospitals, and fitness clubs are using our cards for access control and cashless payments.
-            </p>
-          </div>
-          
-          <!-- Right Column -->
-          <div>
-            <p class="text-[#00bcd4] text-sm uppercase tracking-widest mb-2">RFID Lovers...</p>
-            <h2 class="text-3xl font-semibold text-gray-800 mb-6">15 Years RFID Transponders Experience</h2>
-            <p class="text-[#00bcd4] font-medium mb-4">
-              Your reliable RFID cards / keyfobs / wristbands / tags for access control and cashless payment.
-            </p>
-            <p class="text-gray-600 leading-relaxed mb-4">
-              Proud Tek has been supporting hundreds of distributors and system integrators around the world with qualified RFID transponders for 15 years. From standard products to customized RFID products, Proud Tek offers professional recommendations and delivers high-quality products on time.
-            </p>
-            <p class="text-gray-600 leading-relaxed">
-              We always keep in mind that the success of our company is directly related to the quality of the products we offer. They meet the highest quality requirements as stipulated in ISO9001, ISO14000:14001 SGS guidelines and our stringent quality control system.
-            </p>
-          </div>
+        <nav class="text-sm text-white/80 mb-4" aria-label="Breadcrumb">
+          <a href="/" class="hover:underline">Home</a>
+          <span class="mx-2">/</span>
+          <span>About</span>
+        </nav>
+        <div class="max-w-4xl">
+          <p class="eyebrow-label eyebrow-label-wide text-[#c9a84c]/70 mb-4">About ProudTek</p>
+          <h1 class="title-balance text-4xl md:text-6xl font-bold mb-6">An RFID supplier built around practical sourcing, customization and project support</h1>
+          <p class="text-lg md:text-xl text-white/85 max-w-3xl">
+            ProudTek works with buyers who need more than a simple catalog. Expect help matching chips, materials and product formats, then turning that choice into a workable sample and production plan.
+          </p>
         </div>
       </div>
     </section>
-    
-    <!-- Advantages Section -->
-    <section class="py-20 bg-[#00bcd4]">
+
+    <section class="py-16 bg-white">
       <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-          <p class="text-white/80 text-sm mb-2">Why is Proud Tek?</p>
-          <h2 class="text-4xl font-semibold text-white">Our advantages</h2>
-        </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {advantages.map((advantage) => (
-            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white hover:bg-white/20 transition-colors">
-              <div class="mb-4" set:html={advantage.icon}></div>
-              <h3 class="text-lg font-semibold mb-3">{advantage.title}</h3>
-              <p class="text-white/80 text-sm leading-relaxed">{advantage.description}</p>
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
+          <div>
+            <p class="eyebrow-label text-[#c9a84c] mb-2">Company Overview</p>
+            <h2 class="title-balance text-3xl md:text-4xl font-semibold text-gray-900 mb-5">What buyers should understand about ProudTek first</h2>
+            <div class="space-y-5 text-gray-600 leading-relaxed max-w-3xl">
+              <p>
+                ProudTek is an RFID manufacturing and sourcing partner based in Shenzhen, China. The company focuses on contactless product families such as RFID cards, industrial tags, labels, wristbands, keyfobs and readers, with support for standard products as well as project-based customization.
+              </p>
+              <p>
+                For many buyers, the real challenge is not finding any RFID product. It is finding the correct chip, form factor, material and finishing for the actual environment in which the product will be used. That is why the buying path here keeps pulling attention back to compatibility, surface conditions, wear, encoding and sample approval.
+              </p>
+              <p>
+                Whether the project involves hotel key cards, laundry tags, NFC labels, anti-metal tags or event wristbands, the focus stays the same: reduce mismatched samples, shorten the move from research into a shortlist and make repeat purchasing easier once the right format is approved.
+              </p>
             </div>
-          ))}
+          </div>
+
+          <div class="rounded-[2rem] bg-slate-950 p-8 text-white shadow-[0_24px_80px_rgba(15,23,42,0.16)]">
+            <p class="eyebrow-label text-[#c9a84c] mb-2">Brand Snapshot</p>
+            <h2 class="title-balance text-2xl font-semibold mb-6">What buyers usually want to confirm before they shortlist ProudTek</h2>
+            <div class="grid sm:grid-cols-2 gap-4">
+              {valueProps.map((item) => (
+                <div class="copy-safe rounded-2xl border border-white/10 bg-white/5 p-5">
+                  <h3 class="text-lg font-semibold text-white">{item.title}</h3>
+                  <p class="text-sm text-white/75 mt-2 leading-relaxed">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
-    
-    <!-- Stats Section -->
-    <section class="py-16 bg-gray-800">
+
+    <section class="py-16 bg-gray-50 border-y border-gray-100">
       <div class="container mx-auto px-4">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((stat) => (
-            <div class="text-center">
-              <p class="text-4xl md:text-5xl font-bold text-[#00bcd4] mb-2">{stat.value}</p>
-              <p class="text-gray-400">{stat.label}</p>
+        <div class="max-w-3xl mb-10">
+          <p class="eyebrow-label text-[#c9a84c] mb-2">How We Work</p>
+          <h2 class="title-balance text-3xl font-semibold text-gray-900">A manufacturing workflow that starts with fit, not guesswork</h2>
+        </div>
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+          {processSteps.map((item) => (
+            <div class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-7 shadow-sm">
+              <div class="w-11 h-11 rounded-full bg-[#c9a84c]/5 text-[#c9a84c] font-bold flex items-center justify-center mb-5">
+                {item.step}
+              </div>
+              <h3 class="text-xl font-semibold text-gray-800">{item.title}</h3>
+              <p class="text-gray-600 leading-relaxed mt-3">{item.description}</p>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- E-E-A-T: Certifications & Trust Signals -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
+          <div>
+            <p class="eyebrow-label text-[#c9a84c] mb-2">Best Fit</p>
+            <h2 class="title-balance text-3xl font-semibold text-gray-900 mb-5">Who usually gets the most value from working with ProudTek</h2>
+            <p class="text-gray-600 leading-relaxed">
+              ProudTek is especially useful for buyers who are evaluating suppliers, validating compatibility or preparing a sample request. It fits teams that want technical clarity and production support in the same conversation.
+            </p>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            {buyerProfiles.map((item) => (
+              <div class="copy-safe rounded-2xl border border-gray-200 bg-gray-50 px-5 py-5 text-gray-700">
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mb-10">
+          <p class="eyebrow-label text-[#c9a84c] mb-2">Explore Categories</p>
+          <h2 class="title-balance text-3xl font-semibold text-gray-900">Move from company overview into actual product families</h2>
+          <p class="card-copy text-gray-600 mt-4">
+            Start here if supplier scope looks right and the next question is which product family belongs on the shortlist first.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+          {categoryLinks.map((item) => (
+            <a href={item.href} class="copy-safe rounded-[1.75rem] bg-white border border-gray-200 p-6 hover:border-[#c9a84c] hover:shadow-lg transition-all">
+              <h3 class="text-xl font-semibold text-gray-800">{item.label}</h3>
+              <p class="text-sm text-gray-600 leading-relaxed mt-3">{item.description}</p>
+              <span class="mt-5 inline-flex items-center text-sm font-semibold text-[#c9a84c]">
+                View category
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <section class="py-16 bg-white">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
-          <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Certifications & Compliance</h2>
-          <div class="grid md:grid-cols-3 gap-6 text-center">
-            <div class="p-6 border border-gray-200 rounded-lg">
-              <div class="text-3xl font-bold text-[#00bcd4] mb-2">ISO 9001</div>
-              <p class="text-gray-600 text-sm">Quality Management System certified, ensuring consistent product quality and customer satisfaction across all manufacturing processes.</p>
-            </div>
-            <div class="p-6 border border-gray-200 rounded-lg">
-              <div class="text-3xl font-bold text-[#00bcd4] mb-2">ISO 14001</div>
-              <p class="text-gray-600 text-sm">Environmental Management System certified, demonstrating our commitment to minimizing environmental impact in RFID production.</p>
-            </div>
-            <div class="p-6 border border-gray-200 rounded-lg">
-              <div class="text-3xl font-bold text-[#00bcd4] mb-2">SGS</div>
-              <p class="text-gray-600 text-sm">SGS verified manufacturing facility with comprehensive testing and inspection for raw materials, production processes, and finished products.</p>
-            </div>
+          <div class="text-center mb-10">
+            <p class="eyebrow-label text-[#c9a84c] mb-2">FAQ</p>
+            <h2 class="title-balance text-3xl font-semibold text-gray-900">Common questions about ProudTek</h2>
+          </div>
+          <div class="space-y-4">
+            {aboutFaqs.map((faq) => (
+              <details class="copy-safe group rounded-2xl border border-gray-200 bg-gray-50 p-6">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-gray-800">
+                  {faq.question}
+                  <span class="text-[#c9a84c] transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p class="mt-4 text-gray-600 leading-relaxed">{faq.answer}</p>
+              </details>
+            ))}
           </div>
         </div>
       </div>
     </section>
 
-    <!-- E-E-A-T: Production Capabilities -->
-    <section class="py-16 bg-gray-50">
-      <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto">
-          <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Manufacturing Capabilities</h2>
-          <div class="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 class="text-xl font-semibold text-gray-800 mb-4">Production Specifications</h3>
-              <ul class="space-y-3 text-gray-600">
-                <li class="flex items-start gap-2">
-                  <svg class="w-5 h-5 text-[#00bcd4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span><strong>Monthly capacity:</strong> 5 million RFID cards</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="w-5 h-5 text-[#00bcd4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span><strong>Product range:</strong> 46+ SKUs across 6 categories</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="w-5 h-5 text-[#00bcd4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span><strong>Chip support:</strong> 30+ chip types (LF, HF, UHF)</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="w-5 h-5 text-[#00bcd4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span><strong>Printing:</strong> CMYK, offset, silk screen, laser, UV</span>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-800 mb-4">Quality Assurance Process</h3>
-              <ul class="space-y-3 text-gray-600">
-                <li class="flex items-start gap-2">
-                  <svg class="w-5 h-5 text-[#00bcd4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span><strong>Incoming inspection:</strong> Raw material verification from top 5 China suppliers</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="w-5 h-5 text-[#00bcd4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span><strong>In-process QC:</strong> Inspection after each production stage</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="w-5 h-5 text-[#00bcd4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span><strong>Final testing:</strong> 100% chip read/write verification</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="w-5 h-5 text-[#00bcd4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span><strong>Defect rate:</strong> Less than 0.1% across all product lines</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+    <section class="py-14 bg-[#c9a84c]">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to turn product research into a sample plan?</h2>
+        <p class="text-white/90 max-w-3xl mx-auto mb-7">
+          Share your chip requirement, target application and quantity. We can guide you toward the right category, sample path and production discussion.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href={aboutContactHref} class="bg-white text-[#c9a84c] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            Contact ProudTek
+          </a>
+          <a href="/rfid-technology" class="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+            Read the technology guide
+          </a>
         </div>
       </div>
     </section>

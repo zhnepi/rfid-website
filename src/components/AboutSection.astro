@@ -1,27 +1,88 @@
 ---
+import { getIntentContactHref } from '../utils/contact';
 
+const capabilities = [
+  'RFID card and tag manufacturing since 2008',
+  'Stable supply for Mifare, DESFire, NTAG, UCODE, EM, and T5577 chips',
+  'Custom materials, dimensions, printing, UID encoding, and packaging',
+  'QC at every production stage plus 100% chip verification before shipment',
+];
+
+const highlights = [
+  { value: '5M', label: 'RFID cards per month' },
+  { value: '50+', label: 'countries shipped to' },
+  { value: '108+', label: 'global clients served' },
+  { value: '24h', label: 'quote turnaround for common projects' },
+];
+
+const aboutContactHref = getIntentContactHref('samples');
 ---
 
-<section class="py-20 bg-white">
+<section class="py-24 bg-[#fafaf8]">
   <div class="container mx-auto px-4">
-    <div class="max-w-4xl mx-auto text-center">
-      <p class="text-[#00bcd4] text-sm uppercase tracking-widest mb-2">Since 2008...</p>
-      <h2 class="text-4xl md:text-5xl font-script text-gray-800 mb-8">Smart Card Manufacturer</h2>
-      
-      <p class="text-gray-600 leading-relaxed mb-6">
-        Proud Tek has been manufacturing and supplying smart cards for public traffic, access control, cashless payment, etc. since 2008. We have supplied various smart cards to reputable public traffic companies from Mexico, Turkey, Lithuania, and other countries. We also make smart cards in the form factor of key fobs and wristbands and are honored to supply them to Fortune 500 companies.
-      </p>
-      
-      <p class="text-gray-600 leading-relaxed mb-8">
-        In addition to smart cards, we also offer RFID laundry tags that are perfect for tracking garments. Our quick delivery, perfect reading range, and stable performance win us more and more happy wholesalers and laundry shop customers.
-      </p>
-      
-      <a 
-        href="/about" 
-        class="inline-block bg-[#00bcd4] text-white px-8 py-3 rounded hover:bg-[#00acc1] transition-colors font-medium"
-      >
-        About Proud Tek
-      </a>
+    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-start">
+      <div class="reveal">
+        <p class="eyebrow-label eyebrow-label-wide text-[#c9a84c] mb-3">About ProudTek</p>
+        <h2 class="font-serif title-balance text-4xl md:text-5xl font-normal text-[#0d0d0d] mb-6">
+          A Shenzhen RFID factory built for custom manufacturing, fast communication, and dependable delivery
+        </h2>
+        <div class="w-12 h-[1px] bg-[#c9a84c] mb-6"></div>
+
+        <div class="space-y-5 text-[#555] max-w-3xl">
+          <p>
+            ProudTek serves distributors, system integrators, laundries, hotels, public transit projects and industrial tracking teams that need a factory able to support both sample validation and repeat production. Buyers usually start here to confirm chip range, customization depth and delivery discipline before moving deeper into the catalog.
+          </p>
+          <p>
+            We support standard SKUs and project-based OEM production, from RFID card inlays and hotel key cards to textile laundry tags, anti-metal labels, wristbands and rugged industrial transponders. The goal is simple: help buyers move from sample evaluation to stable mass production without switching vendors halfway through the project.
+          </p>
+        </div>
+
+        <ul class="mt-8 grid sm:grid-cols-2 gap-4">
+          {capabilities.map((item) => (
+            <li class="flex items-start gap-3 border border-[#e8e5df] bg-white px-5 py-4">
+              <svg class="w-5 h-5 text-[#c9a84c] mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-sm text-[#444]">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a
+            href="/about"
+            class="inline-block bg-[#c9a84c] text-[#0d0d0d] px-8 py-3.5 hover:bg-[#d4b85e] transition-all duration-300 font-medium text-sm tracking-[0.1em] uppercase hover:shadow-[0_8px_30px_rgba(201,168,76,0.25)]"
+          >
+            Learn More About ProudTek
+          </a>
+          <a
+            href={aboutContactHref}
+            class="inline-block border border-[#c9a84c]/30 text-[#c9a84c] px-8 py-3.5 hover:bg-[#c9a84c] hover:text-[#0d0d0d] transition-all duration-300 font-medium text-sm tracking-[0.1em] uppercase"
+          >
+            Start Your RFID Project
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-[#0d0d0d] p-9 text-white shadow-[0_24px_80px_rgba(0,0,0,0.2)] reveal reveal-delay-2">
+        <p class="eyebrow-label eyebrow-label-wide text-[#c9a84c] mb-3">Factory Snapshot</p>
+        <h3 class="font-serif title-balance text-2xl font-normal mb-7 text-white/90">Why buyers shortlist ProudTek</h3>
+
+        <div class="grid grid-cols-2 gap-4">
+          {highlights.map((item) => (
+            <div class="border border-white/8 bg-white/3 p-5">
+              <div class="text-3xl font-serif text-[#c9a84c]">{item.value}</div>
+              <p class="text-sm text-white/50 mt-2">{item.label}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-8 border border-[#c9a84c]/15 bg-[#c9a84c]/5 p-5">
+          <p class="text-sm text-white/45 leading-relaxed">
+            Common applications include public transportation, hotels, hospitals, libraries, retail, industrial laundry, smart buildings and asset tracking. Use these buying paths when you still need to decide whether cards, tags, labels, wristbands or rugged transponders fit the workflow best.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

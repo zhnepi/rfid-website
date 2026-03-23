@@ -1,0 +1,178 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { authors } from '../../data/authors';
+import { blogPosts } from '../../data/blogs';
+
+export function getStaticPaths() {
+  return authors.map((author) => ({
+    params: { slug: author.slug },
+    props: { author },
+  }));
+}
+
+const { author } = Astro.props;
+const siteURL = 'https://www.proudtek.com';
+const canonicalURL = `${siteURL}/authors/${author.slug}`;
+const authorPosts = blogPosts
+  .filter((post) => (post.authorId || 'proudtek-rfid-editorial-team') === author.id)
+  .sort((a, b) => new Date(b.updatedDate || b.date).getTime() - new Date(a.updatedDate || a.date).getTime())
+  .slice(0, 6);
+
+const profileJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  '@id': `${canonicalURL}#profile`,
+  url: canonicalURL,
+  name: `${author.name} | ProudTek`,
+  dateModified: authorPosts[0]?.updatedDate || authorPosts[0]?.date || new Date().toISOString().split('T')[0],
+  isPartOf: { '@id': `${siteURL}/#website` },
+  about: { '@id': `${siteURL}/#organization` },
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': `${canonicalURL}#author`,
+    name: author.name,
+    description: author.bio,
+    url: canonicalURL,
+    affiliation: { '@id': `${siteURL}/#organization` },
+    knowsAbout: author.expertise,
+    sameAs: author.sameAs,
+    hasCredential: author.expertise.map((skill: string) => ({
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'expertise',
+      competencyRequired: skill,
+    })),
+    ...(authorPosts.length > 0
+      ? {
+          subjectOf: authorPosts.map((post) => ({
+            '@type': 'BlogPosting',
+            headline: post.title,
+            url: `${siteURL}/blogs/${post.slug}`,
+            datePublished: post.date,
+            ...(post.updatedDate ? { dateModified: post.updatedDate } : {}),
+          })),
+        }
+      : {}),
+  },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['[data-speakable="author-bio"]', '[data-speakable="author-expertise"]'],
+  },
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteURL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Authors', item: `${siteURL}/authors` },
+    { '@type': 'ListItem', position: 3, name: author.name, item: canonicalURL },
+  ],
+};
+---
+
+<Layout
+  title={`${author.name} | ProudTek`}
+  description={author.shortBio}
+  canonicalURL={canonicalURL}
+  jsonLd={[profileJsonLd, breadcrumbJsonLd]}
+>
+  <Header />
+  <main>
+    <section class="bg-gradient-to-br from-[#072a31] via-slate-900 to-[#0c4a56] py-20 text-white">
+      <div class="container mx-auto px-4">
+        <nav class="mb-4 text-sm text-white/70" aria-label="Breadcrumb">
+          <a href="/" class="hover:underline">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/authors" class="hover:underline">Authors</a>
+          <span class="mx-2">/</span>
+          <span>{author.name}</span>
+        </nav>
+        <div class="max-w-4xl" data-speakable="author-bio">
+          <p class="eyebrow-label text-[#c9a84c] mb-4">Editorial Profile</p>
+          <h1 class="title-balance text-4xl font-bold md:text-6xl">{author.name}</h1>
+          <p class="mt-4 text-lg text-white/80">{author.role}</p>
+          <p class="mt-6 max-w-3xl text-lg text-white/82">{author.bio}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-16">
+      <div class="container mx-auto px-4">
+        <div class="grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
+          <div class="copy-safe rounded-[1.75rem] border border-gray-200 bg-gray-50 p-8">
+            <p class="eyebrow-label text-[#c9a84c] mb-3">Focus Areas</p>
+            <h2 class="title-balance text-2xl font-semibold text-gray-900 mb-5">What this editorial profile covers</h2>
+            <div class="space-y-3">
+              {author.focusAreas.map((item) => (
+                <div class="rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm leading-relaxed text-gray-700">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="grid gap-6 md:grid-cols-2">
+            <div class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-8 shadow-sm" data-speakable="author-expertise">
+              <p class="eyebrow-label text-[#c9a84c] mb-3">Expertise</p>
+              <ul class="space-y-3 text-sm leading-relaxed text-gray-700">
+                {author.expertise.map((item) => (
+                  <li class="flex items-start gap-3">
+                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#c9a84c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="copy-safe rounded-[1.75rem] border border-[#c9a84c]/15 bg-[#c9a84c]/5 p-8">
+              <p class="eyebrow-label text-[#c9a84c] mb-3">How To Use This Profile</p>
+              <div class="space-y-3 text-sm leading-relaxed text-gray-700">
+                {author.profileHighlights.map((item) => (
+                  <p>{item}</p>
+                ))}
+              </div>
+              <div class="mt-6 space-y-3">
+                {author.profileLinks.map((link) => (
+                  <a href={link.href} class="copy-safe block rounded-2xl border border-[#c9a84c]/15 bg-white p-4 hover:border-[#c9a84c] transition-colors">
+                    <span class="block text-sm font-semibold text-gray-800">{link.label}</span>
+                    <span class="mt-1 block text-sm text-gray-500">{link.description}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-50 py-16 border-y border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between mb-8">
+          <div>
+            <p class="eyebrow-label text-[#c9a84c] mb-2">Recent Articles</p>
+            <h2 class="title-balance text-3xl font-semibold text-gray-900">Guides published under this editorial profile</h2>
+          </div>
+          <a href="/blogs" class="text-sm font-semibold text-[#c9a84c] hover:text-[#b8943f] transition-colors">View all articles</a>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {authorPosts.map((post) => (
+            <a href={`/blogs/${post.slug}`} class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-6 shadow-sm hover:shadow-lg transition-shadow">
+              <span class="eyebrow-label text-[#c9a84c]">{post.category}</span>
+              <h3 class="title-balance mt-3 text-xl font-semibold text-gray-900">{post.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-gray-600">{post.excerpt}</p>
+              <span class="mt-4 block text-sm text-gray-400">{post.updatedDate || post.date}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Newsletter />
+  </main>
+  <Footer />
+</Layout>
