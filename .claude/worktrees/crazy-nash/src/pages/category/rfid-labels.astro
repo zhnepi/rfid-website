@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { products } from '../../data/products';
+
+const categoryName = 'RFID Labels';
+const categoryProducts = products.filter(p => p.category === categoryName);
+---
+
+<Layout
+  title="RFID Labels & Stickers - UHF, NFC, Tamper Proof Labels | ProudTek Manufacturer"
+  description="RFID labels and stickers from ProudTek: UHF stickers, NFC stickers, tamper-proof labels, jewellery tags, windshield tags. Printable and customizable RFID label solutions."
+  keywords="RFID labels, RFID stickers, UHF sticker, NFC sticker, tamper proof RFID label, jewellery tag, windshield tag, RFID label manufacturer"
+>
+  <Header />
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-primary to-secondary text-white py-16">
+    <div class="container mx-auto px-4">
+      <nav class="text-sm mb-4" aria-label="Breadcrumb">
+        <a href="/" class="hover:underline">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/rfid" class="hover:underline">RFID Products</a>
+        <span class="mx-2">/</span>
+        <span>{categoryName}</span>
+      </nav>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">{categoryName}</h1>
+      <p class="text-xl opacity-90 max-w-3xl">
+        Cost-effective RFID labels and stickers for inventory tracking, library management, 
+        retail, and logistics applications. Available in NFC and UHF frequencies.
+      </p>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center mb-8">
+        <p class="text-gray-600">{categoryProducts.length} products found</p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {categoryProducts.map((product) => (
+          <a 
+            href={`/product/${product.slug}`}
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group"
+          >
+            <div class="aspect-square overflow-hidden bg-gray-100">
+              <img
+                src={product.images[0]}
+                alt={product.name}
+                width="400"
+                height="400"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-800 group-hover:text-primary transition-colors line-clamp-2">
+                {product.name}
+              </h3>
+              <p class="text-sm text-gray-500 mt-2 line-clamp-2">
+                {product.description.substring(0, 100)}...
+              </p>
+              <div class="mt-4 flex items-center text-primary text-sm font-medium">
+                View Details
+                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Description - GEO: Comprehensive, authoritative content -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">RFID Label & Sticker Buying Guide</h2>
+        <div class="prose prose-lg text-gray-600">
+          <p>
+            RFID labels and stickers are thin, flexible tags consisting of an RFID inlay (chip + antenna) laminated between paper or synthetic layers. They are the most cost-effective form of RFID identification, with per-unit costs ranging from $0.05 to $0.50 depending on chip type and volume. ProudTek produces millions of RFID labels monthly, supplying retailers, libraries, logistics companies, and healthcare providers across 50+ countries.
+          </p>
+
+          <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">RFID Label Types Comparison</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse border border-gray-200 my-4">
+              <caption class="sr-only">RFID Label Types Comparison</caption>
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700">Label Type</th>
+                  <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700">Frequency</th>
+                  <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700">Read Range</th>
+                  <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700">Best For</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="border border-gray-200 px-4 py-2">NFC Sticker</td><td class="border border-gray-200 px-4 py-2">13.56MHz (HF)</td><td class="border border-gray-200 px-4 py-2">1-5cm</td><td class="border border-gray-200 px-4 py-2">Marketing, product authentication, smartphone interaction</td></tr>
+                <tr class="bg-gray-50"><td class="border border-gray-200 px-4 py-2">UHF Sticker</td><td class="border border-gray-200 px-4 py-2">860-960MHz</td><td class="border border-gray-200 px-4 py-2">1-10m</td><td class="border border-gray-200 px-4 py-2">Retail inventory, warehouse tracking, logistics</td></tr>
+                <tr><td class="border border-gray-200 px-4 py-2">Library Label</td><td class="border border-gray-200 px-4 py-2">13.56MHz (HF)</td><td class="border border-gray-200 px-4 py-2">1-10cm</td><td class="border border-gray-200 px-4 py-2">Book tracking, self-checkout, anti-theft</td></tr>
+                <tr class="bg-gray-50"><td class="border border-gray-200 px-4 py-2">Tamper-Proof Label</td><td class="border border-gray-200 px-4 py-2">HF / UHF</td><td class="border border-gray-200 px-4 py-2">Varies</td><td class="border border-gray-200 px-4 py-2">Anti-counterfeiting, warranty seals, asset protection</td></tr>
+                <tr><td class="border border-gray-200 px-4 py-2">Jewellery Tag</td><td class="border border-gray-200 px-4 py-2">UHF</td><td class="border border-gray-200 px-4 py-2">0.5-2m</td><td class="border border-gray-200 px-4 py-2">Jewellery inventory, retail display tracking</td></tr>
+                <tr class="bg-gray-50"><td class="border border-gray-200 px-4 py-2">Windshield Tag</td><td class="border border-gray-200 px-4 py-2">UHF</td><td class="border border-gray-200 px-4 py-2">3-10m</td><td class="border border-gray-200 px-4 py-2">Vehicle identification, toll collection, parking</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">How to Choose the Right RFID Label</h3>
+          <ol class="list-decimal list-inside space-y-2 mt-3">
+            <li><strong>Application type:</strong> NFC stickers for consumer engagement and authentication; UHF stickers for inventory and supply chain; tamper-proof labels for security and anti-counterfeiting.</li>
+            <li><strong>Surface material:</strong> Standard labels work on cardboard, paper, and plastic. Metal-compatible labels with foam spacers are needed for metallic products. Curved surfaces require flexible inlay designs.</li>
+            <li><strong>Printability:</strong> ProudTek labels support thermal transfer, direct thermal, and inkjet printing. Pre-printed labels with barcodes, QR codes, and custom branding are available.</li>
+            <li><strong>Environmental conditions:</strong> Standard paper labels for indoor use; synthetic (PP/PET) labels for moisture resistance; high-adhesive labels for rough or low-energy surfaces.</li>
+            <li><strong>Volume and cost:</strong> UHF labels start from $0.05/piece at volumes of 100,000+. NFC stickers with NTAG213 chips are typically $0.08-$0.15/piece depending on quantity.</li>
+          </ol>
+
+          <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">Industry Applications</h3>
+          <p>
+            RFID labels drive efficiency across industries: retail (enabling 99%+ inventory accuracy with UHF item-level tagging), libraries (managing 100,000+ volumes with HF book labels and self-checkout systems), healthcare (tracking pharmaceuticals and specimens with tamper-proof labels), logistics (pallet and carton tracking through supply chains), and luxury goods (brand authentication with NFC stickers consumers can verify via smartphone).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-12 bg-primary">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold text-white mb-4">Need Custom RFID Labels?</h2>
+      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free samples and competitive pricing. ProudTek offers custom printing, encoding, and roll-format delivery for easy integration.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="bg-white text-primary px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
+        <a href="https://wa.me/8618665820632?text=Hi, I need custom RFID labels" target="_blank" rel="noopener noreferrer" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

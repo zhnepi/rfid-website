@@ -1,0 +1,44 @@
+---
+const stats = [
+  { number: '108+', label: 'Global Clients' },
+  { number: '50+', label: 'Countries Served' },
+  { number: '15+', label: 'Years Experience' },
+  { number: '46+', label: 'Product Models' },
+];
+
+const industries = [
+  'Public Transit', 'Hotels & Resorts', 'Hospitals', 'Libraries',
+  'Retail Chains', 'Industrial Laundry', 'Events & Festivals', 'Smart Buildings',
+  'Logistics', 'Automotive', 'Education', 'Government',
+];
+---
+
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start max-w-5xl mx-auto">
+      <!-- Left: heading + industries -->
+      <div class="text-center lg:text-left">
+        <p class="section-subtitle mb-2">Trusted Worldwide</p>
+        <h2 class="section-title mb-6">Serving Clients in 50+ Countries</h2>
+
+        <div class="flex flex-wrap justify-center lg:justify-start gap-2">
+          {industries.map((industry) => (
+            <span class="px-3 py-1.5 bg-gray-light border border-gray-200 rounded-full text-xs text-gray-600 font-medium">
+              {industry}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: stats grid -->
+      <div class="grid grid-cols-2 gap-5">
+        {stats.map((stat) => (
+          <div class="text-center lg:text-left p-5 rounded-lg bg-gray-light">
+            <p class="text-3xl md:text-4xl font-bold text-primary" style="font-variant-numeric: tabular-nums;">{stat.number}</p>
+            <p class="text-sm text-gray-500 mt-1 font-medium">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

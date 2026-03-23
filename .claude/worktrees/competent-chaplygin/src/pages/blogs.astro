@@ -1,0 +1,184 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { blogPosts as blogs } from '../data/blogs';
+
+const sortedBlogs = [...blogs].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+const featured = sortedBlogs[0];
+const rest = sortedBlogs.slice(1);
+const categories = ['All', ...Array.from(new Set(blogs.map(b => b.category)))];
+---
+
+<Layout
+  title="RFID Technology Blog - Industry News, Guides & Applications | ProudTek"
+  description="Explore ProudTek's RFID blog for the latest industry news, technology guides, and application insights. Learn about RFID cards, NFC technology, RFID in supply chain, laundry management, and more."
+  keywords="RFID blog, RFID technology news, RFID applications, NFC technology guide, RFID industry insights"
+>
+  <Header />
+  <main>
+    <!-- Hero Section -->
+    <section class="bg-[#00bcd4] py-20">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-display text-white">RFID Guides & Industry Insights</h1>
+        <p class="text-white/80 mt-4 max-w-2xl mx-auto">
+          Helping buyers choose the right RFID products for their projects
+        </p>
+      </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="bg-white border-b border-gray-200 sticky top-0 z-20">
+      <div class="container mx-auto px-4">
+        <div class="flex gap-2 py-4 overflow-x-auto" id="category-filter">
+          {categories.map((cat) => (
+            <button
+              data-filter={cat}
+              class:list={[
+                'whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-colors',
+                cat === 'All'
+                  ? 'bg-[#00bcd4] text-white'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
+              ]}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="py-12 bg-gray-50" data-category={featured.category} data-featured>
+      <div class="container mx-auto px-4">
+        <a href={`/blogs/${featured.slug}`} class="block group">
+          <div class="grid md:grid-cols-2 gap-8 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+            <div class="relative aspect-[16/10] md:aspect-auto overflow-hidden">
+              <img
+                src={featured.image}
+                alt={featured.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-8 flex flex-col justify-center">
+              <span class="text-[#00bcd4] text-xs uppercase tracking-wider font-medium">{featured.category}</span>
+              <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mt-2 mb-4 group-hover:text-[#00bcd4] transition-colors">
+                {featured.title}
+              </h2>
+              <p class="text-gray-600 mb-6">{featured.excerpt}</p>
+              <div class="flex items-center justify-between">
+                <span class="text-[#00bcd4] font-medium inline-flex items-center gap-1">
+                  Read more
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </span>
+                <span class="text-gray-400 text-sm">{featured.date}</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="py-12 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blog-grid">
+          {rest.map((blog, i) => (
+            <>
+              <article data-category={blog.category} class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <a href={`/blogs/${blog.slug}`} class="block">
+                  <div class="relative aspect-[16/10] overflow-hidden">
+                    <img
+                      src={blog.image}
+                      alt={blog.title}
+                      class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                </a>
+                <div class="p-6">
+                  <span class="text-[#00bcd4] text-xs uppercase tracking-wider font-medium">{blog.category}</span>
+                  <h2 class="text-xl font-semibold text-gray-800 mt-2 mb-3 hover:text-[#00bcd4] transition-colors line-clamp-2">
+                    <a href={`/blogs/${blog.slug}`}>{blog.title}</a>
+                  </h2>
+                  <p class="text-gray-600 text-sm mb-4 line-clamp-3">{blog.excerpt}</p>
+                  <div class="flex items-center justify-between">
+                    <a
+                      href={`/blogs/${blog.slug}`}
+                      class="text-[#00bcd4] font-medium hover:text-[#00acc1] transition-colors inline-flex items-center gap-1"
+                    >
+                      Read more
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                    <span class="text-gray-400 text-sm">{blog.date}</span>
+                  </div>
+                </div>
+              </article>
+              {/* CTA card after every 9 posts */}
+              {(i + 1) % 9 === 0 && (
+                <div class="md:col-span-2 lg:col-span-3 bg-gradient-to-r from-[#00bcd4] to-[#00acc1] rounded-2xl p-8 text-center text-white" data-cta>
+                  <h3 class="text-2xl font-bold mb-2">Need help choosing RFID products?</h3>
+                  <p class="text-white/80 mb-6 max-w-xl mx-auto">Tell us about your project and get a free consultation with sample recommendations.</p>
+                  <a
+                    href="/contact"
+                    class="inline-block bg-white text-[#00bcd4] font-semibold px-8 py-3 rounded-full hover:bg-gray-100 transition-colors"
+                  >
+                    Get Free Samples
+                  </a>
+                </div>
+              )}
+            </>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Newsletter />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('#category-filter button');
+  const featured = document.querySelector<HTMLElement>('[data-featured]');
+  const cards = document.querySelectorAll<HTMLElement>('#blog-grid > article');
+  const ctas = document.querySelectorAll<HTMLElement>('#blog-grid > [data-cta]');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter!;
+
+      // Update button styles
+      buttons.forEach(b => {
+        b.classList.remove('bg-[#00bcd4]', 'text-white');
+        b.classList.add('bg-gray-100', 'text-gray-600');
+      });
+      btn.classList.remove('bg-gray-100', 'text-gray-600');
+      btn.classList.add('bg-[#00bcd4]', 'text-white');
+
+      // Filter featured
+      if (featured) {
+        const fCat = featured.dataset.category;
+        featured.style.display = (filter === 'All' || fCat === filter) ? '' : 'none';
+      }
+
+      // Filter cards
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const match = filter === 'All' || card.dataset.category === filter;
+        card.style.display = match ? '' : 'none';
+        if (match) visibleCount++;
+      });
+
+      // Show/hide CTAs only when showing all
+      ctas.forEach(cta => {
+        cta.style.display = filter === 'All' ? '' : 'none';
+      });
+    });
+  });
+</script>

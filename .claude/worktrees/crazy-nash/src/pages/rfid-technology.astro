@@ -1,0 +1,306 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+
+// HowTo JSON-LD for "How to choose RFID products"
+const howToJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Choose the Right RFID Product for Your Application",
+  "description": "A step-by-step guide to selecting the correct RFID frequency, chip type, and form factor for your specific use case.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Determine your read range requirement",
+      "text": "Short range (1-10cm) suggests LF or HF RFID. Medium range (up to 1m) works with HF. Long range (1-12m+) requires UHF RFID."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Assess the operating environment",
+      "text": "Consider whether your RFID tags will be near metal (use on-metal tags), exposed to water/liquids (LF/HF perform better), or in extreme temperatures (use ceramic or high-temp tags rated for -40°C to +250°C)."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Choose the right frequency band",
+      "text": "LF (125kHz) for animal tracking and access control keyfobs. HF (13.56MHz) for smart cards, NFC, payment, and library systems. UHF (860-960MHz) for supply chain, inventory, and asset tracking."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Select the chip based on security and memory needs",
+      "text": "EM4100 for basic ID-only applications. Mifare Classic 1K for standard access control (1KB memory). Mifare DESFire EV2/EV3 for high-security payment (AES-128 encryption, up to 8KB). NTAG213/215/216 for NFC mobile interaction."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Choose the form factor",
+      "text": "ISO card (85.5x54mm) for standard cards. Keyfob for portable access. Wristband for events/hospitals. Label/sticker for retail. Hard tag for industrial environments."
+    }
+  ]
+};
+
+const definedTermJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "name": "RFID",
+    "description": "Radio Frequency Identification - a technology that uses electromagnetic fields to automatically identify and track tags attached to objects.",
+    "inDefinedTermSet": "Technology Terms"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "name": "NFC",
+    "description": "Near Field Communication - a short-range wireless technology operating at 13.56 MHz, enabling two-way communication between devices within 4cm.",
+    "inDefinedTermSet": "Technology Terms"
+  }
+];
+---
+
+<Layout
+  title="RFID Technology Guide - How RFID Works, Frequencies, Chips & Applications | ProudTek"
+  description="Comprehensive RFID technology guide: learn how RFID works, compare LF vs HF vs UHF frequencies, understand Mifare and NFC chips, and discover RFID applications across industries. Expert knowledge from ProudTek."
+  keywords="RFID technology, how RFID works, RFID frequency comparison, LF HF UHF RFID, NFC technology, Mifare chips, RFID applications, RFID guide"
+  jsonLd={[howToJsonLd, ...definedTermJsonLd]}
+>
+  <Header />
+  <main>
+    <!-- Hero -->
+    <section class="bg-gradient-to-r from-primary to-secondary py-16">
+      <div class="container mx-auto px-4">
+        <nav class="text-sm mb-4 text-white/80">
+          <a href="/" class="hover:underline">Home</a>
+          <span class="mx-2">/</span>
+          <span>RFID Technology Guide</span>
+        </nav>
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">RFID Technology Guide</h1>
+        <p class="text-xl text-white/90 max-w-3xl">
+          Everything you need to know about RFID technology: how it works, frequency comparison, chip selection, and industry applications. Written by RFID manufacturing experts with 15+ years of experience.
+        </p>
+      </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="py-8 bg-gray-50 border-b">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-lg font-semibold text-gray-800 mb-3">Table of Contents</h2>
+          <nav class="grid md:grid-cols-2 gap-2 text-sm">
+            <a href="#what-is-rfid" class="text-primary hover:underline">1. What is RFID?</a>
+            <a href="#how-rfid-works" class="text-primary hover:underline">2. How Does RFID Work?</a>
+            <a href="#rfid-frequencies" class="text-primary hover:underline">3. RFID Frequencies Compared</a>
+            <a href="#rfid-chips" class="text-primary hover:underline">4. Popular RFID Chip Types</a>
+            <a href="#rfid-form-factors" class="text-primary hover:underline">5. RFID Form Factors</a>
+            <a href="#rfid-applications" class="text-primary hover:underline">6. Industry Applications</a>
+            <a href="#rfid-vs-nfc" class="text-primary hover:underline">7. RFID vs NFC</a>
+            <a href="#choosing-rfid" class="text-primary hover:underline">8. How to Choose RFID Products</a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <article class="py-12 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto prose prose-lg text-gray-600 prose-headings:text-gray-800">
+
+          <section id="what-is-rfid">
+            <h2 class="text-2xl font-bold mt-8 mb-4">1. What is RFID?</h2>
+            <p><strong>RFID (Radio Frequency Identification)</strong> is a wireless technology that uses electromagnetic fields to automatically identify and track tags attached to objects. An RFID system consists of three components: a <strong>tag</strong> (transponder containing a microchip and antenna), a <strong>reader</strong> (interrogator that emits radio waves), and <strong>middleware</strong> (software that processes the data).</p>
+            <p>RFID was first patented in 1973 and has since become a multi-billion dollar industry. The global RFID market was valued at approximately $14.5 billion in 2023, and industry analysts project it to reach $40.5 billion by 2032, growing at a CAGR of 12.1%. RFID technology is now deployed in virtually every industry, from retail and logistics to healthcare and transportation.</p>
+          </section>
+
+          <section id="how-rfid-works">
+            <h2 class="text-2xl font-bold mt-12 mb-4">2. How Does RFID Work?</h2>
+            <p>RFID operates through a simple but effective process:</p>
+            <ol class="list-decimal list-inside space-y-2 mt-3">
+              <li>The <strong>RFID reader</strong> emits radio frequency energy through its antenna</li>
+              <li>When an <strong>RFID tag</strong> enters the reader's electromagnetic field, the tag's antenna absorbs the energy</li>
+              <li>This energy powers the tag's microchip, which modulates the signal and transmits its stored data back</li>
+              <li>The reader receives this <strong>backscattered signal</strong> and decodes it into usable data</li>
+              <li>The data is forwarded to a backend system for processing</li>
+            </ol>
+            <p class="mt-4"><strong>Passive RFID tags</strong> have no battery and rely entirely on the reader's energy. They are smaller, cheaper ($0.05–$0.50 per tag), and can last indefinitely. <strong>Active RFID tags</strong> have their own battery, enabling read ranges of 100+ meters but at higher cost ($5–$50 per tag) and limited battery life (3–5 years).</p>
+          </section>
+
+          <section id="rfid-frequencies">
+            <h2 class="text-2xl font-bold mt-12 mb-4">3. RFID Frequencies Compared</h2>
+            <p>RFID operates in three primary frequency bands. The choice of frequency directly impacts read range, data rate, and performance in different environments:</p>
+            <div class="overflow-x-auto my-6">
+              <table class="w-full text-sm border-collapse border border-gray-200">
+                <thead>
+                  <tr class="bg-primary text-white">
+                    <th class="border border-gray-300 px-3 py-3 text-left">Feature</th>
+                    <th class="border border-gray-300 px-3 py-3 text-left">LF (125–134 kHz)</th>
+                    <th class="border border-gray-300 px-3 py-3 text-left">HF (13.56 MHz)</th>
+                    <th class="border border-gray-300 px-3 py-3 text-left">UHF (860–960 MHz)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="border px-3 py-2 font-medium">Read Range</td><td class="border px-3 py-2">1–10 cm</td><td class="border px-3 py-2">10 cm – 1 m</td><td class="border px-3 py-2">1–12 m (passive)</td></tr>
+                  <tr class="bg-gray-50"><td class="border px-3 py-2 font-medium">Data Rate</td><td class="border px-3 py-2">Low</td><td class="border px-3 py-2">Moderate</td><td class="border px-3 py-2">Fast</td></tr>
+                  <tr><td class="border px-3 py-2 font-medium">Near Metal</td><td class="border px-3 py-2">Good</td><td class="border px-3 py-2">Moderate</td><td class="border px-3 py-2">Poor (special tags needed)</td></tr>
+                  <tr class="bg-gray-50"><td class="border px-3 py-2 font-medium">Near Water</td><td class="border px-3 py-2">Good</td><td class="border px-3 py-2">Good</td><td class="border px-3 py-2">Poor (signal absorption)</td></tr>
+                  <tr><td class="border px-3 py-2 font-medium">Multi-tag Reading</td><td class="border px-3 py-2">No</td><td class="border px-3 py-2">Limited</td><td class="border px-3 py-2">Yes (100+ tags/second)</td></tr>
+                  <tr class="bg-gray-50"><td class="border px-3 py-2 font-medium">Standards</td><td class="border px-3 py-2">ISO 11784/85</td><td class="border px-3 py-2">ISO 14443, ISO 15693</td><td class="border px-3 py-2">ISO 18000-6C (EPC Gen2)</td></tr>
+                  <tr><td class="border px-3 py-2 font-medium">Common Chips</td><td class="border px-3 py-2">EM4100, T5577</td><td class="border px-3 py-2">Mifare, NTAG, ICODE</td><td class="border px-3 py-2">Impinj Monza, NXP UCODE</td></tr>
+                  <tr class="bg-gray-50"><td class="border px-3 py-2 font-medium">Best For</td><td class="border px-3 py-2">Access control, animal ID</td><td class="border px-3 py-2">Payment, transit, NFC</td><td class="border px-3 py-2">Inventory, logistics</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="rfid-chips">
+            <h2 class="text-2xl font-bold mt-12 mb-4">4. Popular RFID Chip Types</h2>
+            <h3 class="text-xl font-semibold mt-6 mb-3">HF Chips (13.56 MHz)</h3>
+            <ul class="space-y-2">
+              <li><strong>Mifare Classic 1K/4K:</strong> Most widely deployed contactless chip worldwide. 1KB or 4KB memory, Crypto-1 security. Ideal for basic access control and transit.</li>
+              <li><strong>Mifare DESFire EV2/EV3:</strong> High-security chip with AES-128 encryption, 2/4/8KB memory, multi-application support. Required for modern payment and high-security systems.</li>
+              <li><strong>NTAG213/215/216:</strong> NXP's NFC tag chips with 144/504/888 bytes. Optimized for smartphone interaction. NTAG215 is notably used in Nintendo Amiibo figures.</li>
+              <li><strong>Mifare Plus S/X:</strong> Upgrade path from Mifare Classic with AES security. Backward compatible with existing Classic infrastructure.</li>
+            </ul>
+            <h3 class="text-xl font-semibold mt-6 mb-3">LF Chips (125 kHz)</h3>
+            <ul class="space-y-2">
+              <li><strong>EM4100/EM4200:</strong> Read-only chips with 64-bit unique ID. Extremely low cost, widely used in keyfobs and access cards.</li>
+              <li><strong>T5577:</strong> Programmable LF chip that can emulate EM4100 and HID formats. Useful for multi-system compatibility.</li>
+            </ul>
+            <h3 class="text-xl font-semibold mt-6 mb-3">UHF Chips (860–960 MHz)</h3>
+            <ul class="space-y-2">
+              <li><strong>Impinj Monza R6:</strong> Industry-standard UHF chip with 96-bit EPC, AutoTune technology for consistent performance. Read sensitivity of -23 dBm.</li>
+              <li><strong>NXP UCODE 7/8:</strong> Advanced UHF chips with 128–448 bit memory. UCODE 8 supports brand protection features.</li>
+            </ul>
+          </section>
+
+          <section id="rfid-form-factors">
+            <h2 class="text-2xl font-bold mt-12 mb-4">5. RFID Form Factors</h2>
+            <div class="grid md:grid-cols-2 gap-4 my-6 not-prose">
+              <div class="p-4 bg-gray-50 rounded-lg border">
+                <h4 class="font-semibold text-gray-800 mb-2">ISO Cards (85.5 x 54 mm)</h4>
+                <p class="text-sm text-gray-600">Standard credit-card size. PVC, ABS, wood, or paper. Used for access control, payment, ID badges, transit tickets.</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-lg border">
+                <h4 class="font-semibold text-gray-800 mb-2">Keyfobs</h4>
+                <p class="text-sm text-gray-600">Compact ABS, leather, or epoxy form. Attach to keychains. Popular for residential and office access control.</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-lg border">
+                <h4 class="font-semibold text-gray-800 mb-2">Wristbands</h4>
+                <p class="text-sm text-gray-600">Silicone, fabric, or Tyvek. Waterproof and skin-friendly. Used at events, water parks, hospitals, fitness clubs.</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-lg border">
+                <h4 class="font-semibold text-gray-800 mb-2">Labels & Stickers</h4>
+                <p class="text-sm text-gray-600">Self-adhesive, printable. UHF for logistics, NFC for marketing. Available in tamper-evident variants.</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-lg border">
+                <h4 class="font-semibold text-gray-800 mb-2">Hard Tags</h4>
+                <p class="text-sm text-gray-600">Industrial-grade in ABS, ceramic, PCB, or metal. Designed for harsh environments: high temperature, chemicals, impact.</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-lg border">
+                <h4 class="font-semibold text-gray-800 mb-2">Laundry Tags</h4>
+                <p class="text-sm text-gray-600">Silicone, PPS, or textile. Withstand 200+ industrial wash cycles at 180°C+. For linen/uniform tracking.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="rfid-applications">
+            <h2 class="text-2xl font-bold mt-12 mb-4">6. Industry Applications</h2>
+            <p>RFID technology is deployed across virtually every industry:</p>
+            <ul class="space-y-2 mt-3">
+              <li><strong>Retail & Apparel:</strong> UHF RFID labels achieve 95%+ inventory accuracy (vs. 65% with barcode), enabling real-time stock visibility, loss prevention, and omnichannel fulfillment.</li>
+              <li><strong>Supply Chain & Logistics:</strong> Pallet and case-level UHF tracking reduces receiving time by 90% and eliminates manual scanning. Companies report 30–50% labor cost reduction.</li>
+              <li><strong>Healthcare:</strong> Patient identification wristbands prevent medical errors. Asset tracking locates equipment in real-time. Temperature-logging RFID tags monitor cold chain compliance.</li>
+              <li><strong>Transportation:</strong> Contactless HF smart cards process 20+ million daily transactions in metro systems worldwide (e.g., Oyster, Octopus, T-money).</li>
+              <li><strong>Industrial Laundry:</strong> RFID laundry tags automate counting and sorting, reducing labor by up to 90% while ensuring hygiene compliance tracking.</li>
+              <li><strong>Library Management:</strong> HF RFID book tags enable self-checkout, automated sorting, and 99%+ inventory accuracy. Libraries report 70% reduction in staff workload for circulation tasks.</li>
+            </ul>
+          </section>
+
+          <section id="rfid-vs-nfc">
+            <h2 class="text-2xl font-bold mt-12 mb-4">7. RFID vs NFC: Key Differences</h2>
+            <p>NFC (Near Field Communication) is a subset of HF RFID, operating specifically at 13.56 MHz. While related, they serve different purposes:</p>
+            <div class="overflow-x-auto my-6">
+              <table class="w-full text-sm border-collapse border border-gray-200">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border px-3 py-2 text-left">Feature</th>
+                    <th class="border px-3 py-2 text-left">RFID</th>
+                    <th class="border px-3 py-2 text-left">NFC</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="border px-3 py-2">Frequency</td><td class="border px-3 py-2">LF, HF, or UHF</td><td class="border px-3 py-2">13.56 MHz only</td></tr>
+                  <tr class="bg-gray-50"><td class="border px-3 py-2">Range</td><td class="border px-3 py-2">Up to 12m+</td><td class="border px-3 py-2">Up to 10 cm</td></tr>
+                  <tr><td class="border px-3 py-2">Communication</td><td class="border px-3 py-2">One-way (reader to tag)</td><td class="border px-3 py-2">Two-way (peer-to-peer)</td></tr>
+                  <tr class="bg-gray-50"><td class="border px-3 py-2">Smartphone support</td><td class="border px-3 py-2">Requires external reader</td><td class="border px-3 py-2">Built into modern phones</td></tr>
+                  <tr><td class="border px-3 py-2">Best for</td><td class="border px-3 py-2">Tracking, access, logistics</td><td class="border px-3 py-2">Payment, marketing, data sharing</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="choosing-rfid">
+            <h2 class="text-2xl font-bold mt-12 mb-4">8. How to Choose the Right RFID Product</h2>
+            <p>Follow this 5-step process to select the optimal RFID solution:</p>
+            <div class="space-y-4 mt-4 not-prose">
+              <div class="flex gap-4 p-4 bg-gray-50 rounded-lg border-l-4 border-primary">
+                <span class="text-2xl font-bold text-primary">1</span>
+                <div>
+                  <h4 class="font-semibold text-gray-800">Define your read range</h4>
+                  <p class="text-sm text-gray-600 mt-1">Contact/tap (1–10cm) = LF or HF. Proximity (10cm–1m) = HF. Room-level (1–12m) = UHF.</p>
+                </div>
+              </div>
+              <div class="flex gap-4 p-4 bg-gray-50 rounded-lg border-l-4 border-primary">
+                <span class="text-2xl font-bold text-primary">2</span>
+                <div>
+                  <h4 class="font-semibold text-gray-800">Assess your environment</h4>
+                  <p class="text-sm text-gray-600 mt-1">Metal presence? Use on-metal tags. Water/humidity? Avoid UHF. Extreme heat? Use ceramic or high-temp rated tags (-40°C to +250°C).</p>
+                </div>
+              </div>
+              <div class="flex gap-4 p-4 bg-gray-50 rounded-lg border-l-4 border-primary">
+                <span class="text-2xl font-bold text-primary">3</span>
+                <div>
+                  <h4 class="font-semibold text-gray-800">Determine security requirements</h4>
+                  <p class="text-sm text-gray-600 mt-1">Basic ID only = EM4100. Standard security = Mifare Classic. High security = Mifare DESFire EV3 (AES-128). Financial transactions always require EV2 or higher.</p>
+                </div>
+              </div>
+              <div class="flex gap-4 p-4 bg-gray-50 rounded-lg border-l-4 border-primary">
+                <span class="text-2xl font-bold text-primary">4</span>
+                <div>
+                  <h4 class="font-semibold text-gray-800">Choose your form factor</h4>
+                  <p class="text-sm text-gray-600 mt-1">Wallet carry = ISO card. Keychain = keyfob. Wearable = wristband. Surface-mount = label/sticker. Industrial = hard tag.</p>
+                </div>
+              </div>
+              <div class="flex gap-4 p-4 bg-gray-50 rounded-lg border-l-4 border-primary">
+                <span class="text-2xl font-bold text-primary">5</span>
+                <div>
+                  <h4 class="font-semibold text-gray-800">Request samples and test</h4>
+                  <p class="text-sm text-gray-600 mt-1">Always test RFID products in your real-world environment before bulk ordering. ProudTek offers free samples for all standard products.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </article>
+
+    <!-- CTA -->
+    <section class="py-12 bg-primary">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-2xl font-bold text-white mb-4">Need Help Choosing the Right RFID Solution?</h2>
+        <p class="text-white/90 mb-6 max-w-2xl mx-auto">Our RFID experts have helped 108+ clients across 50+ countries find the perfect solution. Get free consultation and samples.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/contact" class="bg-white text-primary px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Contact Our Experts</a>
+          <a href="/rfid" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">Browse All Products</a>
+        </div>
+      </div>
+    </section>
+
+    <Newsletter />
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { products } from '../data/products';
+
+// 本地图片映射
+const localImages: Record<string, string> = {
+  'rfid-card-inlay': '/images/products/RFID-card-inaly-2x5-TK4100-500x500.webp',
+  'mini-rfid-tag': '/images/products/plastic-rfid-tag-500x500.webp',
+  'rfid-cable-tie-tag': '/images/products/rfid-cable-tie-1.webp',
+  'rfid-waste-bin-tag': '/images/products/rfid-bin-tag-500x500.webp',
+  'rfid-nail-tag': '/images/products/RFID-Nail-Tag-3608.webp',
+  'pallet-rfid-tag': '/images/products/Pallet-RFID-tag.webp',
+  'rfid-tyre-tag': '/images/products/rfid-tyre-tag02.webp',
+  'spring-rfid-tire-tag': '/images/products/rfid-tire-tag-500x443.webp',
+  'high-temperature-rfid-tag': '/images/products/high-temperature-rfid-tag-500x500.webp',
+  'key-transponder': '/images/products/key-transponder.webp',
+  'rfid-fpc-tag': '/images/products/13.56MHz-FPC-tag.webp',
+  'rfid-ceramic-tag': '/images/products/UHF-Ceramic-Tag.jpg',
+  'rfid-pcb-tag': '/images/products/RFID-PCB-Tag-HF.webp',
+  'rfid-pcb': '/images/products/PCB-RFID-Tag-1.webp',
+  'silicone-laundry-tag': '/images/products/Silicone-laundry-tag.webp',
+  'pps-laundry-tag-rfid-button': '/images/products/laundry-tag-rfid.webp',
+  'rfid-windshield-tag': '/images/products/RFID-Windshield-Tag.webp',
+  'tamper-proof-rfid-tag': '/images/products/tamper-proof-rfid-tag-500x500.webp',
+  'library-rfid-tags': '/images/products/library-rfid-tags.webp',
+  'uhf-library-label': '/images/products/uhf-library-500x500.webp',
+  'rfid-jewellery-tags': '/images/products/rfid-jewellery-tags.webp',
+  'uhf-sticker': '/images/products/UHF-sticker-500x500.webp',
+  'nfc-sticker': '/images/products/nfc-sticker.webp',
+  'nfc-epoxy-card': '/images/products/NFC-epoxy-card.webp',
+  'nfc-coin': '/images/products/NFC-coin.webp',
+  'rfid-clear-tag': '/images/products/RFID-Clear-tag.webp',
+  'rfid-clamshell-card': '/images/products/clamshel-card-500x500.webp',
+  'rfid-wood-card-2': '/images/products/RFID-wood-card.webp',
+  'rfid-paper-card': '/images/products/RFID-Paper-Card-500x500.webp',
+  'rfid-glass-tag': '/images/products/RFID-glass-tag-500x500.webp',
+  'rfid-metal-tag': '/images/products/Printable-RFID-metal-tag.webp',
+  'rfid-reader-writer': '/images/products/RFID_reader_writer.webp',
+  'textile-rfid-laundry-tag': '/images/products/textile-RFID-laundry-tag-heat-seal.webp',
+  'rfid-silicone-wristband': '/images/products/RFID-SIlicone-wristbands-006.webp',
+  'rfid-cards': '/images/products/ticket-smart-card.webp',
+  'rfid-keyfob': '/images/products/PROUDTEK-RFID-KEYFOB.webp',
+};
+
+// 获取产品图片
+function getProductImage(slug: string): string {
+  return localImages[slug] || '/images/products/placeholder.webp';
+}
+---
+
+<Layout
+  title="RFID Products Catalog - Cards, Tags, Wristbands, Labels & Readers | ProudTek"
+  description="Browse ProudTek's complete RFID product catalog: RFID cards, smart cards, RFID tags, NFC stickers, RFID wristbands, keyfobs, laundry tags, and RFID readers. Custom manufacturing available."
+  keywords="RFID products, RFID cards catalog, RFID tags, NFC stickers, RFID wristbands, RFID keyfob, laundry tags, RFID reader writer, custom RFID products"
+>
+  <Header />
+  <main>
+    <!-- Hero Section -->
+    <section class="bg-primary py-20">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-5xl md:text-6xl heading-display text-white">RFID Products</h1>
+      </div>
+    </section>
+    
+    <!-- Description Section -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4">
+        <p class="text-gray-600 text-center max-w-4xl mx-auto leading-relaxed">
+          Proud Tek supplys a wide selection of RFID products, including RFID card, RFID Keyfob, RFID Wristband, RFID Card Inlay, RFID Card Reader, etc. We provide regular models, while we also provide high quality customizing service. Welcome you to send inquiries regarding RFID components.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Products Grid - Masonry Style like original -->
+    <section class="py-8 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {products.map((product) => (
+            <a href={`/product/${product.slug}`} class="product-card group block relative overflow-hidden bg-gray-100 border-4 border-primary/30">
+              <div class="aspect-square overflow-hidden">
+                <img 
+                  src={getProductImage(product.slug)} 
+                  alt={product.name}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <!-- Overlay with product name -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end">
+                <div class="w-full p-3 text-white">
+                  <h3 class="text-sm font-medium leading-tight">{product.name}</h3>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <Newsletter />
+  </main>
+  <Footer />
+</Layout>

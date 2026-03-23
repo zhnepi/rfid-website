@@ -1,0 +1,189 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+
+const advantages = [
+  {
+    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+    </svg>`,
+    title: 'Stable Chip Supply',
+    description: 'Reliable supply of Desfire EV2, Mifare Plus S/X, Mifare 1K/4K, and 30+ chip types even when market supply is tight.',
+  },
+  {
+    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path>
+    </svg>`,
+    title: 'Full Customization',
+    description: 'Custom material, color, size, shape, and printing. From standard cards to bespoke RFID solutions.',
+  },
+  {
+    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>`,
+    title: 'Strict Quality Control',
+    description: 'QC at every production stage. 100% chip read/write verification. Less than 0.1% defect rate.',
+  },
+  {
+    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+    </svg>`,
+    title: 'Fast Delivery',
+    description: '100% on-time delivery via DHL, UPS, FedEx, air cargo, or sea freight. Free samples shipped in 1-3 days.',
+  },
+];
+
+const stats = [
+  { value: '15', label: 'Years of experience' },
+  { value: '+108', label: 'Customers served' },
+  { value: '99%', label: 'On-time Delivery' },
+  { value: '99%', label: 'Positive feedback' },
+];
+---
+
+<Layout
+  title="About ProudTek - Leading RFID Card & Tag Manufacturer Since 2008 | Shenzhen China"
+  description="Learn about ProudTek (Shenzhen Proud Tek Co., LTD), a professional RFID manufacturer since 2008. We offer RFID cards, smart cards, RFID tags with strict quality control, competitive pricing, and fast delivery worldwide."
+  keywords="ProudTek, RFID manufacturer, Shenzhen RFID factory, RFID company China, smart card manufacturer, RFID supplier"
+>
+  <Header />
+  <main>
+    <!-- Hero Section -->
+    <section class="bg-primary py-20">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-5xl md:text-6xl heading-display text-white">About Us</h1>
+      </div>
+    </section>
+    
+    <!-- Company Introduction -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Left Column -->
+          <div>
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">RFID Cards Factory Since 2008</h2>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Founded in 2008, and located in Shenzhen, Proud Tek has grown rapidly as one of the leading manufacturers of RFID cards. Combining craftsmanship and high-tech equipment, We are offering comprehensive production service, providing RFID card inlay, RFID white cards, RFID Printing cards, RFID cards with magnetism bar, RFID die-cut cards, RFID black cards with PVC/PET/ABS of incomparable quality, with monthly production capacity up to 5 million.
+            </p>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Proud Tek is offering our clients qualified products at competitive prices. We are purchasing brand-new materials from China's top 5 suppliers, and insisting QC after each production procedure to guarantee each piece of the cards is QC passed.
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+              We've successfully supported tens of countries' bus and metro systems with ticketing cards. Hundreds of hotels, hospitals, and fitness clubs are using our cards for access control and cashless payments.
+            </p>
+          </div>
+          
+          <!-- Right Column -->
+          <div>
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">15 Years RFID Transponder Experience</h2>
+            <p class="text-primary font-medium mb-4">
+              Your reliable RFID cards / keyfobs / wristbands / tags for access control and cashless payment.
+            </p>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Proud Tek has been supporting hundreds of distributors and system integrators around the world with qualified RFID transponders for 15 years. From standard products to customized RFID products, Proud Tek offers professional recommendations and delivers high-quality products on time.
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+              We always keep in mind that the success of our company is directly related to the quality of the products we offer. They meet the highest quality requirements as stipulated in ISO9001, ISO14000:14001 SGS guidelines and our stringent quality control system.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Advantages Section -->
+    <section class="py-20 bg-primary">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-semibold text-white">Why ProudTek</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {advantages.map((advantage) => (
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white hover:bg-white/20 transition-colors">
+              <div class="mb-4" set:html={advantage.icon}></div>
+              <h3 class="text-lg font-semibold mb-3">{advantage.title}</h3>
+              <p class="text-white/80 text-sm leading-relaxed">{advantage.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <!-- Stats & Certifications -->
+    <section class="py-16 bg-gray-800">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+          {stats.map((stat) => (
+            <div class="text-center">
+              <p class="text-4xl md:text-5xl font-bold text-primary mb-2">{stat.value}</p>
+              <p class="text-gray-400">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+        <div class="flex justify-center gap-4 flex-wrap">
+          <span class="text-xs font-semibold text-gray-400 uppercase tracking-wide px-3 py-1 border border-gray-600 rounded-full">ISO 9001</span>
+          <span class="text-xs font-semibold text-gray-400 uppercase tracking-wide px-3 py-1 border border-gray-600 rounded-full">ISO 14001</span>
+          <span class="text-xs font-semibold text-gray-400 uppercase tracking-wide px-3 py-1 border border-gray-600 rounded-full">SGS Verified</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- E-E-A-T: Production Capabilities -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-gray-800 mb-8">Manufacturing Capabilities</h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">Production Specifications</h3>
+              <ul class="space-y-3 text-gray-600">
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span><strong>Monthly capacity:</strong> 5 million RFID cards</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span><strong>Product range:</strong> 46+ SKUs across 6 categories</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span><strong>Chip support:</strong> 30+ chip types (LF, HF, UHF)</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span><strong>Printing:</strong> CMYK, offset, silk screen, laser, UV</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">Quality Assurance Process</h3>
+              <ul class="space-y-3 text-gray-600">
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span><strong>Incoming inspection:</strong> Raw material verification from top 5 China suppliers</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span><strong>In-process QC:</strong> Inspection after each production stage</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span><strong>Final testing:</strong> 100% chip read/write verification</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span><strong>Defect rate:</strong> Less than 0.1% across all product lines</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Newsletter />
+  </main>
+  <Footer />
+</Layout>
