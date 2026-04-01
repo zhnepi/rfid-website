@@ -3,128 +3,219 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
+import { getCategoryComparisonLinks } from '../utils/comparisons';
 
 const productCategories = [
   {
-    id: 'card',
-    name: 'RFID Cards',
-    description: 'High-quality RFID cards for access control, public transportation, cashless payment, and more.',
-    products: [
-      { name: 'Mifare Classic 1K Card', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80' },
-      { name: 'Mifare DESFire EV2 Card', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80' },
-      { name: 'NTAG213 NFC Card', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80' },
-      { name: 'Dual Frequency Card', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80' },
-    ],
+    id: 'cards',
+    name: 'RFID Cards & Inlays',
+    comparisonContext: 'rfid-cards',
+    href: '/category/rfid-cards',
+    image: '/images/products/ticket-smart-card.webp',
+    question: 'Do you need cards or inlays that match an installed reader first?',
+    description: 'Start here for hotel key cards, transit cards, access badges, NFC cards, and inlays built around reader compatibility and print finish.',
+    bullets: ['LF, HF, UHF chip options', 'CMYK print, UID, barcode, magnetic stripe', 'Ideal for hotels, transport, campuses'],
   },
   {
-    id: 'keyfob',
-    name: 'RFID Keyfobs',
-    description: 'Durable and compact RFID keyfobs for convenient access control solutions.',
-    products: [
-      { name: 'ABS Keyfob', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80' },
-      { name: 'Leather Keyfob', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80' },
-      { name: 'Epoxy Keyfob', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80' },
-      { name: 'Metal Keyfob', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80' },
-    ],
+    id: 'tags',
+    name: 'Industrial RFID Tags',
+    comparisonContext: 'rfid-tags',
+    href: '/category/rfid-tags',
+    image: '/images/products/Printable-RFID-metal-tag.webp',
+    question: 'Will the tag need to survive metal, washing, heat, or outdoor use?',
+    description: 'Use this family when environment and mounting method matter more than thin packaging or consumer-facing design.',
+    bullets: ['Rugged housings and on-metal options', 'Asset, tool, pallet, and vehicle tracking', 'Custom size, mounting, and encoding'],
   },
   {
-    id: 'wristband',
-    name: 'RFID Wristbands',
-    description: 'Comfortable and waterproof RFID wristbands for events, hotels, and fitness clubs.',
-    products: [
-      { name: 'Silicone Wristband', image: 'https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=400&q=80' },
-      { name: 'Fabric Wristband', image: 'https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=400&q=80' },
-      { name: 'Disposable Wristband', image: 'https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=400&q=80' },
-      { name: 'PVC Wristband', image: 'https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=400&q=80' },
-    ],
+    id: 'labels',
+    name: 'RFID Labels & NFC Stickers',
+    comparisonContext: 'rfid-labels',
+    href: '/category/rfid-labels',
+    image: '/images/products/nfc-sticker.webp',
+    question: 'Need a thin label for inventory, packaging, library, or NFC tap?',
+    description: 'Best for roll-based deployment, visible print, smart packaging, and item-level tracking where slim form factor matters.',
+    bullets: ['Printable rolls for large-scale deployment', 'Retail, inventory, and anti-counterfeit use', 'Compatible with major chips and printers'],
   },
   {
-    id: 'laundry-tag',
-    name: 'RFID Laundry Tags',
-    description: 'Heat-resistant and durable RFID tags for laundry management and tracking.',
-    products: [
-      { name: 'Textile Laundry Tag', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&q=80' },
-      { name: 'Silicone Laundry Tag', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&q=80' },
-      { name: 'PPS Laundry Tag', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&q=80' },
-      { name: 'Flexible Laundry Tag', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&q=80' },
-    ],
+    id: 'wearables',
+    name: 'RFID Wristbands & Keyfobs',
+    comparisonContext: 'wearables',
+    href: '/category/rfid-wristbands',
+    image: '/images/products/RFID-SIlicone-wristbands-006.webp',
+    question: 'Do users need a wearable or portable credential instead of a card?',
+    description: 'A strong fit for resorts, gyms, events, apartments, and guest programs where cards are less convenient to carry.',
+    bullets: ['Waterproof wearable formats', 'Custom logo, number, QR, and UID', 'Popular for hospitality and events'],
   },
   {
-    id: 'reader-writer',
-    name: 'RFID Readers & Writers',
-    description: 'Professional RFID reader/writer devices for various applications.',
-    products: [
-      { name: 'Desktop Reader', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80' },
-      { name: 'USB Reader', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80' },
-      { name: 'Long Range Reader', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80' },
-      { name: 'Handheld Reader', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80' },
-    ],
+    id: 'readers',
+    name: 'RFID Readers & OEM Modules',
+    comparisonContext: 'rfid-readers',
+    href: '/category/rfid-readers',
+    image: '/images/products/RFID_reader_writer.webp',
+    question: 'Need hardware that can read, issue, or encode your chosen chip?',
+    description: 'Start here for desktop readers, reader-writers, and OEM modules when compatibility and integration come before volume buying.',
+    bullets: ['Windows, Linux, Android support', 'Reader/writer and module configurations', 'Suitable for kiosks and embedded systems'],
   },
   {
-    id: 'metal-tag',
-    name: 'RFID Metal Tags',
-    description: 'Anti-metal RFID tags designed for tracking metal assets and equipment.',
-    products: [
-      { name: 'PCB Anti-metal Tag', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&q=80' },
-      { name: 'Ceramic Anti-metal Tag', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&q=80' },
-      { name: 'ABS Anti-metal Tag', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&q=80' },
-      { name: 'Flexible Anti-metal Tag', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&q=80' },
-    ],
+    id: 'laundry',
+    name: 'Laundry RFID Solutions',
+    comparisonContext: 'laundry',
+    href: '/product/textile-rfid-laundry-tag',
+    image: '/images/products/textile-RFID-laundry-tag-heat-seal.webp',
+    question: 'Is your first question really about wash-cycle durability and bulk linen reading?',
+    description: 'Use this path when you are comparing textile, silicone, and PPS tags for hospitals, hotels, linen rental, or garment circulation.',
+    bullets: ['Built for washing, drying, ironing', 'Bulk reading for laundries and hospitals', 'Heat-seal, sew-on, or button styles'],
   },
 ];
+
+const productCategoryCards = productCategories.map((category) => ({
+  ...category,
+  topComparison: getCategoryComparisonLinks(category.comparisonContext, [], 1)[0],
+}));
+
+const pageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "ProudTek RFID Products",
+  "url": "https://www.proudtek.com/products",
+  "description": "Overview of ProudTek RFID product categories including cards, tags, labels, wristbands, keyfobs, readers, and laundry tags.",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": productCategories.map((category, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": category.name,
+      "url": `https://www.proudtek.com${category.href}`
+    }))
+  }
+};
 ---
 
-<Layout title="RFID Products - ProudTek">
+<Layout
+  title="RFID Product Categories - Cards, Tags, Labels, Wristbands & Readers | ProudTek"
+  description="Explore ProudTek's RFID product categories: RFID cards, tags, labels, NFC stickers, wristbands, keyfobs, readers and industrial laundry tags."
+  keywords="RFID product categories, RFID cards supplier, RFID tags manufacturer, NFC stickers, RFID wristbands, RFID keyfobs, RFID readers, laundry RFID tags"
+  jsonLd={pageJsonLd}
+>
   <Header />
   <main>
-    <!-- Hero Section -->
-    <section class="bg-[#00bcd4] py-20">
-      <div class="container mx-auto px-4 text-center">
-        <h1 class="text-5xl md:text-6xl font-script text-white">RFID Products</h1>
-        <p class="text-white/80 mt-4 max-w-2xl mx-auto">
-          Explore our comprehensive range of RFID products designed for various applications
-        </p>
+    <section class="bg-slate-950 py-20 text-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl">
+          <p class="eyebrow-label eyebrow-label-wide text-[#0e7490]/70 mb-3">Product Overview</p>
+          <h1 class="title-balance text-4xl md:text-6xl font-semibold">Start with the RFID format that fits your object, environment, and buying stage</h1>
+          <p class="card-copy text-white/75 text-lg mt-5 max-w-3xl">
+            Use this page when you are still deciding between cards, tags, labels, wearables, readers, or laundry-specific formats and want the fastest path into the right family.
+          </p>
+        </div>
       </div>
     </section>
-    
-    <!-- Products Section -->
-    {productCategories.map((category) => (
-      <section id={category.id} class="py-16 odd:bg-white even:bg-gray-50">
-        <div class="container mx-auto px-4">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl font-semibold text-gray-800 mb-4">{category.name}</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">{category.description}</p>
+
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="grid lg:grid-cols-3 gap-6">
+          <div class="copy-safe rounded-[1.75rem] bg-[#0e7490]/5 border border-[#0e7490]/15 p-8">
+            <p class="eyebrow-label text-[#0e7490] mb-3">Start Here</p>
+            <h2 class="title-balance text-2xl font-semibold text-gray-900 mb-4">What are you tagging, issuing, or trying to read?</h2>
+            <p class="card-copy text-gray-600">
+              People, vehicles, garments, metal assets, retail items, books, and packages usually point to very different RFID formats. Use that first decision to narrow the catalog fast.
+            </p>
           </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {category.products.map((product) => (
-              <div class="product-card bg-white rounded-lg overflow-hidden shadow-lg">
-                <div class="aspect-square overflow-hidden">
-                  <img 
-                    src={product.image} 
-                    alt={product.name}
-                    class="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div class="p-4">
-                  <h3 class="text-lg font-medium text-gray-800 text-center">{product.name}</h3>
-                </div>
-              </div>
-            ))}
+          <div class="copy-safe rounded-[1.75rem] bg-gray-50 border border-gray-200 p-8">
+            <p class="eyebrow-label text-[#0e7490] mb-3">Next Filter</p>
+            <h2 class="title-balance text-2xl font-semibold text-gray-900 mb-4">What does the product need to survive or match?</h2>
+            <p class="card-copy text-gray-600">
+              Reader protocol, metal surfaces, wash cycles, outdoor exposure, printer setup, and visible branding usually narrow the right product family faster than frequency alone.
+            </p>
           </div>
-          
-          <div class="text-center mt-8">
-            <a 
-              href="/contact" 
-              class="inline-block bg-[#00bcd4] text-white px-8 py-3 rounded hover:bg-[#00acc1] transition-colors font-medium"
-            >
-              Request Quote
-            </a>
+          <div class="copy-safe rounded-[1.75rem] bg-gray-50 border border-gray-200 p-8">
+            <p class="eyebrow-label text-[#0e7490] mb-3">Fast Path</p>
+            <h2 class="title-balance text-2xl font-semibold text-gray-900 mb-4">Need a shortlist before you ask for samples?</h2>
+            <p class="card-copy text-gray-600">
+              Each family below is set up to move you into a narrower category, a matching comparison page, and then an inquiry path that already fits the buying question.
+            </p>
           </div>
         </div>
-      </section>
-    ))}
-    
+      </div>
+    </section>
+
+    <section class="py-4 pb-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {productCategoryCards.map((category) => (
+            <article class="copy-safe group overflow-hidden rounded-[1.75rem] border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <a href={category.href} class="block">
+                <div class="aspect-[5/4] overflow-hidden bg-gray-100">
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="p-6">
+                  <h2 class="title-balance text-2xl font-semibold text-gray-900">{category.name}</h2>
+                  <p class="mt-3 text-sm font-semibold leading-relaxed text-gray-800">{category.question}</p>
+                  <p class="card-copy mt-2 text-sm text-gray-600">{category.description}</p>
+                  <ul class="mt-4 space-y-2">
+                    {category.bullets.map((bullet) => (
+                      <li class="flex items-start gap-2 text-sm text-gray-700">
+                        <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0e7490]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </a>
+              <div class="flex items-center justify-between gap-3 border-t border-gray-100 px-6 pb-6 pt-4">
+                {category.topComparison ? (
+                  <a href={`/compare/${category.topComparison.slug}`} class="min-w-0 text-xs font-medium text-[#0e7490] transition-colors hover:text-[#155e75]">
+                    <span class="block truncate">Compare: {category.topComparison.name}</span>
+                  </a>
+                ) : (
+                  <span class="text-xs text-gray-400">Browse the product family</span>
+                )}
+                <a href={category.href} class="inline-flex shrink-0 items-center text-sm font-medium text-[#0e7490]">
+                  View category
+                  <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="title-balance text-3xl font-semibold text-gray-900 mb-6">What to decide before you open a category page</h2>
+          <div class="grid md:grid-cols-2 gap-8 text-gray-600 leading-relaxed">
+            <div>
+              <p>
+                Start from the object and the workflow. Credentials carried by people usually point to cards, wristbands, or keyfobs. Assets, garments, pallets, books, tools, and packages usually point to tags or labels.
+              </p>
+              <p class="mt-4">
+                Then narrow by what must be matched or survived: an existing reader, metal surface, industrial washing, outdoor weather, printer setup, or long-range logistics. Those constraints usually decide the product family before chip fine-tuning does.
+              </p>
+            </div>
+            <div>
+              <p>
+                A second filter is customization depth. Standard products work well when you need a common chip and basic print. If the project needs anti-metal performance, special dimensions, multiple installation methods, or pre-encoded data, move into the category page first.
+              </p>
+              <p class="mt-4">
+                That keeps comparison cleaner because each family page answers a narrower buyer question instead of forcing every use case into one oversized catalog grid.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <Newsletter />
   </main>
   <Footer />

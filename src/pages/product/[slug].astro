@@ -3,8 +3,20 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Newsletter from '../../components/Newsletter.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import ApplicationIcon from '../../components/ApplicationIcon.astro';
 import { products } from '../../data/products';
+import { categoryPages } from '../../data/categoryPages';
+import { splitApplicationText, truncateText } from '../../utils/content';
+import { getProductComparisonLinks } from '../../utils/comparisons';
+import { getContextualInquiryLabel, getProductContactHref, getProductInquiryIntent, getProductWhatsAppHref } from '../../utils/contact';
+import { getProductBuyerIntro, getProductBuyerQuestion, getProductBuyerSummary } from '../../utils/productCopy';
+import {
+  getProductApplications,
+  getProductDetailSections,
+  getProductFeatureList,
+  getProductSpecificationEntries,
+} from '../../utils/productData';
 
 export function getStaticPaths() {
   return products.map(product => ({
@@ -19,17 +31,35 @@ const relatedProducts = products
   .filter(p => p.category === product.category && p.slug !== product.slug)
   .slice(0, 4);
 
-const specs = product.specifications || {};
-const specEntries = Object.entries(specs).filter(([key, value]) =>
-  typeof value === 'string' || typeof value === 'number'
-);
+const specEntries = getProductSpecificationEntries(product);
+const productFeatures = getProductFeatureList(product);
+const productApplications = getProductApplications(product);
+const productDetailSections = getProductDetailSections(product);
 
-// GEO-enhanced Product JSON-LD with additional properties
+const productFaqs = [
+  {
+    question: `Can ${product.name} be customized for my project?`,
+    answer: `Yes. ProudTek can usually customize ${product.name} with suitable chip options, branding, numbering, encoding or packaging support depending on the exact product format and order plan.`,
+  },
+  {
+    question: `How do I confirm compatibility before ordering ${product.name}?`,
+    answer: `The safest approach is to test a sample with your real reader, surface material and workflow. Share your chip requirement or current system details and we can suggest a suitable sample plan.`,
+  },
+  {
+    question: `Can ProudTek provide samples and production support for ${product.name}?`,
+    answer: `Yes. We support sample requests, bulk production and export-oriented quoting for ${product.name}. Send your quantity, customization needs and target application to get a recommendation.`,
+  },
+];
+
+const productBuyerQuestion = getProductBuyerQuestion(product);
+const productBuyerIntro = getProductBuyerIntro(product);
+const productBuyerSummary = getProductBuyerSummary(product, 112);
+
 const productJsonLd = {
   "@context": "https://schema.org",
   "@type": "Product",
   "name": product.name,
-  "description": product.description,
+  "description": productBuyerIntro,
   "image": product.images.map((img: string) => img.startsWith('http') ? img : `https://www.proudtek.com${img}`),
   "brand": { "@type": "Brand", "name": "ProudTek" },
   "manufacturer": {
@@ -40,32 +70,55 @@ const productJsonLd = {
   },
   "category": product.category,
   "url": `https://www.proudtek.com/product/${product.slug}`,
+  "sku": product.slug,
+  "mpn": product.slug,
   "offers": {
     "@type": "Offer",
-    "availability": "https://schema.org/InStock",
-    "seller": { "@type": "Organization", "name": "ProudTek" },
-    "itemCondition": "https://schema.org/NewCondition",
+    "url": `https://www.proudtek.com/product/${product.slug}`,
+    "priceCurrency": "USD",
+    "price": "0",
     "priceSpecification": {
       "@type": "PriceSpecification",
       "priceCurrency": "USD",
-      "eligibleQuantity": {
-        "@type": "QuantitativeValue",
-        "minValue": 500,
-        "unitCode": "C62"
+      "price": "0",
+      "description": "Contact ProudTek for project-based pricing. MOQ and unit cost depend on chip, customization, and order volume."
+    },
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "ProudTek",
+      "url": "https://www.proudtek.com"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "001"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": { "@type": "QuantitativeValue", "minValue": 3, "maxValue": 15, "unitCode": "DAY" },
+        "transitTime": { "@type": "QuantitativeValue", "minValue": 3, "maxValue": 10, "unitCode": "DAY" }
       }
     }
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "25",
-    "bestRating": "5"
-  },
-  "additionalProperty": specEntries.slice(0, 10).map(([key, value]) => ({
+  "additionalProperty": specEntries.slice(0, 10).map(({ key, value }) => ({
     "@type": "PropertyValue",
     "name": key,
-    "value": String(value)
-  }))
+    "value": value
+  })),
+  "subjectOf": {
+    "@type": "WebPage",
+    "url": `https://www.proudtek.com/product/${product.slug}`,
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [
+        "[data-speakable]",
+        "[data-speakable='product-specifications']"
+      ]
+    }
+  }
 };
 
 // Category link for breadcrumb
@@ -78,6 +131,584 @@ const categorySlugMap: Record<string, string> = {
   'RFID Readers': '/category/rfid-readers',
 };
 const categoryHref = categorySlugMap[product.category] || '/rfid';
+const categoryConfigKeyMap: Record<string, string> = {
+  'RFID Cards': 'rfid-cards',
+  'RFID Tags': 'rfid-tags',
+  'RFID Labels': 'rfid-labels',
+  'RFID Wristbands': 'rfid-wristbands',
+  'RFID Keyfob': 'rfid-keyfob',
+  'RFID Readers': 'rfid-readers',
+};
+const categoryConfig = categoryPages[categoryConfigKeyMap[product.category]];
+
+function getProductDecisionCards() {
+  if (product.category === 'RFID Cards') {
+    return [
+      {
+        label: 'System Match',
+        title: 'Will it work with the installed reader or lock?',
+        description: 'Start from protocol and chip family, then confirm whether you need blank, printed, or pre-encoded supply.',
+      },
+      {
+        label: 'Card Build',
+        title: 'PVC, paper, wood, clamshell, or inlay-only?',
+        description: 'Choose the card body around durability, branding, and whether you are embedding the inlay into your own format.',
+      },
+      {
+        label: 'Approval Step',
+        title: 'Do you need sample matching before a bulk order?',
+        description: 'Most buyers validate reader behavior, print finish, and numbering logic before they lock a production run.',
+      },
+    ];
+  }
+
+  if (product.category === 'RFID Tags') {
+    return [
+      {
+        label: 'Surface Match',
+        title: 'Will it sit on metal, textile, wood, plastic, or rubber?',
+        description: 'The mounting surface usually decides tag construction faster than chip selection does.',
+      },
+      {
+        label: 'Environment',
+        title: 'Does it need to survive washing, heat, UV, or rough handling?',
+        description: 'Laundry, anti-metal, tire, and rugged asset workflows all need different enclosures and materials.',
+      },
+      {
+        label: 'Installation',
+        title: 'Adhesive, screw, sew-on, nail-in, or loop install?',
+        description: 'Attachment method changes both field speed and real-world read consistency, so it should be confirmed early.',
+      },
+    ];
+  }
+
+  if (product.category === 'RFID Labels') {
+    return [
+      {
+        label: 'Read Mode',
+        title: 'Is this for NFC phone tap or UHF inventory reading?',
+        description: 'That one choice usually narrows frequency, inlay type, and read behavior right away.',
+      },
+      {
+        label: 'Print Flow',
+        title: 'Will the label run through your printer or packaging line?',
+        description: 'Roll direction, label stock, adhesive, and visible print all matter when labels are applied at scale.',
+      },
+      {
+        label: 'Packaging Risk',
+        title: 'Do you need tamper evidence, thin stock, or metal-safe construction?',
+        description: 'Authentication, retail, and smart packaging programs often need more than a basic sticker format.',
+      },
+    ];
+  }
+
+  if (product.category === 'RFID Readers') {
+    return [
+      {
+        label: 'Protocol',
+        title: 'Which chip, frequency, and standard must the reader support?',
+        description: 'Compatibility with the credential comes first, especially for access, enrollment, and encoding workflows.',
+      },
+      {
+        label: 'Form Factor',
+        title: 'Desktop device, reader-writer, fixed reader, or OEM module?',
+        description: 'Choose the hardware style around the operator workflow, not only the protocol.',
+      },
+      {
+        label: 'Integration',
+        title: 'What operating system, SDK, or interface does your team expect?',
+        description: 'Reader projects move faster when interface expectations are confirmed before sampling.',
+      },
+    ];
+  }
+
+  if (product.category === 'RFID Keyfob') {
+    return [
+      {
+        label: 'Reader Match',
+        title: 'Will it match the access system already in the field?',
+        description: 'Most keyfob projects start by checking reader frequency and installed credential compatibility.',
+      },
+      {
+        label: 'Shell Choice',
+        title: 'ABS, epoxy, or a more premium shell style?',
+        description: 'Shell material affects durability, branding, and how the credential feels in everyday use.',
+      },
+      {
+        label: 'Supply Plan',
+        title: 'Need numbering, encoding, or dependable repeat-order supply?',
+        description: 'Replacement and rollout programs often care as much about consistency as the first sample batch.',
+      },
+    ];
+  }
+
+  if (product.category === 'RFID Wristbands') {
+    return [
+      {
+        label: 'Wear Model',
+        title: 'Single event, resort reuse, or long daily wear?',
+        description: 'Program length usually decides whether silicone, fabric, or disposable formats make more sense.',
+      },
+      {
+        label: 'Workflow',
+        title: 'Access only, locker control, guest ID, or payment too?',
+        description: 'The more jobs the wristband handles, the more important chip selection and user comfort become.',
+      },
+      {
+        label: 'Guest Experience',
+        title: 'Does it need waterproof comfort and strong branding?',
+        description: 'Venues often balance tap speed, wearability, and visible branding before they shortlist samples.',
+      },
+    ];
+  }
+
+  return [
+    {
+      label: 'Workflow Fit',
+      title: 'What job does this product need to do first?',
+      description: 'Use the real environment and operator workflow to decide whether this format belongs on the shortlist.',
+    },
+    {
+      label: 'Compatibility',
+      title: 'What must it match before you can approve samples?',
+      description: 'Reader protocol, printer flow, installation method, or enclosure fit usually matter before bulk buying.',
+    },
+    {
+      label: 'Rollout',
+      title: 'Do you need pilot testing, OEM changes, or repeat supply?',
+      description: 'Knowing the buying stage early helps narrow the right sample and production path.',
+    },
+  ];
+}
+
+function getSpecsSectionContent() {
+  if (product.category === 'RFID Cards') {
+    return {
+      eyebrow: 'Spec Check',
+      title: 'What to confirm in the card spec sheet',
+      description: 'Protocol, chip family, card body, print finish, and encoding plan usually need to be locked before card samples are approved.',
+    };
+  }
+
+  if (product.category === 'RFID Tags') {
+    return {
+      eyebrow: 'Spec Check',
+      title: 'What to confirm before you sample this tag',
+      description: 'Surface material, enclosure, attachment method, and environmental limits usually matter more than a broad tag name alone.',
+    };
+  }
+
+  if (product.category === 'RFID Labels') {
+    return {
+      eyebrow: 'Spec Check',
+      title: 'What to confirm before label rollout',
+      description: 'Frequency, label stock, printer flow, adhesive, and visible print requirements should be aligned before you lock the inlay.',
+    };
+  }
+
+  if (product.category === 'RFID Readers') {
+    return {
+      eyebrow: 'Spec Check',
+      title: 'What to confirm before hardware testing',
+      description: 'Chip protocol, operating system, interface, and SDK expectations should all be clear before a reader sample is approved.',
+    };
+  }
+
+  if (product.category === 'RFID Keyfob') {
+    return {
+      eyebrow: 'Spec Check',
+      title: 'What to confirm before keyfob sampling',
+      description: 'Reader compatibility, shell style, numbering, and branding choices usually decide the right keyfob build.',
+    };
+  }
+
+  if (product.category === 'RFID Wristbands') {
+    return {
+      eyebrow: 'Spec Check',
+      title: 'What to confirm before wristband approval',
+      description: 'Band material, wear duration, waterproofing, chip fit, and branding details normally drive the shortlist.',
+    };
+  }
+
+  return {
+    eyebrow: 'Spec Check',
+    title: 'What to confirm in the spec sheet',
+    description: 'These specifications help buyers decide whether the product belongs on the sample shortlist before they move into deeper review.',
+  };
+}
+
+function getFeaturesSectionContent() {
+  if (product.category === 'RFID Cards') {
+    return {
+      eyebrow: 'Shortlist Logic',
+      title: 'Why buyers keep this card format on the shortlist',
+      description: 'These points usually matter when a project is balancing reader compatibility, print quality, and repeat-order consistency.',
+    };
+  }
+
+  if (product.category === 'RFID Tags') {
+    return {
+      eyebrow: 'Shortlist Logic',
+      title: 'Why buyers shortlist this tag format',
+      description: 'These features help teams decide whether the tag suits the environment, installation method, and read expectations of the real workflow.',
+    };
+  }
+
+  if (product.category === 'RFID Labels') {
+    return {
+      eyebrow: 'Shortlist Logic',
+      title: 'Why this label format stays in consideration',
+      description: 'Buyers usually keep label options in play when they support the right reading mode, print flow, and packaging constraints.',
+    };
+  }
+
+  if (product.category === 'RFID Readers') {
+    return {
+      eyebrow: 'Shortlist Logic',
+      title: 'Why this reader setup makes the shortlist',
+      description: 'Hardware usually stays in consideration when it reduces integration risk and supports the exact credential workflow being planned.',
+    };
+  }
+
+  if (product.category === 'RFID Keyfob') {
+    return {
+      eyebrow: 'Shortlist Logic',
+      title: 'Why buyers shortlist this keyfob style',
+      description: 'These points usually matter when convenience, system match, and everyday durability all matter at once.',
+    };
+  }
+
+  if (product.category === 'RFID Wristbands') {
+    return {
+      eyebrow: 'Shortlist Logic',
+      title: 'Why this wristband format stays on the list',
+      description: 'Wear comfort, guest throughput, and waterproof performance usually decide whether a wristband moves into sampling.',
+    };
+  }
+
+  return {
+    eyebrow: 'Shortlist Logic',
+    title: 'Why buyers keep this option in play',
+    description: 'These product traits often decide whether the format should move from browsing into a real sample plan.',
+  };
+}
+
+function getApplicationsSectionContent() {
+  if (product.category === 'RFID Cards') {
+    return {
+      eyebrow: 'Use Cases',
+      title: 'Where teams usually deploy this card format',
+      description: 'These are the workflows where buyers most often compare this card against other credential options before they request samples.',
+    };
+  }
+
+  if (product.category === 'RFID Tags') {
+    return {
+      eyebrow: 'Use Cases',
+      title: 'Where this tag format usually works best',
+      description: 'Use cases matter because the right tag depends on surface, environment, attachment, and read distance in the field.',
+    };
+  }
+
+  if (product.category === 'RFID Labels') {
+    return {
+      eyebrow: 'Use Cases',
+      title: 'Where buyers usually deploy this label format',
+      description: 'These are the packaging, inventory, and item-level workflows where a thin RFID format typically makes the most sense.',
+    };
+  }
+
+  if (product.category === 'RFID Readers') {
+    return {
+      eyebrow: 'Use Cases',
+      title: 'Where teams usually use this reader setup',
+      description: 'Deployment context helps determine whether this hardware belongs at a desk, in a kiosk, in a gate, or inside a device.',
+    };
+  }
+
+  if (product.category === 'RFID Keyfob') {
+    return {
+      eyebrow: 'Use Cases',
+      title: 'Where buyers usually deploy this keyfob',
+      description: 'These are the access and membership workflows where a compact credential often beats a full-size card.',
+    };
+  }
+
+  if (product.category === 'RFID Wristbands') {
+    return {
+      eyebrow: 'Use Cases',
+      title: 'Where operators usually deploy this wristband',
+      description: 'These use cases help buyers decide whether the band suits venue traffic, guest wear time, and tap behavior.',
+    };
+  }
+
+  return {
+    eyebrow: 'Use Cases',
+    title: 'Where this product format usually fits',
+    description: 'These common deployments help buyers judge whether the product belongs in the right sample batch.',
+  };
+}
+
+function getProofSectionContent() {
+  return {
+    eyebrow: 'Supplier Fit',
+    title: `Why buyers source ${product.name} from ProudTek`,
+    description: 'Once the format is right, most teams still need confidence in manufacturing control, sample support, and repeat-order reliability.',
+  };
+}
+
+function getFaqSectionContent() {
+  return {
+    eyebrow: 'Buyer Questions',
+    title: 'Questions buyers usually ask before sample approval',
+    description: 'These FAQs cover the points that usually come up between a first shortlist and a real sample or quote request.',
+  };
+}
+
+function getBuyerGuidesSectionContent() {
+  if (product.category === 'RFID Cards') {
+    return {
+      eyebrow: 'Next Reading',
+      title: 'What to read before you approve card samples',
+      description: 'Use these guides when you still need to confirm chip path, lock or reader match, and sourcing details before the sample batch is locked.',
+    };
+  }
+
+  if (product.category === 'RFID Tags') {
+    return {
+      eyebrow: 'Next Reading',
+      title: 'What to read before you lock the tag shortlist',
+      description: 'These guides help buyers compare environments, tag formats, and mounting logic before they commit to the first sample plan.',
+    };
+  }
+
+  if (product.category === 'RFID Labels') {
+    return {
+      eyebrow: 'Next Reading',
+      title: 'What to read before label rollout planning',
+      description: 'These pages help narrow print flow, reading mode, and packaging-fit questions before label samples are approved.',
+    };
+  }
+
+  if (product.category === 'RFID Readers') {
+    return {
+      eyebrow: 'Next Reading',
+      title: 'What to read before reader hardware testing',
+      description: 'Use these references when protocol fit, interface choice, and reader workflow still need to be validated before sampling.',
+    };
+  }
+
+  if (product.category === 'RFID Keyfob') {
+    return {
+      eyebrow: 'Next Reading',
+      title: 'What to read before matching access credentials',
+      description: 'These guides help teams compare shell styles, chip fit, and installed reader compatibility before they request keyfob samples.',
+    };
+  }
+
+  if (product.category === 'RFID Wristbands') {
+    return {
+      eyebrow: 'Next Reading',
+      title: 'What to read before guest credential rollout',
+      description: 'These guides help compare wearable formats, venue workflows, and branding needs before wristband samples move forward.',
+    };
+  }
+
+  return {
+    eyebrow: 'Next Reading',
+    title: 'What to read before you lock the sample path',
+    description: 'These references help buyers move from broad browsing into a tighter shortlist before they send project details.',
+  };
+}
+
+function getRelatedProductsSectionContent() {
+  if (product.category === 'RFID Cards') {
+    return {
+      eyebrow: 'Nearby Options',
+      title: 'Compare nearby card formats before you drop them',
+      description: 'Buyers often compare body style, chip path, and print approach across a few close card options before final sample approval.',
+    };
+  }
+
+  if (product.category === 'RFID Tags') {
+    return {
+      eyebrow: 'Nearby Options',
+      title: 'Compare nearby tag formats before you narrow the shortlist',
+      description: 'A similar tag can behave very differently once surface, enclosure, and installation method change, so it helps to keep close options visible.',
+    };
+  }
+
+  if (product.category === 'RFID Labels') {
+    return {
+      eyebrow: 'Nearby Options',
+      title: 'Compare nearby label formats before rollout',
+      description: 'Thin labels, stickers, and specialty label builds often look similar early, but they diverge quickly once print and read mode are considered.',
+    };
+  }
+
+  if (product.category === 'RFID Readers') {
+    return {
+      eyebrow: 'Nearby Options',
+      title: 'Compare nearby reader setups before testing starts',
+      description: 'Teams often keep a few hardware paths open until interface, deployment style, and credential support are all clear.',
+    };
+  }
+
+  if (product.category === 'RFID Keyfob') {
+    return {
+      eyebrow: 'Nearby Options',
+      title: 'Compare nearby credential styles before keyfob approval',
+      description: 'Small changes in shell style, material, and compatibility can change which credential works best in the field.',
+    };
+  }
+
+  if (product.category === 'RFID Wristbands') {
+    return {
+      eyebrow: 'Nearby Options',
+      title: 'Compare nearby wearable formats before sample sign-off',
+      description: 'Wear duration, guest comfort, and venue workflow often make another wristband style worth comparing before rollout.',
+    };
+  }
+
+  return {
+    eyebrow: 'Nearby Options',
+    title: 'Compare nearby options before you narrow the shortlist',
+    description: 'These related products help buyers keep close alternatives in view before they commit to a sample direction.',
+  };
+}
+
+function getGuideCardEyebrow(href: string) {
+  if (href.startsWith('/compare/')) return 'Head-to-head';
+  if (href.startsWith('/category/')) return 'Category path';
+  if (href.startsWith('/rfid-technology')) return 'Tech basics';
+  if (href.startsWith('/contact')) return 'Inquiry path';
+
+  return 'Buyer guide';
+}
+
+function getGuideCardCta(href: string) {
+  if (href.startsWith('/compare/')) return 'Open comparison';
+  if (href.startsWith('/category/')) return 'Open category';
+  if (href.startsWith('/contact')) return 'Start inquiry';
+
+  return 'Open guide';
+}
+
+function getRelatedProductCardPrompt(relatedProduct: typeof product) {
+  if (relatedProduct.category === 'RFID Cards') {
+    return 'Compare this option if you may need a different card body, chip path, or print finish.';
+  }
+
+  if (relatedProduct.category === 'RFID Tags') {
+    return 'Compare this option if enclosure, mounting, or environment fit may change the better tag choice.';
+  }
+
+  if (relatedProduct.category === 'RFID Labels') {
+    return 'Compare this option if label stock, read mode, or application surface may change the shortlist.';
+  }
+
+  if (relatedProduct.category === 'RFID Readers') {
+    return 'Compare this option if interface, deployment style, or encoding support may change the better hardware fit.';
+  }
+
+  if (relatedProduct.category === 'RFID Keyfob') {
+    return 'Compare this option if shell style, durability, or system fit may point to a different credential.';
+  }
+
+  if (relatedProduct.category === 'RFID Wristbands') {
+    return 'Compare this option if wear time, venue flow, or branding needs may favor another band format.';
+  }
+
+  return 'Compare this option if the current product is close but not quite the right format yet.';
+}
+
+function getProductGuideLinks() {
+  const slug = product.slug.toLowerCase();
+
+  if (product.category === 'RFID Cards') {
+    return [
+      { href: '/blogs/how-to-order-rfid-cards-from-china', label: 'How to order custom RFID cards', description: 'A sourcing guide covering samples, MOQ, QC and factory communication.' },
+      { href: '/blogs/hotel-key-card-rfid-guide', label: 'Hotel RFID card guide', description: 'Useful when the project involves lock compatibility, chip choice and hospitality printing.' },
+      { href: '/blogs/mifare-classic-vs-desfire', label: 'Mifare Classic vs DESFire', description: 'Compare chip security and fit before finalizing a card specification.' },
+    ];
+  }
+
+  if (product.category === 'RFID Tags') {
+    if (slug.includes('laundry')) {
+      return [
+        { href: '/blogs/laundry-rfid-tags-buying-guide', label: 'Laundry RFID tag guide', description: 'Compare washable tag constructions, attachment methods and sample checkpoints.' },
+        { href: '/blogs/covid-rfid-laundry', label: 'RFID in the laundry industry', description: 'Background on how RFID supports textile visibility and process control.' },
+        { href: '/category/rfid-tags', label: 'More RFID tag formats', description: 'Browse industrial, washable and rugged RFID tag options.' },
+      ];
+    }
+
+    if (slug.includes('metal') || slug.includes('pcb') || slug.includes('ceramic')) {
+      return [
+        { href: '/blogs/anti-metal-rfid-tags-guide', label: 'Anti-metal RFID tag guide', description: 'Learn how to choose on-metal constructions for tools, IT assets and equipment.' },
+        { href: '/blogs/rfid-labels-vs-hard-tags', label: 'Labels vs hard tags', description: 'Helpful when comparing printable on-metal labels with harder-wearing tag formats.' },
+        { href: '/category/rfid-tags', label: 'Industrial RFID tags', description: 'Compare more rugged tags for harsh and reusable environments.' },
+      ];
+    }
+
+    return [
+      { href: '/blogs/rfid-types', label: 'RFID tag types guide', description: 'A high-level primer on common RFID tag categories and use cases.' },
+      { href: '/blogs/rfid-supply-chain', label: 'RFID for supply chain', description: 'See how tags support logistics, warehouse and inventory visibility.' },
+      { href: '/blogs/anti-metal-rfid-tags-guide', label: 'Anti-metal tag selection', description: 'Useful when the application involves metal assets or difficult mounting surfaces.' },
+    ];
+  }
+
+  if (product.category === 'RFID Labels') {
+    return [
+      { href: '/blogs/rfid-labels-vs-hard-tags', label: 'RFID labels vs hard tags', description: 'Compare thin printable label formats with reusable tags before sampling.' },
+      { href: '/blogs/nfc-technology', label: 'NFC technology guide', description: 'Helpful when labels need to be read by smartphones or support tap experiences.' },
+      { href: '/blogs/rfid-vs-barcode', label: 'RFID vs barcode', description: 'Useful when planning a packaging or inventory upgrade.' },
+    ];
+  }
+
+  if (product.category === 'RFID Readers') {
+    return [
+      { href: '/blogs/how-to-choose-rfid-readers-and-writers', label: 'Reader and writer guide', description: 'Compare desktop, USB, fixed and embedded hardware for real workflows.' },
+      { href: '/blogs/rfid-frequency-guide', label: 'RFID frequency guide', description: 'Review LF, HF/NFC and UHF before selecting compatible reader hardware.' },
+      { href: '/rfid-technology', label: 'RFID technology reference', description: 'Get a broader overview of standards, protocols and practical selection logic.' },
+    ];
+  }
+
+  if (product.category === 'RFID Keyfob') {
+    return [
+      { href: '/blogs/rfid-keyfob-buying-guide', label: 'RFID keyfob buying guide', description: 'Match shell style and chip type to the installed reader before ordering.' },
+      { href: '/blogs/rfid-frequency-guide', label: 'Frequency selection guide', description: 'Useful when confirming LF versus HF compatibility in access-control systems.' },
+      { href: '/category/rfid-keyfob', label: 'RFID keyfob category page', description: 'Browse keyfob formats and buying guidance in one place.' },
+    ];
+  }
+
+  if (product.category === 'RFID Wristbands') {
+    return [
+      { href: '/blogs/rfid-wristbands-for-events-and-hotels', label: 'RFID wristband guide', description: 'Compare silicone, fabric and disposable wristbands for guest-facing projects.' },
+      { href: '/blogs/nfc-tags-business-use-cases', label: 'NFC business use cases', description: 'See how tap workflows support hospitality, events and branded experiences.' },
+      { href: '/category/rfid-wristbands', label: 'RFID wristband category page', description: 'Explore more styles for resorts, clubs, festivals and water attractions.' },
+    ];
+  }
+
+  return [
+    { href: '/rfid-technology', label: 'RFID technology basics', description: 'Review standards, frequencies and product-selection fundamentals.' },
+    { href: '/blogs', label: 'RFID buying guides', description: 'Browse broader sourcing, technology and application content.' },
+    { href: getProductContactHref(product), label: 'Request project guidance', description: 'Send your application and we can help narrow the right sample plan.' },
+  ];
+}
+
+const productGuideLinks = getProductGuideLinks();
+const productComparisonLinks = getProductComparisonLinks(product, 3);
+const productContactHref = getProductContactHref(product);
+const productWhatsAppHref = getProductWhatsAppHref(product);
+const productInquiryLabel = getContextualInquiryLabel(getProductInquiryIntent(product), 'product');
+const productDecisionCards = getProductDecisionCards();
+const specsSectionContent = getSpecsSectionContent();
+const featuresSectionContent = getFeaturesSectionContent();
+const applicationsSectionContent = getApplicationsSectionContent();
+const proofSectionContent = getProofSectionContent();
+const faqSectionContent = getFaqSectionContent();
+const buyerGuidesSectionContent = getBuyerGuidesSectionContent();
+const relatedProductsSectionContent = getRelatedProductsSectionContent();
 
 // BreadcrumbList JSON-LD
 const breadcrumbJsonLd = {
@@ -86,12 +717,29 @@ const breadcrumbJsonLd = {
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.proudtek.com/" },
     { "@type": "ListItem", "position": 2, "name": "RFID Products", "item": "https://www.proudtek.com/rfid" },
-    { "@type": "ListItem", "position": 3, "name": product.name, "item": `https://www.proudtek.com/product/${product.slug}` }
+    { "@type": "ListItem", "position": 3, "name": product.category, "item": `https://www.proudtek.com${categoryHref}` },
+    { "@type": "ListItem", "position": 4, "name": product.name, "item": `https://www.proudtek.com/product/${product.slug}` }
   ]
 };
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": productFaqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+
 const pageTitle = `${product.name} | ${product.category} - ProudTek RFID Manufacturer`;
-const pageDescription = `${product.name} - ${product.description.substring(0, 150)}. Custom RFID solutions from ProudTek, China's leading manufacturer since 2008.`;
+const pageDescription = truncateText(
+  `${product.name}. ${productBuyerSummary} Request samples, customization details and project guidance from ProudTek.`,
+  160
+);
 ---
 
 <Layout
@@ -100,22 +748,19 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
   keywords={`${product.name}, ${product.category}, RFID manufacturer, custom RFID, ProudTek, China RFID factory`}
   ogImage={product.images[0] || '/images/hero/smart-card-banner.webp'}
   ogType="product"
-  jsonLd={[productJsonLd, breadcrumbJsonLd]}
+  jsonLd={[productJsonLd, breadcrumbJsonLd, faqJsonLd]}
 >
   <Header />
   <main>
     <!-- Breadcrumb -->
     <section class="bg-gray-100 py-4">
       <div class="container mx-auto px-4">
-        <nav class="text-sm text-gray-600" aria-label="Breadcrumb">
-          <ol class="flex items-center flex-wrap">
-            <li><a href="/" class="hover:text-[#00bcd4]">Home</a></li>
-            <li><span class="mx-2">/</span></li>
-            <li><a href="/rfid" class="hover:text-[#00bcd4]">RFID Products</a></li>
-            <li><span class="mx-2">/</span></li>
-            <li><span class="text-gray-800">{product.name}</span></li>
-          </ol>
-        </nav>
+        <Breadcrumb items={[
+          { name: 'Home', href: '/' },
+          { name: 'RFID Products', href: '/rfid' },
+          { name: product.category, href: categoryHref },
+          { name: product.name },
+        ]} />
       </div>
     </section>
 
@@ -129,10 +774,11 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
               <img
                 id="main-image"
                 src={product.images[0] || '/images/placeholder.webp'}
-                alt={`${product.name} - ProudTek RFID ${product.category}`}
+                alt={`${product.name} - ${product.category} manufactured by ProudTek, ${specEntries.find(e => e.key === 'Frequency')?.value || 'multi-frequency'} RFID product from Shenzhen China`}
                 class="w-full h-full object-contain"
                 width="600"
                 height="600"
+                decoding="async"
                 fetchpriority="high"
               />
             </div>
@@ -140,11 +786,11 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
               <div class="grid grid-cols-4 gap-2">
                 {product.images.map((img: string, index: number) => (
                   <button
-                    class="aspect-square bg-gray-100 rounded border border-gray-200 overflow-hidden hover:border-[#00bcd4] transition-colors thumbnail-btn"
+                    class="aspect-square bg-gray-100 rounded border border-gray-200 overflow-hidden hover:border-[#0e7490] transition-colors thumbnail-btn"
                     data-image={img}
                     aria-label={`View ${product.name} image ${index + 1}`}
                   >
-                    <img src={img} alt={`${product.name} view ${index + 1}`} class="w-full h-full object-contain" loading="lazy" width="150" height="150" />
+                    <img src={img} alt={`${product.name} view ${index + 1}`} class="w-full h-full object-contain" loading="lazy" decoding="async" fetchpriority="low" width="150" height="150" />
                   </button>
                 ))}
               </div>
@@ -154,29 +800,43 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
           <!-- Product Info -->
           <div class="space-y-6">
             <div>
-              <span class="text-sm text-[#00bcd4] font-medium">{product.category}</span>
-              <h1 class="text-3xl font-bold text-gray-800 mt-2">{product.name}</h1>
+              <span class="eyebrow-label text-[#0e7490]">{product.category}</span>
+              <h1 class="title-balance text-3xl font-bold text-gray-800 mt-2">{product.name}</h1>
+              <p class="mt-4 text-lg font-semibold leading-relaxed text-gray-900">{productBuyerQuestion}</p>
             </div>
 
-            <div class="prose prose-gray max-w-none">
-              <p class="text-gray-600 leading-relaxed">{product.description}</p>
+            <div class="prose prose-gray max-w-none product-description" data-speakable>
+              <p class="card-copy text-gray-600">{productBuyerIntro}</p>
+            </div>
+
+             <div class="copy-safe rounded-2xl border border-[#0e7490]/15 bg-[#0e7490]/5 p-5">
+              <p class="eyebrow-label text-[#0e7490] mb-2">What buyers usually confirm first</p>
+              <div class="grid gap-4 sm:grid-cols-3">
+                {productDecisionCards.map((card) => (
+                  <div class="rounded-2xl border border-[#0e7490]/15 bg-white p-4">
+                    <p class="eyebrow-label text-[#0e7490] mb-2">{card.label}</p>
+                    <h2 class="title-balance text-base font-semibold text-gray-800">{card.title}</h2>
+                    <p class="card-copy mt-2 text-sm text-gray-600">{card.description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <!-- Contact Buttons -->
             <div class="pt-4 flex flex-wrap gap-4">
               <a
-                href="/contact"
-                class="inline-block bg-[#00bcd4] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#00acc1] transition-colors"
+                href={productContactHref}
+                class="inline-block bg-[#0e7490] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#155e75] transition-colors"
               >
-                Request a Quote
+                {productInquiryLabel}
               </a>
               <a
-                href={`https://wa.me/8618665820632?text=Hi, I'm interested in ${encodeURIComponent(product.name)}`}
+                href={productWhatsAppHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-block border-2 border-[#25D366] text-[#25D366] px-8 py-3 rounded-lg font-medium hover:bg-[#25D366] hover:text-white transition-colors"
               >
-                WhatsApp Inquiry
+                WhatsApp for a quick check
               </a>
             </div>
           </div>
@@ -188,15 +848,19 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
     {specEntries.length > 0 && (
       <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
-          <div class="max-w-5xl mx-auto">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Specifications</h2>
+          <div class="max-w-5xl mx-auto" data-speakable="product-specifications">
+            <div class="max-w-3xl mb-6">
+              <p class="eyebrow-label text-[#0e7490] mb-2">{specsSectionContent.eyebrow}</p>
+              <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{specsSectionContent.title}</h2>
+              <p class="card-copy text-gray-600">{specsSectionContent.description}</p>
+            </div>
             <div class="bg-white rounded-xl shadow-sm overflow-hidden">
               <table class="w-full text-sm">
                 <tbody>
-                  {specEntries.map(([key, value], index) => (
+                  {specEntries.map(({ key, value }, index) => (
                     <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50/70'}>
                       <td class="px-6 py-3.5 font-medium text-gray-800 w-1/3 border-b border-gray-100">{key}</td>
-                      <td class="px-6 py-3.5 text-gray-600 border-b border-gray-100">{String(value)}</td>
+                      <td class="px-6 py-3.5 text-gray-600 border-b border-gray-100">{value}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -208,15 +872,19 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
     )}
 
     <!-- Key Features -->
-    {product.features && product.features.length > 0 && (
+    {productFeatures.length > 0 && (
       <section class="py-12 bg-white">
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Key Features</h2>
+            <div class="max-w-3xl mb-6">
+              <p class="eyebrow-label text-[#0e7490] mb-2">{featuresSectionContent.eyebrow}</p>
+              <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{featuresSectionContent.title}</h2>
+              <p class="card-copy text-gray-600">{featuresSectionContent.description}</p>
+            </div>
             <div class="grid md:grid-cols-2 gap-4">
-              {product.features.map((feature: string) => (
-                <div class="flex items-start gap-3 bg-gray-50 p-5 rounded-xl">
-                  <svg class="w-5 h-5 text-[#00bcd4] mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              {productFeatures.map((feature: string) => (
+                 <div class="copy-safe flex items-start gap-3 bg-gray-50 p-5 rounded-xl">
+                  <svg class="w-5 h-5 text-[#0e7490] mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   <span class="text-gray-700">{feature}</span>
@@ -229,22 +897,25 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
     )}
 
     <!-- Applications -->
-    {product.applications && product.applications.length > 0 && (
+    {productApplications.length > 0 && (
       <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Applications</h2>
+            <div class="max-w-3xl mb-6">
+              <p class="eyebrow-label text-[#0e7490] mb-2">{applicationsSectionContent.eyebrow}</p>
+              <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{applicationsSectionContent.title}</h2>
+              <p class="card-copy text-gray-600">{applicationsSectionContent.description}</p>
+            </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {product.applications.map((app: string) => {
-                const [title, ...rest] = app.split(' — ');
-                const description = rest.join(' — ');
+              {productApplications.map((app: string) => {
+                const { title, description } = splitApplicationText(app);
                 return (
                   <div class="flex items-start gap-4 bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 border border-gray-100">
                     <ApplicationIcon application={app} />
                     <div class="min-w-0">
-                      <h3 class="text-sm font-semibold text-gray-800 leading-snug">{title}</h3>
+                      <h3 class="copy-safe title-balance text-sm font-semibold text-gray-800">{title}</h3>
                       {description && (
-                        <p class="text-xs text-gray-500 mt-1 leading-relaxed">{description}</p>
+                        <p class="copy-safe card-copy text-xs text-gray-500 mt-1">{description}</p>
                       )}
                     </div>
                   </div>
@@ -257,25 +928,25 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
     )}
 
     <!-- Product Detail Sections (sub-types, variants, etc.) -->
-    {product.detailSections && product.detailSections.length > 0 && (
+    {productDetailSections.length > 0 && (
       <section class="py-12 bg-white">
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto">
             <h2 class="text-2xl font-bold text-gray-800 mb-8">{product.name} Types</h2>
             <div class="space-y-8">
-              {product.detailSections.map((section: any, index: number) => (
-                <div class={`flex flex-col md:flex-row gap-6 items-start ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+              {productDetailSections.map((section: any, index: number) => (
+                <div class={`copy-safe flex flex-col md:flex-row gap-6 items-start ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
                   {section.image && (
                     <div class="w-full md:w-1/3 shrink-0">
-                      <img src={section.image} alt={section.title} class="w-full rounded-xl shadow-sm object-cover" loading="lazy" />
+                      <img src={section.image} alt={`${section.title} - ${product.name} detail`} class="w-full rounded-xl shadow-sm object-cover" loading="lazy" width="400" height="300" />
                     </div>
                   )}
                   <div class={section.image ? 'w-full md:w-2/3' : 'w-full'}>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                      <span class="w-8 h-8 bg-[#00bcd4] text-white rounded-full flex items-center justify-center text-sm font-bold shrink-0">{index + 1}</span>
+                    <h3 class="title-balance text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                      <span class="w-8 h-8 bg-[#0e7490] text-white rounded-full flex items-center justify-center text-sm font-bold shrink-0">{index + 1}</span>
                       {section.title}
                     </h3>
-                    <p class="text-gray-600 leading-relaxed">{section.content}</p>
+                    <p class="card-copy text-gray-600">{section.content}</p>
                   </div>
                 </div>
               ))}
@@ -285,48 +956,176 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
       </section>
     )}
 
-    <!-- GEO: Why Choose This Product - authoritative, citation-friendly content -->
     <section class="py-12 bg-white border-t">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
-          <h2 class="text-2xl font-bold text-gray-800 mb-6">Why Choose ProudTek {product.name}?</h2>
+          <div class="max-w-3xl mb-6 text-center mx-auto">
+            <p class="eyebrow-label text-[#0e7490] mb-2">{proofSectionContent.eyebrow}</p>
+            <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{proofSectionContent.title}</h2>
+            <p class="card-copy text-gray-600">{proofSectionContent.description}</p>
+          </div>
           <div class="grid md:grid-cols-3 gap-6">
-            <div class="text-center p-4">
-              <div class="text-3xl font-bold text-[#00bcd4] mb-2">ISO 9001</div>
-              <p class="text-sm text-gray-600">Quality-certified manufacturing with 100% chip read/write testing before shipment</p>
+            <div class="copy-safe text-center p-4">
+              <div class="text-3xl font-bold text-[#0e7490] mb-2">ISO 9001</div>
+              <p class="text-sm text-gray-600">Quality-focused manufacturing and sample support for custom RFID projects.</p>
             </div>
-            <div class="text-center p-4">
-              <div class="text-3xl font-bold text-[#00bcd4] mb-2">15+ Years</div>
-              <p class="text-sm text-gray-600">Manufacturing expertise since 2008 with 108+ satisfied clients worldwide</p>
+            <div class="copy-safe text-center p-4">
+              <div class="text-3xl font-bold text-[#0e7490] mb-2">15+ Years</div>
+              <p class="text-sm text-gray-600">RFID manufacturing experience across cards, tags, labels, wristbands and readers.</p>
             </div>
-            <div class="text-center p-4">
-              <div class="text-3xl font-bold text-[#00bcd4] mb-2">Free Samples</div>
-              <p class="text-sm text-gray-600">Test before ordering — free samples shipped within 1–3 business days</p>
+            <div class="copy-safe text-center p-4">
+              <div class="text-3xl font-bold text-[#0e7490] mb-2">Free Samples</div>
+              <p class="text-sm text-gray-600">Test product compatibility before bulk purchasing and customization decisions.</p>
             </div>
           </div>
           <div class="mt-6 text-center">
             <p class="text-gray-600 text-sm">
-              <a href="/rfid-technology" class="text-[#00bcd4] hover:underline">Learn more about RFID technology</a> |
-              <a href={categoryHref} class="text-[#00bcd4] hover:underline">Browse all {product.category}</a> |
-              <a href="/blogs" class="text-[#00bcd4] hover:underline">Read our RFID blog</a>
+              <a href="/rfid-technology" class="text-[#0e7490] hover:underline">Learn more about RFID technology</a> |
+              <a href={categoryHref} class="text-[#0e7490] hover:underline">Browse all {product.category}</a> |
+              <a href="/blogs" class="text-[#0e7490] hover:underline">Read our RFID blog</a>
             </p>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="py-12 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+          <div class="max-w-3xl mb-6">
+            <p class="eyebrow-label text-[#0e7490] mb-2">{buyerGuidesSectionContent.eyebrow}</p>
+            <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{buyerGuidesSectionContent.title}</h2>
+            <p class="card-copy text-gray-600">{buyerGuidesSectionContent.description}</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-5">
+            {productGuideLinks.map((guide) => (
+              <a href={guide.href} class="copy-safe rounded-2xl border border-gray-200 bg-white p-6 hover:border-[#0e7490] hover:-translate-y-0.5 transition-all">
+                <span class="eyebrow-label text-[#0e7490]">{getGuideCardEyebrow(guide.href)}</span>
+                <span class="title-balance block text-base font-semibold text-gray-800">{guide.label}</span>
+                <span class="card-copy block text-sm text-gray-500 mt-2">{guide.description}</span>
+                <span class="mt-3 inline-flex items-center text-sm font-medium text-[#0e7490]">
+                  {getGuideCardCta(guide.href)}
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {productComparisonLinks.length > 0 && (
+      <section class="py-12 bg-white border-t border-gray-100">
+        <div class="container mx-auto px-4">
+          <div class="max-w-5xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+              <div>
+                <p class="eyebrow-label text-[#0e7490] mb-2">Comparison Pages</p>
+                <h2 class="title-balance text-2xl font-bold text-gray-800">Useful if you are still choosing between two directions</h2>
+              </div>
+              <p class="card-copy text-gray-600 max-w-xl">
+                These head-to-head pages help buyers compare chip, frequency, material or format decisions before they lock a sample plan for this product.
+              </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-5">
+              {productComparisonLinks.map((page) => (
+                <a href={`/compare/${page.slug}`} class="copy-safe rounded-2xl border border-gray-200 bg-gray-50 p-6 hover:border-[#0e7490] hover:-translate-y-0.5 transition-all">
+                  <span class="eyebrow-label text-[#0e7490]">{page.heroEyebrow}</span>
+                  <span class="title-balance block text-base font-semibold text-gray-800 mt-3">{page.name}</span>
+                  <span class="card-copy block text-sm text-gray-500 mt-2">{truncateText(page.description, 132)}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    {categoryConfig && (
+      <section class="py-12 bg-white border-t border-gray-100">
+        <div class="container mx-auto px-4">
+          <div class="max-w-5xl mx-auto grid lg:grid-cols-[1.02fr_0.98fr] gap-8 items-start">
+            <div>
+              <p class="eyebrow-label text-[#0e7490] mb-2">Commercial Fit</p>
+              <h2 class="title-balance text-2xl font-bold text-gray-800 mb-4">How buyers usually move this product from shortlist to sample</h2>
+              <p class="card-copy text-gray-600 mb-6">
+                Most inquiry-ready visitors want to know whether this product matches their workflow, region and approval stage. These cues help them move faster without leaving the product page.
+              </p>
+              <div class="grid gap-4">
+                {categoryConfig.buyerProfiles.map((profile) => (
+                  <div class="copy-safe rounded-2xl border border-gray-200 bg-gray-50 p-5">
+                    <h3 class="title-balance text-lg font-semibold text-gray-800">{profile.title}</h3>
+                    <p class="card-copy text-sm text-gray-600 mt-2">{profile.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="copy-safe rounded-2xl border border-[#0e7490]/15 bg-[#0e7490]/5 p-6">
+                <p class="eyebrow-label text-[#0e7490] mb-2">Quote Checklist</p>
+                <h3 class="title-balance text-2xl font-semibold text-gray-800 mb-5">What to send us for a faster recommendation</h3>
+                <ul class="space-y-3">
+                  {categoryConfig.inquiryChecklist.map((item) => (
+                    <li class="flex items-start gap-3 text-sm text-gray-600">
+                      <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0e7490]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div class="mt-6 flex flex-wrap gap-3">
+                  <a href={productContactHref} class="rounded-lg bg-[#0e7490] px-5 py-3 text-sm font-semibold text-white hover:bg-[#155e75] transition-colors">
+                    Send project details
+                  </a>
+                  <a
+                    href={productWhatsAppHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="rounded-lg border border-gray-200 px-5 py-3 text-sm font-semibold text-gray-700 hover:border-[#0e7490] hover:text-[#0e7490] transition-colors"
+                  >
+                    WhatsApp this product
+                  </a>
+                </div>
+              </div>
+
+              <div class="copy-safe rounded-2xl border border-gray-200 bg-white p-6">
+                <p class="eyebrow-label text-[#0e7490] mb-2">Market Notes</p>
+                <h3 class="title-balance text-xl font-semibold text-gray-800 mb-4">Regional conversations often tied to this category</h3>
+                <div class="grid gap-3">
+                  {categoryConfig.marketFocus.map((market) => (
+                    <div class="rounded-2xl border border-gray-100 bg-gray-50 p-4">
+                      <h4 class="title-balance text-sm font-semibold text-gray-800">{market.title}</h4>
+                      <p class="card-copy text-sm text-gray-600 mt-2">{market.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
     <!-- Related Products -->
     {relatedProducts.length > 0 && (
       <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
-          <h2 class="text-2xl font-bold text-gray-800 mb-8">Related Products</h2>
+          <div class="max-w-3xl mb-8">
+            <p class="eyebrow-label text-[#0e7490] mb-2">{relatedProductsSectionContent.eyebrow}</p>
+            <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{relatedProductsSectionContent.title}</h2>
+            <p class="card-copy text-gray-600">{relatedProductsSectionContent.description}</p>
+          </div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             {relatedProducts.map(related => (
-              <a href={`/product/${related.slug}`} class="group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+              <a href={`/product/${related.slug}`} class="copy-safe group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
                 <div class="aspect-square bg-gray-100 overflow-hidden">
                   <img
                     src={related.images[0] || '/images/placeholder.webp'}
-                    alt={`${related.name} - ProudTek RFID`}
+                    alt={`${related.name} - ${related.category} by ProudTek RFID manufacturer`}
                     class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                     width="300"
@@ -334,7 +1133,15 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
                   />
                 </div>
                 <div class="p-4">
-                  <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#00bcd4] transition-colors line-clamp-2">{related.name}</h3>
+                  <p class="eyebrow-label text-[#0e7490] mb-2">{related.category}</p>
+                  <h3 class="title-balance text-sm font-medium text-gray-800 group-hover:text-[#0e7490] transition-colors line-clamp-2">{related.name}</h3>
+                  <p class="card-copy mt-2 text-xs text-gray-500">{getRelatedProductCardPrompt(related)}</p>
+                  <span class="mt-3 inline-flex items-center text-sm font-medium text-[#0e7490]">
+                    Compare this option
+                    <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </span>
                 </div>
               </a>
             ))}
@@ -342,6 +1149,29 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
         </div>
       </section>
     )}
+
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="max-w-3xl mb-6">
+            <p class="eyebrow-label text-[#0e7490] mb-2">{faqSectionContent.eyebrow}</p>
+            <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{faqSectionContent.title}</h2>
+            <p class="card-copy text-gray-600">{faqSectionContent.description}</p>
+          </div>
+          <div class="space-y-4">
+            {productFaqs.map((faq) => (
+              <details class="copy-safe group rounded-2xl border border-gray-200 bg-gray-50 p-5">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-gray-800">
+                  {faq.question}
+                  <span class="text-[#0e7490] transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p class="mt-4 text-gray-600 leading-relaxed">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
 
     <Newsletter />
   </main>
@@ -359,8 +1189,8 @@ const pageDescription = `${product.name} - ${product.description.substring(0, 15
       if (newSrc && mainImage) {
         mainImage.src = newSrc;
       }
-      thumbnails.forEach(t => t.classList.remove('border-[#00bcd4]'));
-      btn.classList.add('border-[#00bcd4]');
+      thumbnails.forEach(t => t.classList.remove('border-[#0e7490]'));
+      btn.classList.add('border-[#0e7490]');
     });
   });
 

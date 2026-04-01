@@ -1,0 +1,15 @@
+---
+import MarketLandingPage from '../../components/MarketLandingPage.astro';
+import { marketPagesList } from '../../data/markets';
+
+export function getStaticPaths() {
+  return marketPagesList.map((page) => ({
+    params: { slug: page.slug },
+    props: { marketKey: page.key },
+  }));
+}
+
+const { marketKey } = Astro.props;
+---
+
+<MarketLandingPage marketKey={marketKey} />

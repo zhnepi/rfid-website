@@ -2,38 +2,32 @@
 const applications = [
   {
     name: 'Access Control',
-    description: 'Smart cards & keyfobs for secure entry',
-    image: 'https://images.unsplash.com/photo-1558002038-1055907df827?w=800&q=85',
+    image: 'https://images.unsplash.com/photo-1558002038-1055907df827?w=400&q=80',
     href: '/category/rfid-cards',
   },
   {
     name: 'RFID Retails',
-    description: 'Inventory tracking & anti-theft solutions',
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=85',
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&q=80',
     href: '/category/rfid-labels',
   },
   {
     name: 'RFID Hotel',
-    description: 'Keycard systems & guest experience',
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=85',
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=80',
     href: '/category/rfid-cards',
   },
   {
     name: 'RFID Events',
-    description: 'Wristbands & badges for seamless access',
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=85',
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&q=80',
     href: '/category/rfid-wristbands',
   },
   {
     name: 'RFID Laundry',
-    description: 'Durable tags for industrial washing',
-    image: 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=800&q=85',
+    image: 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=400&q=80',
     href: '/category/rfid-tags',
   },
   {
     name: 'RFID Industry',
-    description: 'Asset tracking & manufacturing automation',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=85',
+    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&q=80',
     href: '/category/rfid-tags',
   },
 ];
@@ -45,203 +39,24 @@ const applications = [
       <p class="text-[#00bcd4] text-sm uppercase tracking-widest mb-2">RFID Applications...</p>
       <h2 class="text-3xl font-semibold text-gray-800">What RFID application are you looking for?</h2>
     </div>
-  </div>
-
-  <!-- Full-width expanding panels -->
-  <div class="app-panels" id="appPanels">
-    {applications.map((app, index) => (
-      <a
-        href={app.href}
-        class="app-panel"
-        data-index={index}
-      >
-        <img
-          src={app.image}
-          alt={app.name}
-          class="app-panel-img"
-          loading="lazy"
-        />
-        <!-- Light gradient overlay - much brighter than before -->
-        <div class="app-panel-overlay"></div>
-        <!-- Content -->
-        <div class="app-panel-content">
-          <h3 class="app-panel-title">{app.name}</h3>
-          <p class="app-panel-desc">{app.description}</p>
-          <span class="app-panel-cta">
-            Explore
-            <svg xmlns="http://www.w3.org/2000/svg" class="app-panel-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </span>
-        </div>
-      </a>
-    ))}
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-0">
+      {applications.map((app) => (
+        <a 
+          href={app.href}
+          class="group relative overflow-hidden aspect-square"
+        >
+          <img 
+            src={app.image} 
+            alt={app.name}
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <h3 class="text-white text-lg md:text-xl font-semibold text-center px-2">{app.name}</h3>
+          </div>
+        </a>
+      ))}
+    </div>
   </div>
 </section>
-
-<style>
-  .app-panels {
-    display: flex;
-    width: 100%;
-    height: 420px;
-    overflow: hidden;
-  }
-
-  .app-panel {
-    position: relative;
-    flex: 1;
-    overflow: hidden;
-    cursor: pointer;
-    transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    text-decoration: none;
-  }
-
-  /* On hover of the container, shrink all panels... */
-  .app-panels:hover .app-panel {
-    flex: 0.5;
-  }
-
-  /* ...except the hovered one, which expands */
-  .app-panels:hover .app-panel:hover {
-    flex: 3;
-  }
-
-  .app-panel-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .app-panel:hover .app-panel-img {
-    transform: scale(1.05);
-  }
-
-  /* Very light overlay for brighter images */
-  .app-panel-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.1) 40%,
-      rgba(0, 0, 0, 0.02) 100%
-    );
-    transition: background 0.4s ease;
-  }
-
-  .app-panel:hover .app-panel-overlay {
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.05) 50%,
-      rgba(0, 0, 0, 0) 100%
-    );
-  }
-
-  /* Content positioned at bottom */
-  .app-panel-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 24px 20px;
-    color: white;
-    z-index: 2;
-  }
-
-  .app-panel-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    white-space: nowrap;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    transition: font-size 0.4s ease;
-  }
-
-  .app-panel:hover .app-panel-title {
-    font-size: 1.5rem;
-  }
-
-  .app-panel-desc {
-    font-size: 0.875rem;
-    margin-top: 4px;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.4s ease 0.1s, max-height 0.4s ease 0.1s;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  }
-
-  .app-panel:hover .app-panel-desc {
-    opacity: 1;
-    max-height: 40px;
-  }
-
-  .app-panel-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 8px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
-    color: #00bcd4;
-  }
-
-  .app-panel:hover .app-panel-cta {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .app-panel-arrow {
-    width: 16px;
-    height: 16px;
-    transition: transform 0.3s ease;
-  }
-
-  .app-panel:hover .app-panel-arrow {
-    transform: translateX(4px);
-  }
-
-  /* Mobile: stack vertically with smaller height */
-  @media (max-width: 768px) {
-    .app-panels {
-      flex-direction: column;
-      height: auto;
-    }
-
-    .app-panel {
-      height: 140px;
-      flex: none !important;
-      transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .app-panels:hover .app-panel {
-      flex: none;
-      height: 100px;
-    }
-
-    .app-panels:hover .app-panel:hover {
-      flex: none;
-      height: 280px;
-    }
-
-    .app-panel-title {
-      font-size: 1rem;
-    }
-
-    .app-panel:hover .app-panel-title {
-      font-size: 1.25rem;
-    }
-
-    .app-panel-content {
-      padding: 16px;
-    }
-  }
-</style>

@@ -1,0 +1,67 @@
+---
+import { evidenceLinks } from '../data/navigation';
+import { getContextualContactAction } from '../utils/contact';
+
+const proofItems = evidenceLinks.slice(0, 4).map((item) => ({
+  ...item,
+  contactAction: getContextualContactAction(item.href),
+}));
+
+const proofPoints = [
+  'Established in Shenzhen in 2008',
+  'ISO 9001 and ISO 14001 manufacturing',
+  'Export support for 50+ countries',
+];
+---
+
+<section class="border-y border-gray-100 bg-white py-16 md:py-20">
+  <div class="container mx-auto px-4">
+    <div class="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+      <div class="copy-safe max-w-xl">
+        <p class="eyebrow-label text-[#b45309]">Factory Proof</p>
+        <h2 class="title-balance mt-3 text-3xl font-semibold text-gray-900 md:text-4xl">
+          Buyers should be able to verify factory fit before they write the first email
+        </h2>
+        <p class="card-copy mt-4 text-gray-600">
+          Review the core proof pages most buyers ask for first: certifications, quality control, sample policy, and shipping terms.
+        </p>
+        <ul class="mt-6 space-y-3">
+          {proofPoints.map((point) => (
+            <li class="flex items-start gap-3 text-sm text-gray-700">
+              <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#b45309]/10 text-[#92400e]">
+                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </span>
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="brand-panel divide-y divide-gray-100 overflow-hidden">
+        {proofItems.map((item) => (
+          <div class="grid gap-4 px-6 py-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+            <div class="copy-safe min-w-0">
+              <a href={item.href} class="block">
+                <h3 class="text-lg font-semibold text-gray-900">{item.name}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-gray-600">{item.description}</p>
+              </a>
+            </div>
+            <div class="flex flex-wrap items-center gap-4 md:justify-end">
+              <a href={item.href} class="accent-link inline-flex items-center text-sm">
+                Open proof page
+                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </a>
+              <a href={item.contactAction.href} class="text-sm font-medium text-gray-500 transition-colors hover:text-[#0e7490]">
+                {item.contactAction.label}
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const siteURL = 'https://www.proudtek.com';
+const canonicalURL = `${siteURL}/thank-you`;
+
+const intentContent = {
+  samples: {
+    title: 'Your sample inquiry is in the queue',
+    copy: 'The team now has the project details needed to narrow sample options, product fit, and the next approval step.',
+  },
+  oem: {
+    title: 'Your customization inquiry has been received',
+    copy: 'The team will review the product format, chip direction, artwork or encoding details, and the best next step for a custom quote.',
+  },
+  compatibility: {
+    title: 'Your compatibility request is on its way to the team',
+    copy: 'The next response should focus on reader, lock, chip, or credential matching so you can move faster into the right shortlist.',
+  },
+  'repeat-order': {
+    title: 'Your repeat-order request has been recorded',
+    copy: 'The team can now review the approved SKU, quantity target, and any changes needed before the next supply cycle.',
+  },
+  general: {
+    title: 'Thanks, your inquiry has been received',
+    copy: 'The team now has your project details and can continue the conversation through the contact method you selected.',
+  },
+} satisfies Record<string, { title: string; copy: string }>;
+---
+
+<Layout
+  title="Thank You - ProudTek Inquiry Received"
+  description="Thanks for contacting ProudTek. Your RFID inquiry has been received and the team will review the details you submitted."
+  canonicalURL={canonicalURL}
+  noindex={true}
+>
+  <Header />
+  <main>
+    <section class="brand-hero-band py-20 md:py-24">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-4xl text-center">
+          <p class="eyebrow-label mb-3 text-[#0891b2]">Inquiry Received</p>
+          <h1 id="thankYouTitle" class="title-balance text-4xl font-bold text-white md:text-5xl lg:text-6xl">
+            Thanks, your inquiry has been received
+          </h1>
+          <p id="thankYouCopy" class="card-copy mx-auto mt-5 max-w-2xl text-base text-white/74 md:text-lg">
+            The team now has your message and can continue with the most relevant next step for your RFID project.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <span id="submissionReference" class="brand-chip-dark hidden"></span>
+            <span class="brand-chip-dark">Typical reply target: 2 to 4 business hours</span>
+            <span class="brand-chip-dark">Factory-direct support for samples and production</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-16 md:py-20">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <div class="brand-panel p-7 md:p-8">
+            <p class="eyebrow-label mb-2 text-[#0e7490]">What Happens Next</p>
+            <h2 class="title-balance text-3xl font-semibold text-gray-900">Your next reply should be more specific than a generic sales follow-up</h2>
+            <div class="mt-6 space-y-4 text-sm leading-relaxed text-gray-600">
+              <p>The team will review the product direction, quantity signal, and technical details you submitted before replying.</p>
+              <p>If samples or compatibility checks are needed, the follow-up should move toward the most relevant shortlist instead of repeating basic questions.</p>
+              <p>If the request is urgent, you can continue immediately on WhatsApp and reference the same project details.</p>
+            </div>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="/products" class="cta-primary">Browse Products</a>
+              <a href="/compare" class="cta-secondary normal-case tracking-normal">Open Comparison Hub</a>
+            </div>
+          </div>
+
+          <aside class="brand-panel-soft p-7 md:p-8">
+            <p class="eyebrow-label mb-2 text-[#0e7490]">Useful While You Wait</p>
+            <h2 class="title-balance text-2xl font-semibold text-gray-900">Keep the buying conversation moving</h2>
+            <div class="mt-6 space-y-3">
+              <a href="/sample-policy" class="brand-panel brand-panel-link block p-4">
+                <span class="block text-sm font-semibold text-gray-900">Review sample policy</span>
+                <span class="mt-1 block text-sm text-gray-500">Useful when the next step is sample matching or pilot approval.</span>
+              </a>
+              <a href="/quality-control" class="brand-panel brand-panel-link block p-4">
+                <span class="block text-sm font-semibold text-gray-900">Review quality control</span>
+                <span class="mt-1 block text-sm text-gray-500">Helpful if the project is already moving from sampling toward a production decision.</span>
+              </a>
+              <a href="https://wa.me/8618665820632" target="_blank" rel="noopener noreferrer" class="brand-panel brand-panel-link block p-4">
+                <span class="block text-sm font-semibold text-gray-900">Continue on WhatsApp</span>
+                <span class="mt-1 block text-sm text-gray-500">Best for urgent follow-up, quick clarifications, or sharing sample photos and system references.</span>
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script define:vars={{ intentContent }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const intent = params.get('intent') || 'general';
+    const submission = params.get('submission') || '';
+    const content = intentContent[intent] || intentContent.general;
+    const titleEl = document.getElementById('thankYouTitle');
+    const copyEl = document.getElementById('thankYouCopy');
+    const referenceEl = document.getElementById('submissionReference');
+    const analyticsWindow = window as Window & {
+      proudtekTrack?: (name: string, properties?: Record<string, unknown>) => void;
+      dataLayer?: Array<Record<string, unknown>>;
+    };
+
+    if (titleEl) {
+      titleEl.textContent = content.title;
+    }
+
+    if (copyEl) {
+      copyEl.textContent = content.copy;
+    }
+
+    if (referenceEl && submission) {
+      referenceEl.textContent = `Reference: ${submission}`;
+      referenceEl.classList.remove('hidden');
+    }
+
+    if (analyticsWindow.proudtekTrack) {
+      analyticsWindow.proudtekTrack('inquiry_thank_you_view', {
+        inquiry_intent: intent,
+        submission_id: submission || 'unknown',
+      });
+      return;
+    }
+
+    analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
+    analyticsWindow.dataLayer.push({
+      event: 'inquiry_thank_you_view',
+      inquiry_intent: intent,
+      submission_id: submission || 'unknown',
+      page_path: window.location.pathname,
+      event_time: new Date().toISOString(),
+    });
+  });
+</script>

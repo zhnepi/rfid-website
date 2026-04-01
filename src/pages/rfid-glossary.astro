@@ -1,0 +1,329 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+
+const siteURL = 'https://www.proudtek.com';
+const canonicalURL = `${siteURL}/rfid-glossary`;
+
+const glossaryTerms = [
+  {
+    term: 'Anti-collision',
+    definition: 'The ability of a reader to identify and process data from multiple RFID tags simultaneously without data corruption. Anti-collision algorithms allow the reader to manage signals from multiple tags in the same field.',
+  },
+  {
+    term: 'Antenna',
+    definition: 'The component in an RFID system that transmits radio frequency signals from the reader and receives signals from the tag. Reader antennas radiate RF energy, while tag antennas receive and transmit data back to the reader.',
+  },
+  {
+    term: 'Backscatter',
+    definition: 'The method by which a passive RFID tag reflects radio waves back to the reader to transmit data. The tag modulates the reflected signal to encode information, consuming minimal power since it requires no internal battery.',
+  },
+  {
+    term: 'Chip Memory (EEPROM)',
+    definition: 'Electrically Erasable Programmable Read-Only Memory used in RFID chips to store data. EEPROM allows data to be written and erased multiple times, making it suitable for rewritable RFID cards and tags.',
+  },
+  {
+    term: 'Contactless Smart Card',
+    definition: 'A card containing an embedded RFID chip that communicates with a reader without physical contact. Commonly used for access control, payment systems, hotel key cards and identification credentials.',
+  },
+  {
+    term: 'Coupling (Inductive vs Electromagnetic)',
+    definition: 'The method of energy transfer between reader and tag. Inductive coupling is used in low and high frequency RFID, while electromagnetic coupling is used in UHF systems. Coupling efficiency affects read range and performance.',
+  },
+  {
+    term: 'DESFire',
+    definition: 'NXP\'s high-security contactless smart card IC offering advanced encryption and authentication capabilities. DESFire chips support 3DES and AES encryption, making them suitable for secure applications requiring data protection.',
+  },
+  {
+    term: 'Encoding',
+    definition: 'The process of writing data to an RFID chip\'s memory. Encoding can occur during manufacturing or at any point in the tag\'s lifecycle, allowing for customization, numbering and personalization of products.',
+  },
+  {
+    term: 'EPC (Electronic Product Code)',
+    definition: 'A standardized global identifier system for RFID tags that uniquely identifies products in supply chain and retail applications. EPC Gen2 is the most common standard, enabling interoperability across industries.',
+  },
+  {
+    term: 'Frequency Hopping',
+    definition: 'A technique where an RFID system rapidly changes transmission frequency across a defined range to reduce interference and improve reliability. This is particularly useful in environments with competing RF signals.',
+  },
+  {
+    term: 'HF (High Frequency)',
+    definition: 'RFID operating frequency range of 13.56 MHz. HF systems offer moderate read range (up to several meters) and are commonly used for NFC, hotel key cards, library tags and access control applications.',
+  },
+  {
+    term: 'Inlay',
+    definition: 'A pre-assembled component consisting of an RFID chip and antenna laminated or bonded together. Inlays serve as the core building block for manufacturing RFID labels, cards and tags.',
+  },
+  {
+    term: 'ISO 14443',
+    definition: 'An international standard for contactless smart cards defining two types: Type A and Type B. ISO 14443 cards operate at 13.56 MHz and are widely used for payment cards, access control and identification.',
+  },
+  {
+    term: 'ISO 15693',
+    definition: 'An international standard for vicinity cards operating at 13.56 MHz. ISO 15693 cards have a longer read range than ISO 14443 (up to 1 meter) and are used for library systems, healthcare and inventory applications.',
+  },
+  {
+    term: 'ISO 18000-6C / EPC Gen2',
+    definition: 'An international standard defining the air interface for UHF RFID systems. EPC Gen2 is the global standard for supply chain and logistics, enabling read ranges up to 10+ meters with anti-collision capability.',
+  },
+  {
+    term: 'LF (Low Frequency)',
+    definition: 'RFID operating frequency range of 125 kHz (and nearby bands). LF systems offer short read range (typically under 0.5 meters) but excellent penetration through metal and liquids, ideal for animal tracking and access control.',
+  },
+  {
+    term: 'Middleware',
+    definition: 'Software layer that bridges RFID readers and backend business applications. Middleware handles data filtering, validation, routing and integration, translating raw tag data into meaningful business information.',
+  },
+  {
+    term: 'MIFARE',
+    definition: 'NXP\'s family of contactless smart card technology based on ISO 14443 Type A. MIFARE includes Classic, Plus and DESFire variants, widely used in transportation, access control and payment systems worldwide.',
+  },
+  {
+    term: 'NDEF (NFC Data Exchange Format)',
+    definition: 'A standardized message format for exchanging data between NFC-enabled devices. NDEF allows NFC tags to store and share various data types such as text, URLs, contact information and configuration instructions.',
+  },
+  {
+    term: 'NFC (Near Field Communication)',
+    definition: 'A short-range wireless technology enabling data exchange between two devices (typically a phone and a tag) at frequencies of 13.56 MHz. NFC requires close proximity (usually under 10 centimeters) for communication.',
+  },
+  {
+    term: 'NTAG',
+    definition: 'NXP\'s family of NFC tag ICs optimized for simple, low-cost applications. NTAG chips support NDEF format and are commonly used in NFC stickers, wristbands and interactive labels for smartphones.',
+  },
+  {
+    term: 'Read Range',
+    definition: 'The maximum distance at which an RFID reader can successfully communicate with a tag. Read range varies by frequency (LF: <0.5m, HF: 0-1m, UHF: 1-10m+), antenna design and environmental conditions.',
+  },
+  {
+    term: 'Reader/Writer',
+    definition: 'An RFID device that transmits RF energy to tags and reads data returned by them. Readers can also encode or write data to tags in real-time, functioning as both read and write devices in RFID systems.',
+  },
+  {
+    term: 'RFID (Radio Frequency Identification)',
+    definition: 'A wireless technology that uses radio waves to automatically identify and track objects. RFID systems consist of a reader, antenna and tags that contain microchips and store data.',
+  },
+  {
+    term: 'Tag Sensitivity',
+    definition: 'The minimum RF signal strength required for an RFID tag to respond to a reader. Higher sensitivity allows tags to communicate from greater distances and in challenging environments, improving overall system performance.',
+  },
+  {
+    term: 'Transponder',
+    definition: 'The RFID tag or chip unit that receives signals from a reader and transmits data back. A transponder consists of a microchip and antenna, functioning as the primary data carrier in an RFID system.',
+  },
+  {
+    term: 'UHF (Ultra High Frequency)',
+    definition: 'RFID operating frequency range of 860–960 MHz. UHF systems offer the longest read range (up to 10+ meters), highest data transfer speeds and are the standard for supply chain, logistics and inventory management.',
+  },
+  {
+    term: 'UID (Unique Identifier)',
+    definition: 'A unique serial number permanently programmed into each RFID chip at manufacture. The UID cannot be changed and serves as the primary identifier for the tag in most applications and systems.',
+  },
+];
+
+// Sort terms alphabetically
+const sortedTerms = glossaryTerms.sort((a, b) => a.term.localeCompare(b.term));
+
+// Get unique first letters for navigation
+const letters = Array.from(new Set(sortedTerms.map((t) => t.term[0]))).sort();
+
+// Group terms by first letter
+const groupedTerms = letters.map((letter) => ({
+  letter,
+  terms: sortedTerms.filter((t) => t.term[0] === letter),
+}));
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteURL}/` },
+    { '@type': 'ListItem', position: 2, name: 'RFID Technology', item: `${siteURL}/rfid-technology` },
+    { '@type': 'ListItem', position: 3, name: 'RFID Glossary', item: canonicalURL },
+  ],
+};
+
+const definedTermSet = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTermSet',
+  name: 'RFID Glossary',
+  description: 'Comprehensive glossary of RFID and NFC terminology and concepts',
+  hasPart: sortedTerms.map((item) => ({
+    '@type': 'DefinedTerm',
+    name: item.term,
+    description: item.definition,
+  })),
+};
+
+const glossaryPageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': `${canonicalURL}#glossary-page`,
+  url: canonicalURL,
+  name: 'RFID Glossary',
+  description: 'A comprehensive glossary of RFID and NFC terms, standards and technologies used in identification and tracking systems.',
+  isPartOf: { '@id': `${siteURL}/#website` },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['[data-speakable="glossary-intro"]', '[data-speakable="glossary-terms"]'],
+  },
+};
+
+const glossaryFaqTerms = [
+  'RFID (Radio Frequency Identification)',
+  'NFC (Near Field Communication)',
+  'MIFARE',
+  'DESFire',
+  'UHF (Ultra High Frequency)',
+  'HF (High Frequency)',
+  'LF (Low Frequency)',
+  'EPC (Electronic Product Code)',
+  'ISO 14443',
+  'NTAG',
+];
+
+const glossaryFaqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: glossaryTerms
+    .filter((item) => glossaryFaqTerms.includes(item.term))
+    .map((item) => ({
+      '@type': 'Question',
+      name: `What is ${item.term}?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.definition,
+      },
+    })),
+};
+---
+
+<Layout
+  title="RFID Glossary - Complete Terminology Guide | ProudTek"
+  description="Comprehensive glossary of RFID and NFC terms, standards and technologies. Covering frequency bands, chip families, standards, encoding methods and system components."
+  keywords="RFID glossary, NFC glossary, RFID terms, RFID standards, ISO 14443, ISO 15693, EPC Gen2, MIFARE, NTAG, DESFire, UHF RFID, HF RFID, LF RFID"
+  canonicalURL={canonicalURL}
+  jsonLd={[glossaryPageJsonLd, breadcrumbJsonLd, definedTermSet, glossaryFaqJsonLd]}
+>
+  <Header />
+  <main>
+    <!-- Hero Section with Breadcrumb -->
+    <section class="bg-gradient-to-br from-[#0e7490] via-[#155e75] to-[#008fa1] py-20 text-white">
+      <div class="container mx-auto px-4">
+        <nav class="text-sm text-white/80 mb-4" aria-label="Breadcrumb">
+          <a href="/" class="hover:underline">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/rfid-technology" class="hover:underline">RFID Technology</a>
+          <span class="mx-2">/</span>
+          <span>RFID Glossary</span>
+        </nav>
+        <div class="max-w-4xl" data-speakable="glossary-intro">
+          <p class="eyebrow-label eyebrow-label-wide text-[#0e7490]/70 mb-4">RFID Glossary</p>
+          <h1 class="title-balance text-4xl md:text-6xl font-bold mb-6">A comprehensive reference for RFID and NFC terminology</h1>
+          <p class="text-lg md:text-xl text-white/85 max-w-3xl">
+            Navigate essential concepts, standards, chip families and system components. Use the alphabetical index to find definitions quickly.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alphabet Navigation -->
+    <section class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap gap-2 py-4 overflow-x-auto">
+          {letters.map((letter) => (
+            <a
+              href={`#letter-${letter}`}
+              class="px-3 py-1 rounded-lg text-sm font-semibold transition-colors hover:bg-[#0e7490]/5 text-gray-700 hover:text-[#0e7490]"
+            >
+              {letter}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Glossary Terms -->
+    <section class="py-16 bg-white" data-speakable="glossary-terms">
+      <div class="container mx-auto px-4">
+        {groupedTerms.map((group) => (
+          <div id={`letter-${group.letter}`} class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 pb-4 border-b-2 border-[#0e7490]">{group.letter}</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {group.terms.map((item) => (
+                <div class="copy-safe rounded-2xl border border-gray-200 bg-gray-50 p-6 hover:shadow-md hover:border-[#0e7490] transition-all">
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">{item.term}</h3>
+                  <p class="text-gray-700 leading-relaxed text-sm">{item.definition}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Related Resources Section -->
+    <section class="py-16 bg-gray-50 border-y border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mb-10">
+          <p class="eyebrow-label text-[#0e7490] mb-2">Related Resources</p>
+          <h2 class="title-balance text-3xl font-semibold text-gray-900">Expand your RFID knowledge</h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+          <a
+            href="/rfid-technology"
+            class="copy-safe rounded-2xl border border-gray-200 bg-white p-7 hover:border-[#0e7490] hover:shadow-lg transition-all"
+          >
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">RFID Technology Guide</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Deep dive into how RFID works, frequency bands, chip technologies and standards.
+            </p>
+            <span class="inline-flex items-center text-sm font-semibold text-[#0e7490]">
+              Read the guide
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </span>
+          </a>
+          <a
+            href="/contact"
+            class="copy-safe rounded-2xl border border-gray-200 bg-white p-7 hover:border-[#0e7490] hover:shadow-lg transition-all"
+          >
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Get Technical Support</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Have questions about a specific RFID application or standard? Contact ProudTek for expert guidance.
+            </p>
+            <span class="inline-flex items-center text-sm font-semibold text-[#0e7490]">
+              Contact us
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-14 bg-[#0e7490]">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to select the right RFID solution?</h2>
+        <p class="text-white/90 max-w-3xl mx-auto mb-7">
+          Now that you understand the terminology, let's match it to your application. ProudTek can help identify the right chip, frequency, standard and form factor for your requirements.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/contact" class="bg-white text-[#0e7490] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            Start a project discussion
+          </a>
+          <a href="/about" class="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+            Learn about ProudTek
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <Newsletter />
+  </main>
+  <Footer />
+</Layout>

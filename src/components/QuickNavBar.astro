@@ -1,0 +1,59 @@
+---
+import { quickNavLinks } from '../data/navigation';
+
+function normalizePath(path: string) {
+  if (!path || path === '/') {
+    return '/';
+  }
+
+  return path.replace(/\/+$/, '') || '/';
+}
+
+function isActive(currentPath: string, href: string, activePrefixes: string[] = []) {
+  const current = normalizePath(currentPath);
+  const target = normalizePath(href.split('#')[0]);
+  const prefixes = activePrefixes.length > 0 ? activePrefixes : [target];
+
+  return prefixes.some((prefix) => {
+    const normalizedPrefix = normalizePath(prefix);
+    return current === normalizedPrefix || (normalizedPrefix !== '/' && current.startsWith(`${normalizedPrefix}/`));
+  });
+}
+
+const currentPath = Astro.url.pathname;
+const showQuickNav = ['/products', '/rfid', '/product', '/category'].some((prefix) =>
+  currentPath === prefix || currentPath.startsWith(`${prefix}/`)
+);
+---
+
+{showQuickNav && (
+  <div class="border-t border-white/5 bg-[#111]/95">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center gap-3 py-2.5">
+        <span class="hidden lg:inline text-xs font-medium uppercase tracking-[0.2em] text-white/30">Browse Products</span>
+        <div class="flex-1 overflow-x-auto">
+          <div class="flex min-w-max gap-2">
+            {quickNavLinks.map((link) => {
+              const active = isActive(currentPath, link.href, link.activePrefixes);
+
+              return (
+                <a
+                  href={link.href}
+                  aria-current={active ? 'page' : undefined}
+                  class:list={[
+                    'border px-4 py-1.5 text-xs font-medium tracking-wide whitespace-nowrap transition-all duration-300',
+                    active
+                      ? 'border-[#0e7490]/30 bg-[#0e7490]/10 text-[#0e7490]'
+                      : 'border-white/10 text-white/45 hover:border-[#0e7490]/20 hover:text-[#0e7490]',
+                  ]}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
