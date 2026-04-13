@@ -382,9 +382,9 @@ const faqJsonLd = faqItems.length
       <div class="container mx-auto px-4">
         <nav class="text-sm text-gray-600" aria-label="Breadcrumb">
           <ol class="flex items-center flex-wrap">
-            <li><a href="/" class="hover:text-[#0e7490]">Home</a></li>
+            <li><a href="/" class="hover:text-[#0d7377]">Home</a></li>
             <li><span class="mx-2">/</span></li>
-            <li><a href="/blogs" class="hover:text-[#0e7490]">Blog</a></li>
+            <li><a href="/blogs" class="hover:text-[#0d7377]">Blog</a></li>
             <li><span class="mx-2">/</span></li>
             <li><span class="copy-safe text-gray-800 line-clamp-1">{post.title}</span></li>
           </ol>
@@ -396,7 +396,7 @@ const faqJsonLd = faqItems.length
       <div class="container mx-auto px-4">
         <div class="max-w-5xl mx-auto">
           <header class="mb-10">
-            <span class="text-[#0e7490] text-xs uppercase tracking-[0.2em] font-medium">{post.category}</span>
+            <span class="text-[#0d7377] text-xs uppercase tracking-[0.2em] font-medium">{post.category}</span>
             <h1 class="text-3xl md:text-5xl font-bold text-gray-800 mt-3">{post.title}</h1>
             <p class="text-lg text-gray-600 mt-4 max-w-3xl blog-excerpt" data-speakable>{post.excerpt}</p>
             <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 mt-5">
@@ -404,7 +404,7 @@ const faqJsonLd = faqItems.length
               {modifiedIso && <span>Updated {post.updatedDate}</span>}
               <span>{readingTime} min read</span>
               <span>{wordCount} words</span>
-              <a href={author ? `/authors/${author.slug}` : '/about'} class="font-medium text-gray-600 hover:text-[#0e7490] transition-colors">
+              <a href={author ? `/authors/${author.slug}` : '/about'} class="font-medium text-gray-600 hover:text-[#0d7377] transition-colors">
                 By {author?.name || 'ProudTek'}
               </a>
             </div>
@@ -426,7 +426,7 @@ const faqJsonLd = faqItems.length
             <div class="mb-10 rounded-3xl border border-gray-200 bg-gray-50 p-8">
               <div class="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <div>
-                  <p class="eyebrow-label mb-2 text-[#0e7490]">Topic Cluster</p>
+                  <p class="eyebrow-label mb-2 text-[#0d7377]">Topic Cluster</p>
                   <h2 class="title-balance text-2xl font-bold text-gray-800">Continue this topic with the next closest guides</h2>
                 </div>
                 <p class="card-copy max-w-2xl text-gray-600">
@@ -435,11 +435,11 @@ const faqJsonLd = faqItems.length
               </div>
               <div class={`grid gap-4 ${clusterPosts.length > 2 ? 'lg:grid-cols-2' : 'md:grid-cols-2'}`}>
                 {clusterPosts.map((clusterPost) => (
-                  <a href={`/blogs/${clusterPost.slug}`} class="copy-safe rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-[#0e7490]">
-                    <span class="eyebrow-label text-[#0e7490]">{clusterPost.category}</span>
+                  <a href={`/blogs/${clusterPost.slug}`} class="copy-safe rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-[#0d7377]">
+                    <span class="eyebrow-label text-[#0d7377]">{clusterPost.category}</span>
                     <h3 class="title-balance mt-3 text-lg font-semibold text-gray-800">{clusterPost.title}</h3>
                     <p class="card-copy mt-2 text-sm text-gray-600">{truncateText(clusterPost.excerpt, 118)}</p>
-                    <span class="mt-4 inline-flex text-sm font-semibold text-[#0e7490]">Read this next</span>
+                    <span class="mt-4 inline-flex text-sm font-semibold text-[#0d7377]">Read this next</span>
                   </a>
                 ))}
               </div>
@@ -448,16 +448,16 @@ const faqJsonLd = faqItems.length
 
           <div class="grid lg:grid-cols-[minmax(0,1fr)_280px] gap-10 items-start">
             <div>
-              <div class="prose prose-lg max-w-none text-gray-600 leading-relaxed prose-headings:text-gray-800 prose-headings:font-semibold prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-7 prose-h3:mb-3 prose-a:text-[#0e7490] prose-strong:text-gray-700 prose-li:mb-2" set:html={content} />
+              <div class="prose prose-lg max-w-none text-gray-600 leading-relaxed prose-headings:text-gray-800 prose-headings:font-semibold prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-7 prose-h3:mb-3 prose-a:text-[#0d7377] prose-strong:text-gray-700 prose-li:mb-2" set:html={content} />
 
               <div class="mt-10 rounded-3xl border border-gray-200 bg-gray-50 p-8">
                 <h2 class="text-2xl font-bold text-gray-800 mb-3">{blogCta.title}</h2>
                 <p class="text-gray-600 leading-relaxed mb-6">{blogCta.description}</p>
                 <div class="flex flex-wrap gap-4">
-                  <a href={blogContactHref} class="bg-[#0e7490] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#155e75] transition-colors">
+                  <a href={blogContactHref} class="bg-[#0d7377] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#0a5c5f] transition-colors">
                     {blogCta.primaryLabel}
                   </a>
-                  <a href={blogCta.secondaryHref} class="border border-[#0e7490] text-[#0e7490] px-6 py-3 rounded-lg font-semibold hover:bg-[#0e7490] hover:text-white transition-colors">
+                  <a href={blogCta.secondaryHref} class="border border-[#0d7377] text-[#0d7377] px-6 py-3 rounded-lg font-semibold hover:bg-[#0d7377] hover:text-white transition-colors">
                     {blogCta.secondaryLabel}
                   </a>
                 </div>
@@ -467,7 +467,7 @@ const faqJsonLd = faqItems.length
                 <div class="mt-8 rounded-3xl border border-gray-200 bg-white p-8">
                 <div class="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                   <div>
-                    <p class="eyebrow-label mb-2 text-[#0e7490]">Comparison Pages</p>
+                    <p class="eyebrow-label mb-2 text-[#0d7377]">Comparison Pages</p>
                     <h2 class="title-balance text-2xl font-bold text-gray-800">Compare the closest alternatives before you request samples</h2>
                   </div>
                   <p class="card-copy max-w-xl text-gray-600">
@@ -476,13 +476,13 @@ const faqJsonLd = faqItems.length
                 </div>
                   <div class="grid gap-4 md:grid-cols-3">
                     {comparisonLinks.map((page) => (
-                      <article class="copy-safe rounded-2xl border border-gray-200 bg-gray-50 p-5 transition-all hover:-translate-y-0.5 hover:border-[#0e7490]">
+                      <article class="copy-safe rounded-2xl border border-gray-200 bg-gray-50 p-5 transition-all hover:-translate-y-0.5 hover:border-[#0d7377]">
                         <a href={`/compare/${page.slug}`} class="block">
-                          <span class="eyebrow-label text-[#0e7490]">{page.heroEyebrow}</span>
+                          <span class="eyebrow-label text-[#0d7377]">{page.heroEyebrow}</span>
                           <span class="title-balance mt-3 block text-base font-semibold text-gray-800">{page.name}</span>
                           <span class="card-copy mt-2 block text-sm text-gray-500">{truncateText(page.description, 108)}</span>
                         </a>
-                        <a href={getComparisonContactHref(page.slug)} class="mt-4 inline-flex text-xs font-medium text-gray-500 transition-colors hover:text-[#0e7490]">
+                        <a href={getComparisonContactHref(page.slug)} class="mt-4 inline-flex text-xs font-medium text-gray-500 transition-colors hover:text-[#0d7377]">
                           Discuss this comparison
                         </a>
                       </article>
@@ -493,7 +493,7 @@ const faqJsonLd = faqItems.length
 
               {faqItems.length > 0 && (
                 <div class="mt-8 rounded-3xl border border-gray-200 bg-white p-8">
-                  <p class="eyebrow-label mb-2 text-[#0e7490]">Quick FAQ</p>
+                  <p class="eyebrow-label mb-2 text-[#0d7377]">Quick FAQ</p>
                   <h2 class="title-balance text-2xl font-bold text-gray-800">Questions buyers often ask after reading this guide</h2>
                   <div class="mt-6 space-y-5">
                     {faqItems.map((item) => (
@@ -507,9 +507,9 @@ const faqJsonLd = faqItems.length
               )}
 
               <div class="mt-8 rounded-3xl bg-[#072a31] text-white p-8">
-                <p class="text-[#0e7490] text-sm uppercase tracking-[0.2em] mb-2">Author</p>
+                <p class="text-[#0d7377] text-sm uppercase tracking-[0.2em] mb-2">Author</p>
                 <h2 class="text-2xl font-bold mb-2">{author?.name || 'ProudTek RFID Team'}</h2>
-                <p class="text-[#0e7490]/70 text-sm font-medium mb-3">{author?.role || 'RFID manufacturer editorial team'}</p>
+                <p class="text-[#0d7377]/70 text-sm font-medium mb-3">{author?.role || 'RFID manufacturer editorial team'}</p>
                 <p class="text-white/75 leading-relaxed">
                   {author?.shortBio || 'We publish practical RFID content to help buyers and project teams compare card, tag, label, wristband and reader options before sampling or production.'}
                 </p>
@@ -517,7 +517,7 @@ const faqJsonLd = faqItems.length
                   <a href={author ? `/authors/${author.slug}` : '/about'} class="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 transition-colors">
                     View editorial profile
                   </a>
-                  <a href={blogContactHref} class="rounded-full border border-cyan-300/30 px-4 py-2 text-sm font-semibold text-[#0e7490]/70 hover:bg-white/10 transition-colors">
+                  <a href={blogContactHref} class="rounded-full border border-cyan-300/30 px-4 py-2 text-sm font-semibold text-[#0d7377]/70 hover:bg-white/10 transition-colors">
                     {blogCta.primaryLabel}
                   </a>
                 </div>
@@ -532,7 +532,7 @@ const faqJsonLd = faqItems.length
                     {headings.map((heading) => (
                       <a
                         href={`#${heading.id}`}
-                        class={`block text-sm leading-relaxed hover:text-[#0e7490] transition-colors ${heading.level === 3 ? 'pl-4 text-gray-500' : 'text-gray-700 font-medium'}`}
+                        class={`block text-sm leading-relaxed hover:text-[#0d7377] transition-colors ${heading.level === 3 ? 'pl-4 text-gray-500' : 'text-gray-700 font-medium'}`}
                       >
                         {heading.text}
                       </a>
@@ -541,11 +541,11 @@ const faqJsonLd = faqItems.length
                 </div>
               )}
 
-              <div class="copy-safe rounded-3xl border border-[#0e7490]/15 bg-[#0e7490]/5 p-6">
+              <div class="copy-safe rounded-3xl border border-[#0d7377]/15 bg-[#0d7377]/5 p-6">
                 <h2 class="text-lg font-semibold text-gray-800 mb-4">What buyers usually open next</h2>
                 <div class="space-y-3">
                   {resourceLinks.map((resource) => (
-                    <a href={resource.href} class="copy-safe block rounded-2xl bg-white p-4 border border-[#0e7490]/15 hover:border-[#0e7490] transition-colors">
+                    <a href={resource.href} class="copy-safe block rounded-2xl bg-white p-4 border border-[#0d7377]/15 hover:border-[#0d7377] transition-colors">
                       <span class="block text-sm font-semibold text-gray-800">{resource.label}</span>
                       <span class="block text-sm text-gray-500 mt-1">{resource.description}</span>
                     </a>
@@ -562,10 +562,10 @@ const faqJsonLd = faqItems.length
       <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
           <div>
-            <p class="text-sm uppercase tracking-[0.2em] text-[#0e7490] mb-2">Related Reading</p>
+            <p class="text-sm uppercase tracking-[0.2em] text-[#0d7377] mb-2">Related Reading</p>
             <h2 class="text-2xl font-bold text-gray-800">Read the next closest guide before you lock the shortlist</h2>
           </div>
-          <a href="/blogs" class="text-[#0e7490] font-semibold hover:text-[#155e75] transition-colors">Back to all articles</a>
+          <a href="/blogs" class="text-[#0d7377] font-semibold hover:text-[#0a5c5f] transition-colors">Back to all articles</a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           {relatedPosts.map((related) => (
@@ -583,8 +583,8 @@ const faqJsonLd = faqItems.length
                 />
               </div>
               <div class="p-6">
-                <span class="text-[#0e7490] text-xs uppercase tracking-[0.2em] font-medium">{related.category}</span>
-                <h3 class="text-lg font-semibold text-gray-800 mt-3 group-hover:text-[#0e7490] transition-colors line-clamp-2">{related.title}</h3>
+                <span class="text-[#0d7377] text-xs uppercase tracking-[0.2em] font-medium">{related.category}</span>
+                <h3 class="text-lg font-semibold text-gray-800 mt-3 group-hover:text-[#0d7377] transition-colors line-clamp-2">{related.title}</h3>
                 <p class="text-sm text-gray-600 mt-2 line-clamp-3">{truncateText(related.excerpt, 120)}</p>
                 <span class="text-gray-400 text-sm mt-3 block">{related.date}</span>
               </div>

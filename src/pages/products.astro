@@ -102,7 +102,7 @@ const pageJsonLd = {
     <section class="bg-slate-950 py-20 text-white">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl">
-          <p class="eyebrow-label eyebrow-label-wide text-[#0e7490]/70 mb-3">Product Overview</p>
+          <p class="eyebrow-label eyebrow-label-wide text-[#0d7377]/70 mb-3">Product Overview</p>
           <h1 class="title-balance text-4xl md:text-6xl font-semibold">Start with the RFID format that fits your object, environment, and buying stage</h1>
           <p class="card-copy text-white/75 text-lg mt-5 max-w-3xl">
             Use this page when you are still deciding between cards, tags, labels, wearables, readers, or laundry-specific formats and want the fastest path into the right family.
@@ -114,22 +114,22 @@ const pageJsonLd = {
     <section class="py-16 bg-white">
       <div class="container mx-auto px-4">
         <div class="grid lg:grid-cols-3 gap-6">
-          <div class="copy-safe rounded-[1.75rem] bg-[#0e7490]/5 border border-[#0e7490]/15 p-8">
-            <p class="eyebrow-label text-[#0e7490] mb-3">Start Here</p>
+          <div class="copy-safe rounded-[1.75rem] bg-[#0d7377]/5 border border-[#0d7377]/15 p-8">
+            <p class="eyebrow-label text-[#0d7377] mb-3">Start Here</p>
             <h2 class="title-balance text-2xl font-semibold text-gray-900 mb-4">What are you tagging, issuing, or trying to read?</h2>
             <p class="card-copy text-gray-600">
               People, vehicles, garments, metal assets, retail items, books, and packages usually point to very different RFID formats. Use that first decision to narrow the catalog fast.
             </p>
           </div>
           <div class="copy-safe rounded-[1.75rem] bg-gray-50 border border-gray-200 p-8">
-            <p class="eyebrow-label text-[#0e7490] mb-3">Next Filter</p>
+            <p class="eyebrow-label text-[#0d7377] mb-3">Next Filter</p>
             <h2 class="title-balance text-2xl font-semibold text-gray-900 mb-4">What does the product need to survive or match?</h2>
             <p class="card-copy text-gray-600">
               Reader protocol, metal surfaces, wash cycles, outdoor exposure, printer setup, and visible branding usually narrow the right product family faster than frequency alone.
             </p>
           </div>
           <div class="copy-safe rounded-[1.75rem] bg-gray-50 border border-gray-200 p-8">
-            <p class="eyebrow-label text-[#0e7490] mb-3">Fast Path</p>
+            <p class="eyebrow-label text-[#0d7377] mb-3">Fast Path</p>
             <h2 class="title-balance text-2xl font-semibold text-gray-900 mb-4">Need a shortlist before you ask for samples?</h2>
             <p class="card-copy text-gray-600">
               Each family below is set up to move you into a narrower category, a matching comparison page, and then an inquiry path that already fits the buying question.
@@ -160,7 +160,7 @@ const pageJsonLd = {
                   <ul class="mt-4 space-y-2">
                     {category.bullets.map((bullet) => (
                       <li class="flex items-start gap-2 text-sm text-gray-700">
-                        <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0e7490]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0d7377]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
                         <span>{bullet}</span>
@@ -171,13 +171,13 @@ const pageJsonLd = {
               </a>
               <div class="flex items-center justify-between gap-3 border-t border-gray-100 px-6 pb-6 pt-4">
                 {category.topComparison ? (
-                  <a href={`/compare/${category.topComparison.slug}`} class="min-w-0 text-xs font-medium text-[#0e7490] transition-colors hover:text-[#155e75]">
+                  <a href={`/compare/${category.topComparison.slug}`} class="min-w-0 text-xs font-medium text-[#0d7377] transition-colors hover:text-[#0a5c5f]">
                     <span class="block truncate">Compare: {category.topComparison.name}</span>
                   </a>
                 ) : (
                   <span class="text-xs text-gray-400">Browse the product family</span>
                 )}
-                <a href={category.href} class="inline-flex shrink-0 items-center text-sm font-medium text-[#0e7490]">
+                <a href={category.href} class="inline-flex shrink-0 items-center text-sm font-medium text-[#0d7377]">
                   View category
                   <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>

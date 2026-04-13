@@ -24,7 +24,7 @@ const currentPath = Astro.url.pathname;
 
 <header class="w-full">
   <!-- Top Bar -->
-  <div class="bg-[#00bcd4] text-white text-sm py-2">
+  <div class="bg-[#0d7377] text-white text-sm py-2">
     <div class="container mx-auto px-4 flex justify-between items-center">
       <div class="flex items-center gap-2">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -57,7 +57,7 @@ const currentPath = Astro.url.pathname;
         <!-- Logo -->
         <a href="/" class="flex items-center">
           <span class="text-3xl font-bold tracking-wider">
-            <span class="text-[#00bcd4]">PR</span><span class="text-gray-700">O</span><span class="text-[#00bcd4]">UDTEK</span>
+            <span class="text-[#0d7377]">PR</span><span class="text-gray-700">O</span><span class="text-[#0d7377]">UDTEK</span>
           </span>
         </a>
         
@@ -68,8 +68,8 @@ const currentPath = Astro.url.pathname;
               <div class="relative group">
                 <a 
                   href={item.href}
-                  class={`text-gray-700 hover:text-[#00bcd4] transition-colors font-medium flex items-center gap-1 ${
-                    currentPath === item.href || currentPath.startsWith('/rfid') || currentPath.startsWith('/product') || currentPath.startsWith('/category') ? 'text-[#00bcd4] border-b-2 border-[#00bcd4]' : ''
+                  class={`text-gray-700 hover:text-[#0d7377] transition-colors font-medium flex items-center gap-1 ${
+                    currentPath === item.href || currentPath.startsWith('/rfid') || currentPath.startsWith('/product') || currentPath.startsWith('/category') ? 'text-[#0d7377] border-b-2 border-[#0d7377]' : ''
                   }`}
                 >
                   {item.name}
@@ -83,8 +83,8 @@ const currentPath = Astro.url.pathname;
                     {item.submenu.map((subitem) => (
                       <a 
                         href={subitem.href}
-                        class={`block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-[#00bcd4] transition-colors ${
-                          currentPath === subitem.href ? 'text-[#00bcd4] bg-gray-50' : ''
+                        class={`block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-[#0d7377] transition-colors ${
+                          currentPath === subitem.href ? 'text-[#0d7377] bg-gray-50' : ''
                         }`}
                       >
                         {subitem.name}
@@ -96,8 +96,8 @@ const currentPath = Astro.url.pathname;
             ) : (
               <a 
                 href={item.href}
-                class={`text-gray-700 hover:text-[#00bcd4] transition-colors font-medium ${
-                  currentPath === item.href ? 'text-[#00bcd4] border-b-2 border-[#00bcd4]' : ''
+                class={`text-gray-700 hover:text-[#0d7377] transition-colors font-medium ${
+                  currentPath === item.href ? 'text-[#0d7377] border-b-2 border-[#0d7377]' : ''
                 }`}
               >
                 {item.name}
@@ -106,7 +106,7 @@ const currentPath = Astro.url.pathname;
           ))}
           <a
             href="/contact"
-            class="bg-[#00bcd4] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#00acc1] transition-colors text-sm whitespace-nowrap"
+            class="bg-amber-500 text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-amber-600 transition-colors text-sm whitespace-nowrap shadow-sm"
           >
             Get a Quote
           </a>
@@ -126,7 +126,7 @@ const currentPath = Astro.url.pathname;
           item.submenu ? (
             <div class="mobile-dropdown">
               <button 
-                class="mobile-dropdown-btn w-full flex justify-between items-center py-2 text-gray-700 hover:text-[#00bcd4] transition-colors"
+                class="mobile-dropdown-btn w-full flex justify-between items-center py-2 text-gray-700 hover:text-[#0d7377] transition-colors"
               >
                 {item.name}
                 <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -137,7 +137,7 @@ const currentPath = Astro.url.pathname;
                 {item.submenu.map((subitem) => (
                   <a 
                     href={subitem.href}
-                    class="block py-2 text-gray-600 hover:text-[#00bcd4] transition-colors text-sm"
+                    class="block py-2 text-gray-600 hover:text-[#0d7377] transition-colors text-sm"
                   >
                     {subitem.name}
                   </a>
@@ -147,15 +147,15 @@ const currentPath = Astro.url.pathname;
           ) : (
             <a 
               href={item.href}
-              class={`block py-2 text-gray-700 hover:text-[#00bcd4] transition-colors ${
-                currentPath === item.href ? 'text-[#00bcd4]' : ''
+              class={`block py-2 text-gray-700 hover:text-[#0d7377] transition-colors ${
+                currentPath === item.href ? 'text-[#0d7377]' : ''
               }`}
             >
               {item.name}
             </a>
           )
         ))}
-        <a href="/contact" class="block mt-4 py-3 text-center bg-[#00bcd4] text-white rounded-lg font-medium hover:bg-[#00acc1] transition-colors">
+        <a href="/contact" class="block mt-4 py-3 text-center bg-[#0d7377] text-white rounded-lg font-medium hover:bg-[#0a5c5f] transition-colors">
           Get a Quote
         </a>
       </div>

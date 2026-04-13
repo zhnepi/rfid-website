@@ -786,7 +786,7 @@ const pageDescription = truncateText(
               <div class="grid grid-cols-4 gap-2">
                 {product.images.map((img: string, index: number) => (
                   <button
-                    class="aspect-square bg-gray-100 rounded border border-gray-200 overflow-hidden hover:border-[#0e7490] transition-colors thumbnail-btn"
+                    class="aspect-square bg-gray-100 rounded border border-gray-200 overflow-hidden hover:border-[#0d7377] transition-colors thumbnail-btn"
                     data-image={img}
                     aria-label={`View ${product.name} image ${index + 1}`}
                   >
@@ -800,7 +800,7 @@ const pageDescription = truncateText(
           <!-- Product Info -->
           <div class="space-y-6">
             <div>
-              <span class="eyebrow-label text-[#0e7490]">{product.category}</span>
+              <span class="eyebrow-label text-[#0d7377]">{product.category}</span>
               <h1 class="title-balance text-3xl font-bold text-gray-800 mt-2">{product.name}</h1>
               <p class="mt-4 text-lg font-semibold leading-relaxed text-gray-900">{productBuyerQuestion}</p>
             </div>
@@ -809,12 +809,12 @@ const pageDescription = truncateText(
               <p class="card-copy text-gray-600">{productBuyerIntro}</p>
             </div>
 
-             <div class="copy-safe rounded-2xl border border-[#0e7490]/15 bg-[#0e7490]/5 p-5">
-              <p class="eyebrow-label text-[#0e7490] mb-2">What buyers usually confirm first</p>
+             <div class="copy-safe rounded-2xl border border-[#0d7377]/15 bg-[#0d7377]/5 p-5">
+              <p class="eyebrow-label text-[#0d7377] mb-2">What buyers usually confirm first</p>
               <div class="grid gap-4 sm:grid-cols-3">
                 {productDecisionCards.map((card) => (
-                  <div class="rounded-2xl border border-[#0e7490]/15 bg-white p-4">
-                    <p class="eyebrow-label text-[#0e7490] mb-2">{card.label}</p>
+                  <div class="rounded-2xl border border-[#0d7377]/15 bg-white p-4">
+                    <p class="eyebrow-label text-[#0d7377] mb-2">{card.label}</p>
                     <h2 class="title-balance text-base font-semibold text-gray-800">{card.title}</h2>
                     <p class="card-copy mt-2 text-sm text-gray-600">{card.description}</p>
                   </div>
@@ -826,7 +826,7 @@ const pageDescription = truncateText(
             <div class="pt-4 flex flex-wrap gap-4">
               <a
                 href={productContactHref}
-                class="inline-block bg-[#0e7490] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#155e75] transition-colors"
+                class="inline-block bg-[#0d7377] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#0a5c5f] transition-colors"
               >
                 {productInquiryLabel}
               </a>
@@ -850,7 +850,7 @@ const pageDescription = truncateText(
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto" data-speakable="product-specifications">
             <div class="max-w-3xl mb-6">
-              <p class="eyebrow-label text-[#0e7490] mb-2">{specsSectionContent.eyebrow}</p>
+              <p class="eyebrow-label text-[#0d7377] mb-2">{specsSectionContent.eyebrow}</p>
               <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{specsSectionContent.title}</h2>
               <p class="card-copy text-gray-600">{specsSectionContent.description}</p>
             </div>
@@ -877,14 +877,14 @@ const pageDescription = truncateText(
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto">
             <div class="max-w-3xl mb-6">
-              <p class="eyebrow-label text-[#0e7490] mb-2">{featuresSectionContent.eyebrow}</p>
+              <p class="eyebrow-label text-[#0d7377] mb-2">{featuresSectionContent.eyebrow}</p>
               <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{featuresSectionContent.title}</h2>
               <p class="card-copy text-gray-600">{featuresSectionContent.description}</p>
             </div>
             <div class="grid md:grid-cols-2 gap-4">
               {productFeatures.map((feature: string) => (
                  <div class="copy-safe flex items-start gap-3 bg-gray-50 p-5 rounded-xl">
-                  <svg class="w-5 h-5 text-[#0e7490] mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-[#0d7377] mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   <span class="text-gray-700">{feature}</span>
@@ -902,7 +902,7 @@ const pageDescription = truncateText(
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto">
             <div class="max-w-3xl mb-6">
-              <p class="eyebrow-label text-[#0e7490] mb-2">{applicationsSectionContent.eyebrow}</p>
+              <p class="eyebrow-label text-[#0d7377] mb-2">{applicationsSectionContent.eyebrow}</p>
               <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{applicationsSectionContent.title}</h2>
               <p class="card-copy text-gray-600">{applicationsSectionContent.description}</p>
             </div>
@@ -943,7 +943,7 @@ const pageDescription = truncateText(
                   )}
                   <div class={section.image ? 'w-full md:w-2/3' : 'w-full'}>
                     <h3 class="title-balance text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                      <span class="w-8 h-8 bg-[#0e7490] text-white rounded-full flex items-center justify-center text-sm font-bold shrink-0">{index + 1}</span>
+                      <span class="w-8 h-8 bg-[#0d7377] text-white rounded-full flex items-center justify-center text-sm font-bold shrink-0">{index + 1}</span>
                       {section.title}
                     </h3>
                     <p class="card-copy text-gray-600">{section.content}</p>
@@ -960,29 +960,29 @@ const pageDescription = truncateText(
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
           <div class="max-w-3xl mb-6 text-center mx-auto">
-            <p class="eyebrow-label text-[#0e7490] mb-2">{proofSectionContent.eyebrow}</p>
+            <p class="eyebrow-label text-[#0d7377] mb-2">{proofSectionContent.eyebrow}</p>
             <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{proofSectionContent.title}</h2>
             <p class="card-copy text-gray-600">{proofSectionContent.description}</p>
           </div>
           <div class="grid md:grid-cols-3 gap-6">
             <div class="copy-safe text-center p-4">
-              <div class="text-3xl font-bold text-[#0e7490] mb-2">ISO 9001</div>
+              <div class="text-3xl font-bold text-[#0d7377] mb-2">ISO 9001</div>
               <p class="text-sm text-gray-600">Quality-focused manufacturing and sample support for custom RFID projects.</p>
             </div>
             <div class="copy-safe text-center p-4">
-              <div class="text-3xl font-bold text-[#0e7490] mb-2">15+ Years</div>
+              <div class="text-3xl font-bold text-[#0d7377] mb-2">15+ Years</div>
               <p class="text-sm text-gray-600">RFID manufacturing experience across cards, tags, labels, wristbands and readers.</p>
             </div>
             <div class="copy-safe text-center p-4">
-              <div class="text-3xl font-bold text-[#0e7490] mb-2">Free Samples</div>
+              <div class="text-3xl font-bold text-[#0d7377] mb-2">Free Samples</div>
               <p class="text-sm text-gray-600">Test product compatibility before bulk purchasing and customization decisions.</p>
             </div>
           </div>
           <div class="mt-6 text-center">
             <p class="text-gray-600 text-sm">
-              <a href="/rfid-technology" class="text-[#0e7490] hover:underline">Learn more about RFID technology</a> |
-              <a href={categoryHref} class="text-[#0e7490] hover:underline">Browse all {product.category}</a> |
-              <a href="/blogs" class="text-[#0e7490] hover:underline">Read our RFID blog</a>
+              <a href="/rfid-technology" class="text-[#0d7377] hover:underline">Learn more about RFID technology</a> |
+              <a href={categoryHref} class="text-[#0d7377] hover:underline">Browse all {product.category}</a> |
+              <a href="/blogs" class="text-[#0d7377] hover:underline">Read our RFID blog</a>
             </p>
           </div>
         </div>
@@ -993,17 +993,17 @@ const pageDescription = truncateText(
       <div class="container mx-auto px-4">
         <div class="max-w-5xl mx-auto">
           <div class="max-w-3xl mb-6">
-            <p class="eyebrow-label text-[#0e7490] mb-2">{buyerGuidesSectionContent.eyebrow}</p>
+            <p class="eyebrow-label text-[#0d7377] mb-2">{buyerGuidesSectionContent.eyebrow}</p>
             <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{buyerGuidesSectionContent.title}</h2>
             <p class="card-copy text-gray-600">{buyerGuidesSectionContent.description}</p>
           </div>
           <div class="grid md:grid-cols-3 gap-5">
             {productGuideLinks.map((guide) => (
-              <a href={guide.href} class="copy-safe rounded-2xl border border-gray-200 bg-white p-6 hover:border-[#0e7490] hover:-translate-y-0.5 transition-all">
-                <span class="eyebrow-label text-[#0e7490]">{getGuideCardEyebrow(guide.href)}</span>
+              <a href={guide.href} class="copy-safe rounded-2xl border border-gray-200 bg-white p-6 hover:border-[#0d7377] hover:-translate-y-0.5 transition-all">
+                <span class="eyebrow-label text-[#0d7377]">{getGuideCardEyebrow(guide.href)}</span>
                 <span class="title-balance block text-base font-semibold text-gray-800">{guide.label}</span>
                 <span class="card-copy block text-sm text-gray-500 mt-2">{guide.description}</span>
-                <span class="mt-3 inline-flex items-center text-sm font-medium text-[#0e7490]">
+                <span class="mt-3 inline-flex items-center text-sm font-medium text-[#0d7377]">
                   {getGuideCardCta(guide.href)}
                   <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -1022,7 +1022,7 @@ const pageDescription = truncateText(
           <div class="max-w-5xl mx-auto">
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
               <div>
-                <p class="eyebrow-label text-[#0e7490] mb-2">Comparison Pages</p>
+                <p class="eyebrow-label text-[#0d7377] mb-2">Comparison Pages</p>
                 <h2 class="title-balance text-2xl font-bold text-gray-800">Useful if you are still choosing between two directions</h2>
               </div>
               <p class="card-copy text-gray-600 max-w-xl">
@@ -1031,8 +1031,8 @@ const pageDescription = truncateText(
             </div>
             <div class="grid md:grid-cols-3 gap-5">
               {productComparisonLinks.map((page) => (
-                <a href={`/compare/${page.slug}`} class="copy-safe rounded-2xl border border-gray-200 bg-gray-50 p-6 hover:border-[#0e7490] hover:-translate-y-0.5 transition-all">
-                  <span class="eyebrow-label text-[#0e7490]">{page.heroEyebrow}</span>
+                <a href={`/compare/${page.slug}`} class="copy-safe rounded-2xl border border-gray-200 bg-gray-50 p-6 hover:border-[#0d7377] hover:-translate-y-0.5 transition-all">
+                  <span class="eyebrow-label text-[#0d7377]">{page.heroEyebrow}</span>
                   <span class="title-balance block text-base font-semibold text-gray-800 mt-3">{page.name}</span>
                   <span class="card-copy block text-sm text-gray-500 mt-2">{truncateText(page.description, 132)}</span>
                 </a>
@@ -1048,7 +1048,7 @@ const pageDescription = truncateText(
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto grid lg:grid-cols-[1.02fr_0.98fr] gap-8 items-start">
             <div>
-              <p class="eyebrow-label text-[#0e7490] mb-2">Commercial Fit</p>
+              <p class="eyebrow-label text-[#0d7377] mb-2">Commercial Fit</p>
               <h2 class="title-balance text-2xl font-bold text-gray-800 mb-4">How buyers usually move this product from shortlist to sample</h2>
               <p class="card-copy text-gray-600 mb-6">
                 Most inquiry-ready visitors want to know whether this product matches their workflow, region and approval stage. These cues help them move faster without leaving the product page.
@@ -1064,13 +1064,13 @@ const pageDescription = truncateText(
             </div>
 
             <div class="space-y-6">
-              <div class="copy-safe rounded-2xl border border-[#0e7490]/15 bg-[#0e7490]/5 p-6">
-                <p class="eyebrow-label text-[#0e7490] mb-2">Quote Checklist</p>
+              <div class="copy-safe rounded-2xl border border-[#0d7377]/15 bg-[#0d7377]/5 p-6">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Quote Checklist</p>
                 <h3 class="title-balance text-2xl font-semibold text-gray-800 mb-5">What to send us for a faster recommendation</h3>
                 <ul class="space-y-3">
                   {categoryConfig.inquiryChecklist.map((item) => (
                     <li class="flex items-start gap-3 text-sm text-gray-600">
-                      <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0e7490]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0d7377]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                       </svg>
                       <span>{item}</span>
@@ -1078,14 +1078,14 @@ const pageDescription = truncateText(
                   ))}
                 </ul>
                 <div class="mt-6 flex flex-wrap gap-3">
-                  <a href={productContactHref} class="rounded-lg bg-[#0e7490] px-5 py-3 text-sm font-semibold text-white hover:bg-[#155e75] transition-colors">
+                  <a href={productContactHref} class="rounded-lg bg-[#0d7377] px-5 py-3 text-sm font-semibold text-white hover:bg-[#0a5c5f] transition-colors">
                     Send project details
                   </a>
                   <a
                     href={productWhatsAppHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="rounded-lg border border-gray-200 px-5 py-3 text-sm font-semibold text-gray-700 hover:border-[#0e7490] hover:text-[#0e7490] transition-colors"
+                    class="rounded-lg border border-gray-200 px-5 py-3 text-sm font-semibold text-gray-700 hover:border-[#0d7377] hover:text-[#0d7377] transition-colors"
                   >
                     WhatsApp this product
                   </a>
@@ -1093,7 +1093,7 @@ const pageDescription = truncateText(
               </div>
 
               <div class="copy-safe rounded-2xl border border-gray-200 bg-white p-6">
-                <p class="eyebrow-label text-[#0e7490] mb-2">Market Notes</p>
+                <p class="eyebrow-label text-[#0d7377] mb-2">Market Notes</p>
                 <h3 class="title-balance text-xl font-semibold text-gray-800 mb-4">Regional conversations often tied to this category</h3>
                 <div class="grid gap-3">
                   {categoryConfig.marketFocus.map((market) => (
@@ -1115,7 +1115,7 @@ const pageDescription = truncateText(
       <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
           <div class="max-w-3xl mb-8">
-            <p class="eyebrow-label text-[#0e7490] mb-2">{relatedProductsSectionContent.eyebrow}</p>
+            <p class="eyebrow-label text-[#0d7377] mb-2">{relatedProductsSectionContent.eyebrow}</p>
             <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{relatedProductsSectionContent.title}</h2>
             <p class="card-copy text-gray-600">{relatedProductsSectionContent.description}</p>
           </div>
@@ -1133,10 +1133,10 @@ const pageDescription = truncateText(
                   />
                 </div>
                 <div class="p-4">
-                  <p class="eyebrow-label text-[#0e7490] mb-2">{related.category}</p>
-                  <h3 class="title-balance text-sm font-medium text-gray-800 group-hover:text-[#0e7490] transition-colors line-clamp-2">{related.name}</h3>
+                  <p class="eyebrow-label text-[#0d7377] mb-2">{related.category}</p>
+                  <h3 class="title-balance text-sm font-medium text-gray-800 group-hover:text-[#0d7377] transition-colors line-clamp-2">{related.name}</h3>
                   <p class="card-copy mt-2 text-xs text-gray-500">{getRelatedProductCardPrompt(related)}</p>
-                  <span class="mt-3 inline-flex items-center text-sm font-medium text-[#0e7490]">
+                  <span class="mt-3 inline-flex items-center text-sm font-medium text-[#0d7377]">
                     Compare this option
                     <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -1154,7 +1154,7 @@ const pageDescription = truncateText(
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
           <div class="max-w-3xl mb-6">
-            <p class="eyebrow-label text-[#0e7490] mb-2">{faqSectionContent.eyebrow}</p>
+            <p class="eyebrow-label text-[#0d7377] mb-2">{faqSectionContent.eyebrow}</p>
             <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{faqSectionContent.title}</h2>
             <p class="card-copy text-gray-600">{faqSectionContent.description}</p>
           </div>
@@ -1163,7 +1163,7 @@ const pageDescription = truncateText(
               <details class="copy-safe group rounded-2xl border border-gray-200 bg-gray-50 p-5">
                 <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-gray-800">
                   {faq.question}
-                  <span class="text-[#0e7490] transition-transform group-open:rotate-45">+</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45">+</span>
                 </summary>
                 <p class="mt-4 text-gray-600 leading-relaxed">{faq.answer}</p>
               </details>
@@ -1189,8 +1189,8 @@ const pageDescription = truncateText(
       if (newSrc && mainImage) {
         mainImage.src = newSrc;
       }
-      thumbnails.forEach(t => t.classList.remove('border-[#0e7490]'));
-      btn.classList.add('border-[#0e7490]');
+      thumbnails.forEach(t => t.classList.remove('border-[#0d7377]'));
+      btn.classList.add('border-[#0d7377]');
     });
   });
 

@@ -107,7 +107,7 @@ const faqJsonLd = {
           <span>{config.heroEyebrow}</span>
         </nav>
         <div class="max-w-4xl">
-          <p class="eyebrow-label text-[#0e7490] mb-4">{config.heroEyebrow}</p>
+          <p class="eyebrow-label text-[#0d7377] mb-4">{config.heroEyebrow}</p>
           <h1 class="title-balance text-4xl font-bold md:text-6xl">{config.heroTitle}</h1>
           <p class="mt-6 max-w-3xl text-lg text-white/82">{config.heroDescription}</p>
         </div>
@@ -131,7 +131,7 @@ const faqJsonLd = {
       <div class="container mx-auto px-4">
         <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
-            <p class="eyebrow-label text-[#0e7490] mb-2">{config.proofEyebrow}</p>
+            <p class="eyebrow-label text-[#0d7377] mb-2">{config.proofEyebrow}</p>
             <h2 class="title-balance text-3xl font-semibold text-gray-900 mb-4">{config.proofTitle}</h2>
             <p class="card-copy text-gray-600 leading-relaxed">{config.proofDescription}</p>
           </div>
@@ -151,13 +151,13 @@ const faqJsonLd = {
       <div class="container mx-auto px-4">
         <div class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
           <div class="copy-safe rounded-[2rem] border border-gray-200 bg-white p-8">
-            <p class="eyebrow-label text-[#0e7490] mb-2">{config.checklistEyebrow}</p>
+            <p class="eyebrow-label text-[#0d7377] mb-2">{config.checklistEyebrow}</p>
             <h2 class="title-balance text-3xl font-semibold text-gray-900 mb-4">{config.checklistTitle}</h2>
             <p class="card-copy text-gray-600 mb-6">{config.checklistDescription}</p>
             <ul class="space-y-3">
               {config.checklist.map((item) => (
                 <li class="flex items-start gap-3 text-sm leading-relaxed text-gray-700">
-                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0e7490]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0d7377]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
                   <span>{item}</span>
@@ -166,25 +166,25 @@ const faqJsonLd = {
             </ul>
           </div>
 
-          <div class="copy-safe rounded-[2rem] border border-[#0e7490]/15 bg-[#0e7490]/5 p-8">
+          <div class="copy-safe rounded-[2rem] border border-[#0d7377]/15 bg-[#0d7377]/5 p-8">
             <h2 class="title-balance text-2xl font-semibold text-gray-900 mb-4">{config.resourcesTitle}</h2>
             <p class="card-copy text-gray-600 mb-6">{config.resourcesDescription}</p>
             <div class="space-y-3">
               {resourceCards.map((resource) => (
-                <article class="copy-safe rounded-2xl border border-[#0e7490]/15 bg-white p-4 transition-colors hover:border-[#0e7490]">
+                <article class="copy-safe rounded-2xl border border-[#0d7377]/15 bg-white p-4 transition-colors hover:border-[#0d7377]">
                   <a href={resource.href} class="block">
                     <span class="block text-sm font-semibold text-gray-800">{resource.name}</span>
                     <span class="mt-1 block text-sm text-gray-500">{resource.description}</span>
                   </a>
                   <div class="mt-4 flex flex-wrap items-center gap-4">
-                    <a href={resource.href} class="inline-flex items-center text-sm font-semibold text-[#0e7490]">
+                    <a href={resource.href} class="inline-flex items-center text-sm font-semibold text-[#0d7377]">
                       {resource.openLabel}
                       <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                       </svg>
                     </a>
                     {resource.contactAction && (
-                      <a href={resource.contactAction.href} class="text-sm font-medium text-gray-500 transition-colors hover:text-[#0e7490]">
+                      <a href={resource.contactAction.href} class="text-sm font-medium text-gray-500 transition-colors hover:text-[#0d7377]">
                         {resource.contactAction.label}
                       </a>
                     )}
@@ -201,7 +201,7 @@ const faqJsonLd = {
       <div class="container mx-auto px-4">
         <div class="mx-auto max-w-4xl">
           <div class="text-center mb-10">
-            <p class="eyebrow-label text-[#0e7490] mb-2">FAQ</p>
+            <p class="eyebrow-label text-[#0d7377] mb-2">FAQ</p>
             <h2 class="title-balance text-3xl font-semibold text-gray-900">Questions buyers often ask on this topic</h2>
           </div>
           <div class="space-y-4">
@@ -209,7 +209,7 @@ const faqJsonLd = {
               <details class="copy-safe group rounded-2xl border border-gray-200 bg-gray-50 p-6">
                 <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-gray-800">
                   {faq.question}
-                  <span class="text-[#0e7490] transition-transform group-open:rotate-45">+</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45">+</span>
                 </summary>
                 <p class="mt-4 leading-relaxed text-gray-600">{faq.answer}</p>
               </details>
@@ -219,12 +219,12 @@ const faqJsonLd = {
       </div>
     </section>
 
-    <section class="bg-[#0e7490] py-14">
+    <section class="bg-[#0d7377] py-14">
       <div class="container mx-auto px-4 text-center">
         <h2 class="title-balance text-3xl font-bold text-white mb-4">{config.ctaTitle}</h2>
         <p class="mx-auto mb-7 max-w-3xl text-white/90">{config.ctaDescription}</p>
         <div class="flex flex-wrap justify-center gap-4">
-          <a href={evidenceContactHref} class="rounded-lg bg-white px-6 py-3 font-semibold text-[#0e7490] hover:bg-gray-100 transition-colors">
+          <a href={evidenceContactHref} class="rounded-lg bg-white px-6 py-3 font-semibold text-[#0d7377] hover:bg-gray-100 transition-colors">
             {evidenceInquiryLabel}
           </a>
           <a href="/products" class="rounded-lg border border-white px-6 py-3 font-semibold text-white hover:bg-white/10 transition-colors">

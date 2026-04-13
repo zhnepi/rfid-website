@@ -95,7 +95,7 @@ const catalogJsonLd = {
     <section class="bg-gradient-to-br from-slate-950 via-slate-900 to-[#1e293b] py-20">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl text-white">
-          <p class="eyebrow-label eyebrow-label-wide text-[#0e7490]/70 mb-3">Complete RFID Catalog</p>
+          <p class="eyebrow-label eyebrow-label-wide text-[#0d7377]/70 mb-3">Complete RFID Catalog</p>
           <h1 class="title-balance text-4xl md:text-6xl font-semibold">Shortlist products by what you need to tag, carry, mount, or read</h1>
           <p class="card-copy text-white/75 text-lg mt-5 max-w-3xl">
             Use this image-first catalog when you are still comparing form factors and want to move from broad browsing into the right product, category, or inquiry path fast.
@@ -108,7 +108,7 @@ const catalogJsonLd = {
       <div class="container mx-auto px-4">
         <div class="flex flex-wrap gap-3">
           {categoryLinks.map((link) => (
-            <a href={link.href} class="rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:border-[#0e7490] hover:text-[#0e7490] transition-colors">
+            <a href={link.href} class="rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:border-[#0d7377] hover:text-[#0d7377] transition-colors">
               {link.name}
             </a>
           ))}
@@ -120,21 +120,21 @@ const catalogJsonLd = {
       <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-3 gap-6">
           <div class="copy-safe rounded-[1.5rem] border border-gray-200 bg-gray-50 p-6">
-            <p class="eyebrow-label text-[#0e7490] mb-2">Start Here</p>
+            <p class="eyebrow-label text-[#0d7377] mb-2">Start Here</p>
             <h2 class="title-balance text-xl font-semibold text-gray-900 mb-3">Do you already know the product family?</h2>
             <p class="card-copy text-sm text-gray-600 leading-relaxed">
               If yes, jump straight into the category shortcuts above. If not, use the product grid below to compare actual formats before you narrow the shortlist.
             </p>
           </div>
           <div class="copy-safe rounded-[1.5rem] border border-gray-200 bg-gray-50 p-6">
-            <p class="eyebrow-label text-[#0e7490] mb-2">Key Filter</p>
+            <p class="eyebrow-label text-[#0d7377] mb-2">Key Filter</p>
             <h2 class="title-balance text-xl font-semibold text-gray-900 mb-3">What must the product match or survive?</h2>
             <p class="card-copy text-sm text-gray-600 leading-relaxed">
               Reader protocol, metal surfaces, wash cycles, printer setup, outdoor exposure, and visible branding usually narrow the right product much faster than catalog name alone.
             </p>
           </div>
-          <div class="copy-safe rounded-[1.5rem] border border-gray-200 bg-[#0e7490]/5 p-6 border-[#0e7490]/15">
-            <p class="eyebrow-label text-[#0e7490] mb-2">Fast Next Step</p>
+          <div class="copy-safe rounded-[1.5rem] border border-gray-200 bg-[#0d7377]/5 p-6 border-[#0d7377]/15">
+            <p class="eyebrow-label text-[#0d7377] mb-2">Fast Next Step</p>
             <h2 class="title-balance text-xl font-semibold text-gray-900 mb-3">Need a shortlist before sending one inquiry?</h2>
             <p class="card-copy text-sm text-gray-600 leading-relaxed">
               Save the product slugs that look closest, then open the matching category or contact path with the shortlist already in hand.
@@ -159,7 +159,7 @@ const catalogJsonLd = {
                   />
                 </div>
                 <div class="p-4">
-                  <p class="eyebrow-label text-[#0e7490] mb-2">{product.category}</p>
+                  <p class="eyebrow-label text-[#0d7377] mb-2">{product.category}</p>
                   <h3 class="title-balance text-sm md:text-base font-semibold text-gray-900">{product.name}</h3>
                   <p class="mt-2 text-xs font-semibold leading-relaxed text-gray-800 line-clamp-2">{cardQuestion}</p>
                   <p class="card-copy mt-2 text-xs text-gray-500 line-clamp-3">{cardSummary}</p>
@@ -167,7 +167,7 @@ const catalogJsonLd = {
               </a>
               <div class="border-t border-gray-100 px-4 pb-4 pt-3">
                 {topComparison ? (
-                  <a href={`/compare/${topComparison.slug}`} class="block text-xs font-medium text-[#0e7490] transition-colors hover:text-[#155e75] line-clamp-2">
+                  <a href={`/compare/${topComparison.slug}`} class="block text-xs font-medium text-[#0d7377] transition-colors hover:text-[#0a5c5f] line-clamp-2">
                     Compare: {topComparison.name}
                   </a>
                 ) : (

@@ -31,7 +31,7 @@ const remainingComparisonPages = comparisonPagesList.filter((page) => !featuredC
   <div class="container mx-auto px-4">
     <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
       <div class="max-w-2xl">
-        <p class="eyebrow-label mb-2 text-[#0e7490]">{eyebrow}</p>
+        <p class="eyebrow-label mb-2 text-[#0d7377]">{eyebrow}</p>
         <h2 class="title-balance text-3xl font-semibold text-gray-900">{title}</h2>
       </div>
       <p class="card-copy max-w-xl text-gray-600">{description}</p>
@@ -40,7 +40,7 @@ const remainingComparisonPages = comparisonPagesList.filter((page) => !featuredC
     <div class="rounded-[2rem] bg-slate-950 px-7 py-8 text-white">
       <div class="grid gap-8 lg:grid-cols-[0.84fr_1.16fr] lg:items-start">
         <div>
-          <p class="eyebrow-label mb-2 text-[#0e7490]">Top Buyer Comparisons</p>
+          <p class="eyebrow-label mb-2 text-[#0d7377]">Top Buyer Comparisons</p>
           <h3 class="title-balance text-2xl font-semibold">Start with the tradeoffs buyers ask about most before samples are approved</h3>
           <p class="card-copy mt-3 text-white/75">
             Start here if the shortlist is stuck on chip choice, frequency, durability or laundry-tag construction and you want to remove the biggest uncertainty first.
@@ -49,7 +49,7 @@ const remainingComparisonPages = comparisonPagesList.filter((page) => !featuredC
         <div class="grid gap-3 sm:grid-cols-2">
           {featuredComparisonPages.map((page) => (
             <a href={`/compare/${page.slug}`} class="copy-safe rounded-2xl border border-white/10 bg-white/5 px-4 py-4 transition-colors hover:bg-white/10">
-              <span class="eyebrow-label text-[#0e7490]">{page.heroEyebrow}</span>
+              <span class="eyebrow-label text-[#0d7377]">{page.heroEyebrow}</span>
               <span class="title-balance mt-2 block text-base font-semibold text-white">{page.name}</span>
             </a>
           ))}
@@ -59,10 +59,10 @@ const remainingComparisonPages = comparisonPagesList.filter((page) => !featuredC
 
     <div class="mt-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
       <div>
-        <p class="eyebrow-label mb-2 text-[#0e7490]">More Comparison Paths</p>
+        <p class="eyebrow-label mb-2 text-[#0d7377]">More Comparison Paths</p>
         <h3 class="title-balance text-2xl font-semibold text-gray-900">Additional pages for narrower chip, material and credential-format choices</h3>
       </div>
-      <a href="/compare" class="inline-flex items-center text-sm font-semibold text-[#0e7490] transition-colors hover:text-[#155e75]">
+      <a href="/compare" class="inline-flex items-center text-sm font-semibold text-[#0d7377] transition-colors hover:text-[#0a5c5f]">
         View full compare hub
         <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -72,11 +72,11 @@ const remainingComparisonPages = comparisonPagesList.filter((page) => !featuredC
 
     <div class="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
       {remainingComparisonPages.map((page) => (
-        <a href={`/compare/${page.slug}`} class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-6 transition-all hover:border-[#0e7490] hover:shadow-lg">
-          <span class="eyebrow-label text-[#0e7490]">{page.heroEyebrow}</span>
+        <a href={`/compare/${page.slug}`} class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-6 transition-all hover:border-[#0d7377] hover:shadow-lg">
+          <span class="eyebrow-label text-[#0d7377]">{page.heroEyebrow}</span>
           <h3 class="title-balance mt-3 text-2xl font-semibold text-gray-900">{page.name}</h3>
           <p class="mt-3 text-sm leading-relaxed text-gray-600">{page.description}</p>
-          <span class="mt-5 inline-flex items-center text-sm font-semibold text-[#0e7490]">
+          <span class="mt-5 inline-flex items-center text-sm font-semibold text-[#0d7377]">
             Open comparison
             <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
