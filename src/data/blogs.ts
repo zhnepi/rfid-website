@@ -14,38 +14,38 @@ export interface BlogPost {
 }
 
 const blogImageMap: Record<string, string> = {
-  'rfid-types': 'https://images.unsplash.com/photo-1675602488512-bdd631490fcb?w=800&q=80',
-  'mifare-cards': 'https://images.unsplash.com/photo-1706827183359-6b015aaad56c?w=800&q=80',
-  'covid-rfid-laundry': 'https://images.unsplash.com/photo-1648627667032-d02d79b28066?w=800&q=80',
-  'nfc-technology': 'https://images.unsplash.com/photo-1726137570000-70ae29f0ba01?w=800&q=80',
-  'rfid-supply-chain': 'https://images.unsplash.com/photo-1592228533283-d78f7c1cf453?w=800&q=80',
-  'rfid-frequency-guide': 'https://images.unsplash.com/photo-1747304349412-2e11b9b7d412?w=800&q=80',
-  'mifare-classic-vs-desfire': 'https://images.unsplash.com/photo-1726066012632-717de8552f16?w=800&q=80',
-  'rfid-vs-barcode': 'https://images.unsplash.com/photo-1580810734868-7ea4e9130c01?w=800&q=80',
-  'nfc-tags-business-use-cases': 'https://images.unsplash.com/photo-1726064855757-ac8720008fe0?w=800&q=80',
-  'how-to-order-rfid-cards-from-china': 'https://images.unsplash.com/photo-1716643863806-989dd76ae093?w=800&q=80',
-  'hotel-key-card-rfid-guide': 'https://images.unsplash.com/photo-1593908521791-b5b4993bf477?w=800&q=80',
-  'laundry-rfid-tags-buying-guide': 'https://images.unsplash.com/photo-1663068307522-1731d9c8fbc2?w=800&q=80',
-  'anti-metal-rfid-tags-guide': 'https://images.unsplash.com/photo-1762163516269-3c143e04175c?w=800&q=80',
-  'rfid-labels-vs-hard-tags': 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80',
-  'rfid-wristbands-for-events-and-hotels': 'https://images.unsplash.com/photo-1755152825416-a7b660d3bf1c?w=800&q=80',
-  'how-to-choose-rfid-readers-and-writers': 'https://images.unsplash.com/photo-1750263160599-53c7974bc79d?w=800&q=80',
-  'rfid-keyfob-buying-guide': 'https://images.unsplash.com/photo-1677951570313-b0750351c461?w=800&q=80',
-  'hf-vs-uhf-rfid-guide': 'https://images.unsplash.com/photo-1728426340279-9962ac86f5e7?w=800&q=80',
-  'rfid-retail-inventory-guide': 'https://images.unsplash.com/photo-1637228393246-c38a4b3d2011?w=800&q=80',
-  'rfid-access-control-cards-guide': 'https://images.unsplash.com/photo-1467733238130-bb6846885316?w=800&q=80',
-  'digital-product-passport-nfc-rfid-guide': 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80',
-  'nfc-anti-counterfeit-tags-guide': 'https://images.unsplash.com/photo-1702865053958-71ec751c4118?w=800&q=80',
-  'rfid-baggage-tracking-airports-guide': 'https://images.unsplash.com/photo-1602650366345-a98dafb4c913?w=800&q=80',
-  'rfid-fresh-food-retail-guide': 'https://images.unsplash.com/photo-1642889366268-1fd09fa3c5ba?w=800&q=80',
-  'qr-vs-nfc-vs-rfid-dpp-guide': 'https://images.unsplash.com/photo-1706759755767-526cdaa02109?w=800&q=80',
-  'medical-device-rfid-udi-guide': 'https://images.unsplash.com/photo-1605654580413-5a7f24649936?w=800&q=80',
-  'rfid-returns-reverse-logistics-guide': 'https://images.unsplash.com/photo-1686632800715-b705ba1b0eb6?w=800&q=80',
-  'battery-passport-rfid-nfc-guide': 'https://images.unsplash.com/photo-1672542128826-5f0d578713d2?w=800&q=80',
-  'sunrise-2027-2d-barcodes-vs-rfid-guide': 'https://images.unsplash.com/photo-1726255294277-57c46883bd94?w=800&q=80',
-  'fsma-204-rfid-food-traceability-guide': 'https://images.unsplash.com/photo-1651525670114-2b8117390b28?w=800&q=80',
-  'dscsa-rfid-pharma-traceability-guide': 'https://images.unsplash.com/photo-1577401132921-cb39bb0adcff?w=800&q=80',
-  'textile-dpp-qr-nfc-rfid-guide': 'https://images.unsplash.com/photo-1632421378043-97b7bfe4b015?w=800&q=80',
+  'rfid-types': '/images/products/Pallet-RFID-tag.webp',
+  'mifare-cards': '/images/hero/smart-card-banner.webp',
+  'covid-rfid-laundry': '/images/products/laundry-tag-rfid.webp',
+  'nfc-technology': '/images/products/nfc-sticker.webp',
+  'rfid-supply-chain': '/images/products/Pallet-RFID-tag.webp',
+  'rfid-frequency-guide': '/images/products/rfid-card-inlay.webp',
+  'mifare-classic-vs-desfire': '/images/products/NFC-epoxy-card.webp',
+  'rfid-vs-barcode': '/images/products/UHF-sticker-500x500.webp',
+  'nfc-tags-business-use-cases': '/images/products/NFC-coin.webp',
+  'how-to-order-rfid-cards-from-china': '/images/products/RFID-wood-card.webp',
+  'hotel-key-card-rfid-guide': '/images/hero/smart-card-banner.webp',
+  'laundry-rfid-tags-buying-guide': '/images/products/Silicone-laundry-tag.webp',
+  'anti-metal-rfid-tags-guide': '/images/products/Printable-RFID-metal-tag.webp',
+  'rfid-labels-vs-hard-tags': '/images/products/UHF-sticker-500x500.webp',
+  'rfid-wristbands-for-events-and-hotels': '/images/hero/wristband-banner.webp',
+  'how-to-choose-rfid-readers-and-writers': '/images/products/RFID_reader_writer.webp',
+  'rfid-keyfob-buying-guide': '/images/products/PROUDTEK-RFID-KEYFOB.webp',
+  'hf-vs-uhf-rfid-guide': '/images/products/rfid-card-inlay.webp',
+  'rfid-retail-inventory-guide': '/images/products/UHF-sticker-500x500.webp',
+  'rfid-access-control-cards-guide': '/images/hero/smart-card-banner.webp',
+  'digital-product-passport-nfc-rfid-guide': '/images/products/nfc-sticker.webp',
+  'nfc-anti-counterfeit-tags-guide': '/images/products/NFC-coin.webp',
+  'rfid-baggage-tracking-airports-guide': '/images/products/UHF-sticker-500x500.webp',
+  'rfid-fresh-food-retail-guide': '/images/products/UHF-sticker-500x500.webp',
+  'qr-vs-nfc-vs-rfid-dpp-guide': '/images/products/nfc-sticker.webp',
+  'medical-device-rfid-udi-guide': '/images/products/RFID-Clear-tag.webp',
+  'rfid-returns-reverse-logistics-guide': '/images/products/Pallet-RFID-tag.webp',
+  'battery-passport-rfid-nfc-guide': '/images/products/NFC-coin.webp',
+  'sunrise-2027-2d-barcodes-vs-rfid-guide': '/images/products/UHF-sticker-500x500.webp',
+  'fsma-204-rfid-food-traceability-guide': '/images/products/UHF-sticker-500x500.webp',
+  'dscsa-rfid-pharma-traceability-guide': '/images/products/RFID-Clear-tag.webp',
+  'textile-dpp-qr-nfc-rfid-guide': '/images/products/textile-RFID-laundry-tag-heat-seal.webp',
 };
 
 const rawBlogPosts: BlogPost[] = [
@@ -55,7 +55,7 @@ const rawBlogPosts: BlogPost[] = [
     category: 'RFID APPLICATIONS',
     date: 'July 30, 2022',
     excerpt: 'RFID (Radio Frequency Identification) technology has revolutionized the way we track and identify objects. In this article, we explore the fundamentals of RFID and the seven most common types of RFID tags used in various industries.',
-    image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80',
+    image: '/images/products/Pallet-RFID-tag.webp',
     metaDescription: 'Learn about RFID technology and discover 7 types of regular RFID tags including passive tags, active tags, semi-passive tags, and more. Complete guide from ProudTek.',
     keywords: 'RFID tags types, RFID technology, passive RFID tag, active RFID tag, RFID guide',
     content: `
@@ -214,7 +214,7 @@ const rawBlogPosts: BlogPost[] = [
     category: 'RFID APPLICATIONS',
     date: 'August 24, 2014',
     excerpt: 'Mifare is one of the most widely used contactless smart card technologies in the world. Learn about Mifare Classic, Mifare Plus, Mifare DESFire, and other variants in the Mifare family.',
-    image: 'https://images.unsplash.com/photo-1706827183359-6b015aaad56c?w=800&q=80',
+    image: '/images/hero/smart-card-banner.webp',
     metaDescription: 'Complete guide to Mifare chip cards: Mifare Classic 1K/4K, Mifare Plus, Mifare DESFire EV2/EV3. Compare features, security levels, and applications. ProudTek manufacturer.',
     keywords: 'Mifare Classic, Mifare Plus, Mifare DESFire, NXP Mifare, contactless smart card, Mifare chip',
     content: `
@@ -344,7 +344,7 @@ const rawBlogPosts: BlogPost[] = [
     category: 'RFID APPLICATIONS',
     date: 'May 11, 2020',
     excerpt: 'The COVID-19 pandemic has significantly impacted various industries, including the RFID laundry sector. Discover how the industry has adapted and the new opportunities that have emerged.',
-    image: 'https://images.unsplash.com/photo-1508175800969-525c72a047dd?w=800&q=80',
+    image: '/images/products/laundry-tag-rfid.webp',
     metaDescription: 'How COVID-19 changed the RFID laundry industry. Explore new hygiene tracking requirements, automated laundry management, and RFID laundry tag solutions from ProudTek.',
     keywords: 'RFID laundry, COVID-19 RFID, laundry tracking, RFID laundry tag, hospital laundry RFID, textile tracking',
     content: `
@@ -441,7 +441,7 @@ const rawBlogPosts: BlogPost[] = [
     category: 'RFID TECHNOLOGY',
     date: 'March 15, 2022',
     excerpt: 'Near Field Communication (NFC) is a subset of RFID technology that enables short-range wireless communication. Explore the various applications of NFC in modern life.',
-    image: 'https://images.unsplash.com/photo-1726137570000-70ae29f0ba01?w=800&q=80',
+    image: '/images/products/nfc-sticker.webp',
     metaDescription: 'Complete guide to NFC technology: how NFC works, NFC vs RFID, applications in payments, access control, marketing. NFC tags and cards from ProudTek.',
     keywords: 'NFC technology, NFC tag, NFC card, NFC applications, NFC vs RFID, near field communication, contactless technology',
     content: `
@@ -593,7 +593,7 @@ const rawBlogPosts: BlogPost[] = [
     category: 'RFID APPLICATIONS',
     date: 'January 20, 2022',
     excerpt: 'RFID technology has transformed supply chain management by providing real-time visibility and tracking capabilities. Learn how businesses are leveraging RFID for better efficiency.',
-    image: 'https://images.unsplash.com/photo-1592228533283-d78f7c1cf453?w=800&q=80',
+    image: '/images/products/Pallet-RFID-tag.webp',
     metaDescription: 'How RFID technology transforms supply chain management: real-time tracking, inventory accuracy, warehouse automation. RFID solutions for logistics from ProudTek.',
     keywords: 'RFID supply chain, RFID inventory management, RFID logistics, RFID warehouse, RFID tracking, supply chain RFID',
     content: `
@@ -658,7 +658,7 @@ const rawBlogPosts: BlogPost[] = [
       <p>RFID systems provide continuous, real-time visibility into inventory levels and locations. Fixed <a href="/product/rfid-reader-writer" style="color:#0e7490; font-weight:500;">RFID readers</a> at key points in the supply chain automatically track items as they move through receiving docks, storage areas, and shipping bays.</p>
 
       <h3>Improved Accuracy</h3>
-      <p>Traditional manual counting and barcode scanning achieve inventory accuracy rates of 65-75%. RFID-enabled systems consistently achieve accuracy rates above 95%, significantly reducing stockouts, overstock situations, and lost items.</p>
+      <p>In high-SKU warehouse environments, traditional manual counting and barcode scanning often achieve inventory accuracy rates of only 65–75% (<a href="https://www.gs1.org/" target="_blank" rel="noopener noreferrer" style="color:#0e7490; font-weight:500;">GS1 industry benchmarks</a>). RFID-enabled systems consistently achieve accuracy rates above 95%, significantly reducing stockouts, overstock situations, and lost items.</p>
 
       <h3>Faster Processing</h3>
       <p>RFID readers can scan multiple tags simultaneously. A pallet of 100 tagged items can be inventoried in seconds, compared to minutes with barcode scanning. This speed improvement is critical for high-volume distribution centers and cross-docking operations.</p>
@@ -713,7 +713,7 @@ const rawBlogPosts: BlogPost[] = [
     category: 'RFID TECHNOLOGY',
     date: 'November 5, 2021',
     excerpt: 'Different RFID frequencies offer different advantages. This guide helps you understand LF, HF, and UHF RFID and choose the right frequency for your specific application.',
-    image: 'https://images.unsplash.com/photo-1696096415886-9f6b73aeb816?w=800&q=80',
+    image: '/images/products/rfid-card-inlay.webp',
     metaDescription: 'Guide to RFID frequencies: LF (125kHz), HF (13.56MHz), UHF (860-960MHz). Compare read ranges, applications, and choose the right RFID frequency. ProudTek expert guide.',
     keywords: 'RFID frequency, LF RFID, HF RFID, UHF RFID, RFID frequency guide, 125kHz RFID, 13.56MHz RFID, 860-960MHz RFID',
     content: `
@@ -838,7 +838,7 @@ const rawBlogPosts: BlogPost[] = [
     category: 'RFID TECHNOLOGY',
     date: 'February 18, 2026',
     excerpt: 'A detailed comparison of Mifare Classic and Mifare DESFire RFID chips covering security, memory, performance, cost, and ideal use cases to help you make the right choice.',
-    image: 'https://images.unsplash.com/photo-1421749810611-438cc492b581?w=800&q=80',
+    image: '/images/products/NFC-epoxy-card.webp',
     metaDescription: 'Mifare Classic vs DESFire EV3: compare security levels, memory capacity, encryption standards, pricing, and best applications. Expert buying guide from ProudTek RFID manufacturer.',
     keywords: 'Mifare Classic vs DESFire, DESFire EV3, Mifare comparison, RFID chip selection, NXP Mifare, contactless smart card security',
     content: `
@@ -1005,13 +1005,13 @@ const rawBlogPosts: BlogPost[] = [
     category: 'RFID TECHNOLOGY',
     date: 'January 10, 2026',
     excerpt: 'An in-depth comparison of RFID and barcode technologies covering speed, accuracy, cost, durability, and ROI to help businesses choose the right identification system.',
-    image: 'https://images.unsplash.com/photo-1507499739999-097706ad8914?w=800&q=80',
+    image: '/images/products/UHF-sticker-500x500.webp',
     metaDescription: 'RFID vs Barcode comparison: speed, accuracy, cost, ROI analysis. Learn when to use RFID tags vs barcodes for inventory management, retail, and supply chain. ProudTek guide.',
     keywords: 'RFID vs barcode, RFID barcode comparison, RFID advantages, barcode alternative, inventory tracking technology, RFID ROI',
     content: `
       <h2>RFID vs Barcode: The Core Differences</h2>
       <p>Barcodes and RFID are both automatic identification technologies, but they work on fundamentally different principles. Barcodes use optical scanning to read printed patterns of lines or dots, while RFID uses radio waves to communicate with electronic tags. This fundamental difference drives all the practical advantages and limitations of each technology.</p>
-      <p>According to industry research, the global RFID market reached $14.5 billion in 2024 and is projected to grow at 10.2% CAGR through 2030, largely driven by businesses transitioning from barcode-only systems to RFID or hybrid solutions.</p>
+      <p>According to <a href="https://www.grandviewresearch.com/industry-analysis/rfid-market" target="_blank" rel="noopener noreferrer" style="color:#0e7490; font-weight:500;">Grand View Research (2024)</a>, the global RFID market reached an estimated $14.5 billion in 2024 and is projected to grow at roughly 10% CAGR through 2030, largely driven by businesses transitioning from barcode-only systems to RFID or hybrid solutions.</p>
 
       <h2>Speed and Efficiency</h2>
       <h3>Barcode Scanning</h3>
@@ -1127,7 +1127,7 @@ const rawBlogPosts: BlogPost[] = [
     category: 'RFID APPLICATIONS',
     date: 'March 5, 2026',
     excerpt: 'Discover 10 innovative ways businesses are using NFC tags in 2026 to boost customer engagement, streamline operations, and drive revenue growth.',
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80',
+    image: '/images/products/NFC-coin.webp',
     metaDescription: 'Top 10 NFC tag business applications in 2026: smart packaging, digital business cards, product authentication, customer engagement. NFC solutions from ProudTek.',
     keywords: 'NFC tags business, NFC marketing, NFC product authentication, NFC smart packaging, NFC business cards, NFC use cases 2026',
     content: `
@@ -1185,7 +1185,7 @@ const rawBlogPosts: BlogPost[] = [
     category: 'RFID APPLICATIONS',
     date: 'December 20, 2025',
     excerpt: 'A step-by-step guide for international buyers on how to source custom RFID cards from Chinese manufacturers, covering specifications, MOQ, quality control, shipping, and payment.',
-    image: 'https://images.unsplash.com/photo-1604505081505-70843ad5845f?w=800&q=80',
+    image: '/images/products/RFID-wood-card.webp',
     metaDescription: 'Step-by-step guide to ordering custom RFID cards from China: how to choose a manufacturer, specify requirements, negotiate pricing, ensure quality, and arrange shipping.',
     keywords: 'order RFID cards China, RFID card manufacturer China, custom RFID cards, import RFID cards, RFID supplier Shenzhen, buy RFID cards wholesale',
     content: `
@@ -1326,7 +1326,7 @@ const rawBlogPosts: BlogPost[] = [
       </div>
 
       <h2>Ready to Order?</h2>
-      <p>ProudTek simplifies the RFID card sourcing process with transparent pricing, free samples, dedicated project management, and reliable quality. With 15+ years of manufacturing experience and shipments to 50+ countries, we understand the needs of international buyers.</p>
+      <p>ProudTek simplifies the RFID card sourcing process with transparent pricing, free samples, dedicated project management, and reliable quality. Manufacturing since 2008 and shipping to buyers across six continents, we understand the needs of international buyers.</p>
       <p>Browse our <a href="/product/rfid-cards" style="color:#0e7490; font-weight:500;">RFID smart cards</a>, <a href="/product/rfid-paper-card" style="color:#0e7490; font-weight:500;">RFID paper cards</a>, or <a href="/product/nfc-epoxy-card" style="color:#0e7490; font-weight:500;">NFC epoxy cards</a>. <a href="/contact" style="color:#0e7490; font-weight:500;">Contact us</a> via WhatsApp or email to start your order today. You can also review our <a href="/sample-policy" style="color:#0e7490; font-weight:500;">sample policy</a> and <a href="/shipping-and-incoterms" style="color:#0e7490; font-weight:500;">shipping terms</a> before placing an order.</p>
     `,
   },
@@ -2119,7 +2119,7 @@ const rawBlogPosts: BlogPost[] = [
     keywords: 'RFID retail inventory, UHF RFID retail, RFID stock accuracy, retail RFID tags, item-level RFID tagging, RFID stockout reduction',
     content: `
       <h2>Why RFID is replacing barcode-only inventory in retail</h2>
-      <p>Traditional <a href="/blogs/rfid-vs-barcode">barcode systems</a> achieve 65-75% inventory accuracy in a typical store. That gap between system stock and actual shelf stock is the leading cause of out-of-stocks, missed sales and poor omnichannel fulfilment. UHF RFID closes this gap by enabling fast, non-line-of-sight scanning that consistently delivers 95-99% accuracy.</p>
+      <p>Traditional <a href="/blogs/rfid-vs-barcode">barcode systems</a> achieve roughly 65–75% inventory accuracy in a typical high-SKU store environment. That gap between system stock and actual shelf stock is the leading cause of out-of-stocks, missed sales and poor omnichannel fulfilment. UHF RFID closes this gap by enabling fast, non-line-of-sight scanning that consistently delivers 95-99% accuracy.</p>
       <p>Major retailers including Zara (Inditex), Nike, Macy's, Decathlon and Uniqlo have adopted item-level RFID tagging across their operations, and the trend is accelerating into 2026.</p>
 
       <h2>How retail RFID works in practice</h2>

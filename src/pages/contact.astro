@@ -134,14 +134,14 @@ const breadcrumbJsonLd = {
     <!-- Hero Section -->
     <section class="brand-hero-band py-16 md:py-20">
       <div class="absolute inset-0 opacity-60">
-        <div class="absolute top-10 left-10 w-32 h-32 rounded-full border border-[#0d7377]/18"></div>
+        <div class="absolute top-10 left-10 w-32 h-32 rounded-full border border-[#0e7490]/18"></div>
         <div class="absolute bottom-10 right-10 w-48 h-48 rounded-full border border-white/10"></div>
-        <div class="absolute top-1/2 left-1/3 w-20 h-20 rounded-full border border-[#0d7377]/20"></div>
+        <div class="absolute top-1/2 left-1/3 w-20 h-20 rounded-full border border-[#0891b2]/20"></div>
       </div>
       <div class="container mx-auto px-4 relative z-10">
         <div class="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
           <div class="copy-safe">
-            <p id="contactHeroEyebrow" class="eyebrow-label mb-3 text-[#0d7377]">{defaultContactTheme.heroEyebrow}</p>
+            <p id="contactHeroEyebrow" class="eyebrow-label mb-3 text-[#0891b2]">{defaultContactTheme.heroEyebrow}</p>
             <h1 id="contactHeroTitle" class="title-balance text-4xl font-bold text-white md:text-5xl lg:text-6xl">{defaultContactTheme.heroTitle}</h1>
             <p id="contactHeroCopy" class="card-copy mt-4 max-w-2xl text-base text-white/72 md:text-lg">{defaultContactTheme.heroCopy}</p>
 
@@ -169,7 +169,7 @@ const breadcrumbJsonLd = {
                 href={defaultEmailHref}
                 class="cta-secondary-dark normal-case tracking-normal text-sm"
               >
-                <svg class="w-5 h-5 text-[#0d7377]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-[#0e7490]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
                 <span id="quickEmailLabel">Email your inquiry</span>
@@ -182,7 +182,7 @@ const breadcrumbJsonLd = {
           </div>
 
           <div class="brand-panel-dark copy-safe p-6 md:p-7">
-            <p class="eyebrow-label text-[#0d7377]">Best Results</p>
+            <p class="eyebrow-label text-[#0e7490]">Best Results</p>
             <h2 class="title-balance mt-3 text-2xl font-semibold text-white">One useful inquiry beats three back-and-forth emails</h2>
             <p class="card-copy mt-3 text-sm text-white/72">
               The fastest path is to send the product family, reader or chip requirement, quantity range, and any print or encoding needs in one message.
@@ -202,10 +202,10 @@ const breadcrumbJsonLd = {
         <div class="grid gap-8 xl:grid-cols-[1.16fr_0.84fr]">
           <div>
             <div class="max-w-2xl">
-              <p class="eyebrow-label text-[#0d7377] mb-2">Inquiry Paths</p>
+              <p class="eyebrow-label text-[#0e7490] mb-2">Inquiry Paths</p>
               <h2 class="title-balance text-3xl font-bold text-gray-900">Choose the path that matches what still needs to be confirmed</h2>
               <p class="card-copy mt-4 text-gray-600">
-                Most buyers only need one route: samples, OEM customization, compatibility, or repeat procurement.
+                Most buyers only need one route. Pick the one that matches, and it will pre-fill the form below.
               </p>
             </div>
             <div class="mt-8 grid gap-5 md:grid-cols-2">
@@ -224,9 +224,9 @@ const breadcrumbJsonLd = {
             </div>
           </div>
 
-          <aside class="brand-panel-dark copy-safe p-6 md:p-7">
-            <p class="eyebrow-label text-[#0d7377]">Still Comparing?</p>
-            <h2 class="title-balance mt-3 text-2xl font-semibold text-white">Use one comparison route when two close options are still on the table</h2>
+          <aside class="brand-panel-dark copy-safe p-6 md:p-7 hidden xl:block">
+            <p class="eyebrow-label text-[#0e7490]">Still Comparing?</p>
+            <h2 class="title-balance mt-3 text-2xl font-semibold text-white">Use a comparison route when two close options are still on the table</h2>
             <p class="card-copy mt-3 text-sm text-white/72">
               This is the better path when you are not ready to choose one format, chip, or frequency direction yet.
             </p>
@@ -260,13 +260,13 @@ const breadcrumbJsonLd = {
               <p id="contactFormHelp" class="text-xs text-gray-500 mb-6">The more specific the inquiry, the faster we can match the right product path.</p>
 
               <div id="inquiryContextBanner" class="brand-panel-soft hidden mb-6 p-5">
-                <p id="inquiryContextEyebrow" class="eyebrow-label text-[#0d7377] mb-2">Inquiry Context Loaded</p>
+                <p id="inquiryContextEyebrow" class="eyebrow-label text-[#0e7490] mb-2">Inquiry Context Loaded</p>
                 <h3 id="inquiryContextTitle" class="title-balance text-xl font-semibold text-gray-900">Inquiry context ready</h3>
                 <p id="inquiryContextCopy" class="card-copy mt-2 text-sm text-gray-600"></p>
               </div>
 
               <div id="contactPromptCard" class="brand-panel-soft mb-6 p-5">
-                <p id="contactPromptEyebrow" class="eyebrow-label text-[#0d7377] mb-2">{defaultContactTheme.promptEyebrow}</p>
+                <p id="contactPromptEyebrow" class="eyebrow-label text-[#0e7490] mb-2">{defaultContactTheme.promptEyebrow}</p>
                 <h3 id="contactPromptTitle" class="title-balance text-xl font-semibold text-gray-900">{defaultContactTheme.promptTitle}</h3>
                 <p id="contactPromptCopy" class="card-copy mt-2 text-sm text-gray-600">{defaultContactTheme.promptCopy}</p>
                 <div id="contactPromptList" class="mt-4 flex flex-wrap gap-2">
@@ -480,7 +480,7 @@ const breadcrumbJsonLd = {
               <div id="draftPanel" class="brand-panel-soft hidden mt-6 p-6">
                 <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                   <div class="max-w-2xl">
-                    <p class="eyebrow-label text-[#0d7377] mb-2">Draft Support</p>
+                    <p class="eyebrow-label text-[#0e7490] mb-2">Draft Support</p>
                     <h3 class="title-balance text-xl font-semibold text-gray-900">Use this backup if the live submission is temporarily unavailable</h3>
                     <p class="mt-2 text-sm text-gray-600">Your inquiry details stay here as a fallback draft. You can reopen it in email, copy it, or continue on WhatsApp with the same information.</p>
                   </div>
@@ -525,7 +525,7 @@ const breadcrumbJsonLd = {
 
               <noscript>
                 <div class="brand-panel-soft mt-6 p-5 text-sm text-gray-700">
-                  JavaScript is turned off. This form can still be submitted normally. If you prefer, email <a class="font-semibold text-gray-900 underline decoration-[#0d7377]/40 underline-offset-4" href="mailto:info@proudtek.com">info@proudtek.com</a> or continue on <a class="font-semibold text-gray-900 underline decoration-[#0d7377]/40 underline-offset-4" href={defaultWhatsAppHref}>WhatsApp</a>.
+                  JavaScript is turned off. This form can still be submitted normally. If you prefer, email <a class="font-semibold text-gray-900 underline decoration-[#0e7490]/40 underline-offset-4" href="mailto:info@proudtek.com">info@proudtek.com</a> or continue on <a class="font-semibold text-gray-900 underline decoration-[#0e7490]/40 underline-offset-4" href={defaultWhatsAppHref}>WhatsApp</a>.
                 </div>
               </noscript>
             </div>
@@ -541,7 +541,7 @@ const breadcrumbJsonLd = {
             <div class="space-y-5">
               {contactInfo.map((info) => (
                 <div class="copy-safe flex items-start gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                  <div class="text-[#0d7377] flex-shrink-0 mt-0.5 bg-[#0d7377]/5 p-2 rounded-lg" set:html={info.icon}></div>
+                  <div class="text-[#0e7490] flex-shrink-0 mt-0.5 bg-[#0e7490]/5 p-2 rounded-lg" set:html={info.icon}></div>
                   <div>
                     <h3 class="font-semibold text-gray-800 text-sm uppercase tracking-wide">{info.title}</h3>
                     <p class="text-gray-600 mt-0.5">{info.content}</p>
@@ -553,7 +553,7 @@ const breadcrumbJsonLd = {
             <!-- Business Hours -->
               <div class="brand-panel-soft copy-safe mt-8 p-5">
               <h3 class="font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                <svg class="w-5 h-5 text-[#0d7377]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-[#0e7490]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 Business Hours (China Standard Time)
@@ -566,7 +566,7 @@ const breadcrumbJsonLd = {
             </div>
 
             <div class="brand-panel-soft copy-safe mt-8 p-6">
-              <p class="eyebrow-label text-[#0d7377] mb-2">Need Proof First?</p>
+              <p class="eyebrow-label text-[#0e7490] mb-2">Need Proof First?</p>
               <h3 class="title-balance text-2xl font-semibold text-gray-900 mb-4">Review supplier evidence before you send the inquiry</h3>
               <div class="space-y-3">
                 {evidenceLinks.map((link) => (

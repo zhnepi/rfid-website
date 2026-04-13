@@ -41,7 +41,7 @@ const organizationJsonLd = {
     "width": 512,
     "height": 512
   },
-  "description": "ProudTek is a professional RFID manufacturer established in 2008 in Shenzhen, China. We specialize in RFID cards, smart cards, RFID tags, wristbands, keyfobs, and readers, serving over 108 clients across 50+ countries with a 99% on-time delivery rate.",
+  "description": "ProudTek is a professional RFID manufacturer established in 2008 in Shenzhen, China. We specialize in RFID cards, smart cards, RFID tags, wristbands, keyfobs, and readers, serving over 108 clients across 50+ countries.",
   "foundingDate": "2008",
   "numberOfEmployees": {
     "@type": "QuantitativeValue",
@@ -93,12 +93,6 @@ const organizationJsonLd = {
       { "@type": "OfferCatalog", "name": "RFID Readers", "url": `${siteURL}/category/rfid-readers` }
     ]
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "108",
-    "bestRating": "5"
-  },
   "knowsAbout": [
     "RFID Technology",
     "NFC Technology",
@@ -109,7 +103,11 @@ const organizationJsonLd = {
     "Supply Chain RFID Solutions"
   ],
   "iso6523Code": "ISO9001:2015",
-  "award": "ISO9001, ISO14001, SGS Certified RFID Manufacturer"
+  "hasCredential": [
+    { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "ISO 9001:2015" },
+    { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "ISO 14001" },
+    { "@type": "EducationalOccupationalCredential", "credentialCategory": "verification", "name": "SGS Verified Supplier" }
+  ]
 };
 
 const websiteJsonLd = {

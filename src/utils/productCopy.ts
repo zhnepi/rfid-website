@@ -146,7 +146,34 @@ function getProductCopyProfile(product: Product): ProductCopyProfile {
     };
   }
 
-  if (inCategory('RFID Cards') || matches('card', 'inlay', 'clamshell', 'prelam')) {
+  if (matches('wood')) {
+    return {
+      question: 'Looking for a premium tactile finish with full RFID capability?',
+      summary: 'A fit for brands, hotels, and events that want an eco-friendly or premium card feel — available in bamboo, walnut, and custom wood types.',
+      intro:
+        'Use this card when the project calls for a distinctive look and tactile finish that sets the credential apart. Confirm wood type, print compatibility, and chip selection before samples are approved.',
+    };
+  }
+
+  if (matches('paper')) {
+    return {
+      question: 'Need a low-cost or recyclable RFID card for high-volume use?',
+      summary: 'A fit for events, transit tickets, and short-lifecycle projects where cost per unit and recyclability matter most.',
+      intro:
+        'Use this card when per-unit cost, disposal, or recyclability drives the format decision more than durability. Confirm paper stock weight, print method, and chip choice before sampling.',
+    };
+  }
+
+  if (matches('clamshell')) {
+    return {
+      question: 'Need a thicker, more durable card for rough-use environments?',
+      summary: 'A fit for factories, construction sites, and high-wear access control where a standard PVC card would not survive daily handling.',
+      intro:
+        'Use this clamshell card when the credential needs to survive drops, outdoor weather, or rough daily handling. Confirm reader compatibility, print area, and slot-punch requirements before production.',
+    };
+  }
+
+  if (inCategory('RFID Cards') || matches('card', 'inlay', 'prelam')) {
     return {
       question: 'Need a credential that must match an installed reader or hotel lock?',
       summary: 'A fit for access control, hotel keys, ticketing, and projects that start from reader matching or card production.',
