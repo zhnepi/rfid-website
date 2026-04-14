@@ -1,7 +1,4 @@
 ---
-import { solutionPages } from '../data/solutions';
-import { getSolutionComparisonLinks } from '../utils/comparisons';
-
 const applications = [
   {
     name: 'Access Control',
@@ -33,14 +30,7 @@ const applications = [
     image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&q=80',
     href: '/category/rfid-tags',
   },
-].map((application) => {
-  const solutionPage = solutionPages[application.solutionSlug];
-
-  return {
-    ...application,
-    topComparison: solutionPage ? getSolutionComparisonLinks(application.solutionSlug, solutionPage.productSlugs, 1)[0] : undefined,
-  };
-});
+];
 ---
 
 <section class="py-20 bg-white">

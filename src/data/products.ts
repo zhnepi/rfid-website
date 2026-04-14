@@ -335,7 +335,7 @@ export const products: Product[] = [
       "Military and defense — identify weapons, vehicles, and metal equipment"
     ],
     specifications: {"Product Name":"UHF Ceramic Tag","Housing Material":"Ceramic","Color":"Black","Compliance":"ISO/IEC18000-6C, EPC Class 1, Gen 2","Chip":"M4QT","Frequency":"US: 902~928MHz, EU: 866~868MHz","Waterproof level":"IP68","Working Temperature":"-40 ~ 85 ℃","Storage Temperature":"-40 ~ 150℃","Installing Method":"self-adhesive","Application":"apply to the surface of metal items"},
-    images: ["/images/products/UHF-Ceramic-Tag.webp"],
+    images: ["/images/products/UHF-Ceramic-Tag.jpg"],
     category: "RFID Tags",
     slug: "rfid-ceramic-tag"
   },

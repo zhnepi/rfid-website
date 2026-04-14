@@ -1,5 +1,11 @@
 ---
-import CategoryLandingPage from '../../components/CategoryLandingPage.astro';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { products } from '../../data/products';
+
+const categoryName = 'RFID Tags';
+const categoryProducts = products.filter(p => p.category === categoryName);
 ---
 
 <Layout

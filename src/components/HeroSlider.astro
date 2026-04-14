@@ -1,73 +1,49 @@
 ---
-import { getCategoryContactHref, getSolutionContactHref } from '../utils/contact';
-
 const slides = [
   {
     id: 'smart-cards',
-    eyebrow: 'RFID Card Manufacturer Since 2008',
-    title: 'RFID Cards for Transit, Hotels, Access Control, and Cashless Programs',
-    description: 'Factory-direct RFID cards, inlays, and printed credentials with stable chip supply, OEM customization, and repeatable bulk production.',
+    title: 'Smart Card Manufacturer',
+    subtitle: 'We supply',
+    description: 'smart cards and security.',
     image: '/images/hero/smart-card-banner.webp',
-    primaryCta: { href: '/category/rfid-cards', label: 'Explore Card Formats' },
-    secondaryCta: {
-      href: getCategoryContactHref({ key: 'rfid-cards', slug: 'rfid-cards', categoryName: 'RFID Cards' }),
-      label: 'Request Card Matching',
-    },
-    highlights: ['PVC, PET, ABS, paper, and wood', 'LF, HF, and UHF chip options'],
     tabTitle: 'SMART CARDS',
-    tabDescription: 'Transit cards, hotel cards, access badges, membership cards, and NFC credentials.',
+    tabDescription: 'We Produce and supply smart cards for public transportation, school, hospital, airport, and public buildings.',
   },
   {
     id: 'laundry-tag',
-    eyebrow: 'Industrial Laundry RFID',
-    title: 'RFID Laundry Tags for High Heat, Washing, and Bulk Reading',
-    description: 'Textile, silicone, and PPS laundry tags for linens, uniforms, towels, and garments in industrial laundry workflows.',
+    title: 'Laundry Management',
+    subtitle: 'We supply',
+    description: 'RFID laundry tag and efficiency.',
     image: '/images/hero/laundry-banner.webp',
-    primaryCta: { href: '/solutions/laundry-linen-rfid', label: 'Compare Laundry Formats' },
-    secondaryCta: { href: getSolutionContactHref('laundry-linen-rfid'), label: 'Plan Laundry Samples' },
-    highlights: ['200+ wash cycles', 'Heat-seal or sew-on installation'],
-    tabTitle: 'RFID LAUNDRY TAGS',
-    tabDescription: 'Reliable laundry tags for linen rental, hospitals, hospitality, and uniform tracking.',
+    tabTitle: 'RFID LAUNDRY TAG',
+    tabDescription: 'Managing and tracing towels, bedsheets, uniforms, and linens. Tag size: 36x11mm, 55x12mm, 58x15mm, 70x10mm, 70x15mm, 75x15mm, etc.',
   },
   {
     id: 'wristbands',
-    eyebrow: 'RFID For Events and Resorts',
-    title: 'RFID Wristbands and Keyfobs for Hotels, Events, and Resorts',
-    description: 'Waterproof guest credentials for access control, lockers, e-ticketing, and cashless tap experiences.',
+    title: 'RFID Wristband for Events',
+    subtitle: 'We supply',
+    description: 'RFID wristband and happiness.',
     image: '/images/hero/wristband-banner.webp',
-    primaryCta: { href: '/solutions/event-nfc-rfid', label: 'Plan Guest Credentials' },
-    secondaryCta: { href: '/category/rfid-keyfob', label: 'See Keyfob Formats' },
-    highlights: ['Hotels, festivals, gyms, and waterparks', 'Custom logo, UID, QR, and print'],
-    tabTitle: 'WRISTBANDS & KEYFOBS',
-    tabDescription: 'Wearable and portable credentials for resorts, events, clubs, and visitor access.',
+    tabTitle: 'RFID WRISTBANDS',
+    tabDescription: 'RFID disposable wristbands: musical festivals, exhibitions. RFID silicone wristbands: hotels, waterparks, and fitness clubs.',
   },
 ];
-
-const slideCount = slides.length;
 ---
 
-<section
-  class="relative"
-  data-hero-slider
-  aria-label="Featured RFID product families"
-  aria-roledescription="carousel"
->
-  <p id="hero-slider-status" class="sr-only" aria-live="polite">
-    Showing slide 1 of {slideCount}: {slides[0].tabTitle}
-  </p>
-  <!-- Full-screen cinematic hero -->
-  <div class="relative h-[560px] min-h-[560px] overflow-hidden md:h-[85vh] md:min-h-[600px] md:max-h-[900px]">
+<section class="relative">
+  <!-- Hero Slider -->
+  <div class="relative h-[500px] md:h-[600px] overflow-hidden">
+    <!-- Slides Container -->
     <div id="slider" class="relative h-full">
-      {slides.map((slide, index) => {
-        const isActive = index === 0;
-
-        return (
-          <div
-            id={`hero-slide-${index}`}
-            class={`slide absolute inset-0 transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100' : 'opacity-0'}`}
-            data-index={index}
-            aria-hidden={isActive ? 'false' : 'true'}
-            inert={!isActive}
+      {slides.map((slide, index) => (
+        <div 
+          class={`slide absolute inset-0 transition-opacity duration-500 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+          data-index={index}
+        >
+          <!-- Background Image -->
+          <div 
+            class="absolute inset-0 bg-cover bg-center"
+            style={`background-image: url('${slide.image}')`}
           >
             <div class="absolute inset-0 bg-black/30"></div>
           </div>
@@ -90,81 +66,71 @@ const slideCount = slides.length;
               </div>
             </div>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
-
-    <!-- Elegant Navigation Arrows -->
-    <button
+    
+    <!-- Navigation Arrows -->
+    <button 
       id="prev-btn"
-      type="button"
-      class="brand-icon-shell-dark absolute left-6 top-1/2 z-20 -translate-y-1/2"
+      class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition-colors z-20"
       aria-label="Previous slide"
     >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
       </svg>
     </button>
-
-    <button
+    
+    <button 
       id="next-btn"
-      type="button"
-      class="brand-icon-shell-dark absolute right-6 top-1/2 z-20 -translate-y-1/2"
+      class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition-colors z-20"
       aria-label="Next slide"
     >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
       </svg>
     </button>
-
-    <!-- Luxury Dots -->
-    <div class="absolute bottom-8 left-1/2 z-20 -translate-x-1/2">
-      <div class="flex items-center gap-4 rounded-full border border-white/10 bg-[#0d0d0d]/55 px-4 py-2 backdrop-blur-sm">
-        <div class="flex gap-3">
-          {slides.map((slide, index) => (
-            <button
-              type="button"
-              id={`dot-${index}`}
-              class={`dot h-[2px] rounded-none transition-all duration-500 ${index === 0 ? 'w-10 bg-[#c9a84c]' : 'w-4 bg-white/30'}`}
-              data-index={index}
-              aria-controls={`hero-slide-${index}`}
-              aria-label={`Show slide ${index + 1}: ${slide.tabTitle}`}
-              aria-pressed={index === 0 ? 'true' : 'false'}
-            ></button>
-          ))}
-        </div>
-        <button
-          id="pause-btn"
-          type="button"
-          class="min-w-[4.5rem] text-xs font-medium uppercase tracking-[0.16em] text-white/70 transition-colors duration-300 hover:text-[#c9a84c]"
-          aria-pressed="false"
-          aria-label="Pause automatic slide rotation"
-        >
-          Pause
-        </button>
-      </div>
+    
+    <!-- Dots Indicator -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      {slides.map((_, index) => (
+        <button 
+          class={`dot w-3 h-3 rounded-full transition-colors ${index === 0 ? 'bg-white' : 'bg-white/50'}`}
+          data-index={index}
+          aria-label={`Go to slide ${index + 1}`}
+        ></button>
+      ))}
     </div>
   </div>
   
   <!-- Service Tabs - Connected to Slides -->
   <div class="bg-[#0d7377]">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-3" aria-label="Featured product groups">
+      <div class="grid grid-cols-1 md:grid-cols-3">
         {slides.map((slide, index) => (
           <button 
             class={`service-tab group p-8 text-center text-white transition-all duration-300 hover:bg-[#0a5c5f] ${index === 0 ? 'bg-[#0a5c5f]' : ''}`}
             data-tab-index={index}
-            aria-controls={`hero-slide-${index}`}
-            aria-label={`Show slide ${index + 1}: ${slide.tabTitle}`}
-            aria-pressed={index === 0 ? 'true' : 'false'}
           >
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="eyebrow-label text-[#c9a84c]/70 mb-2">{slide.tabTitle}</p>
-                <p class="card-copy text-sm text-white/45">{slide.tabDescription}</p>
-              </div>
-              <span class="text-[#c9a84c]/40 text-xl font-light font-serif">{String(index + 1).padStart(2, '0')}</span>
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full border-2 border-white/30 flex items-center justify-center group-hover:border-white/60 transition-colors">
+              {index === 0 && (
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                </svg>
+              )}
+              {index === 1 && (
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                </svg>
+              )}
+              {index === 2 && (
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              )}
             </div>
+            <h3 class="text-lg font-semibold mb-3">{slide.tabTitle}</h3>
+            <p class="text-sm text-white/80 leading-relaxed">{slide.tabDescription}</p>
           </button>
         ))}
       </div>
@@ -230,87 +196,19 @@ const slideCount = slides.length;
   dots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
       stopAutoPlay();
-
-      if (!autoPlayEnabled || temporarilyPaused || slides.length < 2 || document.hidden) {
-        return;
-      }
-
-      autoPlayInterval = setInterval(nextSlide, 6000);
-    }
-
-    function handleManualNavigation(callback: () => void) {
-      temporarilyPaused = false;
+      showSlide(index);
+      startAutoPlay();
+    });
+  });
+  
+  // Tab click handlers - clicking a tab switches to that slide
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => {
       stopAutoPlay();
-      callback();
-      startAutoPlay();
-    }
-
-    prevBtn?.addEventListener('click', () => {
-      handleManualNavigation(prevSlide);
-    });
-
-    nextBtn?.addEventListener('click', () => {
-      handleManualNavigation(nextSlide);
-    });
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        handleManualNavigation(() => showSlide(index));
-      });
-    });
-
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => {
-        handleManualNavigation(() => showSlide(index));
-      });
-    });
-
-    pauseBtn?.addEventListener('click', () => {
-      autoPlayEnabled = !autoPlayEnabled;
-      updatePauseButton();
+      showSlide(index);
       startAutoPlay();
     });
-
-    sliderRoot.addEventListener('mouseenter', () => {
-      temporarilyPaused = true;
-      stopAutoPlay();
-    });
-
-    sliderRoot.addEventListener('mouseleave', () => {
-      temporarilyPaused = false;
-      startAutoPlay();
-    });
-
-    sliderRoot.addEventListener('focusin', () => {
-      temporarilyPaused = true;
-      stopAutoPlay();
-    });
-
-    sliderRoot.addEventListener('focusout', (event) => {
-      if (!sliderRoot.contains(event.relatedTarget as Node)) {
-        temporarilyPaused = false;
-        startAutoPlay();
-      }
-    });
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        stopAutoPlay();
-      } else {
-        startAutoPlay();
-      }
-    });
-
-    prefersReducedMotion.addEventListener('change', (event) => {
-      autoPlayEnabled = !event.matches;
-      updatePauseButton();
-      startAutoPlay();
-    });
-
-    window.addEventListener('pagehide', stopAutoPlay, { once: true });
-
-    showSlide(0);
-    updatePauseButton();
-    startAutoPlay();
-  }
+  });
+  
+  startAutoPlay();
 </script>

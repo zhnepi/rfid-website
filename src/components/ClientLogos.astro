@@ -2,7 +2,7 @@
 const stats = [
   { number: '108+', label: 'Global Clients' },
   { number: '50+', label: 'Countries Served' },
-  { number: '2008', label: 'Established' },
+  { number: '15+', label: 'Years Experience' },
   { number: '46+', label: 'Product Models' },
 ];
 
@@ -13,7 +13,7 @@ const industries = [
 ];
 ---
 
-<section class="py-16 bg-white border-y border-[#e8e5df]">
+<section class="py-12 bg-white">
   <div class="container mx-auto px-4">
     <div class="text-center mb-8">
       <p class="text-[#0d7377] text-sm uppercase tracking-widest mb-2">Trusted Worldwide</p>
@@ -21,7 +21,7 @@ const industries = [
     </div>
 
     <!-- Stats Row -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 max-w-4xl mx-auto reveal">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10 max-w-4xl mx-auto">
       {stats.map((stat) => (
         <div class="text-center">
           <p class="text-3xl md:text-4xl font-bold text-[#0d7377]">{stat.number}</p>
@@ -31,9 +31,9 @@ const industries = [
     </div>
 
     <!-- Industries Served -->
-    <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto reveal reveal-delay-1">
+    <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
       {industries.map((industry) => (
-        <span class="px-5 py-2.5 bg-[#fafaf8] border border-[#e8e5df] text-xs text-[#666] font-medium tracking-wider uppercase hover:border-[#c9a84c]/30 hover:text-[#c9a84c] transition-all duration-300 cursor-default">
+        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm text-gray-600 font-medium">
           {industry}
         </span>
       ))}

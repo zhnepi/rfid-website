@@ -62,16 +62,6 @@ function getContextualFallbackSlugs(productSlug: string) {
     fallbackSlugs.add('pvc-rfid-cards-vs-paper-cards');
   }
 
-  if (slug.includes('wood')) {
-    fallbackSlugs.add('pvc-rfid-cards-vs-paper-cards');
-    fallbackSlugs.add('lf-vs-hf-rfid');
-  }
-
-  if (slug.includes('clamshell')) {
-    fallbackSlugs.add('rfid-cards-vs-keyfobs');
-    fallbackSlugs.add('lf-vs-hf-rfid');
-  }
-
   if (slug.includes('keyfob') || slug.includes('glass-tag')) {
     fallbackSlugs.add('lf-vs-hf-rfid');
     fallbackSlugs.add('rfid-cards-vs-keyfobs');

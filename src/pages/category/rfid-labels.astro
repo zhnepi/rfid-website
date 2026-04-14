@@ -1,5 +1,11 @@
 ---
-import CategoryLandingPage from '../../components/CategoryLandingPage.astro';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { products } from '../../data/products';
+
+const categoryName = 'RFID Labels';
+const categoryProducts = products.filter(p => p.category === categoryName);
 ---
 
 <Layout
@@ -75,7 +81,7 @@ import CategoryLandingPage from '../../components/CategoryLandingPage.astro';
         <h2 class="text-3xl font-bold text-gray-800 mb-6">RFID Label & Sticker Buying Guide</h2>
         <div class="prose prose-lg text-gray-600">
           <p>
-            RFID labels and stickers are thin, flexible tags consisting of an RFID inlay (chip + antenna) laminated between paper or synthetic layers. They are the most cost-effective form of RFID identification, with per-unit costs ranging from $0.05 to $0.50 depending on chip type and volume. ProudTek produces millions of RFID labels monthly, supplying retailers, libraries, logistics companies, and healthcare providers worldwide.
+            RFID labels and stickers are thin, flexible tags consisting of an RFID inlay (chip + antenna) laminated between paper or synthetic layers. They are the most cost-effective form of RFID identification, with per-unit costs ranging from $0.05 to $0.50 depending on chip type and volume. ProudTek produces millions of RFID labels monthly, supplying retailers, libraries, logistics companies, and healthcare providers across 50+ countries.
           </p>
 
           <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">RFID Label Types Comparison</h3>
