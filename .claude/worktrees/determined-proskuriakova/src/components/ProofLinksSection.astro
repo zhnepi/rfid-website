@@ -1,0 +1,56 @@
+---
+import { evidenceLinks } from '../data/navigation';
+import { getContextualContactAction } from '../utils/contact';
+
+function getProofActionLabel(href: string) {
+  const normalizedHref = href.split(/[?#]/)[0] || '';
+
+  if (normalizedHref.startsWith('/certifications') || normalizedHref.startsWith('/quality-control') || normalizedHref.startsWith('/sample-policy') || normalizedHref.startsWith('/shipping-and-incoterms')) {
+    return 'Review proof page';
+  }
+
+  return 'Open resource';
+}
+
+const proofCards = evidenceLinks.map((link) => ({
+  ...link,
+  contactAction: getContextualContactAction(link.href),
+  openLabel: getProofActionLabel(link.href),
+}));
+---
+
+<section class="bg-white py-16 border-y border-gray-100">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between mb-8">
+      <div class="max-w-2xl">
+        <p class="eyebrow-label text-[#c9a84c] mb-2">Proof And Policies</p>
+        <h2 class="title-balance text-3xl font-semibold text-gray-900">Give buyers evidence before they ask the same trust questions by email</h2>
+      </div>
+      <p class="card-copy max-w-xl text-gray-600">
+        Review these proof pages when the team still needs QC, certification, sample or shipping answers before it is ready to send an RFQ.
+      </p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      {proofCards.map((link) => (
+        <article class="copy-safe rounded-[1.75rem] border border-gray-200 bg-gray-50 p-6 transition-all hover:border-[#c9a84c] hover:bg-white">
+          <a href={link.href} class="block">
+            <h3 class="title-balance text-xl font-semibold text-gray-900">{link.name}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-gray-600">{link.description}</p>
+          </a>
+          <div class="mt-5 flex flex-wrap items-center gap-4">
+            <a href={link.href} class="inline-flex items-center text-sm font-semibold text-[#c9a84c]">
+              {link.openLabel}
+              <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+            <a href={link.contactAction.href} class="text-sm font-medium text-gray-500 transition-colors hover:text-[#c9a84c]">
+              {link.contactAction.label}
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

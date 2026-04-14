@@ -1,8 +1,24 @@
 ---
+import { getIntentContactHref } from '../utils/contact';
 
+const capabilities = [
+  'RFID card and tag manufacturing since 2008',
+  'Stable supply for Mifare, DESFire, NTAG, UCODE, EM, and T5577 chips',
+  'Custom materials, dimensions, printing, UID encoding, and packaging',
+  'QC at every production stage plus 100% chip verification before shipment',
+];
+
+const highlights = [
+  { value: '5M', label: 'RFID cards per month' },
+  { value: '50+', label: 'countries shipped to' },
+  { value: '108+', label: 'global clients served' },
+  { value: '24h', label: 'quote turnaround for common projects' },
+];
+
+const aboutContactHref = getIntentContactHref('samples');
 ---
 
-<section class="py-20 bg-white">
+<section class="py-24 bg-[#fafaf8]">
   <div class="container mx-auto px-4">
     <div class="max-w-4xl mx-auto text-center">
       <p class="text-[#0d7377] text-sm uppercase tracking-widest mb-2">Since 2008...</p>

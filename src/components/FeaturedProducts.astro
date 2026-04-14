@@ -43,6 +43,45 @@ const products = [
     specs: ['On-metal optimized', 'FR4 / Ceramic substrate', 'Industrial grade'],
   },
 ];
+
+const featuredProductMessaging: Record<string, { question: string; summary: string }> = {
+  'rfid-cards': {
+    question: 'Need cards that match an installed reader or hotel lock?',
+    summary: 'Start here when protocol matching, print finish, and repeat supply matter most.',
+  },
+  'rfid-keyfob': {
+    question: 'Want a smaller credential than a full-size access card?',
+    summary: 'Useful for apartments, gyms, parking systems, and programs built around portable credentials.',
+  },
+  'textile-rfid-laundry-tag': {
+    question: 'Will the tag survive wash, heat, pressure, and bulk reading?',
+    summary: 'Built for linen, uniform, and garment workflows where wash-cycle durability comes first.',
+  },
+  'rfid-silicone-wristband': {
+    question: 'Do guests need waterproof tap access and fast check-in?',
+    summary: 'A strong fit for resorts, events, and leisure venues that need wearable credentials.',
+  },
+  'rfid-metal-tag': {
+    question: 'Tagging metal tools or equipment without losing read range?',
+    summary: 'Use anti-metal construction when assets, bins, or tools sit directly on metal surfaces.',
+  },
+  'rfid-reader-writer': {
+    question: 'Need hardware that can read and encode your chosen chip?',
+    summary: 'Good for issuance desks, test benches, and projects that need reader compatibility checks first.',
+  },
+};
+
+const featuredProducts = featuredSlugs
+  .map((slug) => products.find((product) => product.slug === slug))
+  .filter(Boolean)
+  .map((product) => ({
+    ...product,
+    cardQuestion: featuredProductMessaging[product.slug]?.question || getProductBuyerQuestion(product),
+    cardSummary: featuredProductMessaging[product.slug]?.summary || getProductBuyerSummary(product, 112),
+    topComparison: getProductComparisonLinks(product, 1)[0],
+    contactHref: getProductContactHref(product),
+    inquiryLabel: getContextualInquiryLabel(getProductInquiryIntent(product), 'product'),
+  }));
 ---
 
 <section class="py-16 bg-slate-50">
@@ -95,7 +134,7 @@ const products = [
               </svg>
             </div>
           </div>
-        </a>
+        </article>
       ))}
     </div>
 

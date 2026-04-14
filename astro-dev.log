@@ -1,0 +1,1857 @@
+
+> proudtek-rfid@0.0.1 dev
+> astro dev --host 0.0.0.0 --port 4322
+
+[2m20:47:51[22m [34m[types][39m Generated [2m3ms[22m
+[2m20:47:51[22m [34m[content][39m Syncing content
+[2m20:47:51[22m [34m[content][39m Astro config changed
+[2m20:47:51[22m [34m[content][39m Clearing content store
+[2m20:47:51[22m [34m[content][39m Synced content
+[2m20:47:51[22m [34m[vite][39m Port 4322 is in use, trying another one...
+
+[42m[1m astro [22m[49m [32mv5.18.1[39m [2mready in[22m 1115 [2mms[22m
+
+[2m┃[22m Local    [36mhttp://localhost:4323/[39m
+[2m┃[22m Network  [36mhttp://172.18.0.1:4323/[39m
+           [36mhttp://192.168.2.107:4323/[39m
+
+[2m20:47:51[22m [32mwatching for file changes...[39m
+[2m01:45:43[22m [34m[200][39m / [2m7535ms[22m
+[2m01:46:31[22m [34m[200][39m /about [2m5ms[22m
+[2m01:46:33[22m [34m[200][39m /category/rfid-cards [2m4ms[22m
+[2m01:49:37[22m [34m[200][39m / [2m34ms[22m
+[2m01:49:37[22m [34m[200][39m /category/rfid-cards/ [2m66ms[22m
+[2m01:49:37[22m [34m[200][39m /blogs/ [2m6ms[22m
+[2m01:49:38[22m [34m[200][39m /product/rfid-card-inlay/ [2m15ms[22m
+[2m01:52:45[22m [34m[200][39m /blogs/ [2m7ms[22m
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-tags.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-tags.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-keyfob.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-keyfob.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-readers.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-readers.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-wristbands.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-wristbands.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-cards.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-cards.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-labels.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-labels.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-tags.astro
+[2m02:14:48[22m [34m[watch][39m src/pages/category/rfid-tags.astro
+[2m02:15:04[22m [34m[watch][39m src/layouts/Layout.astro
+[2m02:15:04[22m [34m[watch][39m src/layouts/Layout.astro
+[2m02:15:06[22m [34m[200][39m /category/rfid-cards [2m10107ms[22m
+[2m02:15:08[22m [34m[200][39m /category/rfid-cards [2m1768ms[22m
+[2m02:15:16[22m [34m[watch][39m src/layouts/Layout.astro
+[2m02:15:16[22m [34m[watch][39m src/layouts/Layout.astro
+[2m02:15:46[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m02:15:50[22m [34m[200][39m /category/rfid-cards [2m1503ms[22m
+[2m02:16:46[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m02:16:51[22m [34m[200][39m /category/rfid-cards [2m1745ms[22m
+[2m02:17:21[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m02:17:25[22m [34m[200][39m /category/rfid-cards [2m1372ms[22m
+[2m02:17:55[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m02:17:59[22m [34m[200][39m /category/rfid-cards [2m1666ms[22m
+[2m02:18:06[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m02:18:09[22m [34m[200][39m /category/rfid-cards [2m1218ms[22m
+[2m02:18:19[22m [34m[watch][39m src/data/blogs.ts
+[2m02:18:19[22m [34m[watch][39m src/data/blogs.ts
+[2m02:18:22[22m [34m[200][39m /category/rfid-cards [2m1254ms[22m
+[2m02:19:44[22m [34m[watch][39m src/pages/blogs.astro
+[2m02:19:44[22m [34m[watch][39m src/pages/blogs.astro
+[2m02:19:44[22m [34m[watch][39m src/pages/blogs.astro
+[2m02:19:44[22m [34m[watch][39m src/pages/blogs.astro
+[2m02:20:04[22m [34m[200][39m /category/rfid-cards [2m2853ms[22m
+[2m02:21:10[22m [34m[watch][39m src/pages/blogs/[slug].astro
+[2m02:21:10[22m [34m[watch][39m src/pages/blogs/[slug].astro
+[2m02:21:20[22m [34m[200][39m /category/rfid-cards [2m2951ms[22m
+[2m02:21:43[22m [34m[watch][39m src/pages/contact.astro
+[2m02:21:43[22m [34m[watch][39m src/pages/contact.astro
+[2m02:21:52[22m [34m[200][39m /category/rfid-cards [2m4023ms[22m
+[2m02:22:06[22m [34m[watch][39m src/pages/contact.astro
+[2m02:22:06[22m [34m[watch][39m src/pages/contact.astro
+[2m02:22:14[22m [34m[200][39m /category/rfid-cards [2m3253ms[22m
+[2m02:22:24[22m [34m[watch][39m src/pages/contact.astro
+[2m02:22:24[22m [34m[watch][39m src/pages/contact.astro
+[2m02:22:33[22m [34m[200][39m /category/rfid-cards [2m3369ms[22m
+[2m02:22:58[22m [34m[watch][39m src/layouts/Layout.astro
+[2m02:22:58[22m [34m[watch][39m src/layouts/Layout.astro
+[2m02:23:08[22m [34m[200][39m /category/rfid-cards [2m3884ms[22m
+[2m02:24:00[22m [34m[watch][39m dist/404.html
+[2m02:24:00[22m [34m[watch][39m dist/about/index.html
+[2m02:24:00[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m02:24:00[22m [34m[watch][39m dist/blogs/index.html
+[2m02:24:00[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m02:24:00[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m02:24:00[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m02:24:00[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m02:24:00[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m02:24:00[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m02:24:00[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m02:24:00[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m02:24:00[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m02:24:00[22m [34m[watch][39m dist/contact/index.html
+[2m02:24:00[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m02:24:00[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m02:24:00[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m02:24:00[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m02:24:00[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m02:24:00[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m02:24:01[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m02:24:02[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m02:24:02[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m02:24:02[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m02:24:02[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m02:24:02[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m02:24:02[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m02:24:02[22m [34m[watch][39m dist/index.html
+[2m02:24:02[22m [34m[watch][39m dist/products/index.html
+[2m02:24:02[22m [34m[watch][39m dist/rfid/index.html
+[2m02:24:02[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m02:24:37[22m [34m[watch][39m src/data/blogs.ts
+[2m02:24:37[22m [34m[watch][39m src/data/blogs.ts
+[2m02:24:45[22m [34m[200][39m /category/rfid-cards [2m3303ms[22m
+[2m02:25:07[22m [34m[watch][39m src/components/FAQ.astro
+[2m02:25:07[22m [34m[watch][39m src/components/FAQ.astro
+[2m02:25:07[22m [34m[watch][39m src/components/FAQ.astro
+[2m02:25:07[22m [34m[watch][39m src/components/FAQ.astro
+[2m02:25:18[22m [34m[200][39m /category/rfid-cards [2m3700ms[22m
+[2m02:25:41[22m [34m[200][39m /category/rfid-cards/ [2m16ms[22m
+[2m02:25:41[22m [34m[200][39m /contact/ [2m16ms[22m
+[2m02:25:41[22m [34m[200][39m /blogs/ [2m23ms[22m
+[2m02:26:06[22m [34m[200][39m /product/rfid-card-inlay/ [2m98ms[22m
+[2m02:26:06[22m [34m[200][39m /blogs/nfc-technology/ [2m31ms[22m
+[2m03:06:11[22m [34m[watch][39m dist/404.html
+[2m03:06:12[22m [34m[watch][39m dist/index.html
+[2m03:06:12[22m [34m[watch][39m dist/contact/index.html
+[2m03:06:12[22m [34m[watch][39m dist/blogs/index.html
+[2m03:06:12[22m [34m[watch][39m dist/about/index.html
+[2m03:06:13[22m [34m[watch][39m dist/rfid/index.html
+[2m03:06:13[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m03:06:13[22m [34m[watch][39m dist/products/index.html
+[2m03:06:14[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m03:06:14[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m03:06:14[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m03:06:14[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m03:06:14[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m03:06:14[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m03:06:14[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m03:06:14[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m03:06:14[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m03:06:14[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m03:06:14[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m03:06:14[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m03:06:14[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m03:06:14[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m03:06:14[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m03:06:15[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m03:06:15[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m03:06:16[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m03:06:16[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m03:06:16[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m03:06:16[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m03:06:16[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m03:06:16[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m03:06:16[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m03:12:08[22m [34m[watch][39m src/pages/index.astro
+[2m03:12:08[22m [34m[watch][39m src/pages/index.astro
+[2m03:12:32[22m [34m[200][39m /category/rfid-cards [2m16943ms[22m
+[2m03:12:42[22m [34m[watch][39m src/components/AboutSection.astro
+[2m03:12:42[22m [34m[watch][39m src/components/AboutSection.astro
+[2m03:12:42[22m [34m[watch][39m src/components/ApplicationsSection.astro
+[2m03:12:42[22m [34m[watch][39m src/components/ApplicationsSection.astro
+[2m03:12:42[22m [34m[watch][39m src/components/BlogPreview.astro
+[2m03:12:42[22m [34m[watch][39m src/components/BlogPreview.astro
+[2m03:13:55[22m [34m[watch][39m src/pages/about.astro
+[2m03:13:55[22m [34m[watch][39m src/pages/about.astro
+[2m03:13:56[22m [34m[watch][39m src/pages/about.astro
+[2m03:13:56[22m [34m[watch][39m src/pages/about.astro
+[2m03:14:12[22m [34m[200][39m /category/rfid-cards [2m2396ms[22m
+[2m03:15:42[22m [34m[watch][39m src/pages/rfid-technology.astro
+[2m03:15:42[22m [34m[watch][39m src/pages/rfid-technology.astro
+[2m03:15:45[22m [34m[200][39m /category/rfid-cards [2m1074ms[22m
+[2m03:15:56[22m [34m[watch][39m public/llms.txt
+[2m03:15:56[22m [34m[watch][39m public/llms.txt
+[2m03:15:59[22m [34m[200][39m /category/rfid-cards [2m1207ms[22m
+[2m03:16:17[22m [34m[200][39m /about/ [2m5ms[22m
+[2m03:16:17[22m [34m[200][39m /rfid-technology/ [2m6ms[22m
+[2m03:16:17[22m [34m[200][39m / [2m8ms[22m
+[2m03:16:49[22m [34m[watch][39m src/pages/products.astro
+[2m03:16:49[22m [34m[watch][39m src/pages/products.astro
+[2m03:16:49[22m [34m[watch][39m src/pages/rfid.astro
+[2m03:16:49[22m [34m[watch][39m src/pages/rfid.astro
+[2m03:16:53[22m [34m[200][39m /category/rfid-cards [2m1134ms[22m
+[2m03:17:13[22m [34m[200][39m /rfid/ [2m35ms[22m
+[2m03:17:14[22m [34m[200][39m /products/ [2m16ms[22m
+[2m03:17:32[22m [34m[watch][39m dist/404.html
+[2m03:17:32[22m [34m[watch][39m dist/about/index.html
+[2m03:17:32[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m03:17:32[22m [34m[watch][39m dist/blogs/index.html
+[2m03:17:32[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m03:17:32[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m03:17:32[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m03:17:32[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m03:17:32[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m03:17:32[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m03:17:32[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m03:17:32[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m03:17:32[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m03:17:32[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m03:17:32[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m03:17:32[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m03:17:32[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m03:17:32[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m03:17:32[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m03:17:46[22m [34m[watch][39m dist/index.html
+[2m03:17:46[22m [34m[watch][39m dist/contact/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m03:17:46[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m03:17:49[22m [34m[watch][39m dist/rfid/index.html
+[2m03:17:49[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m03:17:49[22m [34m[watch][39m dist/products/index.html
+[2m03:18:36[22m [34m[watch][39m dist/404.html
+[2m03:18:38[22m [34m[watch][39m dist/index.html
+[2m03:18:38[22m [34m[watch][39m dist/about/index.html
+[2m03:18:38[22m [34m[watch][39m dist/blogs/index.html
+[2m03:18:38[22m [34m[watch][39m dist/contact/index.html
+[2m03:18:38[22m [34m[watch][39m dist/products/index.html
+[2m03:18:38[22m [34m[watch][39m dist/rfid/index.html
+[2m03:18:38[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m03:18:39[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m03:18:39[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m03:18:39[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m03:18:39[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m03:18:39[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m03:18:39[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m03:18:39[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m03:18:39[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m03:18:39[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m03:18:39[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m03:18:39[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m03:18:39[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m03:18:39[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m03:18:39[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m03:18:39[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m03:18:39[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m03:18:39[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m03:18:39[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m03:18:39[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m03:18:39[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m03:18:39[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m03:18:39[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m03:18:39[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m03:18:39[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m03:18:39[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m03:18:39[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m03:18:40[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m03:20:22[22m [34m[200][39m / [2m10ms[22m
+[2m03:20:40[22m [34m[200][39m /category/rfid-cards [2m11ms[22m
+[2m03:20:50[22m [34m[200][39m /product/rfid-paper-card [2m13ms[22m
+[2m03:21:00[22m [34m[200][39m /category/rfid-tags [2m4ms[22m
+[2m03:21:02[22m [34m[200][39m /product/rfid-cable-tie-tag [2m4ms[22m
+[2m03:30:34[22m [34m[watch][39m src/data/blogs.ts
+[2m03:30:34[22m [34m[watch][39m src/data/blogs.ts
+[2m03:30:38[22m [34m[200][39m /product/rfid-cable-tie-tag [2m1276ms[22m
+[2m03:30:38[22m [34m[200][39m /category/rfid-cards [2m1281ms[22m
+[2m03:35:10[22m [34m[watch][39m src/data/blogs.ts
+[2m03:35:10[22m [34m[watch][39m src/data/blogs.ts
+[2m03:35:18[22m [34m[200][39m /product/rfid-cable-tie-tag [2m3670ms[22m
+[2m03:35:18[22m [34m[200][39m /category/rfid-cards [2m3706ms[22m
+[2m03:36:59[22m [34m[watch][39m src/data/blogs.ts
+[2m03:36:59[22m [34m[watch][39m src/data/blogs.ts
+[2m03:37:05[22m [34m[200][39m /product/rfid-cable-tie-tag [2m2251ms[22m
+[2m03:37:05[22m [34m[200][39m /category/rfid-cards [2m2254ms[22m
+[2m03:37:27[22m [34m[watch][39m src/data/categoryPages.ts
+[2m03:37:27[22m [34m[watch][39m src/data/categoryPages.ts
+[2m03:37:33[22m [34m[200][39m /product/rfid-cable-tie-tag [2m2532ms[22m
+[2m03:37:33[22m [34m[200][39m /category/rfid-cards [2m129ms[22m
+[2m03:37:39[22m [34m[watch][39m src/pages/blogs.astro
+[2m03:37:39[22m [34m[watch][39m src/pages/blogs.astro
+[2m03:37:45[22m [34m[200][39m /product/rfid-cable-tie-tag [2m2569ms[22m
+[2m03:37:45[22m [34m[200][39m /category/rfid-cards [2m2578ms[22m
+[2m03:38:01[22m [34m[watch][39m src/pages/blogs/[slug].astro
+[2m03:38:01[22m [34m[watch][39m src/pages/blogs/[slug].astro
+[2m03:38:08[22m [34m[200][39m /product/rfid-cable-tie-tag [2m3125ms[22m
+[2m03:38:08[22m [34m[200][39m /category/rfid-cards [2m3140ms[22m
+[2m03:38:47[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m03:38:47[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m03:38:53[22m [34m[200][39m /category/rfid-cards [2m2553ms[22m
+[2m03:38:53[22m [34m[200][39m /product/rfid-cable-tie-tag [2m33ms[22m
+[2m03:39:01[22m [34m[watch][39m public/llms.txt
+[2m03:39:01[22m [34m[watch][39m public/llms.txt
+[2m03:39:08[22m [34m[200][39m /product/rfid-cable-tie-tag [2m2849ms[22m
+[2m03:39:08[22m [34m[200][39m /category/rfid-cards [2m2852ms[22m
+[2m03:39:46[22m [34m[200][39m /blogs/hotel-key-card-rfid-guide/ [2m7ms[22m
+[2m03:39:46[22m [34m[200][39m /blogs/laundry-rfid-tags-buying-guide/ [2m4ms[22m
+[2m03:39:46[22m [34m[200][39m /blogs/how-to-choose-rfid-readers-and-writers/ [2m8ms[22m
+[2m03:39:46[22m [34m[200][39m /category/rfid-tags/ [2m4ms[22m
+[2m03:39:47[22m [34m[200][39m /product/rfid-reader-writer/ [2m3ms[22m
+[2m03:40:11[22m [34m[watch][39m dist/404.html
+[2m03:40:11[22m [34m[watch][39m dist/about/index.html
+[2m03:40:11[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m03:40:11[22m [34m[watch][39m dist/blogs/index.html
+[2m03:40:11[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m03:40:11[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m03:40:11[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m03:40:11[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m03:40:11[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m03:40:11[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m03:40:11[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m03:40:11[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m03:40:11[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m03:40:12[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m03:40:12[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m03:40:12[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m03:40:12[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m03:40:12[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m03:40:12[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m03:40:12[22m [34m[watch][39m dist/contact/index.html
+[2m03:40:14[22m [34m[watch][39m dist/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m03:40:14[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m03:40:14[22m [34m[watch][39m dist/products/index.html
+[2m03:40:14[22m [34m[watch][39m dist/rfid/index.html
+[2m03:40:14[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m03:40:28[22m [34m[watch][39m dist/404.html
+[2m03:40:30[22m [34m[watch][39m dist/index.html
+[2m03:40:31[22m [34m[watch][39m dist/about/index.html
+[2m03:40:31[22m [34m[watch][39m dist/blogs/index.html
+[2m03:40:31[22m [34m[watch][39m dist/contact/index.html
+[2m03:40:31[22m [34m[watch][39m dist/products/index.html
+[2m03:40:31[22m [34m[watch][39m dist/rfid/index.html
+[2m03:40:31[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m03:40:31[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m03:40:31[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m03:40:31[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m03:40:31[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m03:40:31[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m03:40:31[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m03:40:31[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m03:40:31[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m03:40:32[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m03:40:32[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m03:40:32[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m03:40:32[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m03:40:32[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m03:40:32[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m03:40:32[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m03:40:32[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m03:40:32[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m03:40:32[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m03:40:32[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m03:40:32[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m03:40:32[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m03:40:32[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m03:40:32[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m03:40:32[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m03:40:46[22m [34m[200][39m /product/rfid-reader-writer/ [2m10ms[22m
+[2m03:40:46[22m [34m[200][39m /category/rfid-tags/ [2m8ms[22m
+[2m03:42:34[22m [34m[200][39m / [2m17ms[22m
+[2m03:44:15[22m [34m[watch][39m /src/styles/global.css
+[2m03:44:26[22m [34m[watch][39m src/layouts/Layout.astro
+[2m03:44:26[22m [34m[watch][39m src/layouts/Layout.astro
+[2m03:44:38[22m [34m[watch][39m src/components/ApplicationsSection.astro
+[2m03:44:38[22m [34m[watch][39m src/components/ApplicationsSection.astro
+[2m03:44:38[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m03:44:38[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m03:45:03[22m [34m[200][39m /product/rfid-cable-tie-tag [2m12793ms[22m
+[2m03:45:03[22m [34m[200][39m /product/rfid-cable-tie-tag [2m306ms[22m
+[2m03:45:03[22m [34m[200][39m /category/rfid-cards [2m12866ms[22m
+[2m03:45:03[22m [34m[200][39m /category/rfid-cards [2m12866ms[22m
+[2m03:45:03[22m [34m[200][39m /category/rfid-cards [2m12867ms[22m
+[2m03:45:24[22m [34m[watch][39m dist/404.html
+[2m03:45:24[22m [34m[watch][39m dist/about/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m03:45:24[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m03:45:24[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m03:45:24[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m03:45:24[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m03:45:24[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m03:45:24[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m03:45:24[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m03:45:24[22m [34m[watch][39m dist/contact/index.html
+[2m03:45:26[22m [34m[watch][39m dist/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m03:45:26[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m03:45:26[22m [34m[watch][39m dist/products/index.html
+[2m03:45:26[22m [34m[watch][39m dist/rfid/index.html
+[2m03:45:26[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m03:45:35[22m [34m[watch][39m dist/404.html
+[2m03:45:35[22m [34m[watch][39m dist/index.html
+[2m03:45:36[22m [34m[watch][39m dist/about/index.html
+[2m03:45:36[22m [34m[watch][39m dist/blogs/index.html
+[2m03:45:36[22m [34m[watch][39m dist/contact/index.html
+[2m03:45:36[22m [34m[watch][39m dist/products/index.html
+[2m03:45:36[22m [34m[watch][39m dist/rfid/index.html
+[2m03:45:36[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m03:45:37[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m03:45:37[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m03:45:37[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m03:45:37[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m03:45:37[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m03:45:37[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m03:45:37[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m03:45:37[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m03:45:52[22m [34m[200][39m /product/rfid-waste-bin-tag/ [2m6ms[22m
+[2m03:46:30[22m [34m[200][39m /product/rfid-waste-bin-tag/ [2m68ms[22m
+[2m03:47:17[22m [34m[200][39m /product/rfid-waste-bin-tag/ [2m17ms[22m
+[2m03:55:23[22m [34m[watch][39m /src/styles/global.css
+[2m03:55:44[22m [34m[watch][39m src/components/ApplicationsSection.astro
+[2m03:55:44[22m [34m[watch][39m src/components/ApplicationsSection.astro
+[2m03:55:44[22m [34m[watch][39m src/components/BlogPreview.astro
+[2m03:55:44[22m [34m[watch][39m src/components/BlogPreview.astro
+[2m03:55:44[22m [34m[watch][39m src/components/FeaturedProducts.astro
+[2m03:55:44[22m [34m[watch][39m src/components/FeaturedProducts.astro
+[2m03:56:08[22m [34m[watch][39m src/components/KnowledgeHubSection.astro
+[2m03:56:08[22m [34m[watch][39m src/components/KnowledgeHubSection.astro
+[2m03:56:36[22m [34m[watch][39m src/components/CategoryLandingPage.astro
+[2m03:56:36[22m [34m[watch][39m src/components/CategoryLandingPage.astro
+[2m03:56:36[22m [34m[watch][39m src/pages/about.astro
+[2m03:56:36[22m [34m[watch][39m src/pages/about.astro
+[2m03:57:14[22m [34m[watch][39m src/pages/contact.astro
+[2m03:57:14[22m [34m[watch][39m src/pages/products.astro
+[2m03:57:14[22m [34m[watch][39m src/pages/products.astro
+[2m03:57:45[22m [34m[200][39m /product/rfid-cable-tie-tag [2m68834ms[22m
+[2m03:57:45[22m [34m[200][39m /category/rfid-cards [2m68890ms[22m
+[2m03:57:45[22m [34m[200][39m /category/rfid-cards [2m68894ms[22m
+[2m03:57:45[22m [34m[200][39m /category/rfid-cards [2m120ms[22m
+[2m03:57:45[22m [34m[200][39m /product/rfid-cable-tie-tag [2m152ms[22m
+[2m03:57:45[22m [34m[200][39m /product/rfid-cable-tie-tag [2m31336ms[22m
+[2m03:57:45[22m [34m[200][39m /product/rfid-cable-tie-tag [2m31340ms[22m
+[2m03:57:45[22m [34m[200][39m /category/rfid-cards [2m31478ms[22m
+[2m03:57:45[22m [34m[200][39m /category/rfid-cards [2m31489ms[22m
+[2m03:57:54[22m [34m[watch][39m src/pages/rfid.astro
+[2m03:57:54[22m [34m[watch][39m src/pages/rfid.astro
+[2m03:58:11[22m [34m[200][39m /product/rfid-cable-tie-tag [2m136ms[22m
+[2m03:58:11[22m [34m[200][39m /category/rfid-cards [2m4122ms[22m
+[2m03:58:18[22m [34m[watch][39m src/pages/blogs.astro
+[2m03:58:18[22m [34m[watch][39m src/pages/blogs.astro
+[2m03:58:32[22m [34m[200][39m /category/rfid-cards [2m4324ms[22m
+[2m03:58:35[22m [34m[watch][39m src/pages/blogs/[slug].astro
+[2m03:58:35[22m [34m[watch][39m src/pages/blogs/[slug].astro
+[2m03:58:47[22m [34m[200][39m /product/rfid-cable-tie-tag [2m4235ms[22m
+[2m03:58:47[22m [34m[200][39m /category/rfid-cards [2m4239ms[22m
+[2m03:58:52[22m [34m[watch][39m src/pages/rfid-technology.astro
+[2m03:58:52[22m [34m[watch][39m src/pages/rfid-technology.astro
+[2m03:59:05[22m [34m[200][39m /category/rfid-cards [2m4055ms[22m
+[2m03:59:14[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m03:59:14[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m03:59:31[22m [34m[200][39m /product/rfid-cable-tie-tag [2m4850ms[22m
+[2m03:59:31[22m [34m[200][39m /category/rfid-cards [2m4976ms[22m
+[2m04:00:15[22m [34m[watch][39m dist/404.html
+[2m04:00:15[22m [34m[watch][39m dist/about/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m04:00:15[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m04:00:17[22m [34m[watch][39m dist/index.html
+[2m04:00:18[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m04:00:18[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m04:00:18[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m04:00:18[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m04:00:18[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m04:00:18[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m04:00:18[22m [34m[watch][39m dist/contact/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m04:00:18[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m04:00:19[22m [34m[watch][39m dist/products/index.html
+[2m04:00:19[22m [34m[watch][39m dist/rfid/index.html
+[2m04:00:19[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m04:00:35[22m [34m[watch][39m dist/404.html
+[2m04:00:36[22m [34m[watch][39m dist/about/index.html
+[2m04:00:36[22m [34m[watch][39m dist/blogs/index.html
+[2m04:00:36[22m [34m[watch][39m dist/index.html
+[2m04:00:36[22m [34m[watch][39m dist/contact/index.html
+[2m04:00:36[22m [34m[watch][39m dist/products/index.html
+[2m04:00:36[22m [34m[watch][39m dist/rfid/index.html
+[2m04:00:37[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m04:00:37[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m04:00:38[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m04:00:38[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m04:00:38[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m04:00:38[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m04:00:38[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m04:00:38[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m04:00:38[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m04:03:44[22m [34m[200][39m /blogs/ [2m17ms[22m
+[2m04:03:55[22m [34m[200][39m / [2m30ms[22m
+[2m04:17:39[22m [34m[watch][39m /src/styles/global.css
+[2m04:18:34[22m [34m[200][39m /product/rfid-cable-tie-tag [2m21618ms[22m
+[2m04:18:34[22m [34m[200][39m /category/rfid-cards [2m21626ms[22m
+[2m04:19:45[22m [34m[watch][39m src/components/FeaturedProducts.astro
+[2m04:19:45[22m [34m[watch][39m src/components/FeaturedProducts.astro
+[2m04:19:45[22m [34m[watch][39m src/components/ApplicationsSection.astro
+[2m04:19:45[22m [34m[watch][39m src/components/ApplicationsSection.astro
+[2m04:19:45[22m [34m[watch][39m src/components/KnowledgeHubSection.astro
+[2m04:19:45[22m [34m[watch][39m src/components/KnowledgeHubSection.astro
+[2m04:19:45[22m [34m[watch][39m src/components/BlogPreview.astro
+[2m04:19:45[22m [34m[watch][39m src/components/BlogPreview.astro
+[2m04:19:45[22m [34m[watch][39m src/components/CategoryLandingPage.astro
+[2m04:19:45[22m [34m[watch][39m src/components/CategoryLandingPage.astro
+[2m04:19:45[22m [34m[watch][39m src/pages/rfid.astro
+[2m04:19:45[22m [34m[watch][39m src/pages/rfid.astro
+[2m04:19:45[22m [34m[watch][39m src/pages/blogs.astro
+[2m04:19:45[22m [34m[watch][39m src/pages/blogs.astro
+[2m04:19:45[22m [34m[watch][39m src/pages/products.astro
+[2m04:19:45[22m [34m[watch][39m src/pages/products.astro
+[2m04:20:20[22m [34m[200][39m /product/rfid-cable-tie-tag [2m14462ms[22m
+[2m04:20:20[22m [34m[200][39m /category/rfid-cards [2m494ms[22m
+[2m04:20:32[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m04:20:32[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m04:20:39[22m [34m[200][39m /product/rfid-cable-tie-tag [2m1929ms[22m
+[2m04:20:39[22m [34m[200][39m /category/rfid-cards [2m1946ms[22m
+[2m04:22:19[22m [34m[watch][39m src/components/AboutSection.astro
+[2m04:22:19[22m [34m[watch][39m src/components/AboutSection.astro
+[2m04:22:19[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m04:22:19[22m [34m[watch][39m src/components/HeroSlider.astro
+[2m04:22:19[22m [34m[watch][39m src/pages/about.astro
+[2m04:22:19[22m [34m[watch][39m src/pages/about.astro
+[2m04:22:19[22m [34m[watch][39m src/pages/contact.astro
+[2m04:22:19[22m [34m[watch][39m src/pages/rfid-technology.astro
+[2m04:22:19[22m [34m[watch][39m src/pages/rfid-technology.astro
+[2m04:22:34[22m [34m[200][39m /product/rfid-cable-tie-tag [2m1685ms[22m
+[2m04:22:34[22m [34m[200][39m /category/rfid-cards [2m1692ms[22m
+[2m04:25:49[22m [34m[watch][39m dist/404.html
+[2m04:25:49[22m [34m[watch][39m dist/about/index.html
+[2m04:25:49[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m04:25:49[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m04:25:49[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m04:25:49[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m04:25:49[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m04:25:49[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m04:25:49[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m04:25:49[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m04:25:50[22m [34m[watch][39m dist/blogs/index.html
+[2m04:25:50[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m04:25:50[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m04:25:50[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m04:25:50[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m04:25:50[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m04:25:50[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m04:25:50[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m04:25:50[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m04:25:50[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m04:25:50[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m04:25:50[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m04:25:50[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m04:25:50[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m04:25:50[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m04:25:50[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m04:25:50[22m [34m[watch][39m dist/contact/index.html
+[2m04:25:52[22m [34m[watch][39m dist/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m04:25:52[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m04:25:52[22m [34m[watch][39m dist/products/index.html
+[2m04:25:52[22m [34m[watch][39m dist/rfid/index.html
+[2m04:25:52[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m04:26:06[22m [34m[watch][39m dist/404.html
+[2m04:26:08[22m [34m[watch][39m dist/index.html
+[2m04:26:08[22m [34m[watch][39m dist/blogs/index.html
+[2m04:26:08[22m [34m[watch][39m dist/about/index.html
+[2m04:26:08[22m [34m[watch][39m dist/contact/index.html
+[2m04:26:08[22m [34m[watch][39m dist/products/index.html
+[2m04:26:08[22m [34m[watch][39m dist/rfid/index.html
+[2m04:26:08[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m04:26:09[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m04:26:09[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m04:26:09[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m04:26:09[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m04:26:09[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m04:26:09[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m04:26:09[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m04:26:09[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m04:26:09[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m04:26:09[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m04:26:09[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m04:26:09[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m04:26:10[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m04:26:10[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m04:26:10[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m04:26:10[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m04:26:10[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m04:26:10[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m04:26:10[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m04:26:10[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m04:26:10[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m04:26:10[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m04:26:10[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m04:26:10[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m04:26:11[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m04:26:32[22m [34m[200][39m /rfid/ [2m17ms[22m
+[2m04:26:33[22m [34m[200][39m /blogs/ [2m56ms[22m
+[2m04:26:34[22m [34m[200][39m / [2m31ms[22m
+[2m19:01:07[22m [34m[200][39m /about/ [2m62ms[22m
+[2m19:01:20[22m [34m[200][39m / [2m17ms[22m
+[2m19:05:07[22m [34m[200][39m /rfid [2m118ms[22m
+[2m19:05:23[22m [34m[200][39m /product/rfid-card-inlay [2m15ms[22m
+[2m19:05:24[22m [33m[404][39m /images/products/RFID-card-inlay-2x5-TK4100-500x500.webp [2m7ms[22m
+[2m19:05:24[22m [33m[404][39m /images/products/RFID-card-inlay-2x5-TK4100-500x500.webp [2m3ms[22m
+[2m19:05:37[22m [34m[200][39m /contact [2m3ms[22m
+[2m19:05:48[22m [34m[200][39m /category/rfid-tags [2m17ms[22m
+[2m19:05:49[22m [34m[200][39m /product/rfid-waste-bin-tag [2m11ms[22m
+[2m19:05:58[22m [34m[200][39m /rfid-technology [2m9ms[22m
+[2m19:05:59[22m [34m[200][39m /rfid [2m5ms[22m
+[2m19:06:00[22m [34m[200][39m /category/rfid-keyfob [2m12ms[22m
+[2m19:06:05[22m [34m[200][39m /category/rfid-readers [2m3ms[22m
+[2m19:06:07[22m [34m[200][39m /category/rfid-wristbands [2m4ms[22m
+[2m19:06:09[22m [34m[200][39m /rfid [2m10ms[22m
+[2m19:06:11[22m [34m[200][39m /category/rfid-labels [2m4ms[22m
+[2m19:06:16[22m [34m[200][39m /category/rfid-tags [2m8ms[22m
+[2m19:08:40[22m [34m[200][39m / [2m14ms[22m
+[2m19:10:21[22m [34m[200][39m /blogs/laundry-rfid-tags-buying-guide [2m5ms[22m
+[2m19:10:56[22m [34m[200][39m /category/rfid-cards [2m12ms[22m
+[2m19:15:34[22m [34m[watch][39m src/pages/index.astro
+[2m19:15:34[22m [34m[watch][39m src/pages/index.astro
+[2m19:15:40[22m [34m[200][39m /category/rfid-cards [2m2804ms[22m
+[2m19:16:24[22m [34m[watch][39m src/data/categoryPages.ts
+[2m19:16:24[22m [34m[watch][39m src/data/categoryPages.ts
+[2m19:16:28[22m [34m[200][39m /category/rfid-cards [2m1911ms[22m
+[2m19:16:49[22m [34m[watch][39m src/components/CategoryLandingPage.astro
+[2m19:16:49[22m [34m[watch][39m src/components/CategoryLandingPage.astro
+[2m19:16:54[22m [34m[200][39m /category/rfid-cards [2m1782ms[22m
+[2m19:17:21[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m19:17:21[22m [34m[watch][39m src/pages/product/[slug].astro
+[2m19:17:25[22m [34m[200][39m /category/rfid-cards [2m1676ms[22m
+[2m19:18:06[22m [34m[watch][39m dist/404.html
+[2m19:18:06[22m [34m[watch][39m dist/about/index.html
+[2m19:18:06[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m19:18:06[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m19:18:07[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m19:18:08[22m [34m[watch][39m dist/index.html
+[2m19:18:08[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m19:18:08[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m19:18:08[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m19:18:08[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m19:18:08[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m19:18:08[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m19:18:08[22m [34m[watch][39m dist/contact/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m19:18:08[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m19:18:08[22m [34m[watch][39m dist/products/index.html
+[2m19:18:08[22m [34m[watch][39m dist/rfid/index.html
+[2m19:18:08[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m19:18:26[22m [34m[watch][39m dist/404.html
+[2m19:18:29[22m [34m[watch][39m dist/index.html
+[2m19:18:30[22m [34m[watch][39m dist/blogs/index.html
+[2m19:18:30[22m [34m[watch][39m dist/about/index.html
+[2m19:18:30[22m [34m[watch][39m dist/contact/index.html
+[2m19:18:30[22m [34m[watch][39m dist/products/index.html
+[2m19:18:30[22m [34m[watch][39m dist/rfid/index.html
+[2m19:18:30[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m19:18:30[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m19:18:30[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m19:18:30[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m19:18:30[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m19:18:30[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m19:18:30[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m19:18:30[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m19:18:30[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m19:18:30[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m19:18:31[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m19:18:32[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m19:18:58[22m [34m[200][39m /category/rfid-cards/ [2m15ms[22m
+[2m19:18:58[22m [34m[200][39m / [2m19ms[22m
+[2m19:18:59[22m [34m[200][39m /product/rfid-card-inlay/ [2m8ms[22m
+[2m19:19:17[22m [34m[200][39m /blogs [2m12ms[22m
+[2m19:20:29[22m [34m[200][39m / [2m10ms[22m
+[2m19:20:52[22m [34m[200][39m /about [2m4ms[22m
+[2m19:21:40[22m [34m[200][39m /rfid [2m13ms[22m
+[2m19:24:02[22m [34m[200][39m /rfid/ [2m16ms[22m
+[2m19:24:23[22m [34m[200][39m /rfid/ [2m10ms[22m
+[2m19:24:23[22m [34m[200][39m /rfid/ [2m9ms[22m
+[2m19:24:39[22m [34m[200][39m /rfid/ [2m7ms[22m
+[2m19:24:39[22m [34m[200][39m /rfid/ [2m7ms[22m
+[2m19:28:24[22m [34m[watch][39m src/utils/content.ts
+[2m19:28:24[22m [34m[watch][39m src/utils/content.ts
+[2m19:28:27[22m [34m[200][39m /blogs [2m1045ms[22m
+[2m19:28:27[22m [34m[200][39m /rfid [2m1047ms[22m
+[2m19:28:38[22m [34m[200][39m /rfid/ [2m12ms[22m
+[2m19:29:00[22m [34m[200][39m / [2m18ms[22m
+[2m19:29:01[22m [34m[200][39m /rfid/ [2m5ms[22m
+[2m19:29:01[22m [34m[200][39m /products/ [2m6ms[22m
+[2m19:29:01[22m [34m[200][39m /blogs/ [2m3ms[22m
+[2m19:29:02[22m [34m[200][39m /category/rfid-cards/ [2m7ms[22m
+[2m19:29:02[22m [34m[200][39m /product/rfid-card-inlay/ [2m5ms[22m
+[2m19:34:14[22m [34m[watch][39m dist/404.html
+[2m19:34:14[22m [34m[watch][39m dist/about/index.html
+[2m19:34:14[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m19:34:14[22m [34m[watch][39m dist/blogs/index.html
+[2m19:34:14[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m19:34:14[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m19:34:14[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m19:34:14[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m19:34:14[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m19:34:14[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m19:34:14[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m19:34:14[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m19:34:15[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m19:34:15[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m19:34:15[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m19:34:15[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m19:34:15[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m19:34:15[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m19:34:15[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m19:34:15[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m19:34:15[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m19:34:15[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m19:34:15[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m19:34:15[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m19:34:15[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m19:34:15[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m19:34:15[22m [34m[watch][39m dist/contact/index.html
+[2m19:34:17[22m [34m[watch][39m dist/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m19:34:17[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m19:34:17[22m [34m[watch][39m dist/products/index.html
+[2m19:34:17[22m [34m[watch][39m dist/rfid/index.html
+[2m19:34:17[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m19:34:28[22m [34m[watch][39m dist/404.html
+[2m19:34:28[22m [34m[watch][39m dist/index.html
+[2m19:34:29[22m [34m[watch][39m dist/about/index.html
+[2m19:34:29[22m [34m[watch][39m dist/blogs/index.html
+[2m19:34:29[22m [34m[watch][39m dist/contact/index.html
+[2m19:34:30[22m [34m[watch][39m dist/rfid/index.html
+[2m19:34:30[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m19:34:30[22m [34m[watch][39m dist/products/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m19:34:30[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m19:34:31[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m19:34:31[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m19:34:31[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m19:34:31[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m19:34:31[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m19:34:31[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m19:34:31[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m19:34:31[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m19:35:34[22m [34m[200][39m /product/mini-rfid-tag/ [2m12ms[22m
+[2m19:35:34[22m [34m[200][39m /product/rfid-card-inlay/ [2m11ms[22m
+[2m19:37:04[22m [34m[200][39m /rfid/ [2m9ms[22m
+[2m19:37:10[22m [34m[200][39m /product/rfid-silicone-wristband [2m13ms[22m
+[2m19:41:57[22m [34m[watch][39m src/components/Header.astro
+[2m19:41:57[22m [34m[watch][39m src/components/Header.astro
+[2m19:42:00[22m [34m[200][39m /rfid [2m803ms[22m
+[2m19:42:00[22m [34m[200][39m /blogs [2m804ms[22m
+[2m19:42:00[22m [34m[200][39m /product/rfid-silicone-wristband [2m807ms[22m
+[2m19:42:59[22m [34m[watch][39m src/components/Footer.astro
+[2m19:42:59[22m [34m[watch][39m src/components/Footer.astro
+[2m19:43:01[22m [34m[200][39m /blogs [2m674ms[22m
+[2m19:43:01[22m [34m[200][39m /rfid [2m675ms[22m
+[2m19:43:01[22m [34m[200][39m /product/rfid-silicone-wristband [2m679ms[22m
+[2m19:43:11[22m [34m[watch][39m src/layouts/Layout.astro
+[2m19:43:11[22m [34m[watch][39m src/layouts/Layout.astro
+[2m19:43:13[22m [34m[200][39m /rfid [2m868ms[22m
+[2m19:43:13[22m [34m[200][39m /blogs [2m870ms[22m
+[2m19:43:13[22m [34m[200][39m /product/rfid-silicone-wristband [2m873ms[22m
+[2m19:43:25[22m [34m[watch][39m src/layouts/Layout.astro
+[2m19:43:25[22m [34m[watch][39m src/layouts/Layout.astro
+[2m19:43:27[22m [34m[200][39m /blogs [2m736ms[22m
+[2m19:43:27[22m [34m[200][39m /rfid [2m738ms[22m
+[2m19:43:27[22m [34m[200][39m /product/rfid-silicone-wristband [2m739ms[22m
+[2m19:44:08[22m [34m[watch][39m dist/404.html
+[2m19:44:09[22m [34m[watch][39m dist/about/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m19:44:10[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m19:44:10[22m [34m[watch][39m dist/contact/index.html
+[2m19:44:10[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m19:44:10[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m19:44:10[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m19:44:10[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m19:44:10[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m19:44:10[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m19:44:12[22m [34m[watch][39m dist/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m19:44:12[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m19:44:12[22m [34m[watch][39m dist/rfid/index.html
+[2m19:44:12[22m [34m[watch][39m dist/products/index.html
+[2m19:44:12[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m19:44:25[22m [34m[watch][39m dist/404.html
+[2m19:44:26[22m [34m[watch][39m dist/index.html
+[2m19:44:27[22m [34m[watch][39m dist/about/index.html
+[2m19:44:27[22m [34m[watch][39m dist/blogs/index.html
+[2m19:44:27[22m [34m[watch][39m dist/contact/index.html
+[2m19:44:28[22m [34m[watch][39m dist/products/index.html
+[2m19:44:28[22m [34m[watch][39m dist/rfid/index.html
+[2m19:44:28[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m19:44:29[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m19:44:29[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m19:44:29[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m19:44:29[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m19:44:29[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m19:44:29[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m19:44:29[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m19:44:29[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m19:45:01[22m [34m[200][39m /category/rfid-tags/ [2m10ms[22m
+[2m19:45:01[22m [34m[200][39m / [2m16ms[22m
+[2m19:45:01[22m [34m[200][39m /product/rfid-card-inlay/ [2m11ms[22m
+[2m21:22:49[22m [34m[200][39m /product/rfid-silicone-wristband [2m11ms[22m
+[2m21:22:52[22m [34m[200][39m /about [2m4ms[22m
+[2m21:22:54[22m [34m[200][39m / [2m10ms[22m
+[2m21:23:01[22m [34m[200][39m /products [2m5ms[22m
+[2m21:23:17[22m [34m[200][39m /category/rfid-wristbands [2m6ms[22m
+[2m21:23:21[22m [34m[200][39m /product/textile-rfid-laundry-tag [2m16ms[22m
+[2m21:23:58[22m [34m[200][39m /category/rfid-wristbands [2m10ms[22m
+[2m21:24:00[22m [34m[200][39m /category/rfid-readers [2m3ms[22m
+[2m21:24:01[22m [34m[200][39m /rfid-technology [2m11ms[22m
+[2m21:24:06[22m [34m[200][39m /contact [2m4ms[22m
+[2m21:24:10[22m [34m[200][39m /products [2m7ms[22m
+[2m21:24:13[22m [34m[200][39m /rfid [2m7ms[22m
+[2m21:24:15[22m [34m[200][39m /category/rfid-cards [2m3ms[22m
+[2m21:24:16[22m [34m[200][39m /category/rfid-tags [2m10ms[22m
+[2m21:24:18[22m [34m[200][39m /category/rfid-labels [2m4ms[22m
+[2m21:24:19[22m [34m[200][39m /category/rfid-wristbands [2m11ms[22m
+[2m21:24:20[22m [34m[200][39m /category/rfid-readers [2m5ms[22m
+[2m21:24:21[22m [34m[200][39m /rfid-technology [2m5ms[22m
+[2m21:24:21[22m [34m[200][39m /blogs [2m5ms[22m
+[2m21:24:22[22m [34m[200][39m /contact [2m7ms[22m
+[2m21:24:39[22m [34m[200][39m /category/rfid-labels [2m5ms[22m
+[2m21:24:40[22m [34m[200][39m /category/rfid-wristbands [2m5ms[22m
+[2m21:25:51[22m [34m[200][39m /rfid [2m12ms[22m
+[2m21:26:10[22m [34m[200][39m /rfid-technology [2m6ms[22m
+[2m21:26:15[22m [34m[200][39m /blogs [2m11ms[22m
+[2m21:26:50[22m [34m[200][39m /rfid-technology [2m8ms[22m
+[2m21:26:52[22m [34m[200][39m /blogs [2m10ms[22m
+[2m21:30:08[22m [34m[watch][39m src/data/navigation.ts
+[2m21:30:08[22m [34m[watch][39m src/data/navigation.ts
+[2m21:30:08[22m [34m[watch][39m src/components/QuickNavBar.astro
+[2m21:30:08[22m [34m[watch][39m src/components/QuickNavBar.astro
+[2m21:30:08[22m [34m[watch][39m src/components/Header.astro
+[2m21:30:08[22m [34m[watch][39m src/components/Header.astro
+[2m21:30:11[22m [34m[200][39m /blogs [2m1026ms[22m
+[2m21:30:11[22m [34m[200][39m /rfid [2m1036ms[22m
+[2m21:30:11[22m [34m[200][39m /blogs [2m7ms[22m
+[2m21:30:42[22m [34m[200][39m /blogs [2m3ms[22m
+[2m21:30:42[22m [34m[200][39m /rfid [2m4ms[22m
+[2m21:50:18[22m [34m[watch][39m dist/404.html
+[2m21:50:18[22m [34m[watch][39m dist/about/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m21:50:18[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m21:50:18[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m21:50:21[22m [34m[watch][39m dist/index.html
+[2m21:50:21[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m21:50:21[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m21:50:21[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m21:50:21[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m21:50:21[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m21:50:21[22m [34m[watch][39m dist/contact/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m21:50:21[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m21:50:21[22m [34m[watch][39m dist/products/index.html
+[2m21:50:21[22m [34m[watch][39m dist/rfid/index.html
+[2m21:50:21[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m21:50:35[22m [34m[watch][39m dist/404.html
+[2m21:50:35[22m [34m[watch][39m dist/index.html
+[2m21:50:35[22m [34m[watch][39m dist/about/index.html
+[2m21:50:35[22m [34m[watch][39m dist/blogs/index.html
+[2m21:50:36[22m [34m[watch][39m dist/contact/index.html
+[2m21:50:36[22m [34m[watch][39m dist/products/index.html
+[2m21:50:36[22m [34m[watch][39m dist/rfid/index.html
+[2m21:50:36[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m21:50:36[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m21:50:36[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m21:50:36[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m21:50:36[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m21:50:36[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m21:50:36[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m21:50:37[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m21:50:38[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m21:50:38[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m21:50:38[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m21:50:38[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m21:50:38[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m21:50:38[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m21:50:39[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m21:52:33[22m [34m[watch][39m src/data/navigation.ts
+[2m21:52:33[22m [34m[watch][39m src/data/navigation.ts
+[2m21:52:33[22m [34m[watch][39m src/components/Header.astro
+[2m21:52:33[22m [34m[watch][39m src/components/Header.astro
+[2m21:52:36[22m [34m[200][39m /rfid [2m960ms[22m
+[2m21:52:36[22m [34m[200][39m /blogs [2m964ms[22m
+[2m21:52:36[22m [34m[200][39m /blogs [2m6ms[22m
+[2m21:52:49[22m [34m[200][39m /blogs [2m7ms[22m
+[2m21:52:50[22m [34m[200][39m / [2m24ms[22m
+[2m22:56:53[22m [34m[watch][39m dist/404.html
+[2m22:56:53[22m [34m[watch][39m dist/about/index.html
+[2m22:56:53[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m22:56:53[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m22:56:53[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m22:56:53[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m22:56:54[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m22:56:54[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m22:56:54[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m22:56:54[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m22:56:54[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m22:56:54[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m22:56:54[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m22:56:54[22m [34m[watch][39m dist/contact/index.html
+[2m22:56:55[22m [34m[watch][39m dist/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m22:56:55[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m22:56:55[22m [34m[watch][39m dist/products/index.html
+[2m22:56:55[22m [34m[watch][39m dist/rfid/index.html
+[2m22:56:55[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m22:57:04[22m [34m[watch][39m dist/404.html
+[2m22:57:04[22m [34m[watch][39m dist/about/index.html
+[2m22:57:04[22m [34m[watch][39m dist/blogs/index.html
+[2m22:57:04[22m [34m[watch][39m dist/contact/index.html
+[2m22:57:04[22m [34m[watch][39m dist/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/anti-metal-rfid-tags-guide/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/covid-rfid-laundry/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/how-to-choose-rfid-readers-and-writers/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/hotel-key-card-rfid-guide/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/how-to-order-rfid-cards-from-china/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/mifare-cards/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/nfc-technology/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/laundry-rfid-tags-buying-guide/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/mifare-classic-vs-desfire/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/nfc-tags-business-use-cases/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/rfid-frequency-guide/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/rfid-keyfob-buying-guide/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/rfid-labels-vs-hard-tags/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/rfid-supply-chain/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/rfid-types/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/rfid-vs-barcode/index.html
+[2m22:57:05[22m [34m[watch][39m dist/blogs/rfid-wristbands-for-events-and-hotels/index.html
+[2m22:57:05[22m [34m[watch][39m dist/category/rfid-cards/index.html
+[2m22:57:05[22m [34m[watch][39m dist/category/rfid-keyfob/index.html
+[2m22:57:05[22m [34m[watch][39m dist/category/rfid-labels/index.html
+[2m22:57:05[22m [34m[watch][39m dist/category/rfid-readers/index.html
+[2m22:57:05[22m [34m[watch][39m dist/category/rfid-tags/index.html
+[2m22:57:05[22m [34m[watch][39m dist/category/rfid-wristbands/index.html
+[2m22:57:05[22m [34m[watch][39m dist/products/index.html
+[2m22:57:05[22m [34m[watch][39m dist/rfid-technology/index.html
+[2m22:57:05[22m [34m[watch][39m dist/rfid/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/high-temperature-rfid-tag/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/key-transponder/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/library-rfid-tags/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/nfc-coin/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/mini-rfid-tag/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/nfc-epoxy-card/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/nfc-sticker/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/pallet-rfid-tag/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/pps-laundry-tag-rfid-button/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/rfid-cable-tie-tag/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/rfid-card-inlay/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/rfid-cards/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/rfid-ceramic-tag/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/rfid-clamshell-card/index.html
+[2m22:57:05[22m [34m[watch][39m dist/product/rfid-fpc-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-glass-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-clear-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-jewellery-tags/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-keyfob/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-metal-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-nail-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-paper-card/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-pcb/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-pcb-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-reader-writer/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-silicone-wristband/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-tyre-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-waste-bin-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-windshield-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/silicone-laundry-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/rfid-wood-card-2/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/spring-rfid-tire-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/tamper-proof-rfid-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/textile-rfid-laundry-tag/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/uhf-library-label/index.html
+[2m22:57:06[22m [34m[watch][39m dist/product/uhf-sticker/index.html
+[2m22:57:24[22m [34m[200][39m /blogs [2m4ms[22m
+[2m22:57:25[22m [34m[200][39m / [2m5ms[22m
+[2m23:01:55[22m [34m[200][39m / [2m7ms[22m
+[2m23:02:03[22m [34m[200][39m /products [2m5ms[22m
+[2m23:02:22[22m [34m[200][39m /contact [2m10ms[22m
+[2m23:02:36[22m [34m[200][39m /blogs [2m10ms[22m
+[2m23:02:43[22m [34m[200][39m /blogs/hotel-key-card-rfid-guide [2m6ms[22m
+[2m23:03:25[22m [34m[200][39m /rfid-technology [2m4ms[22m
+[2m23:14:31[22m [34m[watch][39m public/robots.txt
+[2m23:14:31[22m [34m[watch][39m public/robots.txt
+[2m23:14:31[22m Configuration file updated. Restarting...
+[2m23:14:31[22m [34m[watch][39m astro.config.mjs
+[2m23:14:31[22m [34m[watch][39m astro.config.mjs
+[2m23:14:31[22m [34m[watch][39m public/robots.txt
+[2m23:14:31[22m [34m[watch][39m public/robots.txt
+[2m23:14:31[22m [34m[watch][39m src/data/blogs.ts
+[2m23:14:31[22m [34m[watch][39m src/data/blogs.ts
+[2m23:14:31[22m [34m[watch][39m src/layouts/Layout.astro
+[2m23:14:31[22m [34m[watch][39m src/layouts/Layout.astro
+[2m23:14:32[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m23:14:43[22m [34m[content][39m Syncing content
+[2m23:14:47[22m [34m[content][39m Synced content
+[2m23:14:47[22m [34m[types][39m Generated [2m15.05s[22m

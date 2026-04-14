@@ -1,0 +1,107 @@
+---
+// GEO-optimized FAQs: direct answers, specific data, citation-friendly format
+const faqs = [
+  {
+    question: 'What types of RFID products does ProudTek manufacture?',
+    answer: 'ProudTek manufactures 6 main categories of RFID products across 46+ SKUs: (1) RFID Cards — PVC, ABS, wood, paper, and clamshell cards; (2) RFID Tags — laundry tags, library tags, nail tags, ceramic tags, PCB tags, tire tags, and pallet tags; (3) RFID Labels & Stickers — UHF stickers, NFC stickers, tamper-proof labels, and jewellery tags; (4) RFID Wristbands — silicone, fabric, and disposable wristbands; (5) RFID Keyfobs — ABS, leather, and epoxy keyfobs; (6) RFID Readers/Writers — desktop and handheld models. All products are available in three frequency bands: LF (125kHz), HF (13.56MHz), and UHF (860–960MHz).',
+  },
+  {
+    question: 'What is the minimum order quantity (MOQ) for RFID products?',
+    answer: 'ProudTek\'s MOQ varies by product type: RFID cards start at 500 pieces, RFID tags and labels start at 1,000 pieces, and RFID wristbands start at 500 pieces. For custom-shaped or specialty products, the MOQ may be 2,000–5,000 pieces depending on tooling requirements. ProudTek also provides free samples of standard products before bulk orders, shipped within 1–3 business days via DHL or FedEx.',
+  },
+  {
+    question: 'Can ProudTek customize RFID products?',
+    answer: 'Yes, ProudTek provides end-to-end RFID customization with 15+ years of experience. Customization options include: material (PVC, PET, ABS, silicone, ceramic, wood, paper), dimensions and shape (die-cut or standard ISO card size 85.5×54mm), chip and frequency selection (30+ chip types across LF/HF/UHF), surface finish (matte, glossy, frosted), printing (CMYK full color, offset, silk screen, laser engraving, UV printing), encoding (UID, serial numbers, custom data), and packaging. The engineering team provides free design support and prototyping for complex requirements.',
+  },
+  {
+    question: 'What RFID chip types does ProudTek support?',
+    answer: 'ProudTek supports 30+ RFID chip types across all major manufacturers. LF chips: EM4100, EM4200, T5577, HID Prox, Hitag1/2/S. HF chips (13.56MHz): NXP Mifare Classic 1K (S50) and 4K (S70), Mifare Plus S/X 2K/4K, Mifare DESFire EV2 2K/4K/8K and EV3, NTAG213 (144 bytes), NTAG215 (504 bytes), NTAG216 (888 bytes), ICODE SLIX/SLIX2. UHF chips (860–960MHz): Impinj Monza R6, Monza 4/5, NXP UCODE 7/8, Alien Higgs-3/4. ProudTek maintains a stable chip supply chain, including for chips that are scarce in the global market such as DESFire EV2/EV3.',
+  },
+  {
+    question: 'How long does it take to deliver RFID orders?',
+    answer: 'ProudTek delivers with a 99% on-time guarantee. Standard products ship within 3–7 business days. Custom orders require 7–15 business days, depending on quantity, complexity, and printing requirements. Rush orders are available for urgent needs. Shipping options include DHL, UPS, FedEx (door-to-door, 3–5 days international), air cargo (5–7 days), and sea freight (20–35 days for bulk orders over 500kg). ProudTek ships to 50+ countries worldwide.',
+  },
+  {
+    question: 'Does ProudTek provide free RFID samples?',
+    answer: 'Yes, ProudTek provides free samples for all standard RFID products in their catalog of 46+ items. To request samples, contact info@proudtek.com or WhatsApp +86-13631526015 with your product requirements, target application, and shipping address. Samples are typically prepared within 1 business day and shipped via DHL/FedEx express (2–5 days delivery worldwide). Custom samples with specific chip programming or printing may take 3–5 additional business days.',
+  },
+  {
+    question: 'What industries use RFID products from ProudTek?',
+    answer: 'ProudTek\'s RFID products serve 10+ major industries: (1) Public Transportation — bus/metro ticketing smart cards used in transit systems across 20+ countries; (2) Access Control — hotel key cards, office entry systems, parking management; (3) Healthcare — patient identification wristbands, asset tracking, pharmaceutical anti-counterfeiting; (4) Laundry Management — industrial laundry tracking with silicone and textile tags surviving 200+ wash cycles at 180°C; (5) Retail — inventory management with UHF labels, anti-theft tags; (6) Libraries — book tracking and self-checkout systems; (7) Logistics — pallet tracking, container identification; (8) Events — NFC wristbands for festivals, conferences, water parks; (9) Automotive — tire tracking, toll collection, vehicle identification; (10) Manufacturing — work-in-progress tracking, tool management.',
+  },
+  {
+    question: 'What quality certifications does ProudTek hold?',
+    answer: 'ProudTek holds ISO 9001:2015 (Quality Management System) and ISO 14001 (Environmental Management System) certifications, verified by SGS. Every RFID product undergoes multi-stage quality control: incoming material inspection, in-process QC after each production step, and final product testing including 100% chip read/write verification. The factory maintains a monthly production capacity of 5 million RFID cards and has served 108+ clients with a 99% positive feedback rate over 15+ years of operation.',
+  },
+];
+
+// FAQ JSON-LD
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer,
+    },
+  })),
+};
+---
+
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-semibold text-gray-800 mb-4">Frequently Asked Questions</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Find answers to common questions about ProudTek's RFID products, customization, and ordering process.
+      </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto space-y-4">
+      {faqs.map((faq, index) => (
+        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-toggle w-full flex justify-between items-center p-5 text-left bg-white hover:bg-gray-50 transition-colors"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${index}`}
+          >
+            <h3 class="text-lg font-medium text-gray-800 pr-4">{faq.question}</h3>
+            <svg class="faq-icon w-5 h-5 text-[#00bcd4] flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id={`faq-answer-${index}`} class="faq-content hidden px-5 pb-5">
+            <p class="text-gray-600 leading-relaxed">{faq.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+</section>
+
+<script>
+  document.querySelectorAll('.faq-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('.faq-icon');
+      const isOpen = content?.classList.contains('hidden') === false;
+
+      // Close all
+      document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+      document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('rotate-180'));
+      document.querySelectorAll('.faq-toggle').forEach(b => b.setAttribute('aria-expanded', 'false'));
+
+      // Open clicked if was closed
+      if (!isOpen) {
+        content?.classList.remove('hidden');
+        icon?.classList.add('rotate-180');
+        button.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

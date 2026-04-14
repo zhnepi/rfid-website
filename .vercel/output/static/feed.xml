@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>ProudTek RFID Blog</title>
+    <link>https://www.proudtek.com/blogs</link>
+    <description>RFID buying guides, technology comparisons, and application insights from ProudTek — an RFID card, tag, and label manufacturer since 2008.</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 16 Mar 2026 07:00:00 GMT</lastBuildDate>
+    <atom:link href="https://www.proudtek.com/feed.xml" rel="self" type="application/rss+xml" />
+    <image>
+      <url>https://www.proudtek.com/favicon.svg</url>
+      <title>ProudTek RFID Blog</title>
+      <link>https://www.proudtek.com</link>
+    </image>
+    <item>
+      <title>About RFID and 7 Types of Regular RFID Tags</title>
+      <link>https://www.proudtek.com/blogs/rfid-types</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/rfid-types</guid>
+      <description>Learn about RFID technology and discover 7 types of regular RFID tags including passive tags, active tags, semi-passive tags, and more. Complete guide from ProudTek.</description>
+      <pubDate>Sat, 30 Jul 2022 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>MIFARE Chip Card Guide: Classic, Plus, DESFire and Ultralight Compared</title>
+      <link>https://www.proudtek.com/blogs/mifare-cards</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/mifare-cards</guid>
+      <description>Compare NXP MIFARE chip cards: Classic 1K/4K, Plus, DESFire EV2/EV3, Ultralight. Security, memory, cost and application guide from ProudTek manufacturer.</description>
+      <pubDate>Sun, 24 Aug 2014 07:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>Choosing the Right RFID Frequency for Your Application</title>
+      <link>https://www.proudtek.com/blogs/rfid-frequency-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/rfid-frequency-guide</guid>
+      <description>Guide to RFID frequencies: LF (125kHz), HF (13.56MHz), UHF (860-960MHz). Compare read ranges, applications, and choose the right RFID frequency. ProudTek expert guide.</description>
+      <pubDate>Fri, 05 Nov 2021 07:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>HF vs UHF RFID: How to Choose the Right Frequency for Your Project</title>
+      <link>https://www.proudtek.com/blogs/hf-vs-uhf-rfid-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/hf-vs-uhf-rfid-guide</guid>
+      <description>HF vs UHF RFID comparison: read range, chip options, standards, cost and use cases. Choose the right RFID frequency for cards, tags and labels. ProudTek guide.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>RFID for Retail Inventory: How Stores Use UHF Tags to Cut Stockouts</title>
+      <link>https://www.proudtek.com/blogs/rfid-retail-inventory-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/rfid-retail-inventory-guide</guid>
+      <description>Retail RFID inventory guide: how UHF tags improve stock accuracy to 95%+, reduce out-of-stocks and automate store replenishment. ProudTek label solutions.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>RFID Access Control Cards: A Buyer&apos;s Guide to Building and Campus Security</title>
+      <link>https://www.proudtek.com/blogs/rfid-access-control-cards-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/rfid-access-control-cards-guide</guid>
+      <description>RFID access control card buying guide: chip selection, credential formats, encoding options and supplier checklist for buildings, offices and campuses. ProudTek guide.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>Digital Product Passport with NFC and RFID: What Brands Should Build Before EU DPP Deadlines</title>
+      <link>https://www.proudtek.com/blogs/digital-product-passport-nfc-rfid-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/digital-product-passport-nfc-rfid-guide</guid>
+      <description>Compare QR, NFC and RFID for Digital Product Passport projects. Learn when GS1 Digital Link is enough and when serialized tags make sense.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>NFC Anti-Counterfeit Tags: How Brands Use Secure Authentication Labels in 2026</title>
+      <link>https://www.proudtek.com/blogs/nfc-anti-counterfeit-tags-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/nfc-anti-counterfeit-tags-guide</guid>
+      <description>Compare secure NFC chips, tamper options and authentication flows for anti-counterfeit labels and smartphone-based product verification.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>RFID Baggage Tracking for Airlines and Airports: What Buyers Should Compare in 2026</title>
+      <link>https://www.proudtek.com/blogs/rfid-baggage-tracking-airports-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/rfid-baggage-tracking-airports-guide</guid>
+      <description>Learn how airports and airlines use RFID baggage tags, reader checkpoints and Resolution 753 workflows to improve bag visibility and transfer accuracy.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>RFID for Fresh Food Retail: How Grocery Teams Extend Item-Level Visibility into Bakery, Meat and Deli</title>
+      <link>https://www.proudtek.com/blogs/rfid-fresh-food-retail-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/rfid-fresh-food-retail-guide</guid>
+      <description>See how grocers are testing RFID in bakery, meat and deli. Compare label choices, cold-chain risks and pilot design for fresh-food tracking.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>QR vs NFC vs RFID for Digital Product Passport: Which Carrier Should Brands Choose?</title>
+      <link>https://www.proudtek.com/blogs/qr-vs-nfc-vs-rfid-dpp-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/qr-vs-nfc-vs-rfid-dpp-guide</guid>
+      <description>Compare QR, NFC and RFID for Digital Product Passport programs. See when one carrier is enough and when brands should combine all three.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>Medical Device RFID and UDI: What Manufacturers Should Compare for Tracking and Compliance</title>
+      <link>https://www.proudtek.com/blogs/medical-device-rfid-udi-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/medical-device-rfid-udi-guide</guid>
+      <description>Understand how FDA UDI rules affect labels, direct marking and tracking, and where RFID adds value in reusable devices, trays and hospital workflows.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>RFID for Returns and Reverse Logistics: How Retailers Turn Post-Sale Chaos into Recoverable Value</title>
+      <link>https://www.proudtek.com/blogs/rfid-returns-reverse-logistics-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/rfid-returns-reverse-logistics-guide</guid>
+      <description>Learn how RFID improves returns intake, routing, resale and reverse logistics visibility for retailers handling high volumes and value recovery.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>Battery Passport with RFID and NFC: What EV and Industrial Battery Teams Should Plan Now</title>
+      <link>https://www.proudtek.com/blogs/battery-passport-rfid-nfc-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/battery-passport-rfid-nfc-guide</guid>
+      <description>Compare QR, NFC and RFID for battery passport programs across manufacturing, service, second life and recycling workflows.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>Sunrise 2027 and RFID: Why 2D Barcodes Will Not Replace Item-Level RFID in Retail</title>
+      <link>https://www.proudtek.com/blogs/sunrise-2027-2d-barcodes-vs-rfid-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/sunrise-2027-2d-barcodes-vs-rfid-guide</guid>
+      <description>Understand what GS1 Sunrise 2027 changes at POS, where 2D barcodes help, and why retailers still need item-level RFID for operations.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>FSMA 204 and RFID: What Food Traceability Teams Should Pilot Before July 20, 2028</title>
+      <link>https://www.proudtek.com/blogs/fsma-204-rfid-food-traceability-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/fsma-204-rfid-food-traceability-guide</guid>
+      <description>Learn what FSMA 204 requires, why July 20, 2028 matters, and where RFID can support receiving, cold-chain visibility and food traceability data capture.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>DSCSA and RFID: Where RFID Fits in Pharmaceutical Traceability Beyond Package-Level Serialization</title>
+      <link>https://www.proudtek.com/blogs/dscsa-rfid-pharma-traceability-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/dscsa-rfid-pharma-traceability-guide</guid>
+      <description>See where RFID fits around DSCSA package-level tracing, from warehouse handling to case and pallet visibility in pharmaceutical supply chains.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>Textile DPP with QR, NFC and RFID: What Apparel Brands Should Put on the Garment, Hangtag or Packaging</title>
+      <link>https://www.proudtek.com/blogs/textile-dpp-qr-nfc-rfid-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/textile-dpp-qr-nfc-rfid-guide</guid>
+      <description>Compare QR, NFC and RFID for textile Digital Product Passport programs and decide what belongs on the garment, hangtag or packaging.</description>
+      <pubDate>Mon, 16 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>Hotel Key Card RFID Guide: Chips, Materials and OEM Questions Buyers Should Compare</title>
+      <link>https://www.proudtek.com/blogs/hotel-key-card-rfid-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/hotel-key-card-rfid-guide</guid>
+      <description>Hotel RFID key card buying guide covering chip options, card materials, print finishes, encoding questions and sample planning for hospitality projects.</description>
+      <pubDate>Fri, 13 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>Laundry RFID Tags Buying Guide: How to Choose Washable Tags for Linen and Uniform Tracking</title>
+      <link>https://www.proudtek.com/blogs/laundry-rfid-tags-buying-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/laundry-rfid-tags-buying-guide</guid>
+      <description>Laundry RFID tag buying guide for linen and uniform tracking. Compare silicone, PPS and textile laundry tags, attachment methods and wash-cycle requirements.</description>
+      <pubDate>Thu, 12 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>Anti-Metal RFID Tags Guide: How to Track Tools, IT Assets and Equipment on Metal Surfaces</title>
+      <link>https://www.proudtek.com/blogs/anti-metal-rfid-tags-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/anti-metal-rfid-tags-guide</guid>
+      <description>Anti-metal RFID tag guide for tools, IT assets and industrial equipment. Compare printable on-metal labels, hard tags, high-temperature tags and compact PCB or ceramic formats.</description>
+      <pubDate>Wed, 11 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>RFID Labels vs Hard Tags: Which Format Fits Your Tracking Project?</title>
+      <link>https://www.proudtek.com/blogs/rfid-labels-vs-hard-tags</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/rfid-labels-vs-hard-tags</guid>
+      <description>RFID labels vs hard tags guide comparing durability, surface fit, printability, reuse and project economics for warehouse, retail and industrial tracking.</description>
+      <pubDate>Tue, 10 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>RFID Wristbands for Events and Hotels: What Buyers Should Compare Before Ordering</title>
+      <link>https://www.proudtek.com/blogs/rfid-wristbands-for-events-and-hotels</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/rfid-wristbands-for-events-and-hotels</guid>
+      <description>RFID wristband buying guide for events and hotels. Compare silicone, fabric and disposable bands for access control, cashless payment and guest identification.</description>
+      <pubDate>Mon, 09 Mar 2026 07:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>How to Choose RFID Readers and Writers for Encoding, Testing and Deployment</title>
+      <link>https://www.proudtek.com/blogs/how-to-choose-rfid-readers-and-writers</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/how-to-choose-rfid-readers-and-writers</guid>
+      <description>How to choose RFID readers and writers for cards, tags and labels. Compare desktop, USB, fixed and embedded readers plus software, interface and protocol requirements.</description>
+      <pubDate>Sun, 08 Mar 2026 08:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>RFID Keyfob Buying Guide: How to Match Access Credentials to Existing Readers</title>
+      <link>https://www.proudtek.com/blogs/rfid-keyfob-buying-guide</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/rfid-keyfob-buying-guide</guid>
+      <description>RFID keyfob buying guide for access control, parking and membership projects. Compare ABS, epoxy and NFC keyfobs and match them to existing readers.</description>
+      <pubDate>Sat, 07 Mar 2026 08:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>NFC Tags for Business: 10 Powerful Use Cases in 2026</title>
+      <link>https://www.proudtek.com/blogs/nfc-tags-business-use-cases</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/nfc-tags-business-use-cases</guid>
+      <description>Top 10 NFC tag business applications in 2026: smart packaging, digital business cards, product authentication, customer engagement. NFC solutions from ProudTek.</description>
+      <pubDate>Thu, 05 Mar 2026 08:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>Mifare Classic vs DESFire: Which RFID Chip Should You Choose?</title>
+      <link>https://www.proudtek.com/blogs/mifare-classic-vs-desfire</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/mifare-classic-vs-desfire</guid>
+      <description>Mifare Classic vs DESFire EV3: compare security levels, memory capacity, encryption standards, pricing, and best applications. Expert buying guide from ProudTek RFID manufacturer.</description>
+      <pubDate>Wed, 18 Feb 2026 08:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>RFID vs Barcode: A Complete Comparison for Businesses</title>
+      <link>https://www.proudtek.com/blogs/rfid-vs-barcode</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/rfid-vs-barcode</guid>
+      <description>RFID vs Barcode comparison: speed, accuracy, cost, ROI analysis. Learn when to use RFID tags vs barcodes for inventory management, retail, and supply chain. ProudTek guide.</description>
+      <pubDate>Sat, 10 Jan 2026 08:00:00 GMT</pubDate>
+      <category>RFID TECHNOLOGY</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+    <item>
+      <title>How to Order Custom RFID Cards from China: Complete Buyer&apos;s Guide</title>
+      <link>https://www.proudtek.com/blogs/how-to-order-rfid-cards-from-china</link>
+      <guid isPermaLink="true">https://www.proudtek.com/blogs/how-to-order-rfid-cards-from-china</guid>
+      <description>Step-by-step guide to ordering custom RFID cards from China: how to choose a manufacturer, specify requirements, negotiate pricing, ensure quality, and arrange shipping.</description>
+      <pubDate>Sat, 20 Dec 2025 08:00:00 GMT</pubDate>
+      <category>RFID APPLICATIONS</category>
+      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+    </item>
+  </channel>
+</rss>

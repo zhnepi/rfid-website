@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { blogPosts as blogs } from '../data/blogs';
+---
+
+<Layout
+  title="RFID Technology Blog - Industry News, Guides & Applications | ProudTek"
+  description="Explore ProudTek's RFID blog for the latest industry news, technology guides, and application insights. Learn about RFID cards, NFC technology, RFID in supply chain, laundry management, and more."
+  keywords="RFID blog, RFID technology news, RFID applications, NFC technology guide, RFID industry insights"
+>
+  <Header />
+  <main>
+    <!-- Hero Section -->
+    <section class="bg-primary py-20">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-5xl md:text-6xl heading-display text-white">Blogs</h1>
+        <p class="text-white/80 mt-4 max-w-2xl mx-auto">
+          Stay updated with the latest news, insights, and trends in RFID technology
+        </p>
+      </div>
+    </section>
+    
+    <!-- Blog Grid -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogs.map((blog) => (
+            <article class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <a href={`/blogs/${blog.slug}`} class="block">
+                <div class="relative aspect-[16/10] overflow-hidden">
+                  <img 
+                    src={blog.image} 
+                    alt={blog.title}
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              </a>
+              <div class="p-6">
+                <span class="text-primary text-xs uppercase tracking-wider font-medium">{blog.category}</span>
+                <h2 class="text-xl font-semibold text-gray-800 mt-2 mb-3 hover:text-primary transition-colors">
+                  <a href={`/blogs/${blog.slug}`}>{blog.title}</a>
+                </h2>
+                <p class="text-gray-600 text-sm mb-4 line-clamp-3">{blog.excerpt}</p>
+                <div class="flex items-center justify-between">
+                  <a 
+                    href={`/blogs/${blog.slug}`}
+                    class="text-primary font-medium hover:text-primary-dark transition-colors inline-flex items-center gap-1"
+                  >
+                    Read more
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </a>
+                  <span class="text-gray-400 text-sm">{blog.date}</span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        
+        <!-- All posts shown -->
+      </div>
+    </section>
+    
+    <Newsletter />
+  </main>
+  <Footer />
+</Layout>

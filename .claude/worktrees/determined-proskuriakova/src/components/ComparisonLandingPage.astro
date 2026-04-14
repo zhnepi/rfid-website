@@ -1,0 +1,383 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Newsletter from './Newsletter.astro';
+import { comparisonPages, comparisonPagesList } from '../data/comparisons';
+import { products } from '../data/products';
+import { solutionPagesList } from '../data/solutions';
+import { truncateText } from '../utils/content';
+import {
+  getComparisonContactHref,
+  getContextualInquiryLabel,
+  getProductContactHref,
+  getProductInquiryIntent,
+  getSolutionContactHref,
+  getSolutionInquiryIntent,
+  getWhatsAppHref,
+} from '../utils/contact';
+import { getProductBuyerSummary } from '../utils/productCopy';
+
+interface Props {
+  comparisonKey: keyof typeof comparisonPages;
+}
+
+const { comparisonKey } = Astro.props;
+const config = comparisonPages[comparisonKey];
+const siteURL = 'https://www.proudtek.com';
+const canonicalURL = `${siteURL}/compare/${config.slug}`;
+const featuredProducts = config.productSlugs
+  .map((slug) => products.find((product) => product.slug === slug))
+  .filter(Boolean);
+const featuredProductCards = featuredProducts.map((product) => ({
+  product: product!,
+  contactHref: getProductContactHref(product!),
+  inquiryLabel: getContextualInquiryLabel(getProductInquiryIntent(product!), 'product'),
+}));
+const relatedSolutionCards = solutionPagesList
+  .filter((page) => config.relatedSolutionSlugs.includes(page.slug))
+  .map((page) => ({
+    ...page,
+    contactHref: getSolutionContactHref(page.slug),
+    inquiryLabel: getContextualInquiryLabel(getSolutionInquiryIntent(page.slug), 'solution'),
+  }));
+const otherComparisonCards = comparisonPagesList
+  .filter((page) => page.slug !== config.slug)
+  .slice(0, 3)
+  .map((page) => ({
+    ...page,
+    contactHref: getComparisonContactHref(page.slug),
+  }));
+const comparisonContactHref = getComparisonContactHref(config.slug);
+const comparisonWhatsAppHref = getWhatsAppHref(config.whatsappMessage);
+
+const collectionJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': `${canonicalURL}#collection`,
+  url: canonicalURL,
+  name: config.title,
+  description: config.description,
+  isPartOf: { '@id': `${siteURL}/#website` },
+  about: [
+    { '@type': 'Thing', name: config.leftOptionLabel },
+    { '@type': 'Thing', name: config.rightOptionLabel },
+  ],
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: featuredProducts.map((product, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: `${siteURL}/product/${product!.slug}`,
+      name: product!.name,
+    })),
+  },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: [
+      '[data-speakable="comparison-summary"]',
+      '[data-speakable="comparison-table"]',
+      '[data-speakable="left-fit"]',
+      '[data-speakable="right-fit"]',
+    ],
+  },
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteURL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Comparisons', item: `${siteURL}/compare` },
+    { '@type': 'ListItem', position: 3, name: config.name, item: canonicalURL },
+  ],
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: config.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Layout
+  title={config.title}
+  description={config.description}
+  keywords={config.keywords}
+  canonicalURL={canonicalURL}
+  ogImage={featuredProducts[0]?.images?.[0] || '/images/hero/smart-card-banner.webp'}
+  jsonLd={[collectionJsonLd, breadcrumbJsonLd, faqJsonLd]}
+>
+  <Header />
+  <main>
+    <section class="bg-gradient-to-br from-[#072a31] via-slate-900 to-[#0c4a56] py-20 text-white">
+      <div class="container mx-auto px-4">
+        <nav class="mb-4 text-sm text-white/70" aria-label="Breadcrumb">
+          <a href="/" class="hover:underline">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/compare" class="hover:underline">Comparisons</a>
+          <span class="mx-2">/</span>
+          <span>{config.name}</span>
+        </nav>
+        <div class="max-w-4xl" data-speakable="comparison-summary">
+          <p class="eyebrow-label mb-4 text-[#c9a84c]">{config.heroEyebrow}</p>
+          <h1 class="title-balance text-4xl font-bold md:text-6xl">{config.heroTitle}</h1>
+          <p class="mt-6 max-w-3xl text-lg text-white/82">{config.heroDescription}</p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href={comparisonContactHref} class="rounded-lg bg-[#c9a84c] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#b8943f]">
+              Start this comparison inquiry
+            </a>
+            <a href="/products" class="rounded-lg border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10">
+              Browse product families
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-gray-100 bg-white py-16">
+      <div class="container mx-auto px-4">
+        <div class="mb-8 max-w-3xl">
+          <p class="eyebrow-label mb-2 text-[#c9a84c]">Decision Signals</p>
+          <h2 class="title-balance text-3xl font-semibold text-gray-900">Why buyers usually start with this comparison</h2>
+        </div>
+        <div class="grid gap-5 md:grid-cols-3">
+          {config.signals.map((signal) => (
+            <div class="copy-safe rounded-[1.75rem] border border-gray-200 bg-gray-50 p-7">
+              <h2 class="title-balance text-xl font-semibold text-gray-900">{signal.title}</h2>
+              <p class="mt-3 text-sm leading-relaxed text-gray-600">{signal.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-50 py-16">
+      <div class="container mx-auto px-4">
+        <div class="mb-8 max-w-3xl">
+          <p class="eyebrow-label mb-2 text-[#c9a84c]">Side-By-Side View</p>
+          <h2 class="title-balance text-3xl font-semibold text-gray-900">The tradeoffs most teams want to clarify before sampling</h2>
+          <p class="card-copy mt-3 text-gray-600">{config.comparisonTable.caption}</p>
+        </div>
+        <div class="overflow-x-auto rounded-[2rem] border border-gray-200 bg-white shadow-sm" data-speakable="comparison-table">
+          <table class="min-w-full border-collapse text-left">
+            <thead class="bg-slate-950 text-white">
+              <tr>
+                {config.comparisonTable.headers.map((header) => (
+                  <th class="px-6 py-4 text-sm font-semibold">{header}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {config.comparisonTable.rows.map((row, rowIndex) => (
+                <tr class:list={[rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50']}>
+                  {row.map((cell, cellIndex) => (
+                    <td class:list={[
+                      'px-6 py-4 align-top text-sm leading-relaxed',
+                      cellIndex === 0 ? 'font-semibold text-gray-900' : 'text-gray-600',
+                    ]}>
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-gray-100 bg-white py-16">
+      <div class="container mx-auto px-4">
+        <div class="grid gap-6 lg:grid-cols-2">
+          <div class="copy-safe rounded-[2rem] border border-gray-200 bg-gray-50 p-8" data-speakable="left-fit">
+            <span class="eyebrow-label text-[#c9a84c]">{config.leftOptionLabel}</span>
+            <h2 class="title-balance mt-3 text-3xl font-semibold text-gray-900">{config.leftFitTitle}</h2>
+            <div class="mt-6 space-y-4">
+              {config.leftFitPoints.map((point) => (
+                <div class="flex gap-3 rounded-2xl border border-gray-200 bg-white px-5 py-5">
+                  <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-[#c9a84c]"></span>
+                  <p class="text-sm leading-relaxed text-gray-700">{point}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="copy-safe rounded-[2rem] border border-[#c9a84c]/15 bg-[#c9a84c]/5 p-8" data-speakable="right-fit">
+            <span class="eyebrow-label text-[#c9a84c]">{config.rightOptionLabel}</span>
+            <h2 class="title-balance mt-3 text-3xl font-semibold text-gray-900">{config.rightFitTitle}</h2>
+            <div class="mt-6 space-y-4">
+              {config.rightFitPoints.map((point) => (
+                <div class="flex gap-3 rounded-2xl border border-[#c9a84c]/15 bg-white px-5 py-5">
+                  <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-[#c9a84c]"></span>
+                  <p class="text-sm leading-relaxed text-gray-700">{point}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 rounded-[2rem] bg-slate-950 p-8 text-white">
+          <p class="eyebrow-label mb-2 text-[#c9a84c]">Practical Buying Note</p>
+          <h2 class="title-balance text-2xl font-semibold">{config.hybridTitle}</h2>
+          <p class="mt-4 max-w-4xl text-white/78">{config.hybridDescription}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-50 py-16">
+      <div class="container mx-auto px-4">
+        <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="eyebrow-label mb-2 text-[#c9a84c]">Recommended Products</p>
+            <h2 class="title-balance text-3xl font-semibold text-gray-900">Product pages that usually support the next sample decision</h2>
+          </div>
+          <a href="/products" class="text-sm font-semibold text-[#c9a84c] transition-colors hover:text-[#b8943f]">Browse product families</a>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {featuredProductCards.map(({ product, contactHref, inquiryLabel }) => (
+            <article class="copy-safe overflow-hidden rounded-[1.75rem] border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-lg">
+              <a href={`/product/${product.slug}`} class="block">
+                <div class="aspect-square overflow-hidden bg-gray-100">
+                  <img
+                    src={product.images[0]}
+                    alt={product.name}
+                    class="h-full w-full object-cover"
+                    loading="lazy"
+                    width="500"
+                    height="500"
+                  />
+                </div>
+                <div class="p-5">
+                  <span class="eyebrow-label text-[#c9a84c]">{product.category}</span>
+                  <h3 class="title-balance mt-3 text-lg font-semibold text-gray-900">{product.name}</h3>
+                  <p class="card-copy mt-2 text-sm text-gray-500">{getProductBuyerSummary(product, 116)}</p>
+                </div>
+              </a>
+              <div class="px-5 pb-5">
+                <a href={contactHref} class="inline-flex text-xs font-medium text-gray-500 transition-colors hover:text-[#c9a84c]">
+                  {inquiryLabel}
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-gray-100 bg-white py-16">
+      <div class="container mx-auto px-4">
+        <div class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+          <div class="copy-safe rounded-[2rem] border border-gray-200 bg-gray-50 p-8">
+            <p class="eyebrow-label mb-2 text-[#c9a84c]">Decision Support</p>
+            <h2 class="title-balance mb-4 text-3xl font-semibold text-gray-900">What buyers usually open before they request samples</h2>
+            <div class="space-y-3">
+              {config.resources.map((resource) => (
+                <a href={resource.href} class="copy-safe block rounded-2xl border border-gray-200 bg-white p-4 transition-colors hover:border-[#c9a84c]">
+                  <span class="block text-sm font-semibold text-gray-800">{resource.name}</span>
+                  <span class="mt-1 block text-sm text-gray-500">{resource.description}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div class="copy-safe rounded-[2rem] border border-[#c9a84c]/15 bg-[#c9a84c]/5 p-8">
+            <p class="eyebrow-label mb-2 text-[#c9a84c]">Related Solution Hubs</p>
+            <h2 class="title-balance mb-4 text-3xl font-semibold text-gray-900">Open these workflow pages if the choice depends on the wider project setup</h2>
+            <div class="space-y-3">
+              {relatedSolutionCards.map((solution) => (
+                <div class="copy-safe rounded-2xl border border-[#c9a84c]/15 bg-white p-4 transition-colors hover:border-[#c9a84c]">
+                  <a href={`/solutions/${solution.slug}`} class="block">
+                    <span class="block text-sm font-semibold text-gray-800">{solution.name}</span>
+                    <span class="mt-1 block text-sm text-gray-500">{solution.description}</span>
+                  </a>
+                  <a href={solution.contactHref} class="mt-3 inline-flex text-xs font-medium text-gray-500 transition-colors hover:text-[#c9a84c]">
+                    {solution.inquiryLabel}
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-50 py-16">
+      <div class="container mx-auto px-4">
+        <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="eyebrow-label mb-2 text-[#c9a84c]">More Comparisons</p>
+            <h2 class="title-balance text-3xl font-semibold text-gray-900">Compare one more nearby option if the shortlist is still open</h2>
+          </div>
+          <a href="/compare" class="text-sm font-semibold text-[#c9a84c] transition-colors hover:text-[#b8943f]">Open comparison hub</a>
+        </div>
+        <div class="grid gap-5 md:grid-cols-3">
+          {otherComparisonCards.map((page) => (
+            <article class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-6 transition-all hover:border-[#c9a84c] hover:shadow-lg">
+              <a href={`/compare/${page.slug}`} class="block">
+                <span class="eyebrow-label text-[#c9a84c]">{page.heroEyebrow}</span>
+                <h3 class="title-balance mt-3 text-2xl font-semibold text-gray-900">{page.name}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-gray-600">{page.description}</p>
+              </a>
+              <a href={page.contactHref} class="mt-4 inline-flex text-xs font-medium text-gray-500 transition-colors hover:text-[#c9a84c]">
+                Discuss this comparison
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-16">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-4xl">
+          <div class="mb-10 text-center">
+            <p class="eyebrow-label mb-2 text-[#c9a84c]">FAQ</p>
+            <h2 class="title-balance text-3xl font-semibold text-gray-900">Questions buyers usually ask before they commit to one direction</h2>
+          </div>
+          <div class="space-y-4">
+            {config.faqs.map((faq) => (
+              <details class="copy-safe group rounded-2xl border border-gray-200 bg-gray-50 p-6">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-gray-800">
+                  {faq.question}
+                  <span class="text-[#c9a84c] transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p class="mt-4 leading-relaxed text-gray-600">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#c9a84c] py-14">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="title-balance mb-4 text-3xl font-bold text-white">{config.ctaTitle}</h2>
+        <p class="mx-auto mb-7 max-w-3xl text-white/90">{config.ctaDescription}</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href={comparisonContactHref} class="rounded-lg bg-white px-6 py-3 font-semibold text-[#c9a84c] transition-colors hover:bg-gray-100">
+            Start this comparison inquiry
+          </a>
+          <a
+            href={comparisonWhatsAppHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg border border-white px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10"
+          >
+            WhatsApp us
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <Newsletter />
+  </main>
+  <Footer />
+</Layout>

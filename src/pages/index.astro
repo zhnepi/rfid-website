@@ -9,12 +9,34 @@ import ApplicationsSection from '../components/ApplicationsSection.astro';
 import Testimonials from '../components/Testimonials.astro';
 import FAQ from '../components/FAQ.astro';
 import Newsletter from '../components/Newsletter.astro';
+
+const homepageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "ProudTek RFID Manufacturer",
+  "url": "https://www.proudtek.com/",
+  "description": "RFID cards, tags, labels, wristbands, keyfobs, and readers manufactured by ProudTek in Shenzhen, China.",
+  "about": {
+    "@type": "Thing",
+    "name": "RFID manufacturing"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "url": "https://www.proudtek.com/category/rfid-cards", "name": "RFID Cards" },
+      { "@type": "ListItem", "position": 2, "url": "https://www.proudtek.com/category/rfid-tags", "name": "RFID Tags" },
+      { "@type": "ListItem", "position": 3, "url": "https://www.proudtek.com/category/rfid-labels", "name": "RFID Labels" },
+      { "@type": "ListItem", "position": 4, "url": "https://www.proudtek.com/category/rfid-wristbands", "name": "RFID Wristbands" }
+    ]
+  }
+};
 ---
 
 <Layout
   title="ProudTek - RFID Card, Smart Card & RFID Tag Manufacturer | China Factory Since 2008"
   description="ProudTek is a leading RFID manufacturer in China since 2008. We provide RFID cards, smart cards, RFID tags, wristbands, keyfobs, and custom RFID solutions for access control, asset tracking, laundry management, and more."
   keywords="RFID manufacturer China, RFID cards, smart cards, RFID tags, NFC cards, RFID wristbands, RFID keyfob, RFID reader, access control cards, custom RFID solutions, Shenzhen RFID factory"
+  jsonLd={homepageJsonLd}
 >
   <Header />
   <main>

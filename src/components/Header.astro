@@ -1,25 +1,175 @@
 ---
-const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'About us', href: '/about' },
-  { 
-    name: 'RFID Products', 
-    href: '/rfid',
-    submenu: [
-      { name: 'RFID Cards', href: '/category/rfid-cards' },
-      { name: 'RFID Tags', href: '/category/rfid-tags' },
-      { name: 'RFID Labels', href: '/category/rfid-labels' },
-      { name: 'RFID Wristbands', href: '/category/rfid-wristbands' },
-      { name: 'RFID Keyfob', href: '/category/rfid-keyfob' },
-      { name: 'RFID Readers', href: '/category/rfid-readers' },
-    ]
-  },
-  { name: 'RFID Guide', href: '/rfid-technology' },
-  { name: 'Blogs', href: '/blogs' },
-  { name: 'Contact', href: '/contact' },
-];
+import QuickNavBar from './QuickNavBar.astro';
+import { guideLinks, headerNavItems, productCategoryLinks } from '../data/navigation';
+import {
+  getContextualContactAction,
+  getContextualEmailAction,
+  getContextualWhatsAppAction,
+  type ContextualContactAction,
+  type ContextualWhatsAppAction,
+} from '../utils/contact';
+
+function normalizePath(path: string) {
+  if (!path || path === '/') {
+    return '/';
+  }
+
+  return path.replace(/\/+$/, '') || '/';
+}
+
+function isActive(currentPath: string, href: string, activePrefixes: string[] = []) {
+  const current = normalizePath(currentPath);
+  const target = normalizePath(href.split('#')[0]);
+  const prefixes = activePrefixes.length > 0 ? activePrefixes : [target];
+
+  return prefixes.some((prefix) => {
+    const normalizedPrefix = normalizePath(prefix);
+    return current === normalizedPrefix || (normalizedPrefix !== '/' && current.startsWith(`${normalizedPrefix}/`));
+  });
+}
 
 const currentPath = Astro.url.pathname;
+const contextualContactAction = getContextualContactAction(currentPath);
+const contextualEmailAction = getContextualEmailAction(currentPath);
+const contextualWhatsAppAction = getContextualWhatsAppAction(currentPath);
+const primaryCtaLabel = currentPath === '/' ? 'Get a Quote' : contextualContactAction.label;
+const isCatalogArea = ['/products', '/rfid', '/product', '/category'].some((prefix) =>
+  currentPath === prefix || currentPath.startsWith(`${prefix}/`)
+);
+const secondaryCta = isCatalogArea
+  ? {
+      href: '/blogs',
+      label: 'Buyer Guides',
+    }
+  : {
+      href: '/rfid',
+      label: 'Browse Catalog',
+    };
+
+function getHeaderCopy(pathname: string, contactAction: ContextualContactAction, whatsappAction: ContextualWhatsAppAction) {
+  const current = normalizePath(pathname);
+
+  if (contactAction.source === 'product') {
+    return {
+      navTitle: 'Jump from this product to the closest family, guide or compare path',
+      mobileDescription: 'Use the catalog, guides and comparisons to confirm fit around this product.',
+      helpTitle: 'Move this product review into a real next step',
+      contactDescription: contactAction.intent === 'compatibility'
+        ? 'Share the reader, lock, chip or protocol details and we will narrow the closest match fast.'
+        : contactAction.intent === 'oem'
+          ? 'Send artwork, encoding or packaging requirements and we will map the cleanest customization path.'
+          : 'Share environment, mounting and sample goals and we will help narrow the right test set.',
+      whatsappDescription: 'Use WhatsApp for a fast product-fit check while the shortlist is still moving.',
+      whatsappLabel: 'WhatsApp this product',
+    };
+  }
+
+  if (contactAction.source === 'category') {
+    return {
+      navTitle: 'Start with the family that best matches your shortlist and buying questions',
+      mobileDescription: 'Move from category pages into guides, comparisons and the fastest inquiry path.',
+      helpTitle: 'Narrow this category before you request samples',
+      contactDescription: contactAction.intent === 'compatibility'
+        ? 'Send the installed system or chip family and we will point you to the most compatible options.'
+        : contactAction.intent === 'oem'
+          ? 'Share the event, branding or credential requirements and we will map the best customization route.'
+          : 'Tell us the surface, wash cycle or operating environment and we will suggest the right sample mix.',
+      whatsappDescription: 'Use WhatsApp when you want a quick first-pass recommendation inside this category.',
+      whatsappLabel: 'WhatsApp this category',
+    };
+  }
+
+  if (contactAction.source === 'solution') {
+    return {
+      navTitle: 'Move from workflow questions into product families, guides and shortlist paths',
+      mobileDescription: 'Jump from the workflow page into products, guides and the next inquiry step.',
+      helpTitle: 'Turn this workflow into a shortlist, sample plan or rollout discussion',
+      contactDescription: 'Share the operational flow, form factor and testing stage and we will map the cleanest next step.',
+      whatsappDescription: 'Use WhatsApp to quickly pressure-test the workflow before you request samples.',
+      whatsappLabel: 'WhatsApp this workflow',
+    };
+  }
+
+  if (contactAction.source === 'market') {
+    return {
+      navTitle: 'Move from regional buying constraints into the right product and guide paths',
+      mobileDescription: 'Use market pages, product families and proof pages to narrow the regional fit faster.',
+      helpTitle: 'Ask about regional fit, samples and supply expectations',
+      contactDescription: 'Share the region, delivery expectation and approval requirements and we will shape the best path.',
+      whatsappDescription: 'Use WhatsApp for a fast regional-fit check before you build the formal RFQ.',
+      whatsappLabel: 'WhatsApp this market',
+    };
+  }
+
+  if (contactAction.source === 'comparison' || current === '/compare') {
+    return {
+      navTitle: 'Cross-check compare pages, product families and shortlist paths in one place',
+      mobileDescription: 'Move from comparison pages into products, guides and the fastest shortlist discussion.',
+      helpTitle: 'Keep the shortlist moving while you compare',
+      contactDescription: 'Send the tradeoffs you are weighing and we will translate them into the right next sample or quote path.',
+      whatsappDescription: 'Use WhatsApp to talk through chip, frequency or format tradeoffs without losing momentum.',
+      whatsappLabel: current === '/compare' ? 'WhatsApp shortlist help' : 'WhatsApp this comparison',
+    };
+  }
+
+  if (contactAction.source === 'blog' || current === '/blogs' || current === '/rfid-technology' || current.startsWith('/authors')) {
+    return {
+      navTitle: 'Jump from guides into the product families and buying paths they point toward',
+      mobileDescription: 'Move from reading into product families, compare pages and the next project conversation.',
+      helpTitle: 'Turn research into a product or sample conversation',
+      contactDescription: 'Share the guide, protocol or sourcing question you are using and we will help narrow the next move.',
+      whatsappDescription: 'Use WhatsApp for a quick answer while you convert research into a shortlist.',
+      whatsappLabel: current.startsWith('/blogs/') ? 'WhatsApp this guide' : 'WhatsApp guide help',
+    };
+  }
+
+  if (contactAction.source === 'evidence' || current === '/about') {
+    return {
+      navTitle: 'Review product families, buyer guides and supplier proof in one navigation path',
+      mobileDescription: 'Move from supplier proof into products, guides and the next commercial discussion.',
+      helpTitle: 'Pair supplier proof with the right next buying step',
+      contactDescription: 'Share the proof points, approval stage or sample requirement and we will connect them to the next step.',
+      whatsappDescription: 'Use WhatsApp for a fast supplier-fit discussion while the team is still screening options.',
+      whatsappLabel: current === '/about' ? 'WhatsApp supplier fit' : 'WhatsApp about proof',
+    };
+  }
+
+  if (current === '/products' || current === '/rfid') {
+    return {
+      navTitle: 'Start with the product family or catalog path that best fits your shortlist',
+      mobileDescription: 'Use product families, the full catalog and buyer guides to narrow the next step faster.',
+      helpTitle: 'Move from catalog browsing into a real sample conversation',
+      contactDescription: 'Tell us which product families are still under review and we will help narrow the best mix for testing.',
+      whatsappDescription: 'Use WhatsApp when you want a quick catalog recommendation without filling a full form yet.',
+      whatsappLabel: current === '/products' ? 'WhatsApp catalog help' : 'WhatsApp full catalog help',
+    };
+  }
+
+  return {
+    navTitle: 'Start with the product family, guide or shortlist path that fits your project',
+    mobileDescription: 'Move from product families into guides, comparisons and the fastest next conversation.',
+    helpTitle: 'Move from first browse to the right sample or quote path',
+    contactDescription: 'Share your use case, chip family or shortlist questions and we will point you to the best starting path.',
+    whatsappDescription: 'Use WhatsApp when you want a quick first-pass recommendation before the formal inquiry.',
+    whatsappLabel: 'WhatsApp for a quick check',
+  };
+}
+
+const headerCopy = getHeaderCopy(currentPath, contextualContactAction, contextualWhatsAppAction);
+const buyerHelpActions = [
+  {
+    href: contextualContactAction.href,
+    label: contextualContactAction.label,
+    description: headerCopy.contactDescription,
+    isExternal: false,
+  },
+  {
+    href: contextualWhatsAppAction.href,
+    label: headerCopy.whatsappLabel,
+    description: headerCopy.whatsappDescription,
+    isExternal: true,
+  },
+];
 ---
 
 <header class="w-full">
@@ -33,25 +183,25 @@ const currentPath = Astro.url.pathname;
         </svg>
         <span>Email: info@proudtek.com</span>
       </div>
-      <div class="flex items-center gap-4">
-        <a href="https://www.linkedin.com/company/proudtek" target="_blank" rel="noopener noreferrer" class="hover:text-gray-200 transition-colors flex items-center gap-1">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <div class="hidden md:flex items-center gap-5">
+        <a href="https://www.linkedin.com/company/proudtek" target="_blank" rel="noopener noreferrer" class="hover:text-[#c9a84c] transition-colors duration-300 flex items-center gap-1.5 text-xs tracking-wider uppercase">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
           </svg>
           LinkedIn
         </a>
-        <a href="https://www.youtube.com/@proudtek" target="_blank" rel="noopener noreferrer" class="hover:text-gray-200 transition-colors flex items-center gap-1">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <a href="https://www.youtube.com/@proudtek" target="_blank" rel="noopener noreferrer" class="hover:text-[#c9a84c] transition-colors duration-300 flex items-center gap-1.5 text-xs tracking-wider uppercase">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
           </svg>
-          Youtube
+          YouTube
         </a>
       </div>
     </div>
   </div>
-  
+
   <!-- Main Navigation -->
-  <nav class="bg-white shadow-md sticky top-0 z-50">
+  <nav class="sticky top-0 z-50 bg-[#0d0d0d]/98 shadow-[0_1px_0_rgba(201,168,76,0.1)] backdrop-blur-xl">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center py-4">
         <!-- Logo -->
@@ -60,26 +210,157 @@ const currentPath = Astro.url.pathname;
             <span class="text-[#0d7377]">PR</span><span class="text-gray-700">O</span><span class="text-[#0d7377]">UDTEK</span>
           </span>
         </a>
-        
+
         <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => (
-            item.submenu ? (
-              <div class="relative group">
-                <a 
+        <div class="hidden lg:flex items-center gap-5 xl:gap-7">
+          {headerNavItems.map((item) => {
+            const active = isActive(currentPath, item.href, item.activePrefixes);
+
+            return item.submenu ? (
+              <div class="relative group/product">
+                <a
                   href={item.href}
                   class={`text-gray-700 hover:text-[#0d7377] transition-colors font-medium flex items-center gap-1 ${
                     currentPath === item.href || currentPath.startsWith('/rfid') || currentPath.startsWith('/product') || currentPath.startsWith('/category') ? 'text-[#0d7377] border-b-2 border-[#0d7377]' : ''
                   }`}
                 >
                   {item.name}
-                  <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover/product:rotate-180 group-focus-within/product:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                   </svg>
                 </a>
-                <!-- Dropdown Menu -->
-                <div class="absolute left-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                  <div class="bg-white shadow-lg rounded-md border border-gray-100 py-2">
+
+                <!-- Mega Menu -->
+                <div class="absolute left-1/2 top-full z-50 w-[min(940px,calc(100vw-2rem))] -translate-x-1/2 pt-4 opacity-0 invisible translate-y-2 transition-all duration-300 group-hover/product:visible group-hover/product:opacity-100 group-hover/product:translate-y-0 group-focus-within/product:visible group-focus-within/product:opacity-100 group-focus-within/product:translate-y-0">
+                  <div class="overflow-hidden rounded-sm border border-[#c9a84c]/15 bg-[#141414] shadow-[0_24px_80px_rgba(0,0,0,0.5)]">
+                    <div class="grid lg:grid-cols-[1.12fr_0.88fr]">
+                      <div class="p-7">
+                        <div class="flex items-end justify-between gap-4 mb-6">
+                          <div>
+                            <p class="eyebrow-label text-[#c9a84c] mb-2">Product Navigation</p>
+                            <h2 class="title-balance text-xl font-normal text-white/90 font-serif">{headerCopy.navTitle}</h2>
+                          </div>
+                          <a href="/rfid" class="text-sm font-medium text-[#c9a84c] hover:text-[#e8d48b] whitespace-nowrap transition-colors duration-300">Full catalog</a>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-3">
+                          {productCategoryLinks.map((subitem) => (
+                            <a href={subitem.href} class="copy-safe rounded-sm border border-white/5 bg-white/3 p-5 hover:border-[#c9a84c]/30 hover:bg-white/5 transition-all duration-300">
+                              <span class="title-balance block text-sm font-semibold text-white/90">{subitem.name}</span>
+                              <span class="card-copy block text-sm text-white/45 mt-2">{subitem.description}</span>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div class="border-t lg:border-t-0 lg:border-l border-white/5 bg-[#111] p-7">
+                        <div class="space-y-6">
+                          <div>
+                            <p class="eyebrow-label text-[#c9a84c] mb-2">Guides And Hubs</p>
+                            <div class="space-y-3">
+                              {guideLinks.map((link) => (
+                                <a href={link.href} class="copy-safe block rounded-sm border border-white/5 bg-white/3 p-4 hover:border-[#c9a84c]/30 transition-all duration-300">
+                                  <span class="title-balance block text-sm font-semibold text-white/90">{link.name}</span>
+                                  <span class="card-copy block text-sm text-white/45 mt-1">{link.description}</span>
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div class="rounded-sm bg-gradient-to-br from-[#c9a84c]/10 to-transparent border border-[#c9a84c]/20 p-5 text-white">
+                            <p class="eyebrow-label text-[#c9a84c] mb-2">Need Help Fast?</p>
+                            <h3 class="title-balance text-lg font-normal font-serif text-white/90">{headerCopy.helpTitle}</h3>
+                            <div class="mt-4 space-y-3">
+                              {buyerHelpActions.map((link) => (
+                                <a
+                                  href={link.href}
+                                  target={link.isExternal ? '_blank' : undefined}
+                                  rel={link.isExternal ? 'noopener noreferrer' : undefined}
+                                  class="copy-safe block rounded-sm border border-[#c9a84c]/15 bg-[#c9a84c]/5 p-4 hover:bg-[#c9a84c]/10 transition-all duration-300"
+                                >
+                                  <span class="block text-sm font-semibold text-white/90">{link.label}</span>
+                                  <span class="card-copy block text-sm text-white/50 mt-1">{link.description}</span>
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <a
+                href={item.href}
+                aria-current={active ? 'page' : undefined}
+                class:list={[
+                  'py-2 text-[14px] font-medium tracking-wide uppercase transition-colors duration-300',
+                  active ? 'text-[#c9a84c]' : 'text-white/75 hover:text-[#c9a84c]',
+                ]}
+              >
+                {item.name}
+              </a>
+            );
+          })}
+        </div>
+
+        <!-- Desktop CTA -->
+        <div class="hidden md:flex items-center gap-4">
+          <a
+            href={secondaryCta.href}
+            class="hidden xl:inline-flex items-center gap-1 text-xs font-medium tracking-wider uppercase text-white/50 transition-colors duration-300 hover:text-[#c9a84c]"
+          >
+            {secondaryCta.label}
+            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          <a
+            href={contextualContactAction.href}
+            class="cta-primary whitespace-nowrap"
+          >
+            {primaryCtaLabel}
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="brand-icon-shell-dark lg:hidden"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Open navigation menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden lg:hidden pb-5">
+        <div class="grid gap-2">
+          {headerNavItems.map((item) => {
+            const active = isActive(currentPath, item.href, item.activePrefixes);
+
+            return item.submenu ? (
+              <div class="mobile-dropdown rounded-sm border border-white/10 bg-white/3 px-4 py-3">
+                <button
+                  class="mobile-dropdown-btn flex w-full items-center justify-between gap-3 text-left"
+                  aria-expanded="false"
+                >
+                  <div>
+                    <span class:list={['block font-medium tracking-wide', active ? 'text-[#c9a84c]' : 'text-white/80']}>{item.name}</span>
+                    <span class="block text-sm text-white/40 mt-1">{headerCopy.mobileDescription}</span>
+                  </div>
+                  <svg class="w-4 h-4 shrink-0 text-white/40 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                <div class="mobile-dropdown-content hidden pt-4">
+                  <div class="grid gap-2">
+                    <a href="/products" class="rounded-sm bg-white/5 px-4 py-3 text-sm font-medium text-white/80 border border-white/5">Product families overview</a>
+                    <a href="/rfid" class="rounded-sm bg-white/5 px-4 py-3 text-sm font-medium text-white/80 border border-white/5">Open the full catalog</a>
                     {item.submenu.map((subitem) => (
                       <a 
                         href={subitem.href}
@@ -94,7 +375,7 @@ const currentPath = Astro.url.pathname;
                 </div>
               </div>
             ) : (
-              <a 
+              <a
                 href={item.href}
                 class={`text-gray-700 hover:text-[#0d7377] transition-colors font-medium ${
                   currentPath === item.href ? 'text-[#0d7377] border-b-2 border-[#0d7377]' : ''
@@ -160,25 +441,85 @@ const currentPath = Astro.url.pathname;
         </a>
       </div>
     </div>
+
+    <QuickNavBar />
   </nav>
 </header>
 
 <script>
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
-  
+  const mobileDropdownBtns = Array.from(document.querySelectorAll('.mobile-dropdown-btn'));
+  const mobileMenuLinks = Array.from(document.querySelectorAll('#mobile-menu a'));
+
+  function setMobileMenuOpen(isOpen) {
+    mobileMenuBtn?.setAttribute('aria-expanded', String(isOpen));
+    mobileMenu?.classList.toggle('hidden', !isOpen);
+  }
+
+  function collapseMobileDropdowns() {
+    mobileDropdownBtns.forEach((btn) => {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('svg');
+
+      btn.setAttribute('aria-expanded', 'false');
+      content?.classList.add('hidden');
+      icon?.classList.remove('rotate-180');
+    });
+  }
+
+  function closeMobileMenu() {
+    setMobileMenuOpen(false);
+    collapseMobileDropdowns();
+  }
+
   mobileMenuBtn?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
+    const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      closeMobileMenu();
+      return;
+    }
+
+    setMobileMenuOpen(true);
   });
-  
-  // Mobile dropdown toggle
-  const mobileDropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
-  mobileDropdownBtns.forEach(btn => {
+
+  mobileDropdownBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       const content = btn.nextElementSibling;
       const icon = btn.querySelector('svg');
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+      btn.setAttribute('aria-expanded', String(!isExpanded));
       content?.classList.toggle('hidden');
       icon?.classList.toggle('rotate-180');
     });
+  });
+
+  mobileMenuLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      closeMobileMenu();
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMobileMenu();
+      mobileMenuBtn?.focus();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!mobileMenuBtn || !mobileMenu || mobileMenu.classList.contains('hidden')) {
+      return;
+    }
+
+    const target = event.target;
+    if (!(target instanceof Node)) {
+      return;
+    }
+
+    if (!mobileMenu.contains(target) && !mobileMenuBtn.contains(target)) {
+      closeMobileMenu();
+    }
   });
 </script>
