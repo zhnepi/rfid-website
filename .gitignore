@@ -22,3 +22,18 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Vercel build output (local / preview builds drift per run)
+.vercel/
+
+# npm cache
+.npm-cache/
+
+# Claude Code local state + worktree artifacts
+.claude/worktrees/
+.claude/scheduled_tasks.lock
+.claude/settings.local.json
+
+# temp work dirs
+tmp-*/
+tmp-catalog/
