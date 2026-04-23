@@ -7,7 +7,7 @@ import { guideLinks, evidenceLinks } from '../../data/navigation';
 import { marketPagesList } from '../../data/markets';
 import { getContextualContactAction, getContextualInquiryLabel, getMarketContactHref, getMarketInquiryIntent } from '../../utils/contact';
 
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/markets`;
 const marketCards = marketPagesList.map((page) => {
   const intent = getMarketInquiryIntent(page.slug);
@@ -79,8 +79,8 @@ const breadcrumbJsonLd = {
 ---
 
 <Layout
-  title="RFID Markets And Regions - Buyer Hubs for North America, Europe and the Middle East | ProudTek"
-  description="Explore ProudTek market pages built for North American RFID cards, European laundry RFID tags and Middle East anti-metal RFID tag sourcing conversations."
+  title="RFID Markets And Regions - Buyer Hubs for North America, Europe and the Middle East | RFIDAK"
+  description="Explore RFIDAK market pages built for North American RFID cards, European laundry RFID tags and Middle East anti-metal RFID tag sourcing conversations."
   keywords="RFID markets, RFID buyer hubs, North America RFID cards, Europe laundry RFID tags, Middle East anti-metal RFID tags"
   canonicalURL={canonicalURL}
   jsonLd={[collectionJsonLd, breadcrumbJsonLd]}

@@ -2,9 +2,37 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { products } from '../data/products';
+import { blogPosts } from '../data/blogs';
 
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/thank-you`;
+
+// W10: serialize a compact dataset so client-side JS can render 3 products + 3 blogs
+// matching the ?intent=, ?product=, ?category= params from the inquiry submission.
+const recProducts = products.map((p) => ({
+  slug: p.slug,
+  name: p.name,
+  category: p.category,
+  image: p.images?.[0] || '/images/placeholder.webp',
+}));
+const recBlogs = blogPosts.map((b) => ({
+  slug: b.slug,
+  title: b.title,
+  category: b.category,
+  image: (b as any).image || (b as any).featuredImage || '/images/placeholder.webp',
+  date: (b as any).date || '',
+}));
+
+const categoryBySlug: Record<string, string> = {
+  'rfid-cards': 'RFID Cards',
+  'rfid-tags': 'RFID Tags',
+  'rfid-labels': 'RFID Labels',
+  'rfid-wristbands': 'RFID Wristbands',
+  'rfid-keyfob': 'RFID Keyfob',
+  'rfid-readers': 'RFID Readers',
+  'rfid-rings': 'RFID Rings',
+};
 
 const intentContent = {
   samples: {
@@ -31,8 +59,8 @@ const intentContent = {
 ---
 
 <Layout
-  title="Thank You - ProudTek Inquiry Received"
-  description="Thanks for contacting ProudTek. Your RFID inquiry has been received and the team will review the details you submitted."
+  title="Thank You - RFIDAK Inquiry Received"
+  description="Thanks for contacting RFIDAK. Your RFID inquiry has been received and the team will review the details you submitted."
   canonicalURL={canonicalURL}
   noindex={true}
 >
@@ -95,9 +123,101 @@ const intentContent = {
         </div>
       </div>
     </section>
+
+    <!-- W10: Dynamic recommendations based on inquiry intent / product / category -->
+    <section id="thankYouRecs" class="bg-gray-50 border-t border-gray-100 py-14 md:py-16 hidden">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-5xl">
+          <div class="mb-8">
+            <p class="eyebrow-label text-[#0d7377] mb-1">Recommended for your project</p>
+            <h2 class="title-balance text-2xl md:text-3xl font-semibold text-gray-900">Keep the momentum — 3 products + 3 guides that match your inquiry</h2>
+          </div>
+
+          <div id="thankYouProducts" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-10"></div>
+
+          <div class="mb-3 flex items-end justify-between">
+            <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-500">Related reading</h3>
+          </div>
+          <div id="thankYouBlogs" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+        </div>
+      </div>
+    </section>
   </main>
   <Footer />
 </Layout>
+
+<script define:vars={{ recProducts, recBlogs, categoryBySlug }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const intent = params.get('intent') || 'general';
+    const productSlug = params.get('product') || '';
+    const categorySlug = params.get('category') || '';
+    const targetCategory = categorySlug ? categoryBySlug[categorySlug] : '';
+
+    // Product selection: prefer same category as submitted product/category; exclude the exact product
+    let productMatches = recProducts.filter((p) => p.slug !== productSlug);
+    if (targetCategory) {
+      productMatches = productMatches.filter((p) => p.category === targetCategory);
+    } else if (productSlug) {
+      const current = recProducts.find((p) => p.slug === productSlug);
+      if (current) productMatches = productMatches.filter((p) => p.category === current.category);
+    }
+    if (productMatches.length < 3) {
+      // fallback: top-of-list products
+      const extras = recProducts.filter((p) => !productMatches.find((m) => m.slug === p.slug) && p.slug !== productSlug);
+      productMatches = productMatches.concat(extras);
+    }
+    const finalProducts = productMatches.slice(0, 3);
+
+    // Blog selection: intent to category mapping
+    const intentToBlogCategory = {
+      samples: 'RFID APPLICATIONS',
+      oem: 'RFID APPLICATIONS',
+      compatibility: 'RFID TECHNOLOGY',
+      'repeat-order': 'RFID APPLICATIONS',
+      general: '',
+    };
+    const preferredBlogCategory = intentToBlogCategory[intent] || '';
+    let blogMatches = recBlogs.slice();
+    if (preferredBlogCategory) {
+      const filtered = blogMatches.filter((b) => (b.category || '').toUpperCase().includes(preferredBlogCategory));
+      if (filtered.length >= 3) blogMatches = filtered;
+    }
+    const finalBlogs = blogMatches.slice(0, 3);
+
+    if (!finalProducts.length && !finalBlogs.length) return;
+
+    const section = document.getElementById('thankYouRecs');
+    const productsContainer = document.getElementById('thankYouProducts');
+    const blogsContainer = document.getElementById('thankYouBlogs');
+
+    if (productsContainer) {
+      productsContainer.innerHTML = finalProducts.map((p) => `
+        <a href="/product/${p.slug}" data-analytics="thankyou_rec_product_${p.slug}" class="brand-panel brand-panel-link block overflow-hidden group">
+          <div class="aspect-square bg-gray-100 overflow-hidden">
+            <img src="${p.image}" alt="${p.name}" loading="lazy" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-4">
+            <p class="text-[11px] font-semibold uppercase tracking-wide text-[#0d7377] mb-1">${p.category}</p>
+            <h3 class="text-sm font-semibold text-gray-900 line-clamp-2">${p.name}</h3>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    if (blogsContainer) {
+      blogsContainer.innerHTML = finalBlogs.map((b) => `
+        <a href="/blogs/${b.slug}" data-analytics="thankyou_rec_blog_${b.slug}" class="brand-panel brand-panel-link block p-5">
+          <p class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-2">${b.category || 'GUIDE'}</p>
+          <h3 class="text-sm font-semibold text-gray-900 leading-snug line-clamp-3">${b.title}</h3>
+          <span class="mt-3 inline-flex items-center text-xs font-medium text-[#0d7377]">Read guide →</span>
+        </a>
+      `).join('');
+    }
+
+    section.classList.remove('hidden');
+  });
+</script>
 
 <script define:vars={{ intentContent }}>
   document.addEventListener('DOMContentLoaded', () => {
@@ -109,7 +229,7 @@ const intentContent = {
     const copyEl = document.getElementById('thankYouCopy');
     const referenceEl = document.getElementById('submissionReference');
     const analyticsWindow = window as Window & {
-      proudtekTrack?: (name: string, properties?: Record<string, unknown>) => void;
+      rfidakTrack?: (name: string, properties?: Record<string, unknown>) => void;
       dataLayer?: Array<Record<string, unknown>>;
     };
 
@@ -126,8 +246,8 @@ const intentContent = {
       referenceEl.classList.remove('hidden');
     }
 
-    if (analyticsWindow.proudtekTrack) {
-      analyticsWindow.proudtekTrack('inquiry_thank_you_view', {
+    if (analyticsWindow.rfidakTrack) {
+      analyticsWindow.rfidakTrack('inquiry_thank_you_view', {
         inquiry_intent: intent,
         submission_id: submission || 'unknown',
       });

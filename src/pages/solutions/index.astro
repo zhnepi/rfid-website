@@ -7,7 +7,7 @@ import { guideLinks, evidenceLinks } from '../../data/navigation';
 import { solutionPagesList } from '../../data/solutions';
 import { getContextualContactAction, getContextualInquiryLabel, getSolutionContactHref, getSolutionInquiryIntent } from '../../utils/contact';
 
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/solutions`;
 const solutionCards = solutionPagesList.map((page) => {
   const intent = getSolutionInquiryIntent(page.slug);
@@ -79,8 +79,8 @@ const breadcrumbJsonLd = {
 ---
 
 <Layout
-  title="RFID Solutions And Use Cases - Access, Hotels, Laundry, Asset Tracking and NFC | ProudTek"
-  description="Explore ProudTek RFID solution hubs built around access control, hotel access, laundry and linen tracking, industrial asset tracking, library workflows and event or NFC engagement."
+  title="RFID Solutions And Use Cases - Access, Hotels, Laundry, Asset Tracking and NFC | RFIDAK"
+  description="Explore RFIDAK RFID solution hubs built around access control, hotel access, laundry and linen tracking, industrial asset tracking, library workflows and event or NFC engagement."
   keywords="RFID solutions, access control RFID, hotel RFID, laundry RFID, industrial asset tracking RFID, library RFID, NFC solutions"
   canonicalURL={canonicalURL}
   jsonLd={[collectionJsonLd, breadcrumbJsonLd]}

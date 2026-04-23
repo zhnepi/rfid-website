@@ -1,0 +1,768 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { getIntentContactHref } from '../utils/contact';
+
+const tocItems = [
+  { href: '#why-chip-matters', label: '1. Why the chip decision matters' },
+  { href: '#chip-universe', label: '2. The chip family universe map' },
+  { href: '#mifare-family', label: '3. MIFARE family (HF secure access)' },
+  { href: '#ntag-family', label: '4. NTAG family (NFC consumer + DPP)' },
+  { href: '#uhf-chips', label: '5. UHF Gen2 chips (Impinj, NXP, Alien)' },
+  { href: '#lf-chips', label: '6. LF chips (legacy access + animal ID)' },
+  { href: '#security-matrix', label: '7. Security tier comparison matrix' },
+  { href: '#cost-curves', label: '8. Cost curves by chip and volume' },
+  { href: '#migration-paths', label: '9. Migration and upgrade paths' },
+  { href: '#counterfeit-risk', label: '10. Counterfeit and clone risks' },
+  { href: '#cluster-articles', label: '11. Continue your research \u2014 8 deep-dive articles' },
+  { href: '#download', label: '12. Download the RFID Buyer\u2019s Guide (PDF)' },
+  { href: '#faq', label: '13. Frequently asked questions' },
+];
+
+const directAnswer = "Use MIFARE DESFire EV3 for secure access and payments; NTAG424 DNA for anti-counterfeit and Digital Product Passport; NTAG213/215/216 for open consumer NFC; MIFARE Classic only for low-stakes legacy (Crypto-1 broken since 2008); Impinj Monza M730-M800 or NXP UCODE 9 for retail and supply chain UHF; EM4305 or T5577 for LF access. The chip family dictates security tier, memory profile, reader compatibility and counterfeit risk \u2014 pick after frequency, before inlay.";
+
+const keyTakeaways = [
+  '<strong>NXP dominates the HF chip universe</strong> &mdash; approximately 70% share across MIFARE and NTAG families (NXP Investor Relations, 2024).',
+  '<strong>MIFARE Classic Crypto-1 is broken</strong> &mdash; Garcia et al. USENIX Security 2008 demonstrated the attack; do not specify Classic for security-sensitive workflows.',
+  '<strong>NTAG424 DNA is the authentication default</strong> &mdash; AES-128 SUN (Secure Unique NFC) rotating URL per tap defeats cloning and is foundational for EU Digital Product Passport.',
+  '<strong>UHF Gen2 chip market is concentrated</strong> &mdash; Impinj + NXP UCODE cover roughly 80% of RAIN deployments (IDTechEx, 2024).',
+  '<strong>Chip authenticity matters</strong> &mdash; gray-market clones of NXP Classic 1K account for an estimated 30% of unauthorized supply (NXP brand protection statement, 2024).',
+];
+
+const industryStats = [
+  { value: '70%', label: 'NXP share of HF / NFC chips (NXP IR, 2024)' },
+  { value: '42 B', label: 'UHF Gen2 tags shipped in 2024 (RAIN Alliance)' },
+  { value: '2008', label: 'Year MIFARE Classic Crypto-1 cipher broken (USENIX)' },
+  { value: '8 KB', label: 'Max user memory on MIFARE DESFire EV3' },
+  { value: '$500 B', label: 'Annual counterfeit market protected by secure NFC (OECD, 2023)' },
+];
+
+const mifareChips = [
+  { name: 'MIFARE Classic 1K / 4K', memory: '1 KB / 4 KB', crypto: 'Crypto-1 (broken)', iso: 'ISO 14443-3A', use: 'Legacy transit, low-security access; avoid new deployments', unit: '$0.15 \u2013 0.30' },
+  { name: 'MIFARE Plus EV2 (2K / 4K)', memory: '2 KB / 4 KB', crypto: 'AES-128', iso: 'ISO 14443-3A', use: 'Secure upgrade path from Classic; SL1/SL3 migration modes', unit: '$0.45 \u2013 0.85' },
+  { name: 'MIFARE DESFire EV3 (2K / 4K / 8K)', memory: '2\u20138 KB', crypto: 'AES-128 / 3DES', iso: 'ISO 14443-4', use: 'High-security access, transit, payments; FIPS 140-2 validated', unit: '$0.85 \u2013 1.80' },
+  { name: 'MIFARE Ultralight EV1', memory: '48 / 128 bytes', crypto: 'Password', iso: 'ISO 14443-3A', use: 'Single-use ticketing', unit: '$0.05 \u2013 0.12' },
+  { name: 'MIFARE Ultralight C', memory: '144 bytes', crypto: '3DES', iso: 'ISO 14443-3A', use: 'Disposable vouchers with lightweight auth', unit: '$0.08 \u2013 0.18' },
+  { name: 'MIFARE Ultralight Nano', memory: '39 bytes', crypto: '(none)', iso: 'ISO 14443-3A', use: 'Event wristbands, lowest-cost HF ID', unit: '$0.04 \u2013 0.10' },
+];
+
+const ntagChips = [
+  { name: 'NTAG210\u00b5 / 213 / 215 / 216', memory: '48 / 144 / 504 / 888 bytes', crypto: '(open)', feature: 'NDEF URL, vCard, rich consumer NFC payload', unit: '$0.05 \u2013 0.25', use: 'Marketing tap, smart packaging, business card, product info' },
+  { name: 'NTAG424 DNA (original SUN)', memory: '416 bytes', crypto: 'AES-128 SUN', feature: 'Per-tap rotating URL, server-verified authenticity', unit: '$0.40 \u2013 0.85', use: 'Anti-counterfeit, warranty, digital product passport' },
+  { name: 'NTAG424 DNA TT (Tag Tamper)', memory: '416 bytes', crypto: 'AES-128 SUN + tamper bit', feature: 'Tamper-evident variant with wire loop detection', unit: '$0.55 \u2013 1.10', use: 'Luxury goods, wine, spirits, pharma' },
+  { name: 'NXP ICODE SLIX / SLIX2', memory: '128 / 80 bytes', crypto: 'Password', feature: 'ISO 15693 vicinity read up to 1 m', unit: '$0.15 \u2013 0.40', use: 'Library media, industrial asset vicinity reads' },
+];
+
+const uhfChips = [
+  { name: 'Impinj Monza R6 / R6-P', memory: '96 / 128 bit EPC + 32 bit TID', feature: 'High backscatter sensitivity; strong entry-level Gen2', unit: '$0.04 \u2013 0.08', use: 'Apparel retail, high-volume item-level' },
+  { name: 'Impinj M730 / M750', memory: '96 bit EPC + 32 bit TID', feature: '2023 gen with improved self-tuning; optimized for liquid-adjacent', unit: '$0.05 \u2013 0.10', use: 'General retail and logistics workhorse' },
+  { name: 'Impinj M770 / M780', memory: '128 bit EPC + 96 bit user', feature: 'Long-range read for dock-door portals', unit: '$0.06 \u2013 0.12', use: 'Warehouse, dock-door, pallet' },
+  { name: 'Impinj M800', memory: '128 bit EPC + 96 bit user', feature: 'Flagship 2024 chip, top read rate and sensitivity', unit: '$0.08 \u2013 0.14', use: 'Premium retail and industrial' },
+  { name: 'NXP UCODE 9 / 9xm', memory: '96 bit EPC + 32 bit TID', feature: 'Self-adjusting, UCODE 9xm optimized for on-metal', unit: '$0.05 \u2013 0.10', use: 'Apparel, logistics; 9xm for industrial asset' },
+  { name: 'NXP UCODE DNA', memory: '96 bit EPC + 3DES crypto', feature: 'Cryptographic UHF for anti-counterfeit', unit: '$0.35 \u2013 0.80', use: 'Pharma, high-value goods' },
+  { name: 'Alien Higgs 9 / H10', memory: '96 bit EPC + 128 bit user', feature: 'Specialty long-range and on-metal optimized', unit: '$0.06 \u2013 0.18', use: 'Industrial, aerospace, defense' },
+];
+
+const lfChips = [
+  { name: 'EM4100 / EM4102 (read-only)', memory: '64 bit', feature: 'Fixed ID; fastest to deploy but not re-writable', use: 'Legacy building access, simple door entry', unit: '$0.18 \u2013 0.40' },
+  { name: 'EM4305 / EM4205 (R/W)', memory: '512 bit', feature: 'Re-encodable; newer generation EM4305', use: 'Asset ID, re-issuable credentials, industrial', unit: '$0.25 \u2013 0.55' },
+  { name: 'Atmel T5577 / T55x7', memory: '330 bit R/W', feature: 'Multi-protocol emulator (EM, HID Prox, Indala, AWID)', use: 'Programmable bridge cards during reader migration', unit: '$0.30 \u2013 0.65' },
+  { name: 'HITAG 1 / S / 2', memory: '256 \u2013 2048 bit', feature: 'Stronger security than EM; used in automotive', unit: '$0.40 \u2013 0.95', use: 'Vehicle immobilizer, industrial access' },
+  { name: 'FDX-B (ISO 11784/11785)', memory: '128 bit', feature: '134.2 kHz; universal for livestock and pet ID', use: 'Livestock ear tag, pet microchip', unit: '$0.35 \u2013 1.20' },
+];
+
+const securityTiers = [
+  ['Chip', 'Crypto', 'Key length', 'Counterfeit resistance', 'Use case ceiling'],
+  ['MIFARE Classic 1K/4K', 'Crypto-1 (broken)', '48-bit', '\u2014 (broken)', 'Low-stakes legacy only'],
+  ['MIFARE Ultralight C', '3DES', '112-bit', 'Low', 'Lightweight disposable auth'],
+  ['MIFARE Plus EV2', 'AES-128', '128-bit', 'Medium', 'Mid-tier secure access'],
+  ['MIFARE DESFire EV3', 'AES-128 / 3DES', '128 / 168-bit', 'High (FIPS 140-2)', 'High-security access, payments'],
+  ['NTAG213/215/216', '(open)', '\u2014', '\u2014', 'Open URL, marketing'],
+  ['NTAG424 DNA', 'AES-128 SUN', '128-bit', 'High (per-tap rotation)', 'Anti-counterfeit, DPP'],
+  ['NXP UCODE DNA (UHF)', '3DES', '168-bit', 'High', 'Pharma, high-value'],
+];
+
+const costBenchmarks = [
+  { chip: 'MIFARE Classic 1K', moq1k: '$0.45 \u2013 0.65', moq10k: '$0.22 \u2013 0.35', moq100k: '$0.15 \u2013 0.22' },
+  { chip: 'MIFARE DESFire EV3 2K', moq1k: '$1.80 \u2013 2.50', moq10k: '$1.10 \u2013 1.45', moq100k: '$0.85 \u2013 1.05' },
+  { chip: 'NTAG213', moq1k: '$0.28 \u2013 0.45', moq10k: '$0.15 \u2013 0.22', moq100k: '$0.10 \u2013 0.14' },
+  { chip: 'NTAG424 DNA', moq1k: '$1.10 \u2013 1.60', moq10k: '$0.60 \u2013 0.90', moq100k: '$0.40 \u2013 0.55' },
+  { chip: 'Impinj Monza M750 inlay', moq1k: '$0.18 \u2013 0.28', moq10k: '$0.08 \u2013 0.12', moq100k: '$0.05 \u2013 0.07' },
+  { chip: 'NXP UCODE 9 inlay', moq1k: '$0.18 \u2013 0.28', moq10k: '$0.08 \u2013 0.12', moq100k: '$0.05 \u2013 0.07' },
+  { chip: 'EM4305 card', moq1k: '$0.75 \u2013 1.10', moq10k: '$0.45 \u2013 0.60', moq100k: '$0.28 \u2013 0.40' },
+];
+
+const migrationPaths = [
+  {
+    from: 'MIFARE Classic 1K',
+    to: 'MIFARE Plus EV2 (SL1 mode)',
+    scenario: 'Reader fleet must be retained; security upgrade driven by audit or insurance requirement.',
+    note: 'Plus EV2 in SL1 mode reads on existing Classic readers; flip to SL3 for AES after reader firmware upgrade.',
+  },
+  {
+    from: 'MIFARE Classic 1K',
+    to: 'MIFARE DESFire EV3',
+    scenario: 'Greenfield modernization or reader refresh cycle; best long-term security + multi-application support.',
+    note: 'Requires new readers supporting ISO 14443-4; budget 30-60% reader hardware increase.',
+  },
+  {
+    from: 'NTAG213 (open URL)',
+    to: 'NTAG424 DNA (SUN)',
+    scenario: 'Moving from plain marketing tap to anti-counterfeit or DPP requirement.',
+    note: 'Add backend verification endpoint; factory key loading adds 5-8 weeks lead time.',
+  },
+  {
+    from: 'EM4100 legacy access',
+    to: 'HF DESFire EV3 or T5577 bridge',
+    scenario: 'Multi-year access system refresh; T5577 bridge cards allow dual-technology during rollout.',
+    note: 'Readers must be replaced; T5577 bridge extends Classic-LF while HF readers roll out building-by-building.',
+  },
+  {
+    from: 'Impinj Monza R6',
+    to: 'Impinj M730 / M750 / M770',
+    scenario: 'Reader firmware refresh + need for better liquid / metal tolerance or read rate.',
+    note: 'M730/M750/M770 are pin-compatible with R6 inlay designs; no tooling change in most cases.',
+  },
+];
+
+const counterfeitRisks = [
+  { chip: 'MIFARE Classic', risk: 'High', detail: 'Crypto-1 broken in 2008; keys recoverable in seconds with commercially available hardware. Cloned Classic 1K is the #1 gray-market chip.' },
+  { chip: 'MIFARE Plus EV2 / DESFire EV3', risk: 'Low', detail: 'AES-128 with secure key management defeats practical cloning. Verify supplier chain to avoid counterfeit NXP ICs.' },
+  { chip: 'NTAG213/215/216', risk: 'Medium (for auth use)', detail: 'Chip is not broken, but payload is copyable. Fine for marketing, not for authentication.' },
+  { chip: 'NTAG424 DNA', risk: 'Low', detail: 'AES-128 SUN per-tap token verifies authenticity. Key disclosure risk exists if supplier is not trusted.' },
+  { chip: 'Impinj / UCODE UHF Gen2', risk: 'Medium', detail: 'TID is factory-unique and hard to clone at chip level, but EPC data is copyable. Use TID binding for authentication workflows.' },
+  { chip: 'EM4100 LF', risk: 'Very high', detail: 'Read-only 64-bit ID is trivially cloned to blank T5577 chips. Do not use EM4100 for security-sensitive access.' },
+];
+
+const clusterArticles = [
+  { href: '/blogs/mifare-cards', label: 'MIFARE cards explained (cluster deep-dive)', description: 'Classic, Plus, DESFire and Ultralight \u2014 when each is appropriate, with migration checklist.' },
+  { href: '/compare/mifare-classic-vs-desfire', label: 'MIFARE Classic vs DESFire', description: 'The core HF access security decision: security, memory, migration paths, cost.' },
+  { href: '/compare/mifare-plus-vs-desfire', label: 'MIFARE Plus EV2 vs DESFire EV3', description: 'Upgrade pathway comparison \u2014 reader compatibility vs long-term security.' },
+  { href: '/blogs/nfc-technology', label: 'NFC technology guide', description: 'NTAG family, NDEF encoding, ISO 14443A, smartphone tap workflows.' },
+  { href: '/blogs/nfc-anti-counterfeit-tags-guide', label: 'NFC anti-counterfeit tags', description: 'NTAG424 DNA SUN, tamper layers and the OECD $500B counterfeit market.' },
+  { href: '/blogs/digital-product-passport-nfc-rfid-guide', label: 'Digital Product Passport (DPP) implementation', description: 'EU ESPR 2027 deadline and how chip choice enables DPP.' },
+  { href: '/blogs/hotel-key-card-rfid-guide', label: 'Hotel key card chip selection', description: 'Real-world DESFire deployment scenario with Saflok / VingCard / SALTO compatibility.' },
+  { href: '/blogs/rfid-types', label: '7 types of RFID tags', description: 'Overview pairing chip families with tag form factors and applications.' },
+];
+
+const chipFaqs = [
+  {
+    question: 'Is MIFARE Classic still safe to deploy in 2026?',
+    answer: 'No, not for security-sensitive workflows. Crypto-1 has been broken since 2008 (Garcia et al., USENIX Security). Classic remains acceptable only for low-stakes legacy systems already in production. Specify MIFARE Plus EV2 or DESFire EV3 for any new access, payment or regulated identity deployment.',
+  },
+  {
+    question: 'What is the real-world difference between NTAG213 and NTAG424 DNA?',
+    answer: 'NTAG213 carries a static 144-byte payload (open URL, vCard). NTAG424 DNA at $0.40-$0.85 adds AES-128 SUN authentication \u2014 each tap generates a cryptographic rotating URL token that the brand backend verifies. Use 213 for marketing; use 424 DNA for anti-counterfeit, warranty and DPP.',
+  },
+  {
+    question: 'Can I mix Impinj and NXP UCODE chips in the same deployment?',
+    answer: 'Yes \u2014 both are ISO/IEC 18000-63 (EPC Gen2v2) compliant and work with the same reader fleet. Test read rate in your specific environment because antenna designs differ slightly. Most retail and logistics deployments use both chip families from different inlay suppliers without issues.',
+  },
+  {
+    question: 'How do I verify my supplier shipped genuine NXP or Impinj chips?',
+    answer: 'Three checks: (1) supplier audit trail showing chip source; (2) TID read under a validated reader \u2014 factory TID should be globally unique per chip; (3) spot-check with NXP originality check function (available on NTAG and MIFARE) or Impinj chip authentication API. RFIDAK quality control runs all three on every production lot.',
+  },
+  {
+    question: 'When should I specify a cryptographic UHF chip like UCODE DNA?',
+    answer: 'When the UHF read scenario requires individual item authentication \u2014 pharma, high-value luxury, spare parts, where a cloned EPC would enable counterfeit infiltration. UCODE DNA costs 5-10x a standard UCODE 9 but adds 3DES authentication resistant to chip-level cloning.',
+  },
+];
+
+const relatedGuides = [
+  { href: '/rfid-technology', label: 'RFID technology pillar', description: 'The broader overview \u2014 frequencies, form factors, environment and selection process.' },
+  { href: '/rfid-frequency-guide', label: 'RFID frequency pillar', description: 'Companion pillar on LF / HF / UHF band decision \u2014 read before this chip guide.' },
+  { href: '/rfid-vs-nfc-vs-bluetooth', label: 'RFID vs NFC vs Bluetooth pillar', description: 'Upstream technology-family decision \u2014 read if you\u2019re still deciding between RFID, NFC-only and BLE.' },
+  { href: '/rfid-glossary', label: 'RFID glossary (A-Z)', description: 'Every acronym, standard and protocol name defined in procurement-friendly English.' },
+  { href: '/category/rfid-cards', label: 'RFID cards category', description: 'MIFARE, DESFire, NTAG and Ultralight card products.' },
+];
+
+const lastReviewed = { date: 'April 20, 2026', reviewer: 'RFIDAK Engineering Team' };
+
+const chipContactHref = getIntentContactHref('compatibility');
+
+const siteURL = 'https://www.rfidak.com';
+const canonicalURL = `${siteURL}/rfid-chip-comparison`;
+
+const techArticleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  '@id': `${canonicalURL}#article`,
+  headline: 'RFID Chip Comparison Guide (MIFARE, NTAG, DESFire, Ultralight, Impinj, UCODE)',
+  description: 'A procurement-focused pillar guide to RFID chip families \u2014 MIFARE, NTAG, DESFire, Ultralight, Impinj Monza, NXP UCODE and LF chips for B2B projects.',
+  url: canonicalURL,
+  author: { '@id': `${siteURL}/#organization` },
+  publisher: { '@id': `${siteURL}/#organization` },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
+  about: [
+    { '@type': 'Thing', name: 'MIFARE' },
+    { '@type': 'Thing', name: 'NTAG424 DNA' },
+    { '@type': 'Thing', name: 'Impinj Monza' },
+    { '@type': 'Thing', name: 'NXP UCODE' },
+    { '@type': 'Thing', name: 'RFID chip selection' },
+  ],
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: chipFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteURL}/` },
+    { '@type': 'ListItem', position: 2, name: 'RFID Technology Guide', item: `${siteURL}/rfid-technology` },
+    { '@type': 'ListItem', position: 3, name: 'RFID Chip Comparison', item: canonicalURL },
+  ],
+};
+
+const speakableJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SpeakableSpecification',
+  cssSelector: ['[data-speakable="answer"]', '[data-speakable="key-takeaways"]'],
+};
+---
+
+<Layout
+  title="RFID Chip Comparison 2026 \u2014 MIFARE, NTAG, UCODE, Impinj"
+  description="Pick the right RFID chip with a security-tier matrix, cost curves at 1K/10K/100K MOQ, migration paths and counterfeit risk ranking for every major chip family."
+  keywords="RFID chip comparison, MIFARE DESFire vs Classic, NTAG424 DNA, Impinj Monza, NXP UCODE, RFID chip selection, cryptographic NFC"
+  canonicalURL={canonicalURL}
+  jsonLd={[techArticleJsonLd, faqJsonLd, breadcrumbJsonLd, speakableJsonLd]}
+>
+  <Header />
+  <main>
+    <section class="bg-gradient-to-r from-[#0d7377] to-[#0a5c5f] py-16 text-white">
+      <div class="container mx-auto px-4">
+        <nav class="text-sm mb-4 text-white/80" aria-label="Breadcrumb">
+          <a href="/" class="hover:underline">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/rfid-technology" class="hover:underline">RFID Technology</a>
+          <span class="mx-2">/</span>
+          <span>Chip Comparison</span>
+        </nav>
+        <div class="max-w-4xl">
+          <p class="eyebrow-label eyebrow-label-wide text-[#0d7377]/70 mb-4">Pillar Guide</p>
+          <h1 class="title-balance text-4xl md:text-5xl font-bold mb-5">RFID chip comparison: MIFARE, NTAG, Ultralight, DESFire, Impinj and UCODE</h1>
+          <p class="text-lg md:text-xl text-white/90 max-w-3xl">
+            Pick the right RFID chip with a security-tier matrix, cost curves at volume, migration paths from legacy chips, and counterfeit risk ranking. For procurement teams already past the frequency decision.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 bg-white border-b border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+          <aside class="rounded-3xl border-l-4 border-[#0d7377] bg-[#0d7377]/5 p-6 md:p-8">
+            <p class="text-xs uppercase tracking-[0.18em] text-[#0d7377] font-semibold mb-3">One-sentence answer</p>
+            <p data-speakable="answer" class="text-lg md:text-xl leading-relaxed text-gray-800 font-medium">
+              {directAnswer}
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 bg-gray-50 border-b border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto grid lg:grid-cols-[0.85fr_1.15fr] gap-8 items-start">
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800 mb-3">On this page</h2>
+            <nav class="space-y-2">
+              {tocItems.map((item) => (
+                <a href={item.href} class="block text-sm text-[#0d7377] hover:underline">{item.label}</a>
+              ))}
+            </nav>
+          </div>
+          <div data-speakable="key-takeaways" class="rounded-3xl border border-[#0d7377]/15 bg-white p-6 md:p-7 shadow-sm">
+            <p class="text-xs uppercase tracking-[0.18em] text-[#0d7377] font-semibold mb-4">Key takeaways</p>
+            <ul class="space-y-3">
+              {keyTakeaways.map((item) => (
+                <li class="flex items-start gap-3 text-sm text-gray-700 leading-relaxed">
+                  <svg class="w-4 h-4 text-[#0d7377] mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span set:html={item}></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 bg-white border-b border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+          <p class="text-xs uppercase tracking-[0.18em] text-[#0d7377] font-semibold mb-4 text-center">Industry numbers at a glance</p>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {industryStats.map((stat) => (
+              <div class="rounded-2xl bg-gradient-to-br from-[#0d7377]/5 to-white border border-[#0d7377]/10 p-5 text-center">
+                <p class="text-2xl md:text-3xl font-bold text-[#0d7377]">{stat.value}</p>
+                <p class="text-xs text-gray-600 mt-2 leading-snug">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <article class="py-12 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto space-y-14">
+          <section id="why-chip-matters">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">1. Why the chip decision matters</h2>
+            <div class="space-y-4 text-gray-600 leading-relaxed">
+              <p>
+                After frequency (LF, HF, UHF), the chip choice locks three things: security tier, memory profile and reader compatibility. A MIFARE Classic card and a DESFire card are both 13.56 MHz HF, but a Classic-only reader cannot read DESFire and a DESFire-era security audit cannot accept Classic. Chip family is where procurement gets expensive if chosen wrong.
+              </p>
+              <p>
+                The playbook-correct order is <strong class="text-gray-800">application \u2192 frequency \u2192 chip family \u2192 chip variant \u2192 inlay.</strong> Unit price comparisons done at the chip-variant level (&quot;NTAG213 vs NTAG215&quot;) only make sense after memory profile and smartphone compatibility are locked.
+              </p>
+              <p>
+                This pillar covers each major chip family as a procurement decision: the memory profile, the security tier, typical unit cost at three MOQ tiers, counterfeit risk, and which RFIDAK products carry that chip. For the broader systems-level view see the <a href="/rfid-technology" class="text-[#0d7377] font-medium hover:underline">RFID technology pillar</a>; for the frequency-level decision see the <a href="/rfid-frequency-guide" class="text-[#0d7377] font-medium hover:underline">frequency pillar</a>.
+              </p>
+            </div>
+          </section>
+
+          <section id="chip-universe">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">2. The chip family universe map</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Three frequency bands, three main vendor ecosystems, one tree diagram. Chip families group by frequency first, then by manufacturer, then by security tier.
+            </p>
+            <div class="rounded-3xl border border-gray-200 bg-gray-50 p-6 md:p-8 font-mono text-sm text-gray-700 overflow-x-auto">
+              <pre class="whitespace-pre leading-relaxed">
+RFID chip universe (2026)
+\u2502
+\u251C\u2500 LF 125-134 kHz
+\u2502   \u251C\u2500 EM Microelectronic: EM4100, EM4102, EM4305, EM4205
+\u2502   \u251C\u2500 Atmel (Microchip): T5577 / T55x7 (multi-protocol)
+\u2502   \u251C\u2500 NXP: HITAG 1, HITAG S, HITAG 2 (automotive)
+\u2502   \u2514\u2500 ISO 11784/11785 FDX-B (livestock, pet)
+\u2502
+\u251C\u2500 HF / NFC 13.56 MHz
+\u2502   \u251C\u2500 NXP MIFARE: Classic, Plus EV2, DESFire EV3, Ultralight EV1/C/Nano
+\u2502   \u251C\u2500 NXP NTAG: NTAG210\u00b5 / 213 / 215 / 216, NTAG424 DNA, NTAG424 DNA TT
+\u2502   \u251C\u2500 NXP ICODE: SLIX / SLIX2 (ISO 15693 vicinity)
+\u2502   \u2514\u2500 Legic, Infineon, Sony FeliCa (regional variants)
+\u2502
+\u2514\u2500 UHF 860-960 MHz (ISO/IEC 18000-63, EPC Gen2v2)
+    \u251C\u2500 Impinj: Monza R6 / R6-P, M730, M750, M770, M780, M800
+    \u251C\u2500 NXP UCODE: UCODE 9, UCODE 9xm (on-metal), UCODE DNA (crypto)
+    \u251C\u2500 Alien Technology: Higgs 9, Higgs H10
+    \u2514\u2500 EM Microelectronic, Fudan FM (emerging)
+              </pre>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 italic">
+              NXP (formerly Philips Semiconductors) dominates the HF / NFC universe with approximately 70% share across MIFARE and NTAG combined (NXP Investor Relations, 2024). The UHF market is concentrated in Impinj and NXP UCODE with roughly 80% combined share (IDTechEx, 2024).
+            </p>
+          </section>
+
+          <section id="mifare-family">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">3. MIFARE family (HF secure access)</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              MIFARE is the dominant HF smart-card chip family, built for secure access, transit, payments and stored-value applications. The family has four branches with very different security tiers \u2014 choosing the wrong variant is the most expensive mistake in B2B HF procurement.
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Chip</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Memory</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Crypto</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">ISO</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Typical use</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">$ / unit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {mifareChips.map((chip, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-800 font-semibold align-top">{chip.name}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.memory}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.crypto}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.iso}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.use}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top whitespace-nowrap">{chip.unit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-6 rounded-2xl bg-red-50 border border-red-200 p-5 text-sm text-gray-700">
+              <p>
+                <strong class="text-red-700">Warning \u2014 MIFARE Classic:</strong> The Crypto-1 cipher was broken in 2008 (Garcia et al., &quot;Dismantling MIFARE Classic,&quot; USENIX Security 2008). Cloning commercially available hardware can recover keys in seconds. Do not specify Classic for any security-sensitive deployment; keep only for low-stakes legacy systems already in production.
+              </p>
+            </div>
+            <div class="mt-4 rounded-2xl bg-[#0d7377]/5 border border-[#0d7377]/15 p-5 text-sm text-gray-700">
+              <p>
+                <strong class="text-[#0d7377]">RFIDAK MIFARE products:</strong>
+                <a href="/product/rfid-cards" class="text-[#0d7377] font-medium hover:underline">MIFARE / DESFire cards</a> \u2022
+                <a href="/compare/mifare-classic-vs-desfire" class="text-[#0d7377] font-medium hover:underline">Classic vs DESFire decision</a> \u2022
+                <a href="/compare/mifare-plus-vs-desfire" class="text-[#0d7377] font-medium hover:underline">Plus EV2 vs DESFire migration</a> \u2022
+                <a href="/blogs/mifare-cards" class="text-[#0d7377] font-medium hover:underline">MIFARE family deep-dive</a>
+              </p>
+            </div>
+          </section>
+
+          <section id="ntag-family">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">4. NTAG family (NFC consumer + DPP)</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              NTAG is NXP\u2019s single-chip NFC Forum Type 2 and Type 4 family, built for consumer-facing smartphone tap. The family splits into the open NTAG210\u00b5/213/215/216 line (marketing, smart packaging) and the secure NTAG424 DNA line (anti-counterfeit, warranty, Digital Product Passport).
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Chip</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Memory</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Crypto</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Feature</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Typical use</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">$ / unit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ntagChips.map((chip, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-800 font-semibold align-top">{chip.name}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.memory}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.crypto}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.feature}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.use}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top whitespace-nowrap">{chip.unit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-6 rounded-2xl bg-[#0d7377]/5 border border-[#0d7377]/15 p-5 text-sm text-gray-700">
+              <p>
+                <strong class="text-[#0d7377]">RFIDAK NTAG products:</strong>
+                <a href="/product/rfid-silicone-wristband" class="text-[#0d7377] font-medium hover:underline">NFC silicone wristband (NTAG213)</a> \u2022
+                <a href="/blogs/nfc-anti-counterfeit-tags-guide" class="text-[#0d7377] font-medium hover:underline">NTAG424 DNA anti-counterfeit guide</a> \u2022
+                <a href="/blogs/digital-product-passport-nfc-rfid-guide" class="text-[#0d7377] font-medium hover:underline">NTAG424 DNA for Digital Product Passport</a>
+              </p>
+            </div>
+          </section>
+
+          <section id="uhf-chips">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">5. UHF Gen2 chips (Impinj, NXP UCODE, Alien)</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              UHF Gen2v2 chips power retail item-level RFID, logistics, pallet tracking and industrial asset management. Three vendors cover roughly 80% of deployments: Impinj (Monza R6 / M730-M800), NXP (UCODE 9, 9xm, DNA) and Alien (Higgs 9, H10). Choice within each family is driven by read-rate sensitivity, on-metal tolerance, memory profile and regional antenna tuning.
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Chip</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Memory</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Feature</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Typical use</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">$ / unit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {uhfChips.map((chip, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-800 font-semibold align-top">{chip.name}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.memory}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.feature}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.use}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top whitespace-nowrap">{chip.unit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-6 rounded-2xl bg-[#0d7377]/5 border border-[#0d7377]/15 p-5 text-sm text-gray-700">
+              <p>
+                <strong class="text-[#0d7377]">RFIDAK UHF Gen2 products:</strong>
+                <a href="/category/rfid-tags" class="text-[#0d7377] font-medium hover:underline">UHF tag range</a> \u2022
+                <a href="/product/textile-rfid-laundry-tag" class="text-[#0d7377] font-medium hover:underline">Textile UHF laundry tag</a> \u2022
+                <a href="/product/rfid-metal-tag" class="text-[#0d7377] font-medium hover:underline">UCODE 9xm on-metal tag</a> \u2022
+                <a href="/blogs/rfid-retail-inventory-guide" class="text-[#0d7377] font-medium hover:underline">UHF retail inventory guide</a>
+              </p>
+            </div>
+          </section>
+
+          <section id="lf-chips">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">6. LF chips (legacy access and animal ID)</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              LF chips are a smaller, slower-moving market \u2014 but still essential for legacy access credentials, vehicle immobilizers and livestock / pet ID. Five chip families cover 90% of procurement scenarios.
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Chip</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Memory</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Feature</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Typical use</th>
+                    <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">$ / unit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {lfChips.map((chip, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-800 font-semibold align-top">{chip.name}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.memory}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.feature}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.use}</td>
+                      <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top whitespace-nowrap">{chip.unit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-6 rounded-2xl bg-[#0d7377]/5 border border-[#0d7377]/15 p-5 text-sm text-gray-700">
+              <p>
+                <strong class="text-[#0d7377]">RFIDAK LF products:</strong>
+                <a href="/product/rfid-keyfob" class="text-[#0d7377] font-medium hover:underline">LF keyfob (EM / T5577)</a> \u2022
+                <a href="/category/rfid-keyfob" class="text-[#0d7377] font-medium hover:underline">LF keyfob range</a> \u2022
+                <a href="/product/rfid-cards" class="text-[#0d7377] font-medium hover:underline">LF 125 kHz cards</a>
+              </p>
+            </div>
+          </section>
+
+          <section id="security-matrix">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">7. Security tier comparison matrix</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Sort chips by security tier, not by marketing tier. This matrix covers the most common B2B secure-access and authentication scenarios. Chips below the &quot;Medium&quot; line should not be used where insurance, audit, payment or regulated identity is involved.
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    {securityTiers[0].map((header) => (
+                      <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">{header}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {securityTiers.slice(1).map((row, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      {row.map((cell, cellIdx) => (
+                        <td class={`px-4 py-3 border-b border-gray-100 align-top ${cellIdx === 0 ? 'text-gray-800 font-semibold' : 'text-gray-600'}`}>{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 italic">
+              FIPS 140-2 validation covers cryptographic module implementation, not raw cipher strength. MIFARE DESFire EV3 FIPS 140-2 certificate: NIST CMVP #3659.
+            </p>
+          </section>
+
+          <section id="cost-curves">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">8. Cost curves by chip and volume</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Indicative pricing per unit in USD, at three MOQ breakpoints. All prices exclude custom artwork, encoding, lamination and tooling. Cryptographic chips (DESFire EV3, NTAG424 DNA, UCODE DNA) carry a security premium that scales less aggressively with volume than open chips do.
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">Chip (typical format)</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">MOQ 1,000</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">MOQ 10,000</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">MOQ 100,000</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {costBenchmarks.map((row, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      <td class="px-5 py-4 border-b border-gray-100 text-gray-800 font-semibold align-top">{row.chip}</td>
+                      <td class="px-5 py-4 border-b border-gray-100 text-gray-600 align-top">{row.moq1k}</td>
+                      <td class="px-5 py-4 border-b border-gray-100 text-gray-600 align-top">{row.moq10k}</td>
+                      <td class="px-5 py-4 border-b border-gray-100 text-gray-600 align-top">{row.moq100k}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 italic">
+              Sources: IDTechEx 2024 RAIN RFID Forecasts; NXP MIFARE and NTAG price lists 2024; RFIDAK 2026 published price book.
+            </p>
+          </section>
+
+          <section id="migration-paths">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">9. Migration and upgrade paths</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Most real chip decisions in 2026 are migration decisions: replacing an existing chip with a more secure, higher-memory or more performant successor. Five scenarios cover 95% of live migrations at RFIDAK customers.
+            </p>
+            <div class="grid md:grid-cols-2 gap-5">
+              {migrationPaths.map((migration) => (
+                <div class="rounded-2xl border border-gray-200 bg-white p-6">
+                  <p class="text-xs uppercase tracking-[0.15em] text-[#0d7377] font-semibold mb-3">Migration</p>
+                  <p class="text-base font-semibold text-gray-800">
+                    <span class="text-gray-500">from</span> {migration.from}
+                  </p>
+                  <p class="text-base font-semibold text-gray-800 mt-1">
+                    <span class="text-gray-500">to</span> {migration.to}
+                  </p>
+                  <p class="text-sm text-gray-600 leading-relaxed mt-3">
+                    <strong class="text-gray-800">When:</strong> {migration.scenario}
+                  </p>
+                  <p class="text-sm text-gray-600 leading-relaxed mt-2">
+                    <strong class="text-gray-800">Notes:</strong> {migration.note}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="counterfeit-risk">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">10. Counterfeit and clone risks</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Chip-level counterfeit risk determines how seriously you should audit supplier chain and factory encoding. Six risk bands cover the majority of B2B chips. NXP brand protection estimates approximately 30% of unauthorized MIFARE Classic supply is gray-market cloned (NXP statement, 2024).
+            </p>
+            <div class="space-y-4">
+              {counterfeitRisks.map((item) => (
+                <div class="copy-safe rounded-2xl border border-gray-200 bg-white p-5 md:p-6">
+                  <div class="flex flex-wrap items-start gap-4">
+                    <span class={`flex-shrink-0 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider ${item.risk === 'High' || item.risk === 'Very high' ? 'bg-red-100 text-red-700' : item.risk === 'Medium' || item.risk === 'Medium (for auth use)' ? 'bg-amber-100 text-amber-700' : 'bg-green-100 text-green-700'}`}>
+                      {item.risk}
+                    </span>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-base font-semibold text-gray-800">{item.chip}</p>
+                      <p class="text-sm text-gray-600 leading-relaxed mt-2">{item.detail}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="cluster-articles">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">11. Continue your research \u2014 8 deep-dive articles</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              These eight articles form the cluster around this pillar. Read in any order; each is self-contained and links back here for context.
+            </p>
+            <div class="grid md:grid-cols-2 gap-5">
+              {clusterArticles.map((item, index) => (
+                <a href={item.href} class="copy-safe rounded-[1.5rem] border border-gray-200 bg-white p-6 hover:border-[#0d7377] hover:shadow-lg transition-all group">
+                  <div class="flex items-start gap-4">
+                    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0d7377]/10 text-[#0d7377] font-semibold text-sm">{index + 1}</span>
+                    <div>
+                      <h3 class="text-lg font-semibold text-gray-800 group-hover:text-[#0d7377] transition-colors">{item.label}</h3>
+                      <p class="text-sm text-gray-600 leading-relaxed mt-2">{item.description}</p>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          <section id="download" class="rounded-3xl bg-gradient-to-br from-[#0d7377] to-[#0a5c5f] text-white p-8 md:p-10">
+            <div class="grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
+              <div>
+                <p class="text-xs uppercase tracking-[0.18em] text-white/70 font-semibold mb-3">Whitepaper</p>
+                <h2 class="text-3xl font-semibold mb-4">12. Download the RFID Buyer&rsquo;s Guide 2026 (PDF)</h2>
+                <p class="text-white/90 leading-relaxed mb-6">
+                  28-page PDF companion to all three RFIDAK pillars (Technology + Frequency + Chip Comparison). Includes chip-family tables, security tier matrix, cost curves and procurement checklist.
+                </p>
+                <ul class="space-y-2 text-sm text-white/85 mb-6">
+                  <li>&bull; MIFARE / NTAG / Impinj / UCODE full chip reference</li>
+                  <li>&bull; Security tier decision matrix</li>
+                  <li>&bull; Cost curves at 1K / 10K / 100K MOQ</li>
+                  <li>&bull; Migration and counterfeit risk guide</li>
+                </ul>
+                <a href="/contact?intent=buyer-guide-2026" class="inline-flex items-center gap-2 bg-white text-[#0d7377] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                  <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                  </svg>
+                  Request the PDF (free)
+                </a>
+                <p class="text-xs text-white/70 mt-4">Same PDF as Pillar #1 and #2. Localized editions (DE / FR / ES / JP) available on request.</p>
+              </div>
+              <div class="hidden md:block">
+                <div class="aspect-[3/4] rounded-2xl bg-white/10 border border-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <div class="text-center px-6">
+                    <p class="text-xs uppercase tracking-[0.2em] text-white/70 mb-3">RFIDAK</p>
+                    <p class="text-2xl font-bold mb-2">RFID</p>
+                    <p class="text-2xl font-bold mb-4">Buyer&rsquo;s Guide</p>
+                    <p class="text-sm text-white/80">2026 edition</p>
+                    <p class="text-xs text-white/60 mt-6">28 pages &middot; PDF</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="faq">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">13. Frequently asked questions</h2>
+            <div class="space-y-4">
+              {chipFaqs.map((faq) => (
+                <details class="copy-safe group rounded-2xl border border-gray-200 bg-white p-6">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-gray-800">
+                    {faq.question}
+                    <span class="text-[#0d7377] transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p class="mt-4 text-gray-600 leading-relaxed">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+
+          <section id="related-guides">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">Related pillar guides and category pages</h2>
+            <div class="grid md:grid-cols-2 gap-5">
+              {relatedGuides.map((item) => (
+                <a href={item.href} class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-6 hover:border-[#0d7377] hover:shadow-lg transition-all">
+                  <h3 class="text-xl font-semibold text-gray-800">{item.label}</h3>
+                  <p class="text-gray-600 leading-relaxed mt-3">{item.description}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          <aside class="rounded-2xl border border-gray-200 bg-gray-50 p-6 md:p-7 text-sm text-gray-600">
+            <div class="flex flex-wrap items-center gap-3">
+              <svg class="w-5 h-5 text-[#0d7377] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <p>
+                <strong class="text-gray-800">Last reviewed:</strong> {lastReviewed.date} by {lastReviewed.reviewer}.
+                Sources cited inline: NXP Investor Relations 2024 (market share); IDTechEx 2024 RAIN RFID Forecasts (UHF volumes and pricing); RAIN Alliance 2024 annual report; OECD 2023 counterfeit market estimate; Garcia et al. &quot;Dismantling MIFARE Classic&quot; USENIX Security 2008; NIST CMVP #3659 FIPS 140-2 validation; NXP MIFARE / NTAG / UCODE public datasheets 2024; Impinj Monza R6 / M730 / M750 / M770 / M780 / M800 datasheets 2024. Numbers confirmed against RFIDAK 2026 production records.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </article>
+
+    <section class="py-14 bg-[#0d7377]">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Need help locking in the right chip?</h2>
+        <p class="text-white/90 max-w-3xl mx-auto mb-7">
+          Share your application, reader fleet, environment and target volume. We&rsquo;ll return a chip shortlist + sample request within one business day.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href={chipContactHref} class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            Contact our engineering team
+          </a>
+          <a href="/rfid" class="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+            Browse products
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <Newsletter />
+  </main>
+  <Footer />
+</Layout>

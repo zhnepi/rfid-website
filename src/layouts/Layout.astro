@@ -1,5 +1,10 @@
 ---
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
+import {
+  getContextualContactAction,
+  getContextualWhatsAppAction,
+} from '../utils/contact';
 
 interface Props {
   title: string;
@@ -14,7 +19,7 @@ interface Props {
 
 const {
   title,
-  description = 'ProudTek - Professional RFID cards, smart cards, RFID tags manufacturer since 2008. Custom RFID solutions for access control, asset tracking, and more.',
+  description = 'RFIDAK - Professional RFID cards, smart cards, RFID tags manufacturer since 2008. Custom RFID solutions for access control, asset tracking, and more.',
   keywords = 'RFID cards, RFID tags, smart cards, RFID manufacturer, RFID wristbands, RFID keyfob, NFC tags, RFID labels, RFID reader, China RFID factory',
   ogImage = '/images/hero/smart-card-banner.webp',
   ogType = 'website',
@@ -23,17 +28,21 @@ const {
   noindex = false,
 } = Astro.props;
 
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonical = canonicalURL || new URL(Astro.url.pathname, siteURL).href;
 const ogImageURL = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteURL).href;
+
+// Per-page contextual WhatsApp + Quote actions for floating bar (W1 QW#1)
+const layoutWhatsApp = getContextualWhatsAppAction(Astro.url.pathname);
+const layoutContact = getContextualContactAction(Astro.url.pathname);
 
 // LocalBusiness + Organization JSON-LD (GEO: richer entity data for AI engines)
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": ["Organization", "LocalBusiness"],
   "@id": `${siteURL}/#organization`,
-  "name": "ProudTek",
-  "legalName": "Shenzhen Proud Tek Co., LTD",
+  "name": "RFIDAK",
+  "legalName": "Shenzhen RFIDAK Co., LTD",
   "url": siteURL,
   "logo": {
     "@type": "ImageObject",
@@ -41,7 +50,7 @@ const organizationJsonLd = {
     "width": 512,
     "height": 512
   },
-  "description": "ProudTek is a professional RFID manufacturer established in 2008 in Shenzhen, China. We specialize in RFID cards, smart cards, RFID tags, wristbands, keyfobs, and readers, serving over 108 clients across 50+ countries with a 99% on-time delivery rate.",
+  "description": "RFIDAK is a professional RFID manufacturer established in 2008 in Shenzhen, China. We specialize in RFID cards, smart cards, RFID tags, wristbands, keyfobs, and readers, serving over 108 clients across 50+ countries with a 99% on-time delivery rate.",
   "foundingDate": "2008",
   "numberOfEmployees": {
     "@type": "QuantitativeValue",
@@ -66,7 +75,7 @@ const organizationJsonLd = {
       "@type": "ContactPoint",
       "telephone": "+86-755-2376-5843",
       "contactType": "sales",
-      "email": "info@proudtek.com",
+      "email": "info@rfidak.com",
       "availableLanguage": ["English", "Chinese"]
     },
     {
@@ -78,8 +87,8 @@ const organizationJsonLd = {
     }
   ],
   "sameAs": [
-    "https://www.linkedin.com/company/proudtek",
-    "https://www.youtube.com/@proudtek"
+    "https://www.linkedin.com/company/rfidak",
+    "https://www.youtube.com/@rfidak"
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
@@ -116,7 +125,7 @@ const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": `${siteURL}/#website`,
-  "name": "ProudTek - RFID Manufacturer",
+  "name": "RFIDAK - RFID Manufacturer",
   "url": siteURL,
   "publisher": { "@id": `${siteURL}/#organization` },
   "inLanguage": "en-US",
@@ -142,7 +151,13 @@ const allJsonLd = [organizationJsonLd, websiteJsonLd, ...(Array.isArray(jsonLd) 
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {noindex
+      ? <meta name="robots" content="noindex, nofollow" />
+      : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    }
+    <link rel="alternate" type="application/rss+xml" title="RFIDAK Blog" href="/feed.xml" />
+    <link rel="alternate" hreflang="en" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
 
     <!-- Canonical URL -->
     <link rel="canonical" href={canonical} />
@@ -156,7 +171,7 @@ const allJsonLd = [organizationJsonLd, websiteJsonLd, ...(Array.isArray(jsonLd) 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageURL} />
-    <meta property="og:site_name" content="ProudTek" />
+    <meta property="og:site_name" content="RFIDAK" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
@@ -167,7 +182,7 @@ const allJsonLd = [organizationJsonLd, websiteJsonLd, ...(Array.isArray(jsonLd) 
     <meta name="twitter:image" content={ogImageURL} />
 
     <!-- Additional SEO -->
-    <meta name="author" content="ProudTek - Shenzhen Proud Tek Co., LTD" />
+    <meta name="author" content="RFIDAK - Shenzhen RFIDAK Co., LTD" />
     <meta name="theme-color" content="#0d7377" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
@@ -186,11 +201,12 @@ const allJsonLd = [organizationJsonLd, websiteJsonLd, ...(Array.isArray(jsonLd) 
 
     <!-- Floating WhatsApp Button (Desktop: bottom-left, Mobile: hidden because of bottom bar) -->
     <a
-      href="https://wa.me/8618665820632?text=Hi,%20I'd%20like%20to%20inquire%20about%20RFID%20products"
+      href={layoutWhatsApp.href}
       target="_blank"
       rel="noopener noreferrer"
       class="hidden md:flex fixed bottom-6 left-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:bg-[#20ba5a] transition-all duration-300 hover:scale-110 group items-center justify-center whatsapp-pulse"
       aria-label="Chat on WhatsApp"
+      data-analytics={`whatsapp_click_floating_${layoutWhatsApp.source}`}
     >
       <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -204,10 +220,11 @@ const allJsonLd = [organizationJsonLd, websiteJsonLd, ...(Array.isArray(jsonLd) 
     <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
       <div class="flex">
         <a
-          href="https://wa.me/8618665820632?text=Hi,%20I'd%20like%20to%20inquire%20about%20RFID%20products"
+          href={layoutWhatsApp.href}
           target="_blank"
           rel="noopener noreferrer"
           class="flex-1 flex items-center justify-center gap-2 py-3 bg-[#25D366] text-white font-medium text-sm"
+          data-analytics={`whatsapp_click_mobile_${layoutWhatsApp.source}`}
         >
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -215,8 +232,9 @@ const allJsonLd = [organizationJsonLd, websiteJsonLd, ...(Array.isArray(jsonLd) 
           WhatsApp
         </a>
         <a
-          href="/contact"
+          href={layoutContact.href}
           class="flex-1 flex items-center justify-center gap-2 py-3 bg-amber-500 text-white font-semibold text-sm"
+          data-analytics={`quote_click_mobile_${layoutContact.source}`}
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -225,5 +243,49 @@ const allJsonLd = [organizationJsonLd, websiteJsonLd, ...(Array.isArray(jsonLd) 
         </a>
       </div>
     </div>
+
+    <!-- W1 QW#3: Vercel Web Analytics + rfidakTrack bridge -->
+    <!-- W4 QW#8: global click delegation reads [data-analytics] on any anchor/button and fires rfidakTrack -->
+    <script is:inline>
+      (function () {
+        var w = window;
+        w.dataLayer = w.dataLayer || [];
+        w.rfidakTrack = function (eventName, properties) {
+          try {
+            if (w.va && typeof w.va.track === 'function') {
+              w.va.track(eventName, properties || {});
+            }
+          } catch (_) {}
+          try {
+            w.dataLayer.push({ event: eventName, ...(properties || {}) });
+          } catch (_) {}
+        };
+
+        // Delegation: any click on an element (or its ancestor) carrying
+        // [data-analytics] auto-tracks with that key + light context.
+        document.addEventListener('click', function (e) {
+          var target = e.target;
+          if (!target || target.nodeType !== 1) return;
+          var el = target.closest ? target.closest('[data-analytics]') : null;
+          if (!el) return;
+          var key = el.getAttribute('data-analytics');
+          if (!key) return;
+
+          var props = {
+            surface: el.tagName ? el.tagName.toLowerCase() : 'unknown',
+            href: el.getAttribute('href') || '',
+            page: location.pathname || '/',
+          };
+
+          var intent = el.getAttribute('data-intent');
+          if (intent) props.intent = intent;
+          var category = el.getAttribute('data-category');
+          if (category) props.category = category;
+
+          try { w.rfidakTrack(key, props); } catch (_) {}
+        }, { passive: true, capture: true });
+      })();
+    </script>
+    <Analytics />
   </body>
 </html>

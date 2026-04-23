@@ -2,19 +2,31 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import CategoryStickyNav from '../../components/CategoryStickyNav.astro';
+import CategoryDecisionCards from '../../components/CategoryDecisionCards.astro';
+import ScrollCTA from '../../components/cta/ScrollCTA.astro';
+import ExitIntent from '../../components/cta/ExitIntent.astro';
 import { products } from '../../data/products';
+import { buildCategoryJsonLd } from '../../utils/categoryJsonLd';
+import { getContextualContactAction, getContextualWhatsAppAction } from '../../utils/contact';
 
 const categoryName = 'RFID Labels';
 const categoryProducts = products.filter(p => p.category === categoryName);
+const description = "RFID labels and stickers from RFIDAK: UHF stickers, NFC stickers, tamper-proof labels, jewellery tags, windshield tags — printable and customizable.";
+const categoryJsonLd = buildCategoryJsonLd({ categoryName, categorySlug: 'rfid-labels', categoryProducts, description });
+const categoryContact = getContextualContactAction(Astro.url.pathname);
+const categoryWhatsApp = getContextualWhatsAppAction(Astro.url.pathname);
 ---
 
 <Layout
-  title="RFID Labels & Stickers - UHF, NFC, Tamper Proof Labels | ProudTek Manufacturer"
-  description="RFID labels and stickers from ProudTek: UHF stickers, NFC stickers, tamper-proof labels, jewellery tags, windshield tags. Printable and customizable RFID label solutions."
+  title="RFID Labels & Stickers | UHF, NFC, Tamper Proof — RFIDAK"
+  description={description}
   keywords="RFID labels, RFID stickers, UHF sticker, NFC sticker, tamper proof RFID label, jewellery tag, windshield tag, RFID label manufacturer"
+  jsonLd={categoryJsonLd}
 >
   <Header />
-  
+  <CategoryStickyNav activeCategory={categoryName} />
+
   <!-- Hero Section -->
   <section class="bg-gradient-to-r from-[#0d7377] to-[#0a5c5f] text-white py-16">
     <div class="container mx-auto px-4">
@@ -33,6 +45,8 @@ const categoryProducts = products.filter(p => p.category === categoryName);
     </div>
   </section>
 
+  <CategoryDecisionCards categorySlug="rfid-labels" />
+
   <!-- Products Grid -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
@@ -49,7 +63,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
             <div class="aspect-square overflow-hidden bg-gray-100">
               <img 
                 src={product.images[0]} 
-                alt={product.name}
+                alt={`${product.name} — ${categoryName} manufactured by RFIDAK in Shenzhen, China`}
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 loading="lazy"
               />
@@ -81,7 +95,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
         <h2 class="text-3xl font-bold text-gray-800 mb-6">RFID Label & Sticker Buying Guide</h2>
         <div class="prose prose-lg text-gray-600">
           <p>
-            RFID labels and stickers are thin, flexible tags consisting of an RFID inlay (chip + antenna) laminated between paper or synthetic layers. They are the most cost-effective form of RFID identification, with per-unit costs ranging from $0.05 to $0.50 depending on chip type and volume. ProudTek produces millions of RFID labels monthly, supplying retailers, libraries, logistics companies, and healthcare providers across 50+ countries.
+            RFID labels and stickers are thin, flexible tags consisting of an RFID inlay (chip + antenna) laminated between paper or synthetic layers. They are the most cost-effective form of RFID identification, with per-unit costs ranging from $0.05 to $0.50 depending on chip type and volume. RFIDAK produces millions of RFID labels monthly, supplying retailers, libraries, logistics companies, and healthcare providers across 50+ countries.
           </p>
 
           <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">RFID Label Types Comparison</h3>
@@ -110,7 +124,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
           <ol class="list-decimal list-inside space-y-2 mt-3">
             <li><strong>Application type:</strong> NFC stickers for consumer engagement and authentication; UHF stickers for inventory and supply chain; tamper-proof labels for security and anti-counterfeiting.</li>
             <li><strong>Surface material:</strong> Standard labels work on cardboard, paper, and plastic. Metal-compatible labels with foam spacers are needed for metallic products. Curved surfaces require flexible inlay designs.</li>
-            <li><strong>Printability:</strong> ProudTek labels support thermal transfer, direct thermal, and inkjet printing. Pre-printed labels with barcodes, QR codes, and custom branding are available.</li>
+            <li><strong>Printability:</strong> RFIDAK labels support thermal transfer, direct thermal, and inkjet printing. Pre-printed labels with barcodes, QR codes, and custom branding are available.</li>
             <li><strong>Environmental conditions:</strong> Standard paper labels for indoor use; synthetic (PP/PET) labels for moisture resistance; high-adhesive labels for rough or low-energy surfaces.</li>
             <li><strong>Volume and cost:</strong> UHF labels start from $0.05/piece at volumes of 100,000+. NFC stickers with NTAG213 chips are typically $0.08-$0.15/piece depending on quantity.</li>
           </ol>
@@ -128,13 +142,16 @@ const categoryProducts = products.filter(p => p.category === categoryName);
   <section class="py-12 bg-[#0d7377]">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-2xl font-bold text-white mb-4">Need Custom RFID Labels?</h2>
-      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free samples and competitive pricing. ProudTek offers custom printing, encoding, and roll-format delivery for easy integration.</p>
+      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free samples and competitive pricing. RFIDAK offers custom printing, encoding, and roll-format delivery for easy integration.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="/contact" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
-        <a href="https://wa.me/8618665820632?text=Hi, I need custom RFID labels" target="_blank" rel="noopener noreferrer" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
+        <a href={categoryContact.href} data-analytics="quote_click_category_cta_rfid-labels" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
+        <a href={categoryWhatsApp.href} target="_blank" rel="noopener noreferrer" data-analytics="whatsapp_click_category_cta_rfid-labels" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
       </div>
     </div>
   </section>
+
+  <ScrollCTA contactHref={categoryContact.href} contactLabel="Get Quote" whatsappHref={categoryWhatsApp.href} source="category" />
+  <ExitIntent sampleHref="/contact?intent=samples&category=rfid-labels&express=1&source=exit-intent#contactForm" whatsappHref={categoryWhatsApp.href} contextName="RFID Labels" />
 
   <Footer />
 </Layout>

@@ -1,8 +1,11 @@
 ---
+// W2 QW#12 (adapted): real cert PDFs are not yet on disk, so each item deep-links
+// to the /certifications evidence page (ISO 9001 / ISO 14001 / SGS sections)
+// instead of serving a fabricated download.
 const certifications = [
-  { label: 'ISO 9001', detail: 'Quality Management' },
-  { label: 'ISO 14001', detail: 'Environmental' },
-  { label: 'SGS Verified', detail: 'Factory Audit' },
+  { label: 'ISO 9001', detail: 'Quality Management', href: '/certifications#iso-9001' },
+  { label: 'ISO 14001', detail: 'Environmental', href: '/certifications#iso-14001' },
+  { label: 'SGS Verified', detail: 'Factory Audit', href: '/certifications#sgs-or-third-party-verification' },
 ];
 
 const stats = [
@@ -19,15 +22,20 @@ const stats = [
       <!-- Certifications -->
       <div class="flex flex-wrap justify-center md:justify-start items-center gap-5">
         {certifications.map((cert) => (
-          <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#0d7377] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <a
+            href={cert.href}
+            class="flex items-center gap-2 rounded-md px-1.5 py-1 -mx-1.5 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d7377] focus-visible:ring-offset-1 transition-colors group"
+            data-analytics={`trust_badge_click_${cert.label.toLowerCase().replace(/\s+/g, '-')}`}
+            aria-label={`View ${cert.label} certification details`}
+          >
+            <svg class="w-5 h-5 text-[#0d7377] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
             </svg>
             <div>
-              <span class="text-sm font-semibold text-slate-800">{cert.label}</span>
+              <span class="text-sm font-semibold text-slate-800 group-hover:text-[#0d7377] transition-colors">{cert.label}</span>
               <span class="text-xs text-slate-500 hidden sm:inline"> &mdash; {cert.detail}</span>
             </div>
-          </div>
+          </a>
         ))}
       </div>
 

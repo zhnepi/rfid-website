@@ -2,19 +2,31 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import CategoryStickyNav from '../../components/CategoryStickyNav.astro';
+import CategoryDecisionCards from '../../components/CategoryDecisionCards.astro';
+import ScrollCTA from '../../components/cta/ScrollCTA.astro';
+import ExitIntent from '../../components/cta/ExitIntent.astro';
 import { products } from '../../data/products';
+import { buildCategoryJsonLd } from '../../utils/categoryJsonLd';
+import { getContextualContactAction, getContextualWhatsAppAction } from '../../utils/contact';
 
 const categoryName = 'RFID Wristbands';
 const categoryProducts = products.filter(p => p.category === categoryName);
+const description = "RFID wristbands from RFIDAK: silicone, fabric woven, paper, PVC, Tyvek and elastic wristbands for events, festivals, water parks and access control.";
+const categoryJsonLd = buildCategoryJsonLd({ categoryName, categorySlug: 'rfid-wristbands', categoryProducts, description });
+const categoryContact = getContextualContactAction(Astro.url.pathname);
+const categoryWhatsApp = getContextualWhatsAppAction(Astro.url.pathname);
 ---
 
 <Layout
-  title="RFID Wristbands - Silicone, Fabric & Disposable RFID Bracelets | ProudTek"
-  description="RFID wristbands from ProudTek: silicone wristbands, fabric wristbands, disposable RFID bracelets for events, festivals, water parks, access control. Skin-friendly, waterproof, customizable."
+  title="RFID Wristbands | Silicone, Fabric & Disposable Bands — RFIDAK"
+  description={description}
   keywords="RFID wristband, silicone RFID wristband, RFID bracelet, NFC wristband, event wristband, waterproof RFID wristband, RFID wristband manufacturer"
+  jsonLd={categoryJsonLd}
 >
   <Header />
-  
+  <CategoryStickyNav activeCategory={categoryName} />
+
   <!-- Hero Section -->
   <section class="bg-gradient-to-r from-[#0d7377] to-[#0a5c5f] text-white py-16">
     <div class="container mx-auto px-4">
@@ -33,6 +45,8 @@ const categoryProducts = products.filter(p => p.category === categoryName);
     </div>
   </section>
 
+  <CategoryDecisionCards categorySlug="rfid-wristbands" />
+
   <!-- Products Grid -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
@@ -49,7 +63,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
             <div class="aspect-square overflow-hidden bg-gray-100">
               <img 
                 src={product.images[0]} 
-                alt={product.name}
+                alt={`${product.name} — ${categoryName} manufactured by RFIDAK in Shenzhen, China`}
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 loading="lazy"
               />
@@ -74,6 +88,47 @@ const categoryProducts = products.filter(p => p.category === categoryName);
     </div>
   </section>
 
+  <!-- Downloads -->
+  <section id="downloads" class="py-12 bg-white border-t border-gray-100">
+    <div class="container mx-auto px-4">
+      <div class="max-w-5xl mx-auto">
+        <div class="max-w-3xl mb-6">
+          <p class="eyebrow-label text-[#0d7377] mb-2">Catalog Download</p>
+          <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">RFID Wristband product list</h2>
+          <p class="card-copy text-gray-600">Download the full RFIDAK wristband mold catalog covering 44 silicone, PVC, Tyvek, woven and elastic models with WB mold codes, dimensions, and product photos.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <a
+            href="/downloads/rfidak-rfid-wristband-list-2026.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+            class="copy-safe group flex items-start gap-4 rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:border-[#0d7377] hover:bg-white hover:-translate-y-0.5 transition-all"
+          >
+            <span class="inline-flex h-12 w-12 shrink-0 items-center justify-center" aria-hidden="true">
+              <svg class="h-12 w-12" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 4h22l8 8v28a4 4 0 01-4 4H10a4 4 0 01-4-4V8a4 4 0 014-4z" fill="#dc2626"/>
+                <path d="M32 4v8h8L32 4z" fill="#fca5a5"/>
+                <text x="24" y="33" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="700">PDF</text>
+              </svg>
+            </span>
+            <div class="min-w-0 flex-1">
+              <h3 class="title-balance text-base font-semibold text-gray-800 group-hover:text-[#0d7377] transition-colors">RFIDAK RFID Wristband List 2026</h3>
+              <p class="card-copy mt-1 text-sm text-gray-600">Full mold catalog: 44 wristband models across silicone, PVC, Tyvek, woven and elastic. WB mold codes, dimensions, and product photos. 13 pages.</p>
+              <p class="mt-2 inline-flex items-center text-sm font-medium text-[#0d7377]">
+                Download
+                <span class="ml-2 text-xs text-gray-500">(794 KB)</span>
+                <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"></path>
+                </svg>
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Category Description - GEO: Comprehensive, authoritative content -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-4">
@@ -81,7 +136,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
         <h2 class="text-3xl font-bold text-gray-800 mb-6">RFID Wristband Buying Guide</h2>
         <div class="prose prose-lg text-gray-600">
           <p>
-            RFID wristbands are wearable identification devices that combine an RFID chip and antenna inside a comfortable band material. The global RFID wristband market is growing at 14.8% CAGR, driven by demand from events, hospitality, and healthcare sectors. ProudTek manufactures RFID wristbands in silicone, fabric, Tyvek, and PVC materials, all meeting international safety standards (RoHS, REACH, FDA-grade silicone).
+            RFID wristbands are wearable identification devices that combine an RFID chip and antenna inside a comfortable band material. The global RFID wristband market is growing at 14.8% CAGR, driven by demand from events, hospitality, and healthcare sectors. RFIDAK manufactures RFID wristbands in silicone, fabric, Tyvek, and PVC materials, all meeting international safety standards (RoHS, REACH, FDA-grade silicone).
           </p>
 
           <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">RFID Wristband Types Comparison</h3>
@@ -111,7 +166,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
             <li><strong>Usage duration:</strong> Disposable Tyvek bands for single-day events (lowest cost at $0.15-$0.30/pc); silicone bands for long-term membership programs (reusable for 5+ years).</li>
             <li><strong>Water exposure:</strong> IP68-rated silicone wristbands for water parks, pools, and marine environments. Fabric bands suit dry outdoor events.</li>
             <li><strong>Chip selection:</strong> NTAG213/215 for NFC tap-and-go payments; Mifare Classic 1K for access control; UHF chips for long-range crowd management.</li>
-            <li><strong>Comfort and safety:</strong> All ProudTek silicone wristbands use FDA-compliant, hypoallergenic material. Available in adult (210mm) and child (165mm) sizes with adjustable closures.</li>
+            <li><strong>Comfort and safety:</strong> All RFIDAK silicone wristbands use FDA-compliant, hypoallergenic material. Available in adult (210mm) and child (165mm) sizes with adjustable closures.</li>
             <li><strong>Branding:</strong> Full-color silkscreen printing, debossed/embossed logos, custom Pantone color matching, and individual UID laser engraving are all available.</li>
           </ol>
 
@@ -128,13 +183,16 @@ const categoryProducts = products.filter(p => p.category === categoryName);
   <section class="py-12 bg-[#0d7377]">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-2xl font-bold text-white mb-4">Need Custom RFID Wristbands?</h2>
-      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free samples with your logo. ProudTek offers 10+ wristband styles with full custom branding and fast 7-day production.</p>
+      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free samples with your logo. RFIDAK offers 10+ wristband styles with full custom branding and fast 7-day production.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="/contact" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
-        <a href="https://wa.me/8618665820632?text=Hi, I need custom RFID wristbands" target="_blank" rel="noopener noreferrer" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
+        <a href={categoryContact.href} data-analytics="quote_click_category_cta_rfid-wristbands" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
+        <a href={categoryWhatsApp.href} target="_blank" rel="noopener noreferrer" data-analytics="whatsapp_click_category_cta_rfid-wristbands" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
       </div>
     </div>
   </section>
+
+  <ScrollCTA contactHref={categoryContact.href} contactLabel="Get Quote" whatsappHref={categoryWhatsApp.href} source="category" />
+  <ExitIntent sampleHref="/contact?intent=samples&category=rfid-wristbands&express=1&source=exit-intent#contactForm" whatsappHref={categoryWhatsApp.href} contextName="RFID Wristbands" />
 
   <Footer />
 </Layout>

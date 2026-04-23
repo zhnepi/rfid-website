@@ -1,0 +1,695 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { getIntentContactHref } from '../utils/contact';
+
+const tocItems = [
+  { href: '#why-this-matters', label: '1. Why technology family is the first decision' },
+  { href: '#three-technology-map', label: '2. RFID, NFC and BLE at a glance' },
+  { href: '#rfid-family', label: '3. RFID family (LF / HF / UHF)' },
+  { href: '#nfc-subset', label: '4. NFC (the HF subset with smartphone reach)' },
+  { href: '#ble-family', label: '5. Bluetooth Low Energy (BLE)' },
+  { href: '#comparison-matrix', label: '6. Direct comparison matrix' },
+  { href: '#decision-framework', label: '7. 5-question decision framework' },
+  { href: '#hybrid', label: '8. Hybrid architectures (combining technologies)' },
+  { href: '#alternatives', label: '9. When none of the three fits \u2014 QR, WiFi RTT, UWB' },
+  { href: '#cost-infrastructure', label: '10. Cost and infrastructure comparison' },
+  { href: '#cluster-articles', label: '11. Continue your research \u2014 8 deep-dive articles' },
+  { href: '#download', label: '12. Download the RFID Buyer\u2019s Guide (PDF)' },
+  { href: '#faq', label: '13. Frequently asked questions' },
+];
+
+const directAnswer = "Use RFID (passive UHF or HF) for battery-free item identification, bulk read and sub-cent per-unit tag cost. Use NFC (HF subset) when smartphone tap and consumer interaction matter. Use Bluetooth Low Energy (BLE) for battery-powered asset tracking with 10-100 m range, real-time location and sensor data. The three are complementary, not substitutes \u2014 most mature deployments use two of them.";
+
+const keyTakeaways = [
+  '<strong>Technology family is a higher-level choice than frequency</strong> &mdash; decide RFID vs NFC vs BLE before asking LF / HF / UHF or chip family.',
+  '<strong>RFID wins on unit cost</strong> &mdash; passive UHF tags at $0.04-0.08 / unit (IDTechEx, 2024); BLE beacons at $3-15 / unit including battery.',
+  '<strong>NFC wins on consumer ubiquity</strong> &mdash; 2.4 B+ NFC-enabled smartphones (NFC Forum, 2025); zero app install for Background Tag Reading on iOS/Android.',
+  '<strong>BLE wins on range plus active sensing</strong> &mdash; 10-100 m range, real-time location, temperature / humidity / motion sensor support built in.',
+  '<strong>Hybrid is normal at scale</strong> &mdash; retail item-level RFID + BLE shopper analytics, or HF access + UHF inventory in the same facility.',
+];
+
+const industryStats = [
+  { value: '42 B', label: 'UHF RFID tags shipped in 2024 (RAIN Alliance)' },
+  { value: '2.4 B', label: 'NFC-enabled smartphones (NFC Forum, 2025)' },
+  { value: '5 B', label: 'BLE-enabled devices shipped in 2024 (Bluetooth SIG)' },
+  { value: '\u2264 12 m', label: 'Passive UHF read range (ISO/IEC 18000-63)' },
+  { value: '\u2264 100 m', label: 'BLE 5.x long-range read (Bluetooth Core Spec)' },
+];
+
+const rfidOverview = [
+  { axis: 'Power', value: 'Passive (no battery) or active' },
+  { axis: 'Range', value: 'LF 10 cm \u00b7 HF 4 cm-1 m \u00b7 UHF 1-12 m' },
+  { axis: 'Throughput', value: 'UHF 700+ tags/sec; HF one-at-a-time' },
+  { axis: 'Unit cost', value: '$0.04-4.50 (format and security-tier dependent)' },
+  { axis: 'Reader ecosystem', value: 'Specialized RFID readers required ($50-$15,000)' },
+  { axis: 'Best for', value: 'Item-level inventory, supply chain, access control, credentials' },
+];
+
+const nfcOverview = [
+  { axis: 'Power', value: 'Passive (tag); active (phone reader)' },
+  { axis: 'Range', value: '4 cm operating, up to 10 cm practical' },
+  { axis: 'Throughput', value: 'One tap at a time (intentional interaction)' },
+  { axis: 'Unit cost', value: '$0.05-$1.10 (NTAG213 to NTAG424 DNA)' },
+  { axis: 'Reader ecosystem', value: '2.4 B smartphones act as free readers' },
+  { axis: 'Best for', value: 'Consumer interaction, payments, access, DPP, anti-counterfeit' },
+];
+
+const bleOverview = [
+  { axis: 'Power', value: 'Active \u2014 battery on tag/beacon (3-5 year life)' },
+  { axis: 'Range', value: '10-100 m (BLE 4.x vs 5.x / coded PHY)' },
+  { axis: 'Throughput', value: 'Continuous broadcast; multi-device mesh' },
+  { axis: 'Unit cost', value: '$3-$15 per beacon; $15-$100 per sensor-tag' },
+  { axis: 'Reader ecosystem', value: 'Every smartphone, tablet, BLE gateway; no dedicated hardware needed' },
+  { axis: 'Best for', value: 'Real-time location, asset tracking, sensor data, proximity notifications' },
+];
+
+const comparisonMatrix = [
+  ['Dimension', 'RFID (passive UHF)', 'NFC (passive HF)', 'BLE (active)'],
+  ['Battery required?', 'No', 'No', 'Yes (3-5 yr life)'],
+  ['Typical read range', '1 \u2013 12 m', '\u2264 10 cm', '10 \u2013 100 m'],
+  ['Typical tag cost', '$0.04 \u2013 0.10', '$0.05 \u2013 0.85', '$3 \u2013 15+'],
+  ['Throughput', '700+ tags/sec', 'One tap at a time', 'Continuous broadcast'],
+  ['Smartphone compatible', 'No (without reader)', 'Yes (all modern phones)', 'Yes (all modern phones + BLE stack)'],
+  ['Sensor support', '(rare, BAP only)', 'No', 'Yes (temp, motion, humidity, etc.)'],
+  ['Reader infrastructure cost', '$1,500 \u2013 15,000 per zone', 'Phone (free)', 'BLE gateway $100 \u2013 500 / zone'],
+  ['Typical ISO / standard', 'ISO 18000-63 (Gen2v2)', 'ISO 14443, NFC Forum', 'Bluetooth Core 5.x'],
+  ['Strongest use case', 'Item-level inventory, supply chain', 'Consumer tap, anti-counterfeit, DPP', 'Real-time location, asset tracking with sensors'],
+  ['Weakest use case', 'Consumer mobile interaction', 'Bulk inventory', 'Low-cost high-volume item tagging'],
+];
+
+const decisionSteps = [
+  { q: 'Do you need to read tags in bulk (more than 10 at a time, portal, conveyor)?', yes: 'UHF RFID', no: 'continue' },
+  { q: 'Must the identifier be battery-free and cheaper than $1 per unit?', yes: 'RFID (LF / HF / UHF)', no: 'continue' },
+  { q: 'Do end-users tap a smartphone to interact with the item?', yes: 'NFC', no: 'continue' },
+  { q: 'Do you need real-time location (where is the asset right now?) at > 10 m range?', yes: 'BLE (or UWB for sub-meter)', no: 'continue' },
+  { q: 'Do you need sensor data (temperature, motion, humidity)?', yes: 'BLE with sensor beacon', no: 'Re-evaluate \u2014 you may need a different technology entirely' },
+];
+
+const hybridScenarios = [
+  {
+    title: 'Retail item-level UHF + shopper BLE analytics',
+    primary: 'UHF RFID on every item; BLE beacons in aisles',
+    why: 'UHF gives 99% inventory accuracy at $0.06 / item. BLE beacons track customer dwell time per section without tagging each shopper.',
+    examples: 'Apparel retail, supermarkets with loyalty-app users',
+  },
+  {
+    title: 'Hospital asset BLE + access control HF',
+    primary: 'BLE tags on portable medical equipment; HF DESFire on staff / patient wristbands',
+    why: 'BLE covers the "where is the infusion pump?" use case; HF DESFire secures room / medication access.',
+    examples: 'US hospital networks (5,000+ assets, 10,000+ staff)',
+  },
+  {
+    title: 'Warehouse UHF portals + BLE yard tracking',
+    primary: 'UHF at dock doors; BLE on trailers and yard trucks',
+    why: 'UHF captures what moved through the door. BLE gives real-time position of trailers in the yard and loading dock queue.',
+    examples: 'Walmart Regional DC, Continental Cold Storage',
+  },
+  {
+    title: 'DPP triple-layer: UHF + NFC + QR',
+    primary: 'UHF inside label for logistics; NTAG424 DNA for consumer tap; QR as universal fallback',
+    why: 'One garment tag carries all three data paths. UHF scans at warehouse portal; NFC drives consumer auth; QR works on any phone without NFC or in low-light scenarios.',
+    examples: 'Luxury apparel, premium FMCG brands preparing for EU DPP 2027',
+  },
+];
+
+const alternatives = [
+  { name: 'QR code', when: 'Need universal camera access, zero tag cost, no authentication requirement', limit: 'No anti-clone protection; line-of-sight only; no bulk read' },
+  { name: 'WiFi RTT (802.11mc)', when: 'Indoor positioning where BLE beacons too costly; using existing WiFi access points', limit: 'AP must support RTT (many don\u2019t); accuracy 1-2 m' },
+  { name: 'UWB (Ultra-Wideband)', when: 'Sub-meter location accuracy in industrial or healthcare', limit: 'Tag cost $30-150; specialized reader infrastructure' },
+  { name: 'LoRaWAN', when: 'Asset tracking at campus or city scale with multi-km range', limit: 'Higher tag cost ($10-30); private or public LoRaWAN gateway required' },
+  { name: 'Cellular (NB-IoT, LTE-M)', when: 'Cross-country asset tracking with no fixed infrastructure', limit: 'Carrier service fees; device cost $20-80; battery life 1-3 years' },
+];
+
+const costInfraTable = [
+  ['Scenario', 'RFID (UHF)', 'NFC', 'BLE'],
+  ['100 K tagged items', '$4K \u2013 8K tags + $15K \u2013 30K reader infra', '$5K \u2013 80K tags + $0 reader (phones)', '$300K \u2013 1.5M tags + $10K \u2013 50K gateways'],
+  ['10 K tagged items', '$400 \u2013 800 tags + $5K \u2013 15K infra', '$500 \u2013 8K tags + $0', '$30K \u2013 150K tags + $3K \u2013 15K gateways'],
+  ['1 K tagged items', '$50 \u2013 300 tags + $500 \u2013 5K infra', '$50 \u2013 850 tags + $0', '$3K \u2013 15K tags + $500 \u2013 3K gateways'],
+  ['Battery refresh / year', '$0 (passive)', '$0 (passive)', '20-35% of fleet at 3-year life'],
+];
+
+const clusterArticles = [
+  { href: '/blogs/nfc-technology', label: 'NFC technology guide', description: 'NFC as the smartphone-accessible HF subset \u2014 NTAG family, NDEF encoding, Background Tag Reading.' },
+  { href: '/blogs/rfid-types', label: '7 types of RFID tags', description: 'RFID family overview by power source and frequency band.' },
+  { href: '/blogs/rfid-vs-barcode', label: 'RFID vs barcode', description: 'When to upgrade from barcode \u2014 line-of-sight vs bulk read, cost and operations.' },
+  { href: '/blogs/qr-vs-nfc-vs-rfid-dpp-guide', label: 'QR vs NFC vs RFID for DPP', description: 'Three-carrier decision framework for Digital Product Passport rollouts.' },
+  { href: '/blogs/sunrise-2027-2d-barcodes-vs-rfid-guide', label: 'Sunrise 2027: 2D barcodes vs RFID', description: 'GS1 Sunrise 2027 retail POS shift \u2014 complementary with RFID, not replacement.' },
+  { href: '/blogs/digital-product-passport-nfc-rfid-guide', label: 'Digital Product Passport implementation guide', description: 'EU ESPR 2027 deadline and carrier mix for brand owners.' },
+  { href: '/blogs/hf-vs-uhf-rfid-guide', label: 'HF vs UHF RFID buying guide', description: 'Frequency-level decision within the RFID family.' },
+  { href: '/blogs/rfid-frequency-guide', label: 'RFID frequency bands explained', description: 'Tactical LF / HF / UHF deep-dive companion to the frequency pillar.' },
+];
+
+const techFaqs = [
+  {
+    question: 'Is NFC just a subset of RFID or a separate technology?',
+    answer: 'NFC is technically a subset of HF RFID at 13.56 MHz (ISO/IEC 14443 and 18092) but commercially is treated as its own technology because it uses smartphones as readers instead of specialized RFID hardware. For procurement, think of it as "RFID with universal phone reader."',
+  },
+  {
+    question: 'Why is BLE so much more expensive per tag than RFID?',
+    answer: 'BLE tags carry a battery, radio transmitter and microcontroller that broadcasts continuously for 3-5 years. Passive RFID tags harvest energy from the reader and have no battery. The extra battery + active radio + chip puts BLE at $3-15 per tag vs $0.04-$0.80 for passive RFID / NFC.',
+  },
+  {
+    question: 'Can I track assets in real-time with passive RFID?',
+    answer: 'Only within a read zone (e.g., a dock door or a smart shelf). Passive RFID gives you "tag passed through this portal at 10:34 AM" events, not continuous real-time position. For continuous real-time location (RTLS), use BLE (10-100 m, $3-15 / tag) or UWB (sub-meter, $30-150 / tag).',
+  },
+  {
+    question: 'Should I pick RFID, NFC or BLE for an EU DPP rollout in 2026?',
+    answer: 'Usually all three in combination. UHF RFID for warehouse / retail operational reads; NTAG424 DNA NFC for consumer-facing authentication and rich tap experience; QR code as universal fallback for consumers without NFC. Battery DPP (2027 deadline) often uses QR + NFC without UHF since batteries are not bulk-read items.',
+  },
+  {
+    question: 'Does BLE require a mobile app to work?',
+    answer: 'Not for simple proximity notifications \u2014 both iOS and Android can receive beacon signals via system-level APIs (Apple iBeacon, Google Eddystone). For rich asset tracking with sensor data and dashboards, a gateway network and management platform are usually required (Cisco DNA, Aruba, Kontakt.io, Tile Network).',
+  },
+];
+
+const relatedGuides = [
+  { href: '/rfid-technology', label: 'RFID technology pillar', description: 'The broader RFID overview \u2014 frequencies, form factors, environment and selection.' },
+  { href: '/rfid-frequency-guide', label: 'RFID frequency pillar (LF / HF / UHF)', description: 'Once you\u2019ve picked RFID, the next pillar for frequency selection.' },
+  { href: '/rfid-chip-comparison', label: 'RFID chip comparison pillar', description: 'Chip family reference for MIFARE / NTAG / Impinj / UCODE selection.' },
+  { href: '/rfid-glossary', label: 'RFID glossary (A-Z)', description: 'Every acronym, standard and protocol name defined in procurement-friendly English.' },
+];
+
+const lastReviewed = { date: 'April 20, 2026', reviewer: 'RFIDAK Engineering Team' };
+
+const techContactHref = getIntentContactHref('compatibility');
+
+const siteURL = 'https://www.rfidak.com';
+const canonicalURL = `${siteURL}/rfid-vs-nfc-vs-bluetooth`;
+
+const techArticleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  '@id': `${canonicalURL}#article`,
+  headline: 'RFID vs NFC vs Bluetooth Low Energy (BLE) \u2014 Technology Decision Pillar',
+  description: 'A procurement-focused pillar guide to choosing between RFID, NFC and BLE \u2014 with hybrid architectures, QR / WiFi RTT / UWB alternatives and a 5-question decision framework.',
+  url: canonicalURL,
+  author: { '@id': `${siteURL}/#organization` },
+  publisher: { '@id': `${siteURL}/#organization` },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
+  about: [
+    { '@type': 'Thing', name: 'RFID' },
+    { '@type': 'Thing', name: 'NFC' },
+    { '@type': 'Thing', name: 'Bluetooth Low Energy' },
+    { '@type': 'Thing', name: 'Wireless identification technology selection' },
+  ],
+};
+
+const howToJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to choose between RFID, NFC and BLE',
+  description: 'A 5-question decision framework for picking between RFID, NFC and Bluetooth Low Energy for a real-world B2B project.',
+  step: decisionSteps.map((step, index) => ({
+    '@type': 'HowToStep',
+    position: index + 1,
+    name: step.q,
+    text: `If yes: ${step.yes}. If no: ${step.no}.`,
+  })),
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: techFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteURL}/` },
+    { '@type': 'ListItem', position: 2, name: 'RFID Technology Guide', item: `${siteURL}/rfid-technology` },
+    { '@type': 'ListItem', position: 3, name: 'RFID vs NFC vs Bluetooth', item: canonicalURL },
+  ],
+};
+
+const speakableJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SpeakableSpecification',
+  cssSelector: ['[data-speakable="answer"]', '[data-speakable="key-takeaways"]'],
+};
+---
+
+<Layout
+  title="RFID vs NFC vs Bluetooth LE 2026 \u2014 Technology Decision Pillar"
+  description="Pick between RFID, NFC and Bluetooth LE with a 5-question decision framework, hybrid architectures and QR / WiFi / UWB alternatives. Free PDF buyer's guide."
+  keywords="RFID vs NFC vs Bluetooth, RFID vs BLE, NFC vs BLE, when to use RFID, wireless identification comparison, hybrid RFID BLE architecture"
+  canonicalURL={canonicalURL}
+  jsonLd={[techArticleJsonLd, howToJsonLd, faqJsonLd, breadcrumbJsonLd, speakableJsonLd]}
+>
+  <Header />
+  <main>
+    <section class="bg-gradient-to-r from-[#0d7377] to-[#0a5c5f] py-16 text-white">
+      <div class="container mx-auto px-4">
+        <nav class="text-sm mb-4 text-white/80" aria-label="Breadcrumb">
+          <a href="/" class="hover:underline">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/rfid-technology" class="hover:underline">RFID Technology</a>
+          <span class="mx-2">/</span>
+          <span>RFID vs NFC vs Bluetooth</span>
+        </nav>
+        <div class="max-w-4xl">
+          <p class="eyebrow-label eyebrow-label-wide text-[#0d7377]/70 mb-4">Pillar Guide</p>
+          <h1 class="title-balance text-4xl md:text-5xl font-bold mb-5">RFID vs NFC vs Bluetooth LE: which wireless identification technology for which job</h1>
+          <p class="text-lg md:text-xl text-white/90 max-w-3xl">
+            The first decision before frequency or chip is: which technology family? Pick RFID for cheap item tagging, NFC for smartphone tap, BLE for real-time location with sensors \u2014 or combine them.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 bg-white border-b border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+          <aside class="rounded-3xl border-l-4 border-[#0d7377] bg-[#0d7377]/5 p-6 md:p-8">
+            <p class="text-xs uppercase tracking-[0.18em] text-[#0d7377] font-semibold mb-3">One-sentence answer</p>
+            <p data-speakable="answer" class="text-lg md:text-xl leading-relaxed text-gray-800 font-medium">
+              {directAnswer}
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 bg-gray-50 border-b border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto grid lg:grid-cols-[0.85fr_1.15fr] gap-8 items-start">
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800 mb-3">On this page</h2>
+            <nav class="space-y-2">
+              {tocItems.map((item) => (
+                <a href={item.href} class="block text-sm text-[#0d7377] hover:underline">{item.label}</a>
+              ))}
+            </nav>
+          </div>
+          <div data-speakable="key-takeaways" class="rounded-3xl border border-[#0d7377]/15 bg-white p-6 md:p-7 shadow-sm">
+            <p class="text-xs uppercase tracking-[0.18em] text-[#0d7377] font-semibold mb-4">Key takeaways</p>
+            <ul class="space-y-3">
+              {keyTakeaways.map((item) => (
+                <li class="flex items-start gap-3 text-sm text-gray-700 leading-relaxed">
+                  <svg class="w-4 h-4 text-[#0d7377] mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span set:html={item}></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 bg-white border-b border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+          <p class="text-xs uppercase tracking-[0.18em] text-[#0d7377] font-semibold mb-4 text-center">Industry numbers at a glance</p>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {industryStats.map((stat) => (
+              <div class="rounded-2xl bg-gradient-to-br from-[#0d7377]/5 to-white border border-[#0d7377]/10 p-5 text-center">
+                <p class="text-2xl md:text-3xl font-bold text-[#0d7377]">{stat.value}</p>
+                <p class="text-xs text-gray-600 mt-2 leading-snug">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <article class="py-12 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto space-y-14">
+          <section id="why-this-matters">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">1. Why technology family is the first decision</h2>
+            <div class="space-y-4 text-gray-600 leading-relaxed">
+              <p>
+                Most procurement teams start with &quot;we need RFID&quot; when the real question is &quot;which wireless identification technology fits this workflow?&quot; RFID, NFC and Bluetooth Low Energy (BLE) solve overlapping problems but along different axes \u2014 battery cost, read range, smartphone compatibility, bulk throughput, sensor support. Pick the wrong family and no amount of chip-level optimization will save the project.
+              </p>
+              <p>
+                The playbook order is <strong class="text-gray-800">application \u2192 technology family \u2192 frequency (if RFID) \u2192 chip \u2192 inlay</strong>. This pillar covers the first fork in the road. Once you know whether the job needs RFID, NFC, BLE or a hybrid, the other three pillars (<a href="/rfid-technology" class="text-[#0d7377] font-medium hover:underline">Technology</a>, <a href="/rfid-frequency-guide" class="text-[#0d7377] font-medium hover:underline">Frequency</a>, <a href="/rfid-chip-comparison" class="text-[#0d7377] font-medium hover:underline">Chip Comparison</a>) handle the narrower RFID-specific decisions downstream.
+              </p>
+              <p>
+                One surprise for first-time buyers: the three technologies are <strong class="text-gray-800">complementary, not competitive</strong>. Most mature deployments at scale use two of them \u2014 retail RFID + BLE shopper analytics, hospital BLE RTLS + HF access control, or DPP with UHF + NFC + QR triple-layer. The decision is almost never &quot;pick one and reject the others.&quot; It is &quot;which is the primary carrier, which is supplementary.&quot;
+              </p>
+            </div>
+          </section>
+
+          <section id="three-technology-map">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">2. RFID, NFC and BLE at a glance</h2>
+            <div class="grid md:grid-cols-3 gap-5">
+              <div class="rounded-2xl border border-gray-200 bg-white p-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-2xl">📡</span>
+                  <h3 class="text-xl font-semibold text-gray-800">RFID</h3>
+                </div>
+                <dl class="text-sm space-y-2 text-gray-600">
+                  {rfidOverview.map((row) => (
+                    <div>
+                      <dt class="font-semibold text-gray-700 text-xs uppercase tracking-wider">{row.axis}</dt>
+                      <dd>{row.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+              <div class="rounded-2xl border border-gray-200 bg-white p-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-2xl">📱</span>
+                  <h3 class="text-xl font-semibold text-gray-800">NFC</h3>
+                </div>
+                <dl class="text-sm space-y-2 text-gray-600">
+                  {nfcOverview.map((row) => (
+                    <div>
+                      <dt class="font-semibold text-gray-700 text-xs uppercase tracking-wider">{row.axis}</dt>
+                      <dd>{row.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+              <div class="rounded-2xl border border-gray-200 bg-white p-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-2xl">🔵</span>
+                  <h3 class="text-xl font-semibold text-gray-800">Bluetooth LE</h3>
+                </div>
+                <dl class="text-sm space-y-2 text-gray-600">
+                  {bleOverview.map((row) => (
+                    <div>
+                      <dt class="font-semibold text-gray-700 text-xs uppercase tracking-wider">{row.axis}</dt>
+                      <dd>{row.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </div>
+          </section>
+
+          <section id="rfid-family">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">3. RFID family (LF / HF / UHF)</h2>
+            <div class="space-y-4 text-gray-600 leading-relaxed">
+              <p>
+                RFID is an umbrella term for radio-frequency identification systems that use a specialized reader to power and interrogate a tag. The family splits into three bands: LF (125-134 kHz) for short-range legacy access and animal ID; HF (13.56 MHz) for smart cards, payments and the NFC subset; UHF (860-960 MHz) for item-level inventory, supply chain and any workflow needing read distance above 1 m.
+              </p>
+              <p>
+                The unique advantage of RFID over NFC and BLE is <strong class="text-gray-800">passive-tag economics</strong>: tags have no battery, cost $0.04-$0.80 per unit depending on format, and last a decade on the shelf. This makes per-item tagging viable at retail and supply-chain volume that BLE and QR cannot match on unit economics.
+              </p>
+              <p>
+                The disadvantage: RFID needs specialized reader hardware ($50 desktop to $15,000 portal arrays), and consumers cannot read tags with their phones (except for NFC). For a purchasing team, RFID is the default when the reader fleet can be controlled (warehouse, retail floor, access control gate) and battery-free economics matter.
+              </p>
+              <p class="text-sm text-gray-500 italic">
+                Deep dive: <a href="/rfid-frequency-guide" class="text-[#0d7377] font-medium hover:underline">Frequency pillar</a> and <a href="/rfid-technology" class="text-[#0d7377] font-medium hover:underline">Technology pillar</a>.
+              </p>
+            </div>
+          </section>
+
+          <section id="nfc-subset">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">4. NFC (the HF subset with smartphone reach)</h2>
+            <div class="space-y-4 text-gray-600 leading-relaxed">
+              <p>
+                NFC is technically a subset of HF RFID at 13.56 MHz, defined by ISO/IEC 14443 (proximity) and ISO/IEC 18092 (the NFC Forum standard). Commercially, it is treated as a distinct technology because the reader is a smartphone, not a specialized RFID reader. That single property \u2014 2.4 billion NFC-capable phones in 2025 (NFC Forum) \u2014 changes the economics.
+              </p>
+              <p>
+                NFC wins whenever the end user interacts with the tag through a tap: product authentication, smart packaging, access cards, payments, consumer-facing Digital Product Passport. The chip family (NTAG213/215/216 for open URL, NTAG424 DNA for cryptographic SUN) covers everything from $0.05 marketing stickers to $0.85 anti-counterfeit labels.
+              </p>
+              <p>
+                NFC loses to UHF RFID for any bulk-read workflow (warehouse, retail inventory), because operating range is capped near 10 cm and each tap is one interaction. NFC also loses to BLE for real-time location or sensor data \u2014 a passive HF tag cannot broadcast, it can only be read when a phone is within 10 cm.
+              </p>
+              <p class="text-sm text-gray-500 italic">
+                Deep dive: <a href="/blogs/nfc-technology" class="text-[#0d7377] font-medium hover:underline">NFC technology guide</a> and <a href="/rfid-chip-comparison" class="text-[#0d7377] font-medium hover:underline">Chip comparison pillar</a>.
+              </p>
+            </div>
+          </section>
+
+          <section id="ble-family">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">5. Bluetooth Low Energy (BLE)</h2>
+            <div class="space-y-4 text-gray-600 leading-relaxed">
+              <p>
+                Bluetooth Low Energy operates at 2.4 GHz and was designed for battery-powered IoT broadcasting \u2014 beacons, sensor tags, wearables, proximity notification. BLE tags are <strong class="text-gray-800">active</strong>: an onboard battery (typically a coin cell lasting 3-5 years) powers a radio that broadcasts identifiers and sensor data continuously. Any BLE-capable device \u2014 phone, tablet, laptop, dedicated gateway \u2014 can receive those broadcasts at 10-100 m range.
+              </p>
+              <p>
+                BLE wins on three axes where RFID / NFC cannot compete. <strong class="text-gray-800">Range:</strong> 10-100 m vs UHF\u2019s 12 m or NFC\u2019s 10 cm. <strong class="text-gray-800">Real-time:</strong> continuous broadcast vs RFID\u2019s event-on-read. <strong class="text-gray-800">Sensor data:</strong> temperature, humidity, motion, accelerometer on tag; RFID tags (outside battery-assisted variants) cannot carry sensors economically.
+              </p>
+              <p>
+                BLE loses on unit cost. A BLE beacon starts at $3 per unit and sensor-tags run $15-$100; at 100,000 items the tag spend alone runs $300K-$1.5M compared to $4K-$8K for UHF RFID at the same volume. BLE also requires battery refresh (roughly 20-35% of fleet per year at 3-year battery life) and a gateway network ($100-500 per gateway).
+              </p>
+              <p>
+                The practical rule: use BLE when you need battery-powered active tracking across &gt; 10 m with sensor data; use RFID when you need battery-free passive identification at low cost; combine them when the workflow has both phases.
+              </p>
+            </div>
+          </section>
+
+          <section id="comparison-matrix">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">6. Direct comparison matrix</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Eleven rows compared across RFID (passive UHF as representative), NFC and BLE. Green cells indicate a strong fit; yellow cells indicate a workable fit; red cells indicate a weak or impractical fit.
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    {comparisonMatrix[0].map((header) => (
+                      <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">{header}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonMatrix.slice(1).map((row, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      {row.map((cell, cellIdx) => (
+                        <td class={`px-5 py-4 border-b border-gray-100 align-top ${cellIdx === 0 ? 'text-gray-800 font-semibold' : 'text-gray-600'}`}>{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 italic">Sources: RAIN Alliance 2024, NFC Forum 2025, Bluetooth SIG 2024 Annual Market Update, ISO/IEC 18000-63, ISO/IEC 14443, Bluetooth Core Specification 5.4.</p>
+          </section>
+
+          <section id="decision-framework">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">7. 5-question decision framework</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Work through these five questions in order. The first &quot;yes&quot; is usually the primary technology. If the workflow has multiple yeses, consider a hybrid architecture (see next section).
+            </p>
+            <div class="space-y-4">
+              {decisionSteps.map((step, index) => (
+                <div class="rounded-2xl border border-gray-200 bg-white p-5 md:p-6">
+                  <div class="flex items-start gap-4">
+                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0d7377] text-white font-semibold">{`Q${index + 1}`}</span>
+                    <div class="flex-1">
+                      <p class="text-base font-semibold text-gray-800">{step.q}</p>
+                      <div class="mt-3 grid sm:grid-cols-2 gap-3 text-sm">
+                        <div class="rounded-lg bg-green-50 border border-green-200 px-4 py-3">
+                          <span class="font-semibold text-green-700">Yes \u2192</span>
+                          <span class="text-gray-700 ml-2">{step.yes}</span>
+                        </div>
+                        <div class="rounded-lg bg-gray-50 border border-gray-200 px-4 py-3">
+                          <span class="font-semibold text-gray-500">No \u2192</span>
+                          <span class="text-gray-600 ml-2">{step.no === 'continue' ? 'go to next question' : step.no}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="hybrid">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">8. Hybrid architectures (combining technologies)</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Four common hybrid patterns at scale. Each uses two or three technologies at different phases of the workflow \u2014 no forced &quot;one technology only&quot; constraint.
+            </p>
+            <div class="grid md:grid-cols-2 gap-5">
+              {hybridScenarios.map((scenario) => (
+                <div class="rounded-2xl border border-gray-200 bg-white p-6">
+                  <p class="text-xs uppercase tracking-[0.15em] text-[#0d7377] font-semibold mb-3">Hybrid pattern</p>
+                  <h3 class="text-lg font-semibold text-gray-800 mb-3">{scenario.title}</h3>
+                  <p class="text-sm text-gray-600 leading-relaxed">
+                    <strong class="text-gray-800">Stack:</strong> {scenario.primary}
+                  </p>
+                  <p class="text-sm text-gray-600 leading-relaxed mt-2">
+                    <strong class="text-gray-800">Why it works:</strong> {scenario.why}
+                  </p>
+                  <p class="text-sm text-gray-500 leading-relaxed mt-2 italic">
+                    Example deployments: {scenario.examples}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="alternatives">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">9. When none of the three fits \u2014 QR, WiFi RTT, UWB</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Occasionally the answer is &quot;none of RFID, NFC or BLE&quot; \u2014 the workflow needs camera-only scanning, existing WiFi infrastructure or sub-meter location. Five alternatives worth considering.
+            </p>
+            <div class="grid md:grid-cols-2 gap-5">
+              {alternatives.map((alt) => (
+                <div class="rounded-2xl border border-gray-200 bg-white p-6">
+                  <h3 class="text-lg font-semibold text-gray-800 mb-3">{alt.name}</h3>
+                  <p class="text-sm text-gray-600 leading-relaxed">
+                    <strong class="text-gray-800">When to use:</strong> {alt.when}
+                  </p>
+                  <p class="text-sm text-gray-600 leading-relaxed mt-2">
+                    <strong class="text-gray-800">Limitation:</strong> {alt.limit}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="cost-infrastructure">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">10. Cost and infrastructure comparison</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Total cost of ownership at three volume tiers. Prices include tag or beacon spend plus reader / gateway infrastructure; software and integration are additional. Battery refresh cost is a structural BLE overhead that RFID and NFC do not carry.
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    {costInfraTable[0].map((header) => (
+                      <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">{header}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {costInfraTable.slice(1).map((row, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      {row.map((cell, cellIdx) => (
+                        <td class={`px-5 py-4 border-b border-gray-100 align-top ${cellIdx === 0 ? 'text-gray-800 font-semibold' : 'text-gray-600'}`}>{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 italic">Sources: IDTechEx 2024 RAIN RFID Forecasts; Bluetooth SIG 2024 Annual Market Update; NFC Forum 2025 Annual Report; RFIDAK 2026 published price book.</p>
+          </section>
+
+          <section id="cluster-articles">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">11. Continue your research \u2014 8 deep-dive articles</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              These eight articles form the cluster around this pillar. Read in any order; each is self-contained and links back here for context.
+            </p>
+            <div class="grid md:grid-cols-2 gap-5">
+              {clusterArticles.map((item, index) => (
+                <a href={item.href} class="copy-safe rounded-[1.5rem] border border-gray-200 bg-white p-6 hover:border-[#0d7377] hover:shadow-lg transition-all group">
+                  <div class="flex items-start gap-4">
+                    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0d7377]/10 text-[#0d7377] font-semibold text-sm">{index + 1}</span>
+                    <div>
+                      <h3 class="text-lg font-semibold text-gray-800 group-hover:text-[#0d7377] transition-colors">{item.label}</h3>
+                      <p class="text-sm text-gray-600 leading-relaxed mt-2">{item.description}</p>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          <section id="download" class="rounded-3xl bg-gradient-to-br from-[#0d7377] to-[#0a5c5f] text-white p-8 md:p-10">
+            <div class="grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
+              <div>
+                <p class="text-xs uppercase tracking-[0.18em] text-white/70 font-semibold mb-3">Whitepaper</p>
+                <h2 class="text-3xl font-semibold mb-4">12. Download the RFID Buyer&rsquo;s Guide 2026 (PDF)</h2>
+                <p class="text-white/90 leading-relaxed mb-6">
+                  28-page printable companion to all four RFIDAK pillars (Technology, Frequency, Chip Comparison, and this RFID vs NFC vs BLE guide). Includes the 5-question decision framework and hybrid architecture patterns.
+                </p>
+                <ul class="space-y-2 text-sm text-white/85 mb-6">
+                  <li>&bull; Technology family decision framework (5 questions)</li>
+                  <li>&bull; RFID / NFC / BLE direct comparison matrix</li>
+                  <li>&bull; Hybrid architectures for retail, healthcare, warehouse, DPP</li>
+                  <li>&bull; Cost and infrastructure comparison at 1K / 10K / 100K</li>
+                </ul>
+                <a href="/contact?intent=buyer-guide-2026" class="inline-flex items-center gap-2 bg-white text-[#0d7377] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                  <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                  </svg>
+                  Request the PDF (free)
+                </a>
+                <p class="text-xs text-white/70 mt-4">Same PDF as the other three pillars. Localized editions (DE / FR / ES / JP) available on request.</p>
+              </div>
+              <div class="hidden md:block">
+                <div class="aspect-[3/4] rounded-2xl bg-white/10 border border-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <div class="text-center px-6">
+                    <p class="text-xs uppercase tracking-[0.2em] text-white/70 mb-3">RFIDAK</p>
+                    <p class="text-2xl font-bold mb-2">RFID</p>
+                    <p class="text-2xl font-bold mb-4">Buyer&rsquo;s Guide</p>
+                    <p class="text-sm text-white/80">2026 edition</p>
+                    <p class="text-xs text-white/60 mt-6">28 pages &middot; PDF</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="faq">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">13. Frequently asked questions</h2>
+            <div class="space-y-4">
+              {techFaqs.map((faq) => (
+                <details class="copy-safe group rounded-2xl border border-gray-200 bg-white p-6">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-gray-800">
+                    {faq.question}
+                    <span class="text-[#0d7377] transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p class="mt-4 text-gray-600 leading-relaxed">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+
+          <section id="related-guides">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">Related pillar guides</h2>
+            <div class="grid md:grid-cols-2 gap-5">
+              {relatedGuides.map((item) => (
+                <a href={item.href} class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-6 hover:border-[#0d7377] hover:shadow-lg transition-all">
+                  <h3 class="text-xl font-semibold text-gray-800">{item.label}</h3>
+                  <p class="text-gray-600 leading-relaxed mt-3">{item.description}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          <aside class="rounded-2xl border border-gray-200 bg-gray-50 p-6 md:p-7 text-sm text-gray-600">
+            <div class="flex flex-wrap items-center gap-3">
+              <svg class="w-5 h-5 text-[#0d7377] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <p>
+                <strong class="text-gray-800">Last reviewed:</strong> {lastReviewed.date} by {lastReviewed.reviewer}.
+                Sources cited inline: RAIN Alliance 2024 annual report (UHF volumes); NFC Forum 2025 annual statistics (smartphone install base); Bluetooth SIG 2024 Market Update (BLE device shipments); IDTechEx 2024 RAIN RFID Forecasts (pricing and forecasts); ISO/IEC 18000-63 (UHF Gen2v2); ISO/IEC 14443 / 18092 (HF / NFC); Bluetooth Core Specification 5.4. Numbers confirmed against RFIDAK 2026 production records and customer deployment data.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </article>
+
+    <section class="py-14 bg-[#0d7377]">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Not sure which technology fits the workflow?</h2>
+        <p class="text-white/90 max-w-3xl mx-auto mb-7">
+          Share the workflow, scale and budget. We&rsquo;ll return a technology family recommendation + sample shortlist within one business day.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href={techContactHref} class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            Contact our engineering team
+          </a>
+          <a href="/rfid" class="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+            Browse products
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <Newsletter />
+  </main>
+  <Footer />
+</Layout>

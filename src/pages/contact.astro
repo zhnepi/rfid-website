@@ -33,7 +33,7 @@ const contactInfo = [
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
     </svg>`,
     title: 'Email',
-    content: 'info@proudtek.com',
+    content: 'info@rfidak.com',
   },
   {
     icon: `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -90,6 +90,13 @@ const defaultEmailHref = getIntentEmailHref('samples');
 const defaultWhatsAppHref = getIntentWhatsAppHref('samples');
 const defaultContactTheme = contactThemes.default;
 
+// W9: Sample Express short form mode — ?express=1 shortens the form to 5 fields
+// (name/email/product/country/quantity + message) and hides side panels / defer
+// sections so the user just sees "fill 5 things, send sample request".
+const isExpress = Astro.url.searchParams.get('express') === '1';
+const expressTitle = 'Request a Free Sample — 60 second form';
+const expressSubmitLabel = 'Send Sample Request';
+
 const comparisonInquiryCards = comparisonInquiryPaths.map((item) => ({
   ...item,
   examples: item.comparisonSlugs
@@ -97,7 +104,7 @@ const comparisonInquiryCards = comparisonInquiryPaths.map((item) => ({
     .filter(Boolean),
 }));
 
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/contact`;
 
 const contactPageJsonLd = {
@@ -105,8 +112,8 @@ const contactPageJsonLd = {
   '@type': 'ContactPage',
   '@id': `${canonicalURL}#contact-page`,
   url: canonicalURL,
-  name: 'Contact ProudTek',
-  description: 'Contact ProudTek for RFID quotes, compatibility checks, sample support and comparison-led inquiries across chips, frequencies and product formats.',
+  name: 'Contact RFIDAK',
+  description: 'Contact RFIDAK for RFID quotes, compatibility checks, sample support and comparison-led inquiries across chips, frequencies and product formats.',
   isPartOf: { '@id': `${siteURL}/#website` },
   about: { '@id': `${siteURL}/#organization` },
 };
@@ -123,141 +130,100 @@ const breadcrumbJsonLd = {
 ---
 
 <Layout
-  title="Contact ProudTek - Get RFID Product Quotes & Custom Solutions | Free Samples"
-  description="Contact ProudTek for RFID quotes, sample support, compatibility checks and comparison-led inquiries covering chips, frequencies, tags and credential formats."
-  keywords="contact RFID manufacturer, RFID quote, RFID comparison inquiry, custom RFID order, ProudTek contact, RFID sample request"
+  title="Contact RFIDAK - Get RFID Product Quotes & Custom Solutions | Free Samples"
+  description="Contact RFIDAK for RFID quotes, sample support, compatibility checks and comparison-led inquiries covering chips, frequencies, tags and credential formats."
+  keywords="contact RFID manufacturer, RFID quote, RFID comparison inquiry, custom RFID order, RFIDAK contact, RFID sample request"
   canonicalURL={canonicalURL}
   jsonLd={[contactPageJsonLd, breadcrumbJsonLd]}
 >
   <Header />
   <main>
-    <!-- Hero Section -->
-    <section class="brand-hero-band py-16 md:py-20">
-      <div class="absolute inset-0 opacity-60">
-        <div class="absolute top-10 left-10 w-32 h-32 rounded-full border border-[#0d7377]/18"></div>
-        <div class="absolute bottom-10 right-10 w-48 h-48 rounded-full border border-white/10"></div>
-        <div class="absolute top-1/2 left-1/3 w-20 h-20 rounded-full border border-[#0d7377]/20"></div>
+    <!-- Slim Contact Hero (compact: form is the primary thing below) -->
+    <section class="relative bg-gradient-to-br from-[#0a5c5f] via-[#0d7377] to-[#0a5c5f] py-8 md:py-10 overflow-hidden">
+      <div class="absolute inset-0 opacity-40 pointer-events-none" aria-hidden="true">
+        <div class="absolute top-8 left-8 w-24 h-24 rounded-full border border-white/15"></div>
+        <div class="absolute bottom-6 right-12 w-32 h-32 rounded-full border border-white/10"></div>
       </div>
       <div class="container mx-auto px-4 relative z-10">
-        <div class="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-          <div class="copy-safe">
-            <p id="contactHeroEyebrow" class="eyebrow-label mb-3 text-[#0d7377]">{defaultContactTheme.heroEyebrow}</p>
-            <h1 id="contactHeroTitle" class="title-balance text-4xl font-bold text-white md:text-5xl lg:text-6xl">{defaultContactTheme.heroTitle}</h1>
-            <p id="contactHeroCopy" class="card-copy mt-4 max-w-2xl text-base text-white/72 md:text-lg">{defaultContactTheme.heroCopy}</p>
+        <div class="mx-auto max-w-4xl">
+          <p id="contactHeroEyebrow" class="inline-flex items-center gap-1.5 mb-2 rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/85">
+            {defaultContactTheme.heroEyebrow}
+          </p>
+          <h1 id="contactHeroTitle" class="title-balance text-2xl font-bold text-white md:text-3xl lg:text-4xl">{defaultContactTheme.heroTitle}</h1>
+          <p id="contactHeroCopy" class="mt-2 max-w-2xl text-sm text-white/78 md:text-base">{defaultContactTheme.heroCopy}</p>
 
-            <div class="mt-6 flex flex-wrap gap-2">
-              {contactHeroPoints.map((item) => (
-                <span class="brand-chip-dark">{item}</span>
-              ))}
-            </div>
-
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a
-                id="quickWhatsAppLink"
-                href={defaultWhatsAppHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="cta-whatsapp normal-case tracking-normal text-sm"
-              >
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-                <span id="quickWhatsAppLabel">WhatsApp a quick question</span>
-              </a>
-              <a
-                id="quickEmailLink"
-                href={defaultEmailHref}
-                class="cta-secondary-dark normal-case tracking-normal text-sm"
-              >
-                <svg class="w-5 h-5 text-[#0d7377]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                </svg>
-                <span id="quickEmailLabel">Email your inquiry</span>
-              </a>
-            </div>
-
-            <p class="mt-4 text-sm text-white/58">
-              Best for accurate pricing: use the form below when you already know the product type, chip, application, or quantity target.
-            </p>
+          <div class="mt-5 flex flex-wrap items-center gap-3">
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-white/12 px-3 py-1.5 text-xs font-medium text-white/90">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Replies in 2&ndash;4 business hours &middot; 24h max
+            </span>
+            <a
+              id="quickWhatsAppLink"
+              href={defaultWhatsAppHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-analytics="contact_hero_whatsapp_click"
+              class="inline-flex items-center gap-1.5 rounded-full bg-[#25D366] hover:bg-[#20ba5a] px-3.5 py-1.5 text-xs font-semibold text-white transition-colors"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              <span id="quickWhatsAppLabel">WhatsApp</span>
+            </a>
+            <a
+              id="quickEmailLink"
+              href={defaultEmailHref}
+              data-analytics="contact_hero_email_click"
+              class="inline-flex items-center gap-1.5 rounded-full bg-white/12 hover:bg-white/20 px-3.5 py-1.5 text-xs font-semibold text-white transition-colors"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              <span id="quickEmailLabel">Email</span>
+            </a>
+            <a href="#contactForm" class="inline-flex items-center gap-1 text-xs font-medium text-white/70 hover:text-white transition-colors">
+              or fill the form below
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+              </svg>
+            </a>
           </div>
-
-          <div class="brand-panel-dark copy-safe p-6 md:p-7">
-            <p class="eyebrow-label text-[#0d7377]">Best Results</p>
-            <h2 class="title-balance mt-3 text-2xl font-semibold text-white">One useful inquiry beats three back-and-forth emails</h2>
-            <p class="card-copy mt-3 text-sm text-white/72">
-              The fastest path is to send the product family, reader or chip requirement, quantity range, and any print or encoding needs in one message.
-            </p>
-            <div class="mt-6 space-y-3 border-t border-white/10 pt-5 text-sm text-white/72">
-              <p><span class="font-semibold text-white">Start with:</span> cards, tags, labels, wristbands, keyfobs, or readers.</p>
-              <p><span class="font-semibold text-white">Add fit details:</span> chip family, protocol, reader model, or working sample.</p>
-              <p><span class="font-semibold text-white">Finish with:</span> quantity target, timeline, and any OEM customization requirements.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="defer-section border-b border-gray-100 bg-white">
-      <div class="container mx-auto px-4 py-12 md:py-16">
-        <div class="grid gap-8 xl:grid-cols-[1.16fr_0.84fr]">
-          <div>
-            <div class="max-w-2xl">
-              <p class="eyebrow-label text-[#0d7377] mb-2">Inquiry Paths</p>
-              <h2 class="title-balance text-3xl font-bold text-gray-900">Choose the path that matches what still needs to be confirmed</h2>
-              <p class="card-copy mt-4 text-gray-600">
-                Most buyers only need one route: samples, OEM customization, compatibility, or repeat procurement.
-              </p>
-            </div>
-            <div class="mt-8 grid gap-5 md:grid-cols-2">
-              {inquiryPaths.map((item) => (
-                <a href={`/contact?intent=${item.intent}#contactForm`} class="brand-panel brand-panel-link copy-safe p-6">
-                  <h3 class="title-balance text-xl font-semibold text-gray-900">{item.title}</h3>
-                  <p class="mt-3 text-sm leading-relaxed text-gray-600">{item.description}</p>
-                  <span class="accent-link mt-5 inline-flex items-center text-sm">
-                    {item.cta}
-                    <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                  </span>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <aside class="brand-panel-dark copy-safe p-6 md:p-7">
-            <p class="eyebrow-label text-[#0d7377]">Still Comparing?</p>
-            <h2 class="title-balance mt-3 text-2xl font-semibold text-white">Use one comparison route when two close options are still on the table</h2>
-            <p class="card-copy mt-3 text-sm text-white/72">
-              This is the better path when you are not ready to choose one format, chip, or frequency direction yet.
-            </p>
-            <div class="mt-6 space-y-3">
-              {comparisonInquiryCards.map((item) => (
-                <a href={`/contact?intent=${item.intent}#contactForm`} class="block rounded-2xl border border-white/10 bg-white/5 px-4 py-4 transition-colors hover:bg-white/8">
-                  <span class="block text-sm font-semibold text-white">{item.title}</span>
-                  <span class="mt-1 block text-sm text-white/68">{item.description}</span>
-                  <span class="mt-3 flex flex-wrap gap-2">
-                    {item.examples.slice(0, 2).map((example) => (
-                      <span class="brand-chip-dark">{example!.name}</span>
-                    ))}
-                  </span>
-                </a>
-              ))}
-            </div>
-          </aside>
         </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="py-16 md:py-20 bg-white">
+    <section class="py-10 md:py-14 bg-white">
       <div class="container mx-auto px-4">
         <div class="grid lg:grid-cols-5 gap-12">
           <!-- Contact Form -->
-          <div class="order-1 lg:order-2 lg:col-span-3">
+          <div class={`order-1 lg:order-2 ${isExpress ? 'lg:col-span-5 max-w-2xl mx-auto w-full' : 'lg:col-span-3'}`}>
             <div class="brand-panel p-6 md:p-8">
-              <h2 id="contactFormTitle" class="text-2xl font-bold text-gray-900 mb-1">{defaultContactTheme.formTitle}</h2>
-              <p id="contactFormCopy" class="text-gray-500 text-sm mb-2">{defaultContactTheme.formCopy}</p>
-              <p id="contactFormHelp" class="text-xs text-gray-500 mb-6">The more specific the inquiry, the faster we can match the right product path.</p>
+              {isExpress && (
+                <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-[#0d7377]/8 px-3 py-1 text-xs font-semibold text-[#0d7377]">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                  Express · 5 fields
+                </div>
+              )}
+              <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+                <h2 id="contactFormTitle" class="text-2xl font-bold text-gray-900">{isExpress ? expressTitle : defaultContactTheme.formTitle}</h2>
+                <span
+                  class="inline-flex items-center gap-1.5 rounded-full bg-[#0d7377]/8 px-2.5 py-1 text-xs font-medium text-[#0d7377]"
+                  role="status"
+                  aria-label="Response time commitment"
+                  title="Every inquiry gets a first reply within 24 hours (Mon–Fri, GMT+8)."
+                >
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  Reply in 2&ndash;4h &middot; 24h max
+                </span>
+              </div>
+              <!-- Non-visual text kept for runtime theme updates (JS-only) -->
+              <p id="contactFormCopy" class="sr-only">{defaultContactTheme.formCopy}</p>
+              <p id="contactFormHelp" class="sr-only">The more specific the inquiry, the faster we can match the right product path.</p>
 
               <div id="inquiryContextBanner" class="brand-panel-soft hidden mb-6 p-5">
                 <p id="inquiryContextEyebrow" class="eyebrow-label text-[#0d7377] mb-2">Inquiry Context Loaded</p>
@@ -265,15 +231,14 @@ const breadcrumbJsonLd = {
                 <p id="inquiryContextCopy" class="card-copy mt-2 text-sm text-gray-600"></p>
               </div>
 
-              <div id="contactPromptCard" class="brand-panel-soft mb-6 p-5">
-                <p id="contactPromptEyebrow" class="eyebrow-label text-[#0d7377] mb-2">{defaultContactTheme.promptEyebrow}</p>
-                <h3 id="contactPromptTitle" class="title-balance text-xl font-semibold text-gray-900">{defaultContactTheme.promptTitle}</h3>
-                <p id="contactPromptCopy" class="card-copy mt-2 text-sm text-gray-600">{defaultContactTheme.promptCopy}</p>
-                <div id="contactPromptList" class="mt-4 flex flex-wrap gap-2">
-                  {defaultContactTheme.promptBullets.map((item) => (
-                    <span class="brand-chip">{item}</span>
-                  ))}
-                </div>
+              <!-- Hidden containers kept for runtime theme swaps (JS writes into them) -->
+              <p id="contactPromptEyebrow" class="sr-only">{defaultContactTheme.promptEyebrow}</p>
+              <p id="contactPromptTitle" class="sr-only">{defaultContactTheme.promptTitle}</p>
+              <p id="contactPromptCopy" class="sr-only">{defaultContactTheme.promptCopy}</p>
+              <div id="contactPromptList" class="sr-only" aria-hidden="true">
+                {defaultContactTheme.promptBullets.map((item) => (
+                  <span>{item}</span>
+                ))}
               </div>
 
               <form id="contactForm" class="space-y-5" action="/api/inquiry" method="post">
@@ -330,68 +295,88 @@ const breadcrumbJsonLd = {
                   </div>
                 </div>
 
-                <div class="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label for="inquiryType" class="block text-sm font-medium text-gray-700 mb-1.5">Inquiry Type <span class="text-red-500">*</span></label>
-                    <select
-                      id="inquiryType"
-                      name="inquiryType"
-                      required
-                      class="field-control"
-                    >
-                      <option value="">Select an inquiry type</option>
-                      <option value="samples">Sample Planning</option>
-                      <option value="oem">OEM / Customization</option>
-                      <option value="compatibility">Compatibility Check</option>
-                      <option value="repeat-order">Repeat Order</option>
-                      <option value="chip-comparison">Chip Comparison</option>
-                      <option value="frequency-comparison">Frequency Comparison</option>
-                      <option value="product-format-comparison">Tag / Credential Format Comparison</option>
-                      <option value="laundry-tag-comparison">Laundry Tag Comparison</option>
-                      <option value="general">General Product Inquiry</option>
-                    </select>
+                {isExpress ? (
+                  <input type="hidden" id="inquiryType" name="inquiryType" value="samples" />
+                ) : (
+                  <div class="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label for="inquiryType" class="block text-sm font-medium text-gray-700 mb-1.5">Inquiry Type <span class="text-red-500">*</span></label>
+                      <select
+                        id="inquiryType"
+                        name="inquiryType"
+                        required
+                        class="field-control"
+                      >
+                        <option value="">Select an inquiry type</option>
+                        <option value="samples">Sample Planning</option>
+                        <option value="oem">OEM / Customization</option>
+                        <option value="compatibility">Compatibility Check</option>
+                        <option value="repeat-order">Repeat Order</option>
+                        <option value="chip-comparison">Chip Comparison</option>
+                        <option value="frequency-comparison">Frequency Comparison</option>
+                        <option value="product-format-comparison">Tag / Credential Format Comparison</option>
+                        <option value="laundry-tag-comparison">Laundry Tag Comparison</option>
+                        <option value="general">General Product Inquiry</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="preferredContact" class="block text-sm font-medium text-gray-700 mb-1.5">Preferred Contact Method</label>
+                      <select
+                        id="preferredContact"
+                        name="preferredContact"
+                        class="field-control"
+                      >
+                        <option value="">Choose preferred method</option>
+                        <option value="email">Email</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="either">Either is fine</option>
+                      </select>
+                    </div>
                   </div>
-                  <div>
-                    <label for="preferredContact" class="block text-sm font-medium text-gray-700 mb-1.5">Preferred Contact Method</label>
-                    <select
-                      id="preferredContact"
-                      name="preferredContact"
-                      class="field-control"
-                    >
-                      <option value="">Choose preferred method</option>
-                      <option value="email">Email</option>
-                      <option value="whatsapp">WhatsApp</option>
-                      <option value="either">Either is fine</option>
-                    </select>
-                  </div>
-                </div>
+                )}
 
-                <div class="grid sm:grid-cols-2 gap-5">
+                {isExpress ? (
                   <div>
-                    <label for="company" class="block text-sm font-medium text-gray-700 mb-1.5">Company Name</label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      autocomplete="organization"
-                      maxlength="120"
-                      placeholder="Your Company"
-                      class="field-control"
-                    />
-                  </div>
-                  <div>
-                    <label for="country" class="block text-sm font-medium text-gray-700 mb-1.5">Country / Region</label>
+                    <label for="country" class="block text-sm font-medium text-gray-700 mb-1.5">Country / Region <span class="text-red-500">*</span></label>
                     <input
                       type="text"
                       id="country"
                       name="country"
                       autocomplete="country-name"
                       maxlength="80"
+                      required
                       placeholder="e.g., United States"
                       class="field-control"
                     />
                   </div>
-                </div>
+                ) : (
+                  <div class="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label for="company" class="block text-sm font-medium text-gray-700 mb-1.5">Company Name</label>
+                      <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        autocomplete="organization"
+                        maxlength="120"
+                        placeholder="Your Company"
+                        class="field-control"
+                      />
+                    </div>
+                    <div>
+                      <label for="country" class="block text-sm font-medium text-gray-700 mb-1.5">Country / Region</label>
+                      <input
+                        type="text"
+                        id="country"
+                        name="country"
+                        autocomplete="country-name"
+                        maxlength="80"
+                        placeholder="e.g., United States"
+                        class="field-control"
+                      />
+                    </div>
+                  </div>
+                )}
 
                 <div class="grid sm:grid-cols-2 gap-5">
                   <div>
@@ -428,16 +413,17 @@ const breadcrumbJsonLd = {
                   </div>
                 </div>
 
-                <div>
-                  <label for="subject" class="block text-sm font-medium text-gray-700 mb-1.5">Subject <span class="text-red-500">*</span></label>
+                <div class={isExpress ? 'hidden' : ''}>
+                  <label for="subject" class="block text-sm font-medium text-gray-700 mb-1.5">Subject{!isExpress && (<span class="text-red-500"> *</span>)}</label>
                   <input
                     type="text"
                     id="subject"
                     name="subject"
-                    required
-                    minlength="5"
+                    required={!isExpress}
+                    minlength={isExpress ? undefined : 5}
                     maxlength="140"
                     dir="auto"
+                    value={isExpress ? 'Sample request (express)' : ''}
                     placeholder={defaultContactTheme.subjectPlaceholder}
                     class="field-control"
                   />
@@ -471,7 +457,7 @@ const breadcrumbJsonLd = {
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                   </svg>
-                  <span id="contactSubmitLabel">{defaultContactTheme.submitLabel}</span>
+                  <span id="contactSubmitLabel">{isExpress ? expressSubmitLabel : defaultContactTheme.submitLabel}</span>
                 </button>
               </form>
 
@@ -486,7 +472,7 @@ const breadcrumbJsonLd = {
                   </div>
                   <a
                     id="draftEmailLink"
-                    href="mailto:info@proudtek.com"
+                    href="mailto:info@rfidak.com"
                     class="cta-secondary normal-case tracking-normal"
                   >
                     Open email backup
@@ -525,59 +511,98 @@ const breadcrumbJsonLd = {
 
               <noscript>
                 <div class="brand-panel-soft mt-6 p-5 text-sm text-gray-700">
-                  JavaScript is turned off. This form can still be submitted normally. If you prefer, email <a class="font-semibold text-gray-900 underline decoration-[#0d7377]/40 underline-offset-4" href="mailto:info@proudtek.com">info@proudtek.com</a> or continue on <a class="font-semibold text-gray-900 underline decoration-[#0d7377]/40 underline-offset-4" href={defaultWhatsAppHref}>WhatsApp</a>.
+                  JavaScript is turned off. This form can still be submitted normally. If you prefer, email <a class="font-semibold text-gray-900 underline decoration-[#0d7377]/40 underline-offset-4" href="mailto:info@rfidak.com">info@rfidak.com</a> or continue on <a class="font-semibold text-gray-900 underline decoration-[#0d7377]/40 underline-offset-4" href={defaultWhatsAppHref}>WhatsApp</a>.
                 </div>
               </noscript>
             </div>
           </div>
 
-          <!-- Contact Info -->
-          <div class="order-2 lg:order-1 lg:col-span-2">
-            <h2 id="contactInfoTitle" class="text-2xl font-bold text-gray-900 mb-2">Contact Information</h2>
-            <p id="contactInfoCopy" class="text-gray-600 mb-8">
+          <!-- Contact Info (hidden in express mode — keep laser focus on the 5-field form) -->
+          <div class={`order-2 lg:order-1 lg:col-span-2 ${isExpress ? 'hidden' : ''}`}>
+            <h2 id="contactInfoTitle" class="text-base font-semibold text-gray-900 uppercase tracking-wide mb-4">Contact Information</h2>
+            <p id="contactInfoCopy" class="sr-only">
               Use these channels when you need a fast human follow-up on pricing, samples, compatibility, or repeat supply.
             </p>
 
-            <div class="space-y-5">
+            <div class="space-y-3">
               {contactInfo.map((info) => (
-                <div class="copy-safe flex items-start gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                  <div class="text-[#0d7377] flex-shrink-0 mt-0.5 bg-[#0d7377]/5 p-2 rounded-lg" set:html={info.icon}></div>
+                <div class="copy-safe flex items-start gap-3">
+                  <div class="text-[#0d7377] flex-shrink-0 mt-0.5 bg-[#0d7377]/5 p-1.5 rounded-md" set:html={info.icon}></div>
                   <div>
-                    <h3 class="font-semibold text-gray-800 text-sm uppercase tracking-wide">{info.title}</h3>
-                    <p class="text-gray-600 mt-0.5">{info.content}</p>
+                    <h3 class="text-[11px] font-semibold text-gray-500 uppercase tracking-wide">{info.title}</h3>
+                    <p class="text-sm text-gray-700 mt-0.5 leading-snug">{info.content}</p>
                   </div>
                 </div>
               ))}
             </div>
 
             <!-- Business Hours -->
-              <div class="brand-panel-soft copy-safe mt-8 p-5">
-              <h3 class="font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                <svg class="w-5 h-5 text-[#0d7377]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="mt-6 rounded-lg border border-gray-200 p-4">
+              <h3 class="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#0d7377]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                Business Hours (China Standard Time)
+                Business Hours (CST / GMT+8)
               </h3>
-              <div class="space-y-1.5 text-sm text-gray-600">
-                <p class="flex justify-between"><span>Monday - Friday:</span> <span class="font-medium text-gray-800">9:00 AM - 6:00 PM</span></p>
-                <p class="flex justify-between"><span>Saturday:</span> <span class="font-medium text-gray-800">9:00 AM - 12:00 PM</span></p>
+              <div class="space-y-0.5 text-xs text-gray-600">
+                <p class="flex justify-between"><span>Mon&ndash;Fri:</span> <span class="font-medium text-gray-800">9:00&ndash;18:00</span></p>
+                <p class="flex justify-between"><span>Saturday:</span> <span class="font-medium text-gray-800">9:00&ndash;12:00</span></p>
                 <p class="flex justify-between"><span>Sunday:</span> <span class="text-gray-400">Closed</span></p>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div class="brand-panel-soft copy-safe mt-8 p-6">
-              <p class="eyebrow-label text-[#0d7377] mb-2">Need Proof First?</p>
-              <h3 class="title-balance text-2xl font-semibold text-gray-900 mb-4">Review supplier evidence before you send the inquiry</h3>
-              <div class="space-y-3">
-                {evidenceLinks.map((link) => (
-                  <a href={link.href} class="brand-panel brand-panel-link copy-safe block p-4">
-                    <span class="block text-sm font-semibold text-gray-800">{link.name}</span>
-                    <span class="mt-1 block text-sm text-gray-500">{link.description}</span>
-                  </a>
-                ))}
-              </div>
+    <!-- Supplementary: Inquiry Paths + Still Comparing? (below form; for visitors not ready to fill it yet) -->
+    <section class={`defer-section border-t border-gray-100 bg-gray-50 ${isExpress ? 'hidden' : ''}`}>
+      <div class="container mx-auto px-4 py-12 md:py-16">
+        <div class="mx-auto max-w-3xl text-center mb-10">
+          <p class="eyebrow-label text-[#0d7377] mb-2">Not ready to fill the form?</p>
+          <h2 class="title-balance text-2xl md:text-3xl font-bold text-gray-900">Pick the route that matches what still needs to be confirmed</h2>
+          <p class="card-copy mt-3 text-gray-600">
+            Most buyers only need one: samples, OEM, compatibility, repeat procurement &mdash; or a head-to-head comparison.
+          </p>
+        </div>
+        <div class="grid gap-8 xl:grid-cols-[1.16fr_0.84fr]">
+          <div>
+            <div class="grid gap-5 md:grid-cols-2">
+              {inquiryPaths.map((item) => (
+                <a href={`/contact?intent=${item.intent}#contactForm`} class="brand-panel brand-panel-link copy-safe p-6">
+                  <h3 class="title-balance text-xl font-semibold text-gray-900">{item.title}</h3>
+                  <p class="mt-3 text-sm leading-relaxed text-gray-600">{item.description}</p>
+                  <span class="accent-link mt-5 inline-flex items-center text-sm">
+                    {item.cta}
+                    <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </span>
+                </a>
+              ))}
             </div>
           </div>
+
+          <aside class="brand-panel-dark copy-safe p-6 md:p-7">
+            <p class="eyebrow-label text-[#0d7377]">Still Comparing?</p>
+            <h2 class="title-balance mt-3 text-2xl font-semibold text-white">Use one comparison route when two close options are still on the table</h2>
+            <p class="card-copy mt-3 text-sm text-white/72">
+              This is the better path when you are not ready to choose one format, chip, or frequency direction yet.
+            </p>
+            <div class="mt-6 space-y-3">
+              {comparisonInquiryCards.map((item) => (
+                <a href={`/contact?intent=${item.intent}#contactForm`} class="block rounded-2xl border border-white/10 bg-white/5 px-4 py-4 transition-colors hover:bg-white/8">
+                  <span class="block text-sm font-semibold text-white">{item.title}</span>
+                  <span class="mt-1 block text-sm text-white/68">{item.description}</span>
+                  <span class="mt-3 flex flex-wrap gap-2">
+                    {item.examples.slice(0, 2).map((example) => (
+                      <span class="brand-chip-dark">{example!.name}</span>
+                    ))}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -646,18 +671,18 @@ const breadcrumbJsonLd = {
     const timezoneField = document.getElementById('timezoneField') as HTMLInputElement;
     const browserLanguageField = document.getElementById('browserLanguageField') as HTMLInputElement;
     const whatsappBaseUrl = 'https://wa.me/8618665820632';
-    const emailBase = 'mailto:info@proudtek.com';
-    const attributionStorageKey = 'proudtek-inquiry-attribution';
+    const emailBase = 'mailto:info@rfidak.com';
+    const attributionStorageKey = 'rfidak-inquiry-attribution';
     let formStartedTracked = false;
 
     const trackEvent = (eventName: string, detail: Record<string, unknown> = {}) => {
       const analyticsWindow = window as Window & {
-        proudtekTrack?: (name: string, properties?: Record<string, unknown>) => void;
+        rfidakTrack?: (name: string, properties?: Record<string, unknown>) => void;
         dataLayer?: Array<Record<string, unknown>>;
       };
 
-      if (analyticsWindow.proudtekTrack) {
-        analyticsWindow.proudtekTrack(eventName, detail);
+      if (analyticsWindow.rfidakTrack) {
+        analyticsWindow.rfidakTrack(eventName, detail);
         return;
       }
 
@@ -673,7 +698,7 @@ const breadcrumbJsonLd = {
     const intentPrefills: Record<string, { subject: string; message: string }> = {
       samples: {
         subject: 'RFID sample request',
-        message: `Hi ProudTek,
+        message: `Hi RFIDAK,
 
 I would like to request RFID samples.
 
@@ -686,7 +711,7 @@ Target timeline:
       },
       oem: {
         subject: 'RFID OEM / customization inquiry',
-        message: `Hi ProudTek,
+        message: `Hi RFIDAK,
 
 I need support with a custom RFID project.
 
@@ -699,7 +724,7 @@ Quantity goal:
       },
       compatibility: {
         subject: 'RFID compatibility check',
-        message: `Hi ProudTek,
+        message: `Hi RFIDAK,
 
 I need help checking compatibility.
 
@@ -711,7 +736,7 @@ Application:
       },
       'repeat-order': {
         subject: 'RFID repeat order inquiry',
-        message: `Hi ProudTek,
+        message: `Hi RFIDAK,
 
 I would like to discuss a repeat RFID order.
 
@@ -723,7 +748,7 @@ Target delivery timing:
       },
       'chip-comparison': {
         subject: 'RFID chip comparison inquiry',
-        message: `Hi ProudTek,
+        message: `Hi RFIDAK,
 
 I need help narrowing an RFID chip comparison before samples or quoting.
 
@@ -735,7 +760,7 @@ Quantity / timeline:
       },
       'frequency-comparison': {
         subject: 'RFID frequency comparison inquiry',
-        message: `Hi ProudTek,
+        message: `Hi RFIDAK,
 
 I need help comparing RFID frequency options before moving into samples.
 
@@ -747,7 +772,7 @@ Quantity / timeline:
       },
       'product-format-comparison': {
         subject: 'RFID format comparison inquiry',
-        message: `Hi ProudTek,
+        message: `Hi RFIDAK,
 
 I need help comparing two RFID product formats before requesting samples or a quote.
 
@@ -759,7 +784,7 @@ Quantity / timeline:
       },
       'laundry-tag-comparison': {
         subject: 'Laundry RFID tag comparison inquiry',
-        message: `Hi ProudTek,
+        message: `Hi RFIDAK,
 
 I need help comparing laundry RFID tag formats before pilot testing.
 
@@ -772,14 +797,14 @@ Quantity / timeline:
     };
 
     const intentWhatsAppMessages: Record<string, string> = {
-      samples: 'Hi ProudTek, I want help narrowing the right RFID samples and next steps for my project.',
-      oem: 'Hi ProudTek, I need help with RFID customization, branding or OEM planning for my project.',
-      compatibility: 'Hi ProudTek, I need help checking RFID compatibility and narrowing the right product path for my project.',
-      'repeat-order': 'Hi ProudTek, I need help preparing an RFID repeat order and confirming the next supply step.',
-      'chip-comparison': 'Hi ProudTek, I need help comparing RFID chip options before moving into samples or a quote.',
-      'frequency-comparison': 'Hi ProudTek, I need help comparing RFID frequency options before I lock the shortlist.',
-      'product-format-comparison': 'Hi ProudTek, I need help comparing RFID product formats before I request samples.',
-      'laundry-tag-comparison': 'Hi ProudTek, I need help comparing laundry RFID tag formats before pilot testing.',
+      samples: 'Hi RFIDAK, I want help narrowing the right RFID samples and next steps for my project.',
+      oem: 'Hi RFIDAK, I need help with RFID customization, branding or OEM planning for my project.',
+      compatibility: 'Hi RFIDAK, I need help checking RFID compatibility and narrowing the right product path for my project.',
+      'repeat-order': 'Hi RFIDAK, I need help preparing an RFID repeat order and confirming the next supply step.',
+      'chip-comparison': 'Hi RFIDAK, I need help comparing RFID chip options before moving into samples or a quote.',
+      'frequency-comparison': 'Hi RFIDAK, I need help comparing RFID frequency options before I lock the shortlist.',
+      'product-format-comparison': 'Hi RFIDAK, I need help comparing RFID product formats before I request samples.',
+      'laundry-tag-comparison': 'Hi RFIDAK, I need help comparing laundry RFID tag formats before pilot testing.',
     };
 
     const comparisonIntents = new Set([
@@ -889,7 +914,7 @@ Quantity / timeline:
 
       return {
         subject,
-        message: `Hi ProudTek,
+        message: `Hi RFIDAK,
 
 ${intro}
 ${contextPage ? `Reference page: ${contextPage}\n` : ''}
@@ -1061,7 +1086,7 @@ ${lines}
 
     const buildWhatsAppFallbackMessage = (subject: string, body: string) => {
       const condensedBody = body.length > 1200 ? `${body.slice(0, 1200).trim()}...` : body;
-      return `Hi ProudTek, I tried to send this inquiry by email and am continuing here.\n\nSubject: ${subject}\n\n${condensedBody}`;
+      return `Hi RFIDAK, I tried to send this inquiry by email and am continuing here.\n\nSubject: ${subject}\n\n${condensedBody}`;
     };
 
     const syncDraftTools = (subject: string, body: string, mailtoLink: string, reveal = true) => {
@@ -1074,7 +1099,7 @@ ${lines}
       }
 
       if (draftPreview) {
-        draftPreview.value = `To: info@proudtek.com\nSubject: ${subject}\n\n${body}`;
+        draftPreview.value = `To: info@rfidak.com\nSubject: ${subject}\n\n${body}`;
       }
 
       if (reveal) {
@@ -1143,7 +1168,7 @@ ${lines}
                 ? ''
                 : 'blogs';
     const contextPage = contextType
-      ? `https://www.proudtek.com/${contextBasePath ? `${contextBasePath}/` : ''}${contextSlug}`
+      ? `https://www.rfidak.com/${contextBasePath ? `${contextBasePath}/` : ''}${contextSlug}`
       : '';
     const themeKey = getThemeKey(contextType, contextSlug, intent);
     const activeTheme = applyTheme(themeKey);
@@ -1219,30 +1244,30 @@ ${lines}
     const getContextualWhatsAppMessage = () => {
       if (contextName) {
         if (contextType === 'comparison') {
-          return `Hi ProudTek, I'm comparing ${contextName} and need help turning this tradeoff into the right sample, compatibility or quote path.`;
+          return `Hi RFIDAK, I'm comparing ${contextName} and need help turning this tradeoff into the right sample, compatibility or quote path.`;
         }
 
         if (contextType === 'solution') {
-          return `Hi ProudTek, I'm reviewing your ${contextName} solution page and need help translating this workflow into the right RFID shortlist and next step.`;
+          return `Hi RFIDAK, I'm reviewing your ${contextName} solution page and need help translating this workflow into the right RFID shortlist and next step.`;
         }
 
         if (contextType === 'market') {
-          return `Hi ProudTek, I'm reviewing your ${contextName} market page and need help with the right sample or sourcing path for this region.`;
+          return `Hi RFIDAK, I'm reviewing your ${contextName} market page and need help with the right sample or sourcing path for this region.`;
         }
 
         if (contextType === 'product') {
-          return `Hi ProudTek, I'm reviewing your ${contextName} product page and need help choosing the right sample, compatibility or quote path for my project.`;
+          return `Hi RFIDAK, I'm reviewing your ${contextName} product page and need help choosing the right sample, compatibility or quote path for my project.`;
         }
 
         if (contextType === 'category') {
-          return `Hi ProudTek, I'm reviewing your ${contextName} category page and need help narrowing the right options for my project.`;
+          return `Hi RFIDAK, I'm reviewing your ${contextName} category page and need help narrowing the right options for my project.`;
         }
 
         if (contextType === 'evidence') {
-          return `Hi ProudTek, I'm reviewing your ${contextName} page and want to confirm supplier proof and the right next buying step.`;
+          return `Hi RFIDAK, I'm reviewing your ${contextName} page and want to confirm supplier proof and the right next buying step.`;
         }
 
-        return `Hi ProudTek, I'm reading your ${contextName} guide and need help applying it to my RFID project.`;
+        return `Hi RFIDAK, I'm reading your ${contextName} guide and need help applying it to my RFID project.`;
       }
 
       return intentWhatsAppMessages[intent || 'samples'] || intentWhatsAppMessages.samples;
@@ -1268,7 +1293,7 @@ ${lines}
     if (quickEmailLink) {
       const emailPrefill = contextualPrefill || {
         subject: 'RFID sample request',
-        message: `Hi ProudTek,
+        message: `Hi RFIDAK,
 
 I would like to request RFID samples.
 
@@ -1416,7 +1441,7 @@ Target timeline:
           quantityRange,
           message,
         });
-        const mailtoLink = `mailto:info@proudtek.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const mailtoLink = `mailto:info@rfidak.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         const payload = serializeFormData(formData);
 
         payload.name = name;

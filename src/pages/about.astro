@@ -5,6 +5,19 @@ import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { getIntentContactHref } from '../utils/contact';
 
+const certifications = [
+  { label: 'ISO 9001', detail: 'Quality Management' },
+  { label: 'ISO 14001', detail: 'Environmental' },
+  { label: 'SGS Verified', detail: 'Factory Audit' },
+];
+
+const heroStats = [
+  { value: '108+', label: 'Clients' },
+  { value: '50+', label: 'Countries' },
+  { value: '5M', label: 'Cards/Month' },
+  { value: '18+', label: 'Years' },
+];
+
 const valueProps = [
   {
     title: 'Manufacturing focus',
@@ -22,6 +35,82 @@ const valueProps = [
     title: 'Practical communication',
     description: 'Built for teams that need clear answers around protocol, material, lead time and application fit before placing an order.',
   },
+];
+
+const milestones = [
+  { year: '2008', title: 'Founded in Shenzhen', description: 'RFIDAK established as an RFID card and tag manufacturer in Shenzhen, China.' },
+  { year: '2012', title: 'ISO 9001 Certified', description: 'Quality management system certified, standardizing production across all lines.' },
+  { year: '2015', title: '2M Units / Month', description: 'Monthly production capacity reaches 2 million units across card and tag lines.' },
+  { year: '2018', title: 'ISO 14001 + SGS Audit', description: 'Environmental certification and SGS factory audit passed for international compliance.' },
+  { year: '2020', title: '50+ Countries Served', description: 'Export footprint expands across Europe, Americas, Middle East, Africa and Asia-Pacific.' },
+  { year: '2023', title: '5M Cards / Month', description: 'Production capacity reaches 5 million units per month with 100+ active clients.' },
+  { year: '2025', title: '46+ Product Models', description: 'Full NFC, HF and UHF product line covering cards, tags, labels, wristbands and keyfobs.' },
+];
+
+const certDetail = [
+  {
+    name: 'ISO 9001:2015',
+    title: 'Quality Management System',
+    description: 'Internationally recognized standard ensuring consistent product quality, documented processes, and continuous improvement across all manufacturing operations.',
+    buyerBenefit: 'Every batch follows the same verified process — fewer defects, consistent output.',
+  },
+  {
+    name: 'ISO 14001:2015',
+    title: 'Environmental Management',
+    description: 'Certified environmental management system that controls waste, emissions and resource usage throughout the production lifecycle.',
+    buyerBenefit: 'Meets sustainability requirements for government and enterprise procurement.',
+  },
+  {
+    name: 'SGS Factory Audit',
+    title: 'Verified Manufacturing Facility',
+    description: 'Independent third-party audit by SGS confirming facility conditions, production capacity, worker safety and management systems.',
+    buyerBenefit: 'Third-party verified — no need to fly to Shenzhen to confirm factory legitimacy.',
+  },
+  {
+    name: 'RoHS / REACH',
+    title: 'Material Compliance',
+    description: 'All products comply with EU RoHS and REACH directives, restricting hazardous substances in materials and components.',
+    buyerBenefit: 'Safe for EU import — no customs blocks due to material non-compliance.',
+  },
+];
+
+const factoryCapabilities = [
+  { icon: 'area', label: 'Production Area', value: '3,000+ sqm', description: 'Dedicated manufacturing facility' },
+  { icon: 'capacity', label: 'Monthly Capacity', value: '5,000,000+', description: 'Cards, tags and labels per month' },
+  { icon: 'qc', label: 'Quality Control', value: '100% Inspection', description: 'Dedicated QC team on every batch' },
+  { icon: 'leadtime', label: 'Lead Time', value: '7–15 Days', description: 'From order confirmation to shipment' },
+  { icon: 'equipment', label: 'Equipment', value: 'Automated Lines', description: 'Laminating, encoding, printing, die-cutting' },
+  { icon: 'shipping', label: 'Export Shipping', value: 'Global Delivery', description: 'DHL, FedEx, UPS, sea freight, FOB Shenzhen' },
+];
+
+const clientTestimonials = [
+  {
+    quote: "We would hate to go to another supplier, as we prefer doing business with RFIDAK! We are very satisfied with your company!",
+    name: "Sladjan M.",
+    title: "CEO",
+    company: "Security Solutions",
+    country: "Serbia",
+  },
+  {
+    quote: "RFIDAK delivered 200,000 RFID laundry tags on time with zero defects. Their quality control is exceptional and pricing is very competitive.",
+    name: "Ahmed K.",
+    title: "Procurement Manager",
+    company: "Industrial Laundry Group",
+    country: "UAE",
+  },
+  {
+    quote: "The NFC wristbands worked flawlessly at our music festival with 30,000 attendees. Custom printing quality was excellent.",
+    name: "Maria L.",
+    title: "Operations Director",
+    company: "Event Tech Solutions",
+    country: "Mexico",
+  },
+];
+
+const industries = [
+  'Public Transit', 'Hotels & Resorts', 'Hospitals', 'Libraries',
+  'Retail Chains', 'Industrial Laundry', 'Events & Festivals', 'Smart Buildings',
+  'Logistics', 'Automotive', 'Education', 'Government',
 ];
 
 const processSteps = [
@@ -65,12 +154,12 @@ const categoryLinks = [
 
 const aboutFaqs = [
   {
-    question: 'What does ProudTek mainly manufacture?',
-    answer: 'ProudTek focuses on RFID cards, tags, labels, wristbands, keyfobs and related reader hardware for sourcing, OEM and project-based applications.',
+    question: 'What does RFIDAK mainly manufacture?',
+    answer: 'RFIDAK focuses on RFID cards, tags, labels, wristbands, keyfobs and related reader hardware for sourcing, OEM and project-based applications.',
   },
   {
-    question: 'Can ProudTek support custom RFID projects, not only standard catalog items?',
-    answer: 'Yes. Many projects require chip matching, print customization, numbering, encoding or special materials. ProudTek can help buyers move from requirements into sampling, compatibility checks and production planning.',
+    question: 'Can RFIDAK support custom RFID projects, not only standard catalog items?',
+    answer: 'Yes. Many projects require chip matching, print customization, numbering, encoding or special materials. RFIDAK can help buyers move from requirements into sampling, compatibility checks and production planning.',
   },
   {
     question: 'Who is the About page most useful for?',
@@ -80,9 +169,25 @@ const aboutFaqs = [
     question: 'Where should I go after reading the About page?',
     answer: 'Most buyers move next to the RFID technology guide, the category pages or the contact page, depending on whether they still need technical background, product shortlisting or a sample discussion.',
   },
+  {
+    question: 'What quality certifications does RFIDAK hold?',
+    answer: 'RFIDAK holds ISO 9001:2015 for quality management, ISO 14001:2015 for environmental management, and has passed an independent SGS factory audit. All products comply with EU RoHS and REACH directives for material safety.',
+  },
+  {
+    question: 'What is the minimum order quantity (MOQ)?',
+    answer: 'MOQ varies by product type: typically 500 pieces for standard RFID cards, 1,000 for wristbands and keyfobs, and 2,000 for labels and tags. Smaller sample orders are available for testing and compatibility verification before committing to production quantities.',
+  },
+  {
+    question: 'Can I get free samples before placing a bulk order?',
+    answer: 'Yes. RFIDAK offers free standard samples for most product families so buyers can verify chip compatibility, print quality, material feel and reader performance before production. Custom samples with specific encoding or printing may have a small tooling cost.',
+  },
+  {
+    question: 'How does RFIDAK handle quality control?',
+    answer: 'Every production batch goes through 100% inspection including chip read/write testing, print quality checks, dimension verification and packaging inspection. The QC process follows ISO 9001 documented procedures with full traceability from raw material to finished goods.',
+  },
 ];
 
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/about`;
 const aboutContactHref = getIntentContactHref('samples');
 
@@ -91,8 +196,8 @@ const aboutPageJsonLd = {
   '@type': 'AboutPage',
   '@id': `${canonicalURL}#about-page`,
   url: canonicalURL,
-  name: 'About ProudTek',
-  description: 'Brand and manufacturing overview for ProudTek, an RFID supplier based in Shenzhen, China.',
+  name: 'About RFIDAK',
+  description: 'Brand and manufacturing overview for RFIDAK, an RFID supplier based in Shenzhen, China.',
   isPartOf: { '@id': `${siteURL}/#website` },
   about: { '@id': `${siteURL}/#organization` },
 };
@@ -118,14 +223,40 @@ const faqJsonLd = {
     },
   })),
 };
+
+const howToJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  '@id': `${canonicalURL}#how-to-source-rfid`,
+  name: 'How to source custom RFID products from RFIDAK',
+  description: 'A 4-step buyer workflow used by RFIDAK to move from initial enquiry to a confirmed RFID production order.',
+  totalTime: 'P14D',
+  estimatedCost: { '@type': 'MonetaryAmount', currency: 'USD', value: '0' },
+  supply: [
+    { '@type': 'HowToSupply', name: 'Reader / lock model and chip family requirement' },
+    { '@type': 'HowToSupply', name: 'Target environment, mounting surface and read distance' },
+    { '@type': 'HowToSupply', name: 'Branding, encoding and packaging requirements' },
+  ],
+  tool: [
+    { '@type': 'HowToTool', name: 'Sample order or pilot quantity' },
+    { '@type': 'HowToTool', name: 'Compatibility test in real installed reader' },
+  ],
+  step: processSteps.map((s, idx) => ({
+    '@type': 'HowToStep',
+    position: idx + 1,
+    name: s.title,
+    text: s.description,
+    url: `${canonicalURL}#step-${s.step}`,
+  })),
+};
 ---
 
 <Layout
-  title="About ProudTek - RFID Manufacturing Partner in Shenzhen, China"
-  description="Learn about ProudTek, an RFID manufacturer in Shenzhen focused on cards, tags, labels, wristbands, keyfobs and project-based customization support."
-  keywords="About ProudTek, RFID manufacturer Shenzhen, RFID factory China, custom RFID supplier, RFID OEM manufacturer"
+  title="About RFIDAK - RFID Manufacturing Partner in Shenzhen, China"
+  description="Learn about RFIDAK, an RFID manufacturer in Shenzhen focused on cards, tags, labels, wristbands, keyfobs and project-based customization support."
+  keywords="About RFIDAK, RFID manufacturer Shenzhen, RFID factory China, custom RFID supplier, RFID OEM manufacturer"
   canonicalURL={canonicalURL}
-  jsonLd={[aboutPageJsonLd, breadcrumbJsonLd, faqJsonLd]}
+  jsonLd={[aboutPageJsonLd, breadcrumbJsonLd, faqJsonLd, howToJsonLd]}
 >
   <Header />
   <main>
@@ -137,11 +268,41 @@ const faqJsonLd = {
           <span>About</span>
         </nav>
         <div class="max-w-4xl">
-          <p class="eyebrow-label eyebrow-label-wide text-[#0d7377]/70 mb-4">About ProudTek</p>
+          <p class="eyebrow-label eyebrow-label-wide text-[#0d7377]/70 mb-4">About RFIDAK</p>
           <h1 class="title-balance text-4xl md:text-6xl font-bold mb-6">An RFID supplier built around practical sourcing, customization and project support</h1>
           <p class="text-lg md:text-xl text-white/85 max-w-3xl">
-            ProudTek works with buyers who need more than a simple catalog. Expect help matching chips, materials and product formats, then turning that choice into a workable sample and production plan.
+            RFIDAK works with buyers who need more than a simple catalog. Expect help matching chips, materials and product formats, then turning that choice into a workable sample and production plan.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Stats Bar -->
+    <section class="py-8 bg-slate-50 border-y border-slate-200/60">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div class="flex flex-wrap justify-center md:justify-start items-center gap-5">
+            {certifications.map((cert) => (
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-[#0d7377] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+                <div>
+                  <span class="text-sm font-semibold text-slate-800">{cert.label}</span>
+                  <span class="text-xs text-slate-500 hidden sm:inline"> &mdash; {cert.detail}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div class="hidden md:block w-px h-8 bg-slate-300"></div>
+          <div class="flex justify-center md:justify-end items-center gap-8">
+            {heroStats.map((stat) => (
+              <div class="text-center">
+                <p class="text-xl font-bold text-[#0d7377] leading-none">{stat.value}</p>
+                <p class="text-xs text-slate-500 mt-0.5">{stat.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -151,23 +312,23 @@ const faqJsonLd = {
         <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
           <div>
             <p class="eyebrow-label text-[#0d7377] mb-2">Company Overview</p>
-            <h2 class="title-balance text-3xl md:text-4xl font-semibold text-gray-900 mb-5">What buyers should understand about ProudTek first</h2>
+            <h2 class="title-balance text-3xl md:text-4xl font-semibold text-gray-900 mb-5">What buyers should understand about RFIDAK first</h2>
             <div class="space-y-5 text-gray-600 leading-relaxed max-w-3xl">
               <p>
-                ProudTek is an RFID manufacturing and sourcing partner based in Shenzhen, China. The company focuses on contactless product families such as RFID cards, industrial tags, labels, wristbands, keyfobs and readers, with support for standard products as well as project-based customization.
+                <strong class="text-gray-800">Founded in 2008 in Shenzhen, China</strong>, RFIDAK has grown into a specialized RFID manufacturer serving <strong class="text-gray-800">108+ clients across 50+ countries</strong>. The company operates a 3,000+ sqm production facility with a monthly capacity of over <strong class="text-gray-800">5 million cards, tags and labels</strong>, backed by ISO 9001 and ISO 14001 certified processes.
               </p>
               <p>
-                For many buyers, the real challenge is not finding any RFID product. It is finding the correct chip, form factor, material and finishing for the actual environment in which the product will be used. That is why the buying path here keeps pulling attention back to compatibility, surface conditions, wear, encoding and sample approval.
+                For many buyers, the real challenge is not finding any RFID product. It is finding the correct chip, form factor, material and finishing for the actual environment in which the product will be used. With <strong class="text-gray-800">46+ product models</strong> spanning NFC, HF and UHF frequencies, RFIDAK supports everything from hotel key cards and laundry tags to NFC labels, anti-metal tags and event wristbands.
               </p>
               <p>
-                Whether the project involves hotel key cards, laundry tags, NFC labels, anti-metal tags or event wristbands, the focus stays the same: reduce mismatched samples, shorten the move from research into a shortlist and make repeat purchasing easier once the right format is approved.
+                Over 18 years of manufacturing experience means fewer mismatched samples, shorter lead times, and a sample-first workflow that lets buyers verify compatibility before committing to production. That track record is why clients in industries from hospitality to logistics keep coming back for repeat orders.
               </p>
             </div>
           </div>
 
           <div class="rounded-[2rem] bg-slate-950 p-8 text-white shadow-[0_24px_80px_rgba(15,23,42,0.16)]">
             <p class="eyebrow-label text-[#0d7377] mb-2">Brand Snapshot</p>
-            <h2 class="title-balance text-2xl font-semibold mb-6">What buyers usually want to confirm before they shortlist ProudTek</h2>
+            <h2 class="title-balance text-2xl font-semibold mb-6">What buyers usually want to confirm before they shortlist RFIDAK</h2>
             <div class="grid sm:grid-cols-2 gap-4">
               {valueProps.map((item) => (
                 <div class="copy-safe rounded-2xl border border-white/10 bg-white/5 p-5">
@@ -177,6 +338,101 @@ const faqJsonLd = {
               ))}
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Company Milestones Timeline -->
+    <section class="py-16 bg-surface border-y border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mb-10">
+          <p class="eyebrow-label text-[#0d7377] mb-2">Our Journey</p>
+          <h2 class="title-balance text-3xl font-semibold text-gray-900">18+ years of RFID manufacturing — from startup to global supplier</h2>
+        </div>
+        <div class="relative">
+          <!-- Timeline line -->
+          <div class="hidden xl:block absolute top-6 left-0 right-0 h-0.5 bg-[#0d7377]/20"></div>
+          <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-7 gap-4 xl:gap-3">
+            {milestones.map((item) => (
+              <div class="relative xl:text-center">
+                <div class="hidden xl:flex w-3 h-3 rounded-full bg-[#0d7377] mx-auto mb-4 ring-4 ring-[#0d7377]/10 relative z-10"></div>
+                <div class="copy-safe rounded-2xl border border-gray-200 bg-white p-5 shadow-sm xl:p-4">
+                  <span class="text-2xl xl:text-xl font-bold text-[#0d7377]">{item.year}</span>
+                  <h3 class="text-base font-semibold text-gray-800 mt-2 xl:mt-1">{item.title}</h3>
+                  <p class="text-sm text-gray-500 mt-2 xl:mt-1 leading-relaxed">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications & Quality -->
+    <section class="py-16 bg-slate-950 text-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mb-10">
+          <p class="eyebrow-label text-[#0d7377] mb-2">Certifications & Compliance</p>
+          <h2 class="title-balance text-3xl font-semibold text-white">Verified quality standards that international buyers require</h2>
+          <p class="text-white/70 mt-4 leading-relaxed">Every certification represents a commitment to consistent quality, environmental responsibility and transparent manufacturing — verified by independent third parties.</p>
+        </div>
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+          {certDetail.map((cert) => (
+            <div class="copy-safe rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/8 transition-colors">
+              <div class="w-11 h-11 rounded-full bg-[#0d7377]/20 text-[#0d7377] flex items-center justify-center mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white">{cert.name}</h3>
+              <p class="text-sm text-[#0d7377] font-medium mt-1">{cert.title}</p>
+              <p class="text-sm text-white/60 mt-3 leading-relaxed">{cert.description}</p>
+              <div class="mt-4 pt-4 border-t border-white/10">
+                <p class="text-xs text-white/50 uppercase tracking-wider mb-1">What this means for buyers</p>
+                <p class="text-sm text-white/80">{cert.buyerBenefit}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Factory Capability -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mb-10">
+          <p class="eyebrow-label text-[#0d7377] mb-2">Factory Capability</p>
+          <h2 class="title-balance text-3xl font-semibold text-gray-900">Production infrastructure behind every order</h2>
+          <p class="text-gray-600 mt-4 leading-relaxed">Concrete numbers and capabilities so buyers can evaluate factory fit without a site visit.</p>
+        </div>
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+          {factoryCapabilities.map((item) => (
+            <div class="copy-safe rounded-[1.75rem] border border-gray-200 bg-slate-50 p-7 shadow-sm">
+              <div class="w-11 h-11 rounded-full bg-[#0d7377]/10 text-[#0d7377] flex items-center justify-center mb-4">
+                {item.icon === 'area' && (
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                )}
+                {item.icon === 'capacity' && (
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                )}
+                {item.icon === 'qc' && (
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                )}
+                {item.icon === 'leadtime' && (
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                )}
+                {item.icon === 'equipment' && (
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                )}
+                {item.icon === 'shipping' && (
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                )}
+              </div>
+              <p class="text-2xl font-bold text-gray-900">{item.value}</p>
+              <h3 class="text-base font-semibold text-gray-800 mt-1">{item.label}</h3>
+              <p class="text-sm text-gray-500 mt-2">{item.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -201,14 +457,83 @@ const faqJsonLd = {
       </div>
     </section>
 
+    <!-- Client Testimonials -->
+    <section class="py-16 bg-white border-t border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+          <p class="eyebrow-label text-[#0d7377] mb-2">Client Feedback</p>
+          <h2 class="title-balance text-3xl font-semibold text-gray-900">What buyers say after working with RFIDAK</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {clientTestimonials.map((t) => (
+            <div class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-7 shadow-sm">
+              <div class="flex gap-1 mb-4">
+                {Array.from({ length: 5 }).map(() => (
+                  <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                ))}
+              </div>
+              <p class="text-gray-600 leading-relaxed italic mb-6">"{t.quote}"</p>
+              <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                <div class="w-10 h-10 bg-[#0d7377] rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                  {t.name.charAt(0)}
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-gray-800">{t.name}</p>
+                  <p class="text-xs text-gray-500">{t.title}, {t.company}</p>
+                  <p class="text-xs text-gray-400">{t.country}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Reach -->
+    <section class="py-16 bg-surface border-y border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+          <p class="eyebrow-label text-[#0d7377] mb-2">Global Reach</p>
+          <h2 class="title-balance text-3xl font-semibold text-gray-900">Trusted by clients across 50+ countries and 12+ industries</h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10 max-w-4xl mx-auto">
+          <div class="text-center">
+            <p class="text-3xl md:text-4xl font-bold text-[#0d7377]">108+</p>
+            <p class="text-sm text-gray-500 mt-1">Global Clients</p>
+          </div>
+          <div class="text-center">
+            <p class="text-3xl md:text-4xl font-bold text-[#0d7377]">50+</p>
+            <p class="text-sm text-gray-500 mt-1">Countries Served</p>
+          </div>
+          <div class="text-center">
+            <p class="text-3xl md:text-4xl font-bold text-[#0d7377]">12+</p>
+            <p class="text-sm text-gray-500 mt-1">Industries</p>
+          </div>
+          <div class="text-center">
+            <p class="text-3xl md:text-4xl font-bold text-[#0d7377]">99%</p>
+            <p class="text-sm text-gray-500 mt-1">On-time Delivery</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+          {industries.map((industry) => (
+            <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 font-medium">
+              {industry}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <section class="py-16 bg-white">
       <div class="container mx-auto px-4">
         <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
           <div>
             <p class="eyebrow-label text-[#0d7377] mb-2">Best Fit</p>
-            <h2 class="title-balance text-3xl font-semibold text-gray-900 mb-5">Who usually gets the most value from working with ProudTek</h2>
+            <h2 class="title-balance text-3xl font-semibold text-gray-900 mb-5">Who usually gets the most value from working with RFIDAK</h2>
             <p class="text-gray-600 leading-relaxed">
-              ProudTek is especially useful for buyers who are evaluating suppliers, validating compatibility or preparing a sample request. It fits teams that want technical clarity and production support in the same conversation.
+              RFIDAK is especially useful for buyers who are evaluating suppliers, validating compatibility or preparing a sample request. It fits teams that want technical clarity and production support in the same conversation.
             </p>
           </div>
           <div class="grid sm:grid-cols-2 gap-4">
@@ -253,7 +578,7 @@ const faqJsonLd = {
         <div class="max-w-4xl mx-auto">
           <div class="text-center mb-10">
             <p class="eyebrow-label text-[#0d7377] mb-2">FAQ</p>
-            <h2 class="title-balance text-3xl font-semibold text-gray-900">Common questions about ProudTek</h2>
+            <h2 class="title-balance text-3xl font-semibold text-gray-900">Common questions about RFIDAK</h2>
           </div>
           <div class="space-y-4">
             {aboutFaqs.map((faq) => (
@@ -278,7 +603,7 @@ const faqJsonLd = {
         </p>
         <div class="flex flex-wrap justify-center gap-4">
           <a href={aboutContactHref} class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-            Contact ProudTek
+            Contact RFIDAK
           </a>
           <a href="/rfid-technology" class="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
             Read the technology guide

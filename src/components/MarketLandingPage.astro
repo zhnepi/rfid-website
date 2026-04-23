@@ -15,7 +15,7 @@ interface Props {
 
 const { marketKey } = Astro.props;
 const config = marketPages[marketKey];
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/markets/${config.slug}`;
 const featuredProducts = config.productSlugs
   .map((slug) => products.find((product) => product.slug === slug))

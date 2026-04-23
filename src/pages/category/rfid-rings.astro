@@ -1,0 +1,155 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CategoryStickyNav from '../../components/CategoryStickyNav.astro';
+import CategoryDecisionCards from '../../components/CategoryDecisionCards.astro';
+import ScrollCTA from '../../components/cta/ScrollCTA.astro';
+import ExitIntent from '../../components/cta/ExitIntent.astro';
+import { products } from '../../data/products';
+import { buildCategoryJsonLd } from '../../utils/categoryJsonLd';
+import { getContextualContactAction, getContextualWhatsAppAction } from '../../utils/contact';
+
+const categoryName = 'RFID Rings';
+const categoryProducts = products.filter(p => p.category === categoryName);
+const description = "NFC smart rings from RFIDAK: ceramic, silicone, and metal RFID rings for access control, Tesla unlock, payment and promotional branding. 13.56 MHz HF NFC.";
+const categoryJsonLd = buildCategoryJsonLd({ categoryName, categorySlug: 'rfid-rings', categoryProducts, description });
+const categoryContact = getContextualContactAction(Astro.url.pathname);
+const categoryWhatsApp = getContextualWhatsAppAction(Astro.url.pathname);
+---
+
+<Layout
+  title="RFID Rings & NFC Smart Rings | Tesla, Ceramic — RFIDAK"
+  description={description}
+  keywords="NFC ring, RFID ring, NFC smart ring, ceramic NFC ring, Tesla NFC ring, silicone RFID ring, wearable NFC, smart jewelry"
+  jsonLd={categoryJsonLd}
+>
+  <Header />
+  <CategoryStickyNav activeCategory={categoryName} />
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-[#0d7377] to-[#0a5c5f] text-white py-16">
+    <div class="container mx-auto px-4">
+      <nav class="text-sm mb-4">
+        <a href="/" class="hover:underline">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/rfid" class="hover:underline">RFID Products</a>
+        <span class="mx-2">/</span>
+        <span>{categoryName}</span>
+      </nav>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">{categoryName}</h1>
+      <p class="text-xl opacity-90 max-w-3xl">
+        NFC smart rings for hands-free access control, Tesla unlock, payment, and branded event giveaways.
+        Ceramic, silicone, and metal bodies with MIFARE, NTAG, and ICODE chip options.
+      </p>
+    </div>
+  </section>
+
+  <CategoryDecisionCards categorySlug="rfid-rings" />
+
+  <!-- Products Grid -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center mb-8">
+        <p class="text-gray-600">{categoryProducts.length} products found</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {categoryProducts.map((product) => (
+          <a
+            href={`/product/${product.slug}`}
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group"
+          >
+            <div class="aspect-square overflow-hidden bg-gray-100">
+              <img
+                src={product.images[0]}
+                alt={`${product.name} — ${categoryName} manufactured by RFIDAK in Shenzhen, China`}
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-800 group-hover:text-[#0d7377] transition-colors line-clamp-2">
+                {product.name}
+              </h3>
+              <p class="text-sm text-gray-500 mt-2 line-clamp-2">
+                {product.description.substring(0, 100)}...
+              </p>
+              <div class="mt-4 flex items-center text-[#0d7377] text-sm font-medium">
+                View Details
+                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Description - GEO: Comprehensive, authoritative content -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">NFC Smart Ring Buying Guide</h2>
+        <div class="prose prose-lg text-gray-600">
+          <p>
+            NFC smart rings are wearable 13.56 MHz HF transponders that replace traditional proximity cards and key fobs for access control, contactless payment, and vehicle unlock. The wearable NFC market reached $1.2 billion in 2024 and is projected to grow 28% annually as consumers prefer hands-free credentials over physical cards (ABI Research). RFIDAK manufactures NFC rings in ceramic, silicone, and PVD-coated metal bodies with chip support across MIFARE Classic/DESFire, NTAG213/215/216, ICODE SLIX, and FM11RF08 — fitting access, transit, payment, and promotional use cases.
+          </p>
+
+          <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">Ring Type Comparison</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse border border-gray-200 my-4">
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700">Ring Type</th>
+                  <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700">Body Material</th>
+                  <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700">IP Rating</th>
+                  <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700">Best For</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="border border-gray-200 px-4 py-2">NFC Ceramic Ring</td><td class="border border-gray-200 px-4 py-2">Zirconia ceramic</td><td class="border border-gray-200 px-4 py-2">Splash resistant</td><td class="border border-gray-200 px-4 py-2">Office access, transit, NFC business card</td></tr>
+                <tr class="bg-gray-50"><td class="border border-gray-200 px-4 py-2">Tesla Smart Ring</td><td class="border border-gray-200 px-4 py-2">PVD steel / titanium + ceramic</td><td class="border border-gray-200 px-4 py-2">IP68</td><td class="border border-gray-200 px-4 py-2">Tesla Model 3 / Y unlock and drive</td></tr>
+                <tr><td class="border border-gray-200 px-4 py-2">Silicone NFC Ring</td><td class="border border-gray-200 px-4 py-2">Medical-grade silicone</td><td class="border border-gray-200 px-4 py-2">Fully waterproof</td><td class="border border-gray-200 px-4 py-2">Gyms, waterparks, industrial, events</td></tr>
+                <tr class="bg-gray-50"><td class="border border-gray-200 px-4 py-2">Multi-Color PVD NFC Ring</td><td class="border border-gray-200 px-4 py-2">316L steel + PVD coating</td><td class="border border-gray-200 px-4 py-2">Splash resistant</td><td class="border border-gray-200 px-4 py-2">Branded events, fashion retail, gifts</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">How to Choose the Right NFC Ring</h3>
+          <ol class="list-decimal list-inside space-y-2 mt-3">
+            <li><strong>Match the chip to the reader system:</strong> MIFARE Classic 1K (S50) works with most installed access readers. MIFARE DESFire EV1/EV2 is required for secure transit and payment. NTAG213/215/216 is the right choice for NFC smartphone interactions (URL launch, vCard sharing, app triggers).</li>
+            <li><strong>Pick body material for the environment:</strong> Ceramic for everyday office and business use (elegant, scratch-resistant). Silicone for sports, pools, and industrial environments (soft, non-conductive, autoclavable). PVD metal + ceramic inlay for Tesla-specific vehicle use (IP68, premium finish).</li>
+            <li><strong>Confirm ring sizing before ordering:</strong> RFIDAK ships ring size gauges on request. US sizes 5-13 cover 15.7-22.2 mm inner diameter. Silicone rings stretch ±0.5 size; ceramic and metal rings must match exactly.</li>
+            <li><strong>Plan for customization scope:</strong> NDEF pre-encoding, UID-series ordering, laser engraving, and Pantone color matching are available. Each has different MOQ and lead-time implications — clarify before production begins.</li>
+            <li><strong>Test a sample with your reader first:</strong> NFC ring read range is 1-5 cm, shorter than card format due to smaller antenna geometry. Verify your installed readers achieve reliable read before committing to volume orders.</li>
+          </ol>
+
+          <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">Customization and Support</h3>
+          <p>
+            Every RFIDAK NFC ring can be supplied with custom chip programming (UID series, NDEF records, access credentials), laser-engraved logos or serial numbers, Pantone color matching (silicone only), and gift-ready individual packaging. Our engineering team provides free compatibility consultation for Tesla, office access, transit, and event deployments. MOQ starts at 100 pieces for ceramic, 50 pieces for Tesla rings, and 500 pieces for silicone rings, with 10-20 business day production lead time including 100% NFC performance testing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-12 bg-[#0d7377]">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold text-white mb-4">Need NFC Rings for Your Project?</h2>
+      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get sample rings, chip compatibility consultation, and custom branding options from RFIDAK. Tesla, access, payment, and promotional programs supported.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={categoryContact.href} data-analytics="quote_click_category_cta_rfid-rings" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
+        <a href={categoryWhatsApp.href} target="_blank" rel="noopener noreferrer" data-analytics="whatsapp_click_category_cta_rfid-rings" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
+      </div>
+    </div>
+  </section>
+
+  <ScrollCTA contactHref={categoryContact.href} contactLabel="Get Quote" whatsappHref={categoryWhatsApp.href} source="category" />
+  <ExitIntent sampleHref="/contact?intent=samples&category=rfid-rings&express=1&source=exit-intent#contactForm" whatsappHref={categoryWhatsApp.href} contextName="RFID Rings" />
+
+  <Footer />
+</Layout>

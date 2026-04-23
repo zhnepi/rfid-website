@@ -5,7 +5,7 @@ import Footer from '../../components/Footer.astro';
 import Newsletter from '../../components/Newsletter.astro';
 import { authors } from '../../data/authors';
 
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/authors`;
 
 const collectionJsonLd = {
@@ -13,8 +13,8 @@ const collectionJsonLd = {
   '@type': 'CollectionPage',
   '@id': `${canonicalURL}#collection`,
   url: canonicalURL,
-  name: 'ProudTek Editorial Profiles',
-  description: 'Editorial and author profiles for ProudTek RFID guides, product explainers and sourcing content.',
+  name: 'RFIDAK Editorial Profiles',
+  description: 'Editorial and author profiles for RFIDAK RFID guides, product explainers and sourcing content.',
   isPartOf: { '@id': `${siteURL}/#website` },
   mainEntity: {
     '@type': 'ItemList',
@@ -38,8 +38,8 @@ const breadcrumbJsonLd = {
 ---
 
 <Layout
-  title="Editorial Profiles | ProudTek"
-  description="Meet the editorial profiles behind ProudTek RFID guides, product explainers and sourcing content."
+  title="Editorial Profiles | RFIDAK"
+  description="Meet the editorial profiles behind RFIDAK RFID guides, product explainers and sourcing content."
   canonicalURL={canonicalURL}
   jsonLd={[collectionJsonLd, breadcrumbJsonLd]}
 >
@@ -54,9 +54,9 @@ const breadcrumbJsonLd = {
         </nav>
         <div class="max-w-4xl">
           <p class="eyebrow-label text-[#0d7377] mb-4">Editorial Profiles</p>
-          <h1 class="title-balance text-4xl font-bold md:text-6xl">Who publishes ProudTek’s RFID guides and product explainers</h1>
+          <h1 class="title-balance text-4xl font-bold md:text-6xl">Who publishes RFIDAK’s RFID guides and product explainers</h1>
           <p class="mt-6 max-w-3xl text-lg text-white/82">
-            These profiles explain the editorial voice behind ProudTek’s buyer guides, technology articles and category content, so readers can understand the scope and focus of the guidance they are using.
+            These profiles explain the editorial voice behind RFIDAK’s buyer guides, technology articles and category content, so readers can understand the scope and focus of the guidance they are using.
           </p>
         </div>
       </div>

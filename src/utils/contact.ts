@@ -141,7 +141,7 @@ const blogIntentByCategory: Record<string, StandardInquiryIntent> = {
 };
 
 const whatsappPhone = '8618665820632';
-const emailAddress = 'info@proudtek.com';
+const emailAddress = 'info@rfidak.com';
 const slugWordOverrides: Record<string, string> = {
   rfid: 'RFID',
   nfc: 'NFC',
@@ -254,40 +254,40 @@ function humanizeSlug(slug: string) {
 
 function getGenericWhatsAppMessage(intent: ContactIntent) {
   if (intent === 'compatibility') {
-    return 'Hi ProudTek, I need help checking RFID compatibility and narrowing the right product path for my project.';
+    return 'Hi RFIDAK, I need help checking RFID compatibility and narrowing the right product path for my project.';
   }
 
   if (intent === 'oem') {
-    return 'Hi ProudTek, I need help with RFID customization, branding or OEM planning for my project.';
+    return 'Hi RFIDAK, I need help with RFID customization, branding or OEM planning for my project.';
   }
 
   if (intent === 'repeat-order') {
-    return 'Hi ProudTek, I need help preparing an RFID repeat order and confirming the next supply step.';
+    return 'Hi RFIDAK, I need help preparing an RFID repeat order and confirming the next supply step.';
   }
 
   if (intent === 'chip-comparison') {
-    return 'Hi ProudTek, I need help comparing RFID chip options before moving into samples or a quote.';
+    return 'Hi RFIDAK, I need help comparing RFID chip options before moving into samples or a quote.';
   }
 
   if (intent === 'frequency-comparison') {
-    return 'Hi ProudTek, I need help comparing RFID frequency options before I lock the shortlist.';
+    return 'Hi RFIDAK, I need help comparing RFID frequency options before I lock the shortlist.';
   }
 
   if (intent === 'product-format-comparison') {
-    return 'Hi ProudTek, I need help comparing RFID product formats before I request samples.';
+    return 'Hi RFIDAK, I need help comparing RFID product formats before I request samples.';
   }
 
   if (intent === 'laundry-tag-comparison') {
-    return 'Hi ProudTek, I need help comparing laundry RFID tag formats before pilot testing.';
+    return 'Hi RFIDAK, I need help comparing laundry RFID tag formats before pilot testing.';
   }
 
-  return 'Hi ProudTek, I want help narrowing the right RFID samples and next steps for my project.';
+  return 'Hi RFIDAK, I want help narrowing the right RFID samples and next steps for my project.';
 }
 
 export const intentEmailPrefills: Record<ContactIntent, { subject: string; message: string }> = {
   samples: {
     subject: 'RFID sample request',
-    message: `Hi ProudTek,
+    message: `Hi RFIDAK,
 
 I would like to request RFID samples.
 
@@ -300,7 +300,7 @@ Target timeline:
   },
   oem: {
     subject: 'RFID OEM / customization inquiry',
-    message: `Hi ProudTek,
+    message: `Hi RFIDAK,
 
 I need support with a custom RFID project.
 
@@ -313,7 +313,7 @@ Quantity goal:
   },
   compatibility: {
     subject: 'RFID compatibility check',
-    message: `Hi ProudTek,
+    message: `Hi RFIDAK,
 
 I need help checking compatibility.
 
@@ -325,7 +325,7 @@ Application:
   },
   'repeat-order': {
     subject: 'RFID repeat order inquiry',
-    message: `Hi ProudTek,
+    message: `Hi RFIDAK,
 
 I would like to discuss a repeat RFID order.
 
@@ -337,7 +337,7 @@ Target delivery timing:
   },
   'chip-comparison': {
     subject: 'RFID chip comparison inquiry',
-    message: `Hi ProudTek,
+    message: `Hi RFIDAK,
 
 I need help narrowing an RFID chip comparison before samples or quoting.
 
@@ -349,7 +349,7 @@ Quantity / timeline:
   },
   'frequency-comparison': {
     subject: 'RFID frequency comparison inquiry',
-    message: `Hi ProudTek,
+    message: `Hi RFIDAK,
 
 I need help comparing RFID frequency options before moving into samples.
 
@@ -361,7 +361,7 @@ Quantity / timeline:
   },
   'product-format-comparison': {
     subject: 'RFID format comparison inquiry',
-    message: `Hi ProudTek,
+    message: `Hi RFIDAK,
 
 I need help comparing two RFID product formats before requesting samples or a quote.
 
@@ -373,7 +373,7 @@ Quantity / timeline:
   },
   'laundry-tag-comparison': {
     subject: 'Laundry RFID tag comparison inquiry',
-    message: `Hi ProudTek,
+    message: `Hi RFIDAK,
 
 I need help comparing laundry RFID tag formats before pilot testing.
 
@@ -433,42 +433,42 @@ function buildContextualWhatsAppMessage(
   }
 
   if (source === 'comparison') {
-    return `Hi ProudTek, I'm comparing ${contextName} and need help turning this tradeoff into the right sample, compatibility or quote path.`;
+    return `Hi RFIDAK, I'm comparing ${contextName} and need help turning this tradeoff into the right sample, compatibility or quote path.`;
   }
 
   if (source === 'product') {
-    return `Hi ProudTek, I'm reviewing your ${contextName} product page and need help choosing the right sample, compatibility or quote path for my project.`;
+    return `Hi RFIDAK, I'm reviewing your ${contextName} product page and need help choosing the right sample, compatibility or quote path for my project.`;
   }
 
   if (source === 'category') {
-    return `Hi ProudTek, I'm reviewing your ${contextName} category page and need help narrowing the right options for my project.`;
+    return `Hi RFIDAK, I'm reviewing your ${contextName} category page and need help narrowing the right options for my project.`;
   }
 
   if (source === 'solution') {
-    return `Hi ProudTek, I'm reviewing your ${contextName} solution page and need help translating this workflow into the right RFID shortlist and next step.`;
+    return `Hi RFIDAK, I'm reviewing your ${contextName} solution page and need help translating this workflow into the right RFID shortlist and next step.`;
   }
 
   if (source === 'market') {
-    return `Hi ProudTek, I'm reviewing your ${contextName} market page and need help with the right sample or sourcing path for this region.`;
+    return `Hi RFIDAK, I'm reviewing your ${contextName} market page and need help with the right sample or sourcing path for this region.`;
   }
 
   if (source === 'blog') {
-    return `Hi ProudTek, I'm reading your ${contextName} guide and need help applying it to my RFID project.`;
+    return `Hi RFIDAK, I'm reading your ${contextName} guide and need help applying it to my RFID project.`;
   }
 
   if (source === 'evidence') {
-    return `Hi ProudTek, I'm reviewing your ${contextName} page and want to confirm supplier proof and the right next buying step.`;
+    return `Hi RFIDAK, I'm reviewing your ${contextName} page and want to confirm supplier proof and the right next buying step.`;
   }
 
   if (source === 'generic') {
-    return `Hi ProudTek, I'm browsing your ${contextName} and need help with the right next RFID step for my project.`;
+    return `Hi RFIDAK, I'm browsing your ${contextName} and need help with the right next RFID step for my project.`;
   }
 
-  return `Hi ProudTek, I'm reviewing your ${contextName} page and need help with the right next RFID step for my project.`;
+  return `Hi RFIDAK, I'm reviewing your ${contextName} page and need help with the right next RFID step for my project.`;
 }
 
 function getGenericPathContext(pathname: string) {
-  if (pathname === '/') return { name: 'ProudTek RFID homepage', source: 'generic' as const };
+  if (pathname === '/') return { name: 'RFIDAK RFID homepage', source: 'generic' as const };
   if (pathname === '/compare') return { name: 'RFID comparison hub', source: 'generic' as const };
   if (pathname === '/markets') return { name: 'RFID markets hub', source: 'generic' as const };
   if (pathname === '/solutions') return { name: 'RFID solutions hub', source: 'generic' as const };
@@ -879,14 +879,14 @@ function getContextPageFromPath(pathname: string, source: ContactContextSource) 
   const normalizedPath = normalizePathname(pathname);
 
   if (source === 'generic' && normalizedPath === '/') {
-    return 'https://www.proudtek.com/';
+    return 'https://www.rfidak.com/';
   }
 
   if (source === 'generic') {
-    return `https://www.proudtek.com${normalizedPath}`;
+    return `https://www.rfidak.com${normalizedPath}`;
   }
 
-  return `https://www.proudtek.com${normalizedPath}`;
+  return `https://www.rfidak.com${normalizedPath}`;
 }
 
 function getEmailLabel(source: ContactContextSource) {

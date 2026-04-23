@@ -47,7 +47,7 @@ export const comparisonPages: Record<string, ComparisonPageContent> = {
     key: 'mifare-classic-vs-desfire',
     slug: 'mifare-classic-vs-desfire',
     name: 'Mifare Classic vs DESFire',
-    title: 'Mifare Classic vs DESFire - Which RFID Chip Fits Your Card Project? | ProudTek',
+    title: 'Mifare Classic vs DESFire - Which RFID Chip Fits Your Card Project? | RFIDAK',
     description:
       'Buyer-focused comparison page for Mifare Classic vs DESFire covering security, memory, cost, migration paths, sample planning and card project fit.',
     keywords:
@@ -156,7 +156,7 @@ export const comparisonPages: Record<string, ComparisonPageContent> = {
     key: 'rfid-cards-vs-keyfobs',
     slug: 'rfid-cards-vs-keyfobs',
     name: 'RFID cards vs keyfobs',
-    title: 'RFID Cards vs Keyfobs - Which Credential Format Fits Your Access Project? | ProudTek',
+    title: 'RFID Cards vs Keyfobs - Which Credential Format Fits Your Access Project? | RFIDAK',
     description:
       'Buyer-focused comparison page for RFID cards vs keyfobs covering user experience, printing, portability, durability and repeat issuance planning.',
     keywords:
@@ -265,7 +265,7 @@ export const comparisonPages: Record<string, ComparisonPageContent> = {
     key: 'rfid-labels-vs-hard-tags',
     slug: 'rfid-labels-vs-hard-tags',
     name: 'RFID labels vs hard tags',
-    title: 'RFID Labels vs Hard Tags - Which Format Fits Your Tracking Project? | ProudTek',
+    title: 'RFID Labels vs Hard Tags - Which Format Fits Your Tracking Project? | RFIDAK',
     description:
       'Buyer-focused comparison page for RFID labels vs hard tags covering printability, durability, reuse, surface fit and sample planning for tracking projects.',
     keywords:
@@ -374,7 +374,7 @@ export const comparisonPages: Record<string, ComparisonPageContent> = {
     key: 'hf-vs-uhf-rfid',
     slug: 'hf-vs-uhf-rfid',
     name: 'HF vs UHF RFID',
-    title: 'HF vs UHF RFID - Which Frequency Fits Your Project? | ProudTek',
+    title: 'HF vs UHF RFID - Which Frequency Fits Your Project? | RFIDAK',
     description:
       'Buyer-focused comparison page for HF vs UHF RFID covering read range, smartphone fit, use cases, environment and product-direction decisions.',
     keywords:
@@ -483,7 +483,7 @@ export const comparisonPages: Record<string, ComparisonPageContent> = {
     key: 'lf-vs-hf-rfid',
     slug: 'lf-vs-hf-rfid',
     name: 'LF vs HF RFID',
-    title: 'LF vs HF RFID - Which Band Fits Your Credential Or Tag Project? | ProudTek',
+    title: 'LF vs HF RFID - Which Band Fits Your Credential Or Tag Project? | RFIDAK',
     description:
       'Buyer-focused comparison page for LF vs HF RFID covering legacy credentials, read behavior, NFC fit, installed readers and product direction.',
     keywords:
@@ -592,7 +592,7 @@ export const comparisonPages: Record<string, ComparisonPageContent> = {
     key: 'mifare-plus-vs-desfire',
     slug: 'mifare-plus-vs-desfire',
     name: 'Mifare Plus vs DESFire',
-    title: 'Mifare Plus vs DESFire - Which Upgrade Path Fits Your Smart Card Program? | ProudTek',
+    title: 'Mifare Plus vs DESFire - Which Upgrade Path Fits Your Smart Card Program? | RFIDAK',
     description:
       'Buyer-focused comparison page for Mifare Plus vs DESFire covering migration, security direction, infrastructure fit and long-term card-program planning.',
     keywords:
@@ -701,7 +701,7 @@ export const comparisonPages: Record<string, ComparisonPageContent> = {
     key: 'pvc-rfid-cards-vs-paper-cards',
     slug: 'pvc-rfid-cards-vs-paper-cards',
     name: 'PVC RFID cards vs paper cards',
-    title: 'PVC RFID Cards vs Paper Cards - Which Format Fits Ticketing Or Access Supply? | ProudTek',
+    title: 'PVC RFID Cards vs Paper Cards - Which Format Fits Ticketing Or Access Supply? | RFIDAK',
     description:
       'Buyer-focused comparison page for PVC RFID cards vs paper cards covering lifespan, print finish, single-use economics and credential planning.',
     keywords:
@@ -810,7 +810,7 @@ export const comparisonPages: Record<string, ComparisonPageContent> = {
     key: 'textile-vs-silicone-laundry-tags',
     slug: 'textile-vs-silicone-laundry-tags',
     name: 'Textile vs silicone laundry tags',
-    title: 'Textile vs Silicone Laundry Tags - Which RFID Format Fits Your Linen Program? | ProudTek',
+    title: 'Textile vs Silicone Laundry Tags - Which RFID Format Fits Your Linen Program? | RFIDAK',
     description:
       'Buyer-focused comparison page for textile vs silicone laundry tags covering attachment, softness, durability and the best fit for linen and uniform tracking.',
     keywords:

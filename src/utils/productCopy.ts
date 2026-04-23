@@ -184,3 +184,199 @@ export function getProductBuyerIntro(product: Product, maxLength?: number) {
   const intro = getProductCopyProfile(product).intro;
   return typeof maxLength === 'number' ? truncateText(intro, maxLength) : intro;
 }
+
+/**
+ * One-sentence direct answer for GEO (AI search engines).
+ * Format: "[Product] is a/an [key trait] [category-singular] made by RFIDAK for [use case],
+ *          with [key chip/spec] and [MOQ] minimum order."
+ * Deterministic derivation from specifications + category so every product gets one without
+ * additional copy work. Always declarative, <= 230 characters.
+ */
+export function getProductDirectAnswer(product: Product): string {
+  const specs = product.specifications || {};
+
+  // Derive a category-singular noun
+  const categoryMap: Record<string, string> = {
+    'RFID Cards': 'RFID smart card',
+    'RFID Tags': 'RFID tag',
+    'RFID Labels': 'RFID label',
+    'RFID Wristbands': 'RFID wristband',
+    'RFID Keyfob': 'RFID keyfob',
+    'RFID Readers': 'RFID reader',
+    'RFID Rings': 'NFC smart ring',
+  };
+  const categoryNoun = categoryMap[product.category] || 'RFID product';
+
+  // Pick key differentiator: material, frequency, chip family, closure
+  const material    = specs['Material'] || specs['Body Material'] || specs['Band Material'] || specs['Housing Material'] || '';
+  const freq        = specs['Operating Frequency'] || specs['Frequency'] || '';
+  const chipOpts    = specs['Chip Options'] || specs['Chip'] || '';
+  const moq         = specs['MOQ'] || '';
+  const closure     = specs['Closure'] || '';
+  const dim         = specs['Dimensions'] || specs['Size'] || '';
+
+  const firstPhrase = (s: string) => {
+    // Strip parenthetical asides first so the comma split doesn't break inside them.
+    const stripped = String(s).replace(/\s*\([^)]*\)/g, '').trim();
+    const head = stripped.split(/[,;·]/)[0].trim();
+    return head.replace(/[\s\(]+$/, '').trim();
+  };
+
+  // Build the 1-sentence answer: prefer short keys
+  const parts: string[] = [];
+  parts.push(`${product.name} is a ${categoryNoun} manufactured by RFIDAK`);
+
+  const qualifier = [material, closure].filter(Boolean).slice(0, 2).map(firstPhrase).join(', ');
+  if (qualifier) parts[0] = `${product.name} is a ${qualifier.toLowerCase()} ${categoryNoun} manufactured by RFIDAK`;
+
+  if (freq) parts.push(`operating at ${firstPhrase(freq).toLowerCase()}`);
+  if (chipOpts) parts.push(`with ${firstPhrase(chipOpts)} chip support`);
+  if (dim) parts.push(`(${firstPhrase(dim)})`);
+  if (moq) parts.push(`from ${firstPhrase(moq).toLowerCase()} MOQ`);
+
+  // Join with ", " but drop trailing comma before "(...)".
+  let text = parts.join(', ').replace(/, \(/g, ' (') + '.';
+  // Safety clamp.
+  if (text.length > 250) text = text.slice(0, 247).replace(/[,;]?\s+\S*$/, '') + '.';
+  return text;
+}
+
+// W5 QW#11: generate ≥ 8 FAQs per product, with the first 3 being conversion-focused
+// (MOQ / Free Sample / Lead Time). Subsequent FAQs pull from spec + category context.
+export interface ProductFaq {
+  question: string;
+  answer: string;
+}
+
+function getCategoryMoq(category: string): string {
+  const map: Record<string, string> = {
+    'RFID Cards': '500 pieces',
+    'RFID Tags': '1,000 pieces',
+    'RFID Labels': '1,000 pieces',
+    'RFID Wristbands': '500 pieces',
+    'RFID Keyfob': '500 pieces',
+    'RFID Readers': '1 piece (for evaluation); 10+ for bulk order',
+    'RFID Rings': '200 pieces',
+  };
+
+  return map[category] || '500 pieces';
+}
+
+function getCategoryTooling(category: string): string {
+  if (category === 'RFID Tags' || category === 'RFID Labels') {
+    return 'Custom shape, material or antenna tooling typically requires 3,000–5,000 pieces to cover one-time mold / die-cut setup cost.';
+  }
+
+  if (category === 'RFID Wristbands') {
+    return 'Custom silicone / PVC molds require 2,000–5,000 pieces to amortize tooling; paper / fabric wristbands keep the standard MOQ.';
+  }
+
+  if (category === 'RFID Cards') {
+    return 'Custom die-cut shapes, oversized inlays or specialty substrates (wood, metal) move MOQ to 2,000–5,000 pieces due to tooling.';
+  }
+
+  return 'Custom shapes, molds or non-standard materials typically move MOQ to 2,000–5,000 pieces to cover tooling setup.';
+}
+
+export function getProductFaqs(product: Product): ProductFaq[] {
+  const specs = product.specifications || {};
+  const pickSpec = (...keys: string[]): string => {
+    for (const k of keys) {
+      const v = specs[k];
+
+      if (typeof v === 'string' && v.trim()) return v.trim();
+    }
+
+    return '';
+  };
+
+  const moq = getCategoryMoq(product.category);
+  const tooling = getCategoryTooling(product.category);
+  const chip = pickSpec('Chip Options', 'Chip', 'Supported Chips', 'Chip Family');
+  const freq = pickSpec('Operating Frequency', 'Frequency');
+  const material = pickSpec('Material', 'Substrate Material', 'Body Material', 'Band Material', 'Housing Material');
+  const dimensions = pickSpec('Dimensions', 'Size');
+  const categoryName = product.category;
+  const name = product.name;
+
+  const faqs: ProductFaq[] = [];
+
+  // --- 1. MOQ (conversion) ---
+  faqs.push({
+    question: `What is the minimum order quantity (MOQ) for ${name}?`,
+    answer: `For ${name}, the standard MOQ starts at ${moq} on stock SKUs. ${tooling} Exact MOQ and unit pricing are quoted per project once chip, customization and packaging are confirmed.`,
+  });
+
+  // --- 2. Free samples (conversion) ---
+  faqs.push({
+    question: `Does RFIDAK provide free samples of ${name}?`,
+    answer: `Yes. Stock ${categoryName.toLowerCase()} samples of ${name} are typically free; we only ask buyers to cover DHL/FedEx express shipping. Samples ship in 1–3 business days after your order is confirmed and arrive in 2–5 days to most countries. Custom samples (new chip, new size, printed artwork) usually take 3–7 additional days.`,
+  });
+
+  // --- 3. Lead time (conversion) ---
+  faqs.push({
+    question: `What is the production lead time for ${name}?`,
+    answer: `Standard ${name} orders ship in 7–15 business days after PO confirmation and artwork approval. Large runs (>100k units) or orders with complex encoding / custom molds may take 15–25 business days. Rush production is available on request for time-sensitive launches; confirm MOQ and artwork early to protect the timeline.`,
+  });
+
+  // --- 4. Customization ---
+  faqs.push({
+    question: `Can ${name} be customized for my brand or project?`,
+    answer: `Yes. ${name} supports end-to-end customization: full-color CMYK / silk-screen / UV printing, laser engraving, serial numbering, custom chip encoding (UID write, NDEF, sector locking), custom shape / size (subject to tooling MOQ), and packaging. Share your artwork, chip requirement and quantity and we will return a spec sheet + price within 24 hours.`,
+  });
+
+  // --- 5. Chip / compatibility ---
+  faqs.push({
+    question: chip
+      ? `Which RFID chips are supported for ${name}?`
+      : `Is ${name} compatible with my existing reader or system?`,
+    answer: chip
+      ? `${name} supports ${chip}. Before ordering, share your reader model or current credential so we can confirm the exact chip variant (e.g., MIFARE Classic 1K vs DESFire EV3, NTAG213 vs 215) and avoid compatibility issues after lamination.`
+      : `Compatibility depends on the frequency band (LF 125 kHz / HF 13.56 MHz / UHF 860–960 MHz) and chip family used by your reader or installed system. Send a photo of your current card / reader model and we will recommend the matching chip + test a sample before bulk order.`,
+  });
+
+  // --- 6. Certifications / QC ---
+  faqs.push({
+    question: `What certifications and quality control does RFIDAK apply to ${name}?`,
+    answer: `RFIDAK operates under ISO 9001:2015 (Quality Management) and ISO 14001 (Environmental Management), audited by SGS. ${name} is subject to incoming material inspection, in-process QC at every lamination / bonding / encoding step, and 100% electrical performance testing before shipment. Products meet CE, FCC, RoHS and REACH as applicable by market. Full test reports are available on request for buyer audits.`,
+  });
+
+  // --- 7. Printing / encoding (contextual) ---
+  if (categoryName === 'RFID Readers') {
+    faqs.push({
+      question: `Does ${name} ship with an SDK or sample code?`,
+      answer: `Yes. ${name} ships with SDK and sample code (Windows / Linux / Android where applicable), plus USB-HID keyboard-emulation mode for zero-integration deployments. Request the developer bundle at inquiry stage and we will include it with the evaluation unit.`,
+    });
+  } else {
+    faqs.push({
+      question: `Can ${name} be pre-encoded or printed with my artwork before shipment?`,
+      answer: `Yes. ${name} can ship with UID range assignment, NDEF URL encoding (for NFC), sector-locked user data, serial numbering, and CMYK / silk-screen / UV printing of your artwork. Provide an AI/PDF artwork file at 300 dpi with 3 mm bleed and a chip-encoding spec; we return a digital proof for approval before production.`,
+    });
+  }
+
+  // --- 8. Shipping / Incoterms ---
+  faqs.push({
+    question: `How does RFIDAK ship ${name} internationally?`,
+    answer: `RFIDAK ships ${name} via DHL / FedEx / UPS (door-to-door, 3–5 days to most countries), air cargo (5–7 days for heavier orders), or sea freight (20–35 days for bulk over 500 kg). Standard Incoterms are EXW, FOB Shenzhen and DDP; choose based on customs clearance preferences. Commercial invoice, packing list and CoC / MSDS are included automatically.`,
+  });
+
+  // --- 9. Repeat orders ---
+  faqs.push({
+    question: `How does RFIDAK handle repeat orders of ${name}?`,
+    answer: `For repeat buyers, RFIDAK locks tooling, artwork and chip encoding on file so subsequent POs ship faster — typically 5–10 business days for stock chip types at previously-run quantities. Price is adjusted transparently per chip market rate and FX movement; we flag any chip shortage (e.g., DESFire EV3) before quotation so the project plan stays realistic.`,
+  });
+
+  // --- 10. Frequency / dimensions detail (bonus, category-dependent) ---
+  if (freq || dimensions) {
+    const parts: string[] = [];
+
+    if (freq) parts.push(`frequency ${freq}`);
+    if (dimensions) parts.push(`dimensions ${dimensions}`);
+    faqs.push({
+      question: `What are the technical specifications of ${name}?`,
+      answer: `Key ${name} specs: ${parts.join('; ')}${material ? `; substrate ${material}` : ''}. A full technical datasheet including read range, chip memory map, IP / temperature rating and compliance certificates is available on request; attach your reader model and target environment so we can confirm suitability before quoting.`,
+    });
+  }
+
+  return faqs;
+}

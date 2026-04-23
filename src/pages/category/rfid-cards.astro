@@ -2,19 +2,31 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import CategoryStickyNav from '../../components/CategoryStickyNav.astro';
+import CategoryDecisionCards from '../../components/CategoryDecisionCards.astro';
+import ScrollCTA from '../../components/cta/ScrollCTA.astro';
+import ExitIntent from '../../components/cta/ExitIntent.astro';
 import { products } from '../../data/products';
+import { buildCategoryJsonLd } from '../../utils/categoryJsonLd';
+import { getContextualContactAction, getContextualWhatsAppAction } from '../../utils/contact';
 
 const categoryName = 'RFID Cards';
 const categoryProducts = products.filter(p => p.category === categoryName);
+const description = "Buy high-quality RFID cards from RFIDAK: PVC RFID cards, NFC epoxy cards, wood cards, paper cards, clamshell cards for access control, payment, and identification.";
+const categoryJsonLd = buildCategoryJsonLd({ categoryName, categorySlug: 'rfid-cards', categoryProducts, description });
+const categoryContact = getContextualContactAction(Astro.url.pathname);
+const categoryWhatsApp = getContextualWhatsAppAction(Astro.url.pathname);
 ---
 
 <Layout
-  title="RFID Cards - PVC, Wood, Paper & Clamshell Smart Cards | ProudTek Manufacturer"
-  description="Buy high-quality RFID cards from ProudTek: PVC RFID cards, NFC epoxy cards, wood cards, paper cards, clamshell cards for access control, payment, and identification. Custom printing available."
+  title="RFID Cards | PVC, Wood, NFC Smart Cards — RFIDAK"
+  description={description}
   keywords="RFID cards, PVC RFID card, NFC card, smart card, clamshell card, wood RFID card, access control card, RFID card manufacturer"
+  jsonLd={categoryJsonLd}
 >
   <Header />
-  
+  <CategoryStickyNav activeCategory={categoryName} />
+
   <!-- Hero Section -->
   <section class="bg-gradient-to-r from-[#0d7377] to-[#0a5c5f] text-white py-16">
     <div class="container mx-auto px-4">
@@ -33,6 +45,8 @@ const categoryProducts = products.filter(p => p.category === categoryName);
     </div>
   </section>
 
+  <CategoryDecisionCards categorySlug="rfid-cards" />
+
   <!-- Products Grid -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
@@ -49,7 +63,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
             <div class="aspect-square overflow-hidden bg-gray-100">
               <img 
                 src={product.images[0]} 
-                alt={product.name}
+                alt={`${product.name} — ${categoryName} manufactured by RFIDAK in Shenzhen, China`}
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 loading="lazy"
               />
@@ -81,7 +95,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
         <h2 class="text-3xl font-bold text-gray-800 mb-6">RFID Card Buying Guide</h2>
         <div class="prose prose-lg text-gray-600">
           <p>
-            RFID cards are contactless smart cards embedded with an RFID chip and antenna, enabling wireless identification and data exchange. According to industry data, the global RFID market is projected to exceed $40 billion by 2030, with smart cards being the largest product segment. ProudTek has been manufacturing RFID cards since 2008, with a monthly production capacity of 5 million cards serving clients in 50+ countries.
+            RFID cards are contactless smart cards embedded with an RFID chip and antenna, enabling wireless identification and data exchange. According to industry data, the global RFID market is projected to exceed $40 billion by 2030, with smart cards being the largest product segment. RFIDAK has been manufacturing RFID cards since 2008, with a monthly production capacity of 5 million cards serving clients in 50+ countries.
           </p>
 
           <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">Types of RFID Cards by Material</h3>
@@ -128,13 +142,25 @@ const categoryProducts = products.filter(p => p.category === categoryName);
   <section class="py-12 bg-[#0d7377]">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-2xl font-bold text-white mb-4">Need Custom RFID Cards?</h2>
-      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free samples and a quote within 24 hours. ProudTek provides full customization with 15+ years of manufacturing expertise.</p>
+      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free samples and a quote within 24 hours. RFIDAK provides full customization with 15+ years of manufacturing expertise.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="/contact" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
-        <a href="https://wa.me/8618665820632?text=Hi, I need custom RFID cards" target="_blank" rel="noopener noreferrer" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
+        <a href={categoryContact.href} data-analytics="quote_click_category_cta_rfid-cards" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
+        <a href={categoryWhatsApp.href} target="_blank" rel="noopener noreferrer" data-analytics="whatsapp_click_category_cta_rfid-cards" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
       </div>
     </div>
   </section>
   
+  <ScrollCTA
+    contactHref={categoryContact.href}
+    contactLabel="Get Quote"
+    whatsappHref={categoryWhatsApp.href}
+    source="category"
+  />
+  <ExitIntent
+    sampleHref="/contact?intent=samples&category=rfid-cards&express=1&source=exit-intent#contactForm"
+    whatsappHref={categoryWhatsApp.href}
+    contextName="RFID Cards"
+  />
+
   <Footer />
 </Layout>

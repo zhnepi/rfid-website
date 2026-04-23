@@ -2,19 +2,31 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import CategoryStickyNav from '../../components/CategoryStickyNav.astro';
+import CategoryDecisionCards from '../../components/CategoryDecisionCards.astro';
+import ScrollCTA from '../../components/cta/ScrollCTA.astro';
+import ExitIntent from '../../components/cta/ExitIntent.astro';
 import { products } from '../../data/products';
+import { buildCategoryJsonLd } from '../../utils/categoryJsonLd';
+import { getContextualContactAction, getContextualWhatsAppAction } from '../../utils/contact';
 
 const categoryName = 'RFID Tags';
 const categoryProducts = products.filter(p => p.category === categoryName);
+const description = "Industrial RFID tags from RFIDAK: laundry, library, nail, ceramic, PCB, tire and asset tracking tags — high temperature resistant, IP68 waterproof, custom built.";
+const categoryJsonLd = buildCategoryJsonLd({ categoryName, categorySlug: 'rfid-tags', categoryProducts, description });
+const categoryContact = getContextualContactAction(Astro.url.pathname);
+const categoryWhatsApp = getContextualWhatsAppAction(Astro.url.pathname);
 ---
 
 <Layout
-  title="RFID Tags - Industrial, Laundry, Library & Asset Tracking Tags | ProudTek"
-  description="Industrial RFID tags from ProudTek: laundry tags, library tags, nail tags, ceramic tags, PCB tags, tire tags, and more. High temperature resistant, waterproof. Custom RFID tag manufacturing."
+  title="RFID Tags | Laundry, Ceramic & Industrial Tags — RFIDAK"
+  description={description}
   keywords="RFID tags, industrial RFID tag, laundry RFID tag, library RFID tag, ceramic RFID tag, PCB tag, asset tracking tag, RFID tag manufacturer"
+  jsonLd={categoryJsonLd}
 >
   <Header />
-  
+  <CategoryStickyNav activeCategory={categoryName} />
+
   <!-- Hero Section -->
   <section class="bg-gradient-to-r from-[#0d7377] to-[#0a5c5f] text-white py-16">
     <div class="container mx-auto px-4">
@@ -33,6 +45,8 @@ const categoryProducts = products.filter(p => p.category === categoryName);
     </div>
   </section>
 
+  <CategoryDecisionCards categorySlug="rfid-tags" />
+
   <!-- Products Grid -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
@@ -49,7 +63,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
             <div class="aspect-square overflow-hidden bg-gray-100">
               <img 
                 src={product.images[0]} 
-                alt={product.name}
+                alt={`${product.name} — ${categoryName} manufactured by RFIDAK in Shenzhen, China`}
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 loading="lazy"
               />
@@ -81,7 +95,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
         <h2 class="text-3xl font-bold text-gray-800 mb-6">RFID Tag Buying Guide</h2>
         <div class="prose prose-lg text-gray-600">
           <p>
-            RFID tags are electronic devices containing a microchip and antenna enclosed in a durable housing, designed for automatic identification and tracking in industrial environments. The global RFID tag market is valued at over $12 billion and growing at 11.2% CAGR. ProudTek manufactures 20+ types of industrial RFID tags, with ruggedized designs that withstand temperatures from -40°C to +250°C, chemical exposure, and IP68 waterproofing.
+            RFID tags are electronic devices containing a microchip and antenna enclosed in a durable housing, designed for automatic identification and tracking in industrial environments. The global RFID tag market is valued at over $12 billion and growing at 11.2% CAGR. RFIDAK manufactures 20+ types of industrial RFID tags, with ruggedized designs that withstand temperatures from -40°C to +250°C, chemical exposure, and IP68 waterproofing.
           </p>
 
           <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">RFID Tag Types Comparison</h3>
@@ -119,7 +133,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
 
           <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">Industry Applications</h3>
           <p>
-            ProudTek RFID tags serve diverse industries: healthcare (surgical instrument tracking, patient wristbands), automotive (tire lifecycle management across 500,000+ vehicles), manufacturing (WIP tracking on production lines), logistics (pallet and container tracking across global supply chains), hospitality (uniform and linen management for hotels processing 10,000+ items daily), and forestry (tree tagging for lumber traceability).
+            RFIDAK RFID tags serve diverse industries: healthcare (surgical instrument tracking, patient wristbands), automotive (tire lifecycle management across 500,000+ vehicles), manufacturing (WIP tracking on production lines), logistics (pallet and container tracking across global supply chains), hospitality (uniform and linen management for hotels processing 10,000+ items daily), and forestry (tree tagging for lumber traceability).
           </p>
         </div>
       </div>
@@ -130,13 +144,16 @@ const categoryProducts = products.filter(p => p.category === categoryName);
   <section class="py-12 bg-[#0d7377]">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-2xl font-bold text-white mb-4">Need Custom RFID Tags?</h2>
-      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free samples and a quote within 24 hours. ProudTek offers 20+ tag types with full customization for your specific application.</p>
+      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free samples and a quote within 24 hours. RFIDAK offers 20+ tag types with full customization for your specific application.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="/contact" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
-        <a href="https://wa.me/8618665820632?text=Hi, I need custom RFID tags" target="_blank" rel="noopener noreferrer" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
+        <a href={categoryContact.href} data-analytics="quote_click_category_cta_rfid-tags" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
+        <a href={categoryWhatsApp.href} target="_blank" rel="noopener noreferrer" data-analytics="whatsapp_click_category_cta_rfid-tags" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
       </div>
     </div>
   </section>
+
+  <ScrollCTA contactHref={categoryContact.href} contactLabel="Get Quote" whatsappHref={categoryWhatsApp.href} source="category" />
+  <ExitIntent sampleHref="/contact?intent=samples&category=rfid-tags&express=1&source=exit-intent#contactForm" whatsappHref={categoryWhatsApp.href} contextName="RFID Tags" />
 
   <Footer />
 </Layout>

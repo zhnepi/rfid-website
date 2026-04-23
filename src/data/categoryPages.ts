@@ -48,8 +48,8 @@ export const categoryPages: Record<string, CategoryPageContent> = {
     key: 'rfid-cards',
     slug: 'rfid-cards',
     categoryName: 'RFID Cards',
-    title: 'RFID Cards - PVC, NFC, Wood and Clamshell Smart Cards | ProudTek',
-    description: 'Source custom RFID cards from ProudTek for access control, loyalty, ticketing and smart identity projects. PVC, paper, wood and clamshell card options with chip encoding and custom print.',
+    title: 'RFID Cards - PVC, NFC, Wood and Clamshell Smart Cards | RFIDAK',
+    description: 'Source custom RFID cards from RFIDAK for access control, loyalty, ticketing and smart identity projects. PVC, paper, wood and clamshell card options with chip encoding and custom print.',
     keywords: 'RFID cards, NFC cards, clamshell cards, smart card manufacturer, custom RFID card, access control card',
     heroDescription: 'Custom RFID cards for access control, hotel key cards, membership programs, campus cashless systems and event ticketing. Choose PVC, paper, wood or rugged clamshell formats with printing, UID laser marking and chip encoding.',
     heroPrimaryCtaLabel: 'Match cards to your system',
@@ -103,7 +103,7 @@ export const categoryPages: Record<string, CategoryPageContent> = {
         answer: 'Share the chip model or reader protocol, quantity, artwork, print finish, encoding needs and whether you need matching software or reader recommendations.',
       },
       {
-        question: 'Can ProudTek encode RFID cards before shipment?',
+        question: 'Can RFIDAK encode RFID cards before shipment?',
         answer: 'Yes. We can deliver cards blank, UID printed only, or pre-encoded according to your numbering or data-writing plan after sample approval.',
       },
       {
@@ -120,7 +120,7 @@ export const categoryPages: Record<string, CategoryPageContent> = {
       },
       {
         question: 'What is the MOQ for custom printed RFID cards from China?',
-        answer: 'ProudTek accepts orders starting from 500 pieces for standard PVC RFID cards. For specialty materials like wood or metal hybrid cards, MOQ may be 1,000 pieces. Free standard samples are available before bulk production.',
+        answer: 'RFIDAK accepts orders starting from 500 pieces for standard PVC RFID cards. For specialty materials like wood or metal hybrid cards, MOQ may be 1,000 pieces. Free standard samples are available before bulk production.',
       },
       {
         question: 'How long does RFID card production take from order to delivery?',
@@ -141,8 +141,8 @@ export const categoryPages: Record<string, CategoryPageContent> = {
     key: 'rfid-tags',
     slug: 'rfid-tags',
     categoryName: 'RFID Tags',
-    title: 'RFID Tags - Industrial, Laundry, Library and Asset Tags | ProudTek',
-    description: 'Browse industrial RFID tags for laundry, metal assets, pallets, bins, tools, tyres and library systems. ProudTek supplies rugged RFID tag formats with frequency and mounting options matched to the job.',
+    title: 'RFID Tags - Industrial, Laundry, Library and Asset Tags | RFIDAK',
+    description: 'Browse industrial RFID tags for laundry, metal assets, pallets, bins, tools, tyres and library systems. RFIDAK supplies rugged RFID tag formats with frequency and mounting options matched to the job.',
     keywords: 'RFID tags, industrial RFID tags, laundry RFID tags, anti-metal RFID tags, asset tracking tags, RFID tag manufacturer',
     heroDescription: 'Industrial RFID tags for metal tools, laundry textiles, pallets, reusable bins, tyre traceability, cable assets and harsh-environment tracking. Choose rigid, washable, anti-metal or mini tag formats with the chip and enclosure your workflow needs.',
     heroPrimaryCtaLabel: 'Plan tag samples',
@@ -205,7 +205,7 @@ export const categoryPages: Record<string, CategoryPageContent> = {
         answer: 'An on-site sample test with your real reader, antenna placement and tagged object is the best way to confirm read reliability before production.',
       },
       {
-        question: 'Can ProudTek supply tags pre-encoded or serialized?',
+        question: 'Can RFIDAK supply tags pre-encoded or serialized?',
         answer: 'Yes. We can provide blank tags, sequential numbering, UID print or custom data writing depending on the chip and your process.',
       },
       {
@@ -236,8 +236,8 @@ export const categoryPages: Record<string, CategoryPageContent> = {
     key: 'rfid-labels',
     slug: 'rfid-labels',
     categoryName: 'RFID Labels',
-    title: 'RFID Labels and Stickers - UHF, NFC and Tamper Evident Labels | ProudTek',
-    description: 'Source printable RFID labels and stickers for retail, logistics, NFC campaigns, libraries and anti-counterfeit packaging. ProudTek offers UHF, HF and NFC label formats with custom print and encoding.',
+    title: 'RFID Labels and Stickers - UHF, NFC and Tamper Evident Labels | RFIDAK',
+    description: 'Source printable RFID labels and stickers for retail, logistics, NFC campaigns, libraries and anti-counterfeit packaging. RFIDAK offers UHF, HF and NFC label formats with custom print and encoding.',
     keywords: 'RFID labels, RFID stickers, NFC stickers, UHF labels, tamper evident RFID labels, printable RFID labels',
     heroDescription: 'RFID labels and stickers for retail inventory, warehouse carton tracking, library management, product authentication and smartphone-triggered NFC experiences. Available in paper, synthetic, tamper-evident and metal-compatible constructions.',
     heroPrimaryCtaLabel: 'Match labels to your workflow',
@@ -313,7 +313,7 @@ export const categoryPages: Record<string, CategoryPageContent> = {
       },
       {
         question: 'Are tamper-evident RFID labels available for anti-counterfeiting?',
-        answer: 'Yes. ProudTek offers RFID labels with tamper-evident features including destructible facestock, void patterns, and brittle antenna designs that break on removal. These are commonly used for pharmaceutical authentication, warranty seals, and luxury brand protection.',
+        answer: 'Yes. RFIDAK offers RFID labels with tamper-evident features including destructible facestock, void patterns, and brittle antenna designs that break on removal. These are commonly used for pharmaceutical authentication, warranty seals, and luxury brand protection.',
       },
     ],
     resources: [
@@ -330,8 +330,8 @@ export const categoryPages: Record<string, CategoryPageContent> = {
     key: 'rfid-readers',
     slug: 'rfid-readers',
     categoryName: 'RFID Readers',
-    title: 'RFID Readers and Writers - Desktop, USB and Fixed Readers | ProudTek',
-    description: 'Explore RFID readers and writers for LF, HF, NFC and UHF projects. ProudTek supplies desktop readers, USB encoders and reader hardware with protocol guidance for development and deployment.',
+    title: 'RFID Readers and Writers - Desktop, USB and Fixed Readers | RFIDAK',
+    description: 'Explore RFID readers and writers for LF, HF, NFC and UHF projects. RFIDAK supplies desktop readers, USB encoders and reader hardware with protocol guidance for development and deployment.',
     keywords: 'RFID readers, RFID writers, USB RFID reader, NFC reader writer, desktop RFID reader, UHF reader',
     heroDescription: 'RFID readers and writers for tag issuance, desktop enrollment, NFC encoding, access control integration and long-range identification projects. Suitable for buyers who need compatible hardware alongside cards, tags or labels.',
     heroPrimaryCtaLabel: 'Check reader compatibility',
@@ -398,7 +398,7 @@ export const categoryPages: Record<string, CategoryPageContent> = {
         answer: 'Reader projects often require protocol notes, command sets or SDK guidance. Tell us your operating system and development environment when requesting samples.',
       },
       {
-        question: 'Do ProudTek RFID readers come with SDK and development support?',
+        question: 'Do RFIDAK RFID readers come with SDK and development support?',
         answer: 'Yes. Desktop and module readers include SDK packages with sample code for Windows, Android, and Linux. Protocol documentation and technical support are provided. OEM integration modules include detailed API references.',
       },
       {
@@ -407,7 +407,7 @@ export const categoryPages: Record<string, CategoryPageContent> = {
       },
       {
         question: 'What interface options are available for RFID reader modules?',
-        answer: 'ProudTek RFID reader modules support USB, RS232, RS485, Wiegand 26/34, and UART interfaces. USB HID keyboard emulation is available for plug-and-play integration without custom software development.',
+        answer: 'RFIDAK RFID reader modules support USB, RS232, RS485, Wiegand 26/34, and UART interfaces. USB HID keyboard emulation is available for plug-and-play integration without custom software development.',
       },
     ],
     resources: [
@@ -424,8 +424,8 @@ export const categoryPages: Record<string, CategoryPageContent> = {
     key: 'rfid-keyfob',
     slug: 'rfid-keyfob',
     categoryName: 'RFID Keyfob',
-    title: 'RFID Keyfobs - Access Control Key Tags and Transponders | ProudTek',
-    description: 'Custom RFID keyfobs for apartment access, office entry, parking and membership programs. ProudTek supplies ABS, epoxy and other keyfob styles with multiple chip options and branding support.',
+    title: 'RFID Keyfobs - Access Control Key Tags and Transponders | RFIDAK',
+    description: 'Custom RFID keyfobs for apartment access, office entry, parking and membership programs. RFIDAK supplies ABS, epoxy and other keyfob styles with multiple chip options and branding support.',
     keywords: 'RFID keyfob, RFID key tag, access control keyfob, RFID transponder, NFC keyfob',
     heroDescription: 'RFID keyfobs for apartment access, office entry, parking management, gym membership and branded loyalty programs. Compact, durable and easy to carry with ABS, epoxy and other shell options.',
     heroPrimaryCtaLabel: 'Match keyfobs to your system',
@@ -500,7 +500,7 @@ export const categoryPages: Record<string, CategoryPageContent> = {
       },
       {
         question: 'Can keyfobs be custom shaped with company branding?',
-        answer: 'Yes. ProudTek supports custom keyfob mold design for unique shapes. Standard customization includes logo printing, color matching, serial numbering, and UID laser engraving. Custom mold MOQ starts at 3,000 pieces.',
+        answer: 'Yes. RFIDAK supports custom keyfob mold design for unique shapes. Standard customization includes logo printing, color matching, serial numbering, and UID laser engraving. Custom mold MOQ starts at 3,000 pieces.',
       },
     ],
     resources: [
@@ -517,8 +517,8 @@ export const categoryPages: Record<string, CategoryPageContent> = {
     key: 'rfid-wristbands',
     slug: 'rfid-wristbands',
     categoryName: 'RFID Wristbands',
-    title: 'RFID Wristbands - Silicone, Fabric and Disposable Bracelets | ProudTek',
-    description: 'Custom RFID wristbands for events, hotels, resorts, clubs, healthcare and water parks. ProudTek supplies silicone, fabric and disposable wristband styles with print and encoding support.',
+    title: 'RFID Wristbands - Silicone, Fabric and Disposable Bracelets | RFIDAK',
+    description: 'Custom RFID wristbands for events, hotels, resorts, clubs, healthcare and water parks. RFIDAK supplies silicone, fabric and disposable wristband styles with print and encoding support.',
     keywords: 'RFID wristbands, RFID bracelets, silicone RFID wristband, event wristbands, NFC wristband',
     heroDescription: 'RFID wristbands for events, resorts, hospitals, gym access, cashless payment and water park operations. Available in reusable silicone, fabric and disposable styles with chip matching for access, payment or identification.',
     heroPrimaryCtaLabel: 'Plan wristband samples',

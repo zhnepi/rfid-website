@@ -19,7 +19,7 @@ const technologyPosts = blogs.filter((post) => post.category === 'RFID TECHNOLOG
 const applicationPosts = blogs.filter((post) => post.category === 'RFID APPLICATIONS').slice(0, 6);
 const allPosts = blogs;
 
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/blogs`;
 
 const collectionJsonLd = {
@@ -27,8 +27,8 @@ const collectionJsonLd = {
   '@type': 'CollectionPage',
   '@id': `${canonicalURL}#collection`,
   url: canonicalURL,
-  name: 'ProudTek RFID Blog',
-  description: 'RFID buying guides, NFC explainers, sourcing articles and application notes from ProudTek.',
+  name: 'RFIDAK RFID Blog',
+  description: 'RFID buying guides, NFC explainers, sourcing articles and application notes from RFIDAK.',
   isPartOf: { '@id': `${siteURL}/#website` },
   mainEntity: {
     '@type': 'ItemList',
@@ -46,11 +46,11 @@ const blogJsonLd = {
   '@type': 'Blog',
   '@id': `${canonicalURL}#blog`,
   url: canonicalURL,
-  name: 'ProudTek RFID Blog',
+  name: 'RFIDAK RFID Blog',
   description: 'Practical RFID and NFC content for buyers, engineers and project teams.',
   publisher: { '@id': `${siteURL}/#organization` },
   blogPost: blogs.map((post) => {
-    const author = getAuthorById(post.authorId || 'proudtek-rfid-editorial-team');
+    const author = getAuthorById(post.authorId || 'rfidak-rfid-editorial-team');
     return {
       '@type': 'BlogPosting',
       headline: post.title,
@@ -83,9 +83,9 @@ const breadcrumbJsonLd = {
 ---
 
 <Layout
-  title="RFID Blog - Guides, NFC Articles and Buying Advice | ProudTek"
-  description="Explore practical RFID and NFC articles from ProudTek, including frequency guides, application examples, sourcing tips and product selection advice."
-  keywords="RFID blog, RFID guides, NFC articles, RFID sourcing guide, RFID applications, ProudTek blog"
+  title="RFID Blog - Guides, NFC Articles and Buying Advice | RFIDAK"
+  description="Explore practical RFID and NFC articles from RFIDAK, including frequency guides, application examples, sourcing tips and product selection advice."
+  keywords="RFID blog, RFID guides, NFC articles, RFID sourcing guide, RFID applications, RFIDAK blog"
   canonicalURL={canonicalURL}
   jsonLd={[collectionJsonLd, blogJsonLd, breadcrumbJsonLd]}
 >
@@ -160,7 +160,7 @@ const breadcrumbJsonLd = {
                 <div class="aspect-[4/3] overflow-hidden rounded-xl bg-gray-100">
                   <img
                     src={post.image}
-                    alt={post.title}
+                    alt={`${post.title} — RFIDAK RFID buyer guide and industry insight`}
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                     decoding="async"
@@ -201,7 +201,7 @@ const breadcrumbJsonLd = {
                 <div class="flex-shrink-0 w-28 h-28 md:w-32 md:h-32 rounded-lg overflow-hidden bg-gray-100">
                   <img
                     src={post.image}
-                    alt={post.title}
+                    alt={`${post.title} — RFIDAK RFID buyer guide and industry insight`}
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                     decoding="async"
@@ -317,7 +317,7 @@ const breadcrumbJsonLd = {
                 <div class="aspect-[16/10] overflow-hidden rounded-xl bg-gray-100">
                   <img
                     src={post.image}
-                    alt={post.title}
+                    alt={`${post.title} — RFIDAK RFID buyer guide and industry insight`}
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                     decoding="async"

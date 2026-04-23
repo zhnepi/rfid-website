@@ -2,19 +2,31 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import CategoryStickyNav from '../../components/CategoryStickyNav.astro';
+import CategoryDecisionCards from '../../components/CategoryDecisionCards.astro';
+import ScrollCTA from '../../components/cta/ScrollCTA.astro';
+import ExitIntent from '../../components/cta/ExitIntent.astro';
 import { products } from '../../data/products';
+import { buildCategoryJsonLd } from '../../utils/categoryJsonLd';
+import { getContextualContactAction, getContextualWhatsAppAction } from '../../utils/contact';
 
 const categoryName = 'RFID Keyfob';
 const categoryProducts = products.filter(p => p.category === categoryName);
+const description = "RFID keyfobs and key transponders from RFIDAK: ABS, leather, epoxy and PVC keyfobs for access control, door entry and car parking with multiple chip options.";
+const categoryJsonLd = buildCategoryJsonLd({ categoryName, categorySlug: 'rfid-keyfob', categoryProducts, description });
+const categoryContact = getContextualContactAction(Astro.url.pathname);
+const categoryWhatsApp = getContextualWhatsAppAction(Astro.url.pathname);
 ---
 
 <Layout
-  title="RFID Keyfobs - Access Control Key Tags & Transponders | ProudTek"
-  description="RFID keyfobs and key transponders from ProudTek: ABS keyfobs, leather keyfobs, epoxy keyfobs for access control, door entry, car parking. Multiple chip options available."
+  title="RFID Keyfobs | Access Control Key Tags — RFIDAK"
+  description={description}
   keywords="RFID keyfob, key transponder, RFID key tag, access control keyfob, NFC keyfob, RFID keyfob manufacturer, door entry keyfob"
+  jsonLd={categoryJsonLd}
 >
   <Header />
-  
+  <CategoryStickyNav activeCategory={categoryName} />
+
   <!-- Hero Section -->
   <section class="bg-gradient-to-r from-[#0d7377] to-[#0a5c5f] text-white py-16">
     <div class="container mx-auto px-4">
@@ -33,6 +45,8 @@ const categoryProducts = products.filter(p => p.category === categoryName);
     </div>
   </section>
 
+  <CategoryDecisionCards categorySlug="rfid-keyfob" />
+
   <!-- Products Grid -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
@@ -49,7 +63,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
             <div class="aspect-square overflow-hidden bg-gray-100">
               <img 
                 src={product.images[0]} 
-                alt={product.name}
+                alt={`${product.name} — ${categoryName} manufactured by RFIDAK in Shenzhen, China`}
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 loading="lazy"
               />
@@ -81,7 +95,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
         <h2 class="text-3xl font-bold text-gray-800 mb-6">RFID Keyfob Buying Guide</h2>
         <div class="prose prose-lg text-gray-600">
           <p>
-            RFID keyfobs are compact, portable RFID devices designed to be attached to keychains for convenient hands-free identification. The RFID access control market exceeds $10 billion globally, with keyfobs being one of the most popular form factors for residential and commercial entry systems. ProudTek manufactures keyfobs and key transponders with 10+ designs, supporting 125KHz, 13.56MHz, UHF, and dual-frequency configurations.
+            RFID keyfobs are compact, portable RFID devices designed to be attached to keychains for convenient hands-free identification. The RFID access control market exceeds $10 billion globally, with keyfobs being one of the most popular form factors for residential and commercial entry systems. RFIDAK manufactures keyfobs and key transponders with 10+ designs, supporting 125KHz, 13.56MHz, UHF, and dual-frequency configurations.
           </p>
 
           <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">RFID Keyfob Types Comparison</h3>
@@ -127,13 +141,16 @@ const categoryProducts = products.filter(p => p.category === categoryName);
   <section class="py-12 bg-[#0d7377]">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-2xl font-bold text-white mb-4">Need Custom RFID Keyfobs?</h2>
-      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free samples with your logo. ProudTek offers 10+ keyfob designs with custom branding, chip selection, and competitive pricing.</p>
+      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free samples with your logo. RFIDAK offers 10+ keyfob designs with custom branding, chip selection, and competitive pricing.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="/contact" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
-        <a href="https://wa.me/8618665820632?text=Hi, I need custom RFID keyfobs" target="_blank" rel="noopener noreferrer" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
+        <a href={categoryContact.href} data-analytics="quote_click_category_cta_rfid-keyfob" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
+        <a href={categoryWhatsApp.href} target="_blank" rel="noopener noreferrer" data-analytics="whatsapp_click_category_cta_rfid-keyfob" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
       </div>
     </div>
   </section>
+
+  <ScrollCTA contactHref={categoryContact.href} contactLabel="Get Quote" whatsappHref={categoryWhatsApp.href} source="category" />
+  <ExitIntent sampleHref="/contact?intent=samples&category=rfid-keyfob&express=1&source=exit-intent#contactForm" whatsappHref={categoryWhatsApp.href} contextName="RFID Keyfobs" />
 
   <Footer />
 </Layout>

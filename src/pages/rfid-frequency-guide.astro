@@ -1,0 +1,808 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { getIntentContactHref } from '../utils/contact';
+
+const tocItems = [
+  { href: '#why-frequency-matters', label: '1. Why frequency is the first decision' },
+  { href: '#lf-deep-dive', label: '2. LF (125-134 kHz) \u2014 short-range, niche-stable' },
+  { href: '#hf-deep-dive', label: '3. HF / NFC (13.56 MHz) \u2014 the interoperable middle' },
+  { href: '#uhf-deep-dive', label: '4. UHF (860-960 MHz) \u2014 supply chain workhorse' },
+  { href: '#decision-matrix', label: '5. 4-question decision framework' },
+  { href: '#regional-compliance', label: '6. Regional UHF compliance map' },
+  { href: '#cost-by-frequency', label: '7. Cost benchmarks by frequency' },
+  { href: '#migration', label: '8. Upgrade and migration scenarios' },
+  { href: '#cluster-articles', label: '9. Continue your research \u2014 8 deep-dive articles' },
+  { href: '#download', label: '10. Download the RFID Buyer\u2019s Guide (PDF)' },
+  { href: '#faq', label: '11. Frequently asked questions' },
+];
+
+const directAnswer = "Pick LF (125-134 kHz) for animal ID and legacy short-range access; HF / NFC (13.56 MHz) for smart cards, payments and smartphone-tap; UHF (860-960 MHz) for retail, logistics and any workflow needing read range above 1 m. The frequency choice locks the ISO standard, the reader fleet and the regulatory approval path \u2014 make it before selecting chip or inlay.";
+
+const keyTakeaways = [
+  '<strong>Frequency is the first architectural decision</strong> &mdash; it fixes read distance, anti-collision throughput, ISO standard and regional compliance path.',
+  '<strong>3 bands carry &gt; 99% of B2B volume</strong> &mdash; LF, HF/NFC, UHF. Microwave (2.45 GHz+) and active tags stay in niches.',
+  '<strong>UHF is region-specific</strong> &mdash; FCC 902-928, ETSI 865-868, MIIT China 920-925, ARIB Japan 916-921; wrong sub-band loses 30-50% read rate.',
+  '<strong>Physics, not brand, decides</strong> &mdash; water and metal detune UHF; LF penetrates both. Smartphone tap is HF-only. Item-level bulk inventory is UHF-only.',
+  '<strong>Sample testing is mandatory</strong> &mdash; simulate the real environment (liquid, metal, temperature, population density) before committing to bulk MOQ.',
+];
+
+const industryStats = [
+  { value: '42 B', label: 'UHF passive tags shipped in 2024 (RAIN Alliance)' },
+  { value: '2.4 B', label: 'NFC-enabled smartphones in 2025 (NFC Forum)' },
+  { value: '12 m', label: 'Typical passive UHF Gen2v2 read range (ISO/IEC 18000-63)' },
+  { value: '4 cm', label: 'NFC operating range per ISO/IEC 14443 / 18092' },
+  { value: '10 cm', label: 'LF read range ceiling even at max power (ISO 11784)' },
+];
+
+const lfChips = [
+  { name: 'EM4100 / EM4102', memory: '64 bit read-only', use: 'Legacy access badges, door entry' },
+  { name: 'EM4305 / EM4205', memory: '512 bit R/W', use: 'Re-encodable access credentials, asset ID' },
+  { name: 'T5577 / Atmel T55x7', memory: '330 bit R/W', use: 'Multi-protocol programmable (emulates EM, HID, Indala)' },
+  { name: 'HITAG 1 / S / 2', memory: '256-2048 bit', use: 'Vehicle immobilizer, industrial access' },
+  { name: 'FDX-B (ISO 11784)', memory: '128 bit', use: 'Livestock ear tag, pet microchip \u2014 134.2 kHz subset' },
+];
+
+const hfChips = [
+  { name: 'MIFARE Classic 1K / 4K', memory: '1-4 KB', use: 'Legacy transit, low-security access \u2014 Crypto-1 broken since 2008' },
+  { name: 'MIFARE Plus EV2', memory: '2-4 KB', use: 'AES-128 upgrade from Classic with SL1/SL3 migration' },
+  { name: 'MIFARE DESFire EV3', memory: 'Up to 8 KB', use: 'High-security access, transit, payments; FIPS 140-2 validated' },
+  { name: 'MIFARE Ultralight EV1 / C / Nano', memory: '48-192 bytes', use: 'Single-use ticketing, disposable vouchers' },
+  { name: 'NXP NTAG213 / 215 / 216', memory: '144 / 504 / 888 bytes', use: 'Consumer NFC, marketing tap, vCard, smart packaging' },
+  { name: 'NXP NTAG424 DNA', memory: '416 bytes', use: 'Cryptographic SUN authentication \u2014 anti-counterfeit, DPP' },
+  { name: 'NXP ICODE SLIX / SLIX2', memory: '128 bytes', use: 'ISO 15693 library, industrial asset vicinity reads' },
+];
+
+const uhfChips = [
+  { name: 'Impinj Monza R6 / R6-P', memory: '96-128 bit EPC, 32-bit TID', use: 'High-volume retail item-level; strong backscatter' },
+  { name: 'Impinj M730 / M750 / M770 / M780 / M800', memory: '96-128 bit EPC + 32-96 bit user', use: '2024 generation; optimized read rate and sensitivity' },
+  { name: 'NXP UCODE 9 / 9xm', memory: '96 bit EPC + 32 bit TID', use: 'Apparel and logistics volume SKU; self-tuning' },
+  { name: 'NXP UCODE DNA', memory: '96 bit EPC + 3DES crypto', use: 'Pharma and high-value goods anti-counterfeit' },
+  { name: 'Alien Higgs 9 / H10', memory: '96 bit EPC + 128 bit user', use: 'Specialty industrial and on-metal optimized designs' },
+];
+
+const decisionTree = [
+  { q: 'Do you need a read distance greater than 1 m?', yes: 'UHF', no: 'continue' },
+  { q: 'Will end-users interact via smartphone tap?', yes: 'HF / NFC', no: 'continue' },
+  { q: 'Is this animal ID or a legacy immobilizer?', yes: 'LF', no: 'continue' },
+  { q: 'Do you need to read more than 50 tags per second at portals or gates?', yes: 'UHF', no: 'HF / NFC' },
+];
+
+const regionalCompliance = [
+  ['United States', '902 \u2013 928 MHz', '4 W EIRP', 'FCC Part 15.247'],
+  ['European Union', '865.6 \u2013 867.6 MHz', '2 W ERP', 'ETSI EN 302 208'],
+  ['Japan', '916.7 \u2013 920.9 MHz', '1 W ERP', 'ARIB STD-T107'],
+  ['China', '920.5 \u2013 924.5 MHz', '2 W ERP', 'GB/T 29768 (MIIT)'],
+  ['Brazil', '902 \u2013 907.5 / 915 \u2013 928 MHz', '4 W EIRP', 'ANATEL Resolution 506'],
+  ['India', '865 \u2013 867 MHz', '4 W EIRP', 'WPC Notification 2008-S.O.1763(E)'],
+  ['Australia', '920 \u2013 926 MHz', '4 W EIRP', 'ACMA Class Licence 2015'],
+  ['South Korea', '917 \u2013 920.8 MHz', '4 W EIRP', 'KCC Radio Regulation Article 49' ],
+];
+
+const costByFrequency = [
+  { format: 'Sticker / wet inlay', lf: '$0.18 \u2013 0.30', hf: '$0.05 \u2013 0.15', uhf: '$0.04 \u2013 0.08' },
+  { format: 'PVC card', lf: '$0.45 \u2013 0.80', hf: '$0.15 \u2013 0.40', uhf: '$0.20 \u2013 0.55' },
+  { format: 'Silicone wristband', lf: '$0.65 \u2013 1.20', hf: '$0.45 \u2013 0.95', uhf: '$0.55 \u2013 1.10' },
+  { format: 'Textile laundry tag', lf: '\u2014', hf: '$0.65 \u2013 1.30', uhf: '$0.55 \u2013 1.10' },
+  { format: 'On-metal hard tag', lf: '$1.50 \u2013 3.00', hf: '$1.20 \u2013 2.50', uhf: '$1.50 \u2013 4.50' },
+  { format: 'Keyfob', lf: '$0.35 \u2013 0.85', hf: '$0.45 \u2013 1.10', uhf: '\u2014' },
+];
+
+const migrationScenarios = [
+  {
+    from: 'LF 125 kHz legacy access',
+    to: 'HF MIFARE DESFire EV3',
+    why: 'Replace broken Crypto-1 / low-security LF with AES-128 secure cards as part of access system refresh.',
+    watchFor: 'Must replace reader fleet (LF and HF readers are not interchangeable); plan dual-technology bridge cards during transition.',
+  },
+  {
+    from: 'HF MIFARE Classic',
+    to: 'HF MIFARE DESFire EV3 or MIFARE Plus EV2',
+    why: 'Crypto-1 cipher broken in 2008 (Garcia et al, USENIX Security); replace for any security-sensitive workflow.',
+    watchFor: 'Plus EV2 in SL1 mode reuses Classic readers; DESFire requires full reader upgrade but gives AES + multi-application.',
+  },
+  {
+    from: 'Manual barcode / human inventory',
+    to: 'UHF Gen2v2 item-level',
+    why: 'Retail mandate (Walmart, Macy, M&S), inventory accuracy targets above 95%, or fulfillment speed gains.',
+    watchFor: 'Requires reader portals, WMS integration, item-level tag budget; pilot 1 SKU family before rollout.',
+  },
+  {
+    from: 'UHF FCC-tuned inlays',
+    to: 'UHF global / multi-band inlays',
+    why: 'Expanding into EU / Asia markets where FCC-only inlays detune and lose 30-50% read range.',
+    watchFor: 'Specify multi-band UCODE 9 or Monza M730 / M770; re-test dock doors in each region before deployment.',
+  },
+];
+
+const clusterArticles = [
+  { href: '/blogs/rfid-frequency-guide', label: 'RFID frequency bands explained (tactical deep-dive)', description: 'Line-by-line companion blog \u2014 ISO 11784, 14443, 15693, 18000-63 with chip-level guidance.' },
+  { href: '/blogs/hf-vs-uhf-rfid-guide', label: 'HF vs UHF RFID buying guide', description: 'The single most common procurement question \u2014 tradeoffs in range, smartphone support, liquid tolerance.' },
+  { href: '/compare/hf-vs-uhf-rfid', label: 'HF vs UHF RFID comparison', description: 'Side-by-side decision framework with use-case examples.' },
+  { href: '/compare/lf-vs-hf-rfid', label: 'LF vs HF RFID comparison', description: 'Legacy access and immobilizer vs smart-card modernization.' },
+  { href: '/blogs/nfc-technology', label: 'NFC technology guide', description: 'HF band deep dive \u2014 NTAG family, NDEF, smartphone tap workflows, ISO 14443A.' },
+  { href: '/blogs/rfid-retail-inventory-guide', label: 'RFID retail inventory guide', description: 'UHF in apparel and general merchandise \u2014 Walmart mandate, accuracy benchmarks.' },
+  { href: '/blogs/anti-metal-rfid-tags-guide', label: 'Anti-metal RFID tags guide', description: 'How UHF tags are re-tuned for on-metal performance; tag designs for ferrous and non-ferrous substrates.' },
+  { href: '/blogs/laundry-rfid-tags-buying-guide', label: 'Laundry RFID tags buyer guide', description: 'UHF in industrial laundry \u2014 heat-seal vs sewn-in, wash cycle durability, chemical compatibility.' },
+];
+
+const frequencyFaqs = [
+  {
+    question: 'Can a single reader handle LF, HF and UHF at the same time?',
+    answer: 'Not usually. A small number of multi-band desktop readers exist for enrollment, but production fleets are single-band per workflow because antenna design and power regulation differ. Plan one band per use case.',
+  },
+  {
+    question: 'Will a UHF tag designed for FCC (902-928 MHz) work in Europe (865-868 MHz)?',
+    answer: 'Range typically drops 30-50% because the inlay antenna resonance is mismatched. For global deployment, specify multi-band chips such as NXP UCODE 9 or Impinj Monza M730 / M770, which are tuned across the global UHF band.',
+  },
+  {
+    question: 'Why would I still use LF in 2026?',
+    answer: 'LF remains the best technical choice when the tag must be injected under skin or encased in metal \u2014 livestock ID (ISO 11784/11785), vehicle immobilizers, and some extreme-environment asset tags. LF also has the widest installed base of legacy access systems.',
+  },
+  {
+    question: 'Can NFC replace UHF for retail inventory?',
+    answer: 'No. NFC requires a reader within 4-10 cm of each tag, so item-level bulk read at portals is impractical. UHF Gen2v2 reads 700+ tags per second at up to 12 m and is the standard for retail and logistics. NFC wins for consumer interaction on a single item.',
+  },
+  {
+    question: 'What is the lead time and MOQ difference between the three bands?',
+    answer: 'Lead times are comparable (2-4 weeks stock, 4-6 weeks custom). MOQs differ by format, not frequency; UHF inlays typically start at 5,000 pcs, HF at 1,000 pcs, LF at 500 pcs because the installed volume is much larger at UHF.',
+  },
+];
+
+const relatedGuides = [
+  { href: '/rfid-technology', label: 'RFID technology pillar guide', description: 'The broader overview of how RFID systems work \u2014 chip families, form factors, environment, and the procurement checklist.' },
+  { href: '/rfid-chip-comparison', label: 'RFID chip comparison pillar (MIFARE / NTAG / UCODE)', description: 'Companion pillar \u2014 detailed chip family reference, security tier matrix and counterfeit risk after you have the frequency locked.' },
+  { href: '/rfid-vs-nfc-vs-bluetooth', label: 'RFID vs NFC vs Bluetooth pillar', description: 'Upstream from this frequency pillar \u2014 decide the technology family first (RFID / NFC / BLE / hybrid).' },
+  { href: '/rfid-glossary', label: 'RFID glossary (A-Z)', description: 'Every acronym, standard and protocol name defined in procurement-friendly English.' },
+  { href: '/category/rfid-cards', label: 'RFID cards category', description: 'HF / NFC cards in MIFARE, DESFire, NTAG and Ultralight variants.' },
+  { href: '/category/rfid-tags', label: 'RFID tags category', description: 'UHF supply-chain and industrial tags including on-metal and high-temperature options.' },
+];
+
+const lastReviewed = { date: 'April 20, 2026', reviewer: 'RFIDAK Engineering Team' };
+
+const frequencyContactHref = getIntentContactHref('compatibility');
+
+const siteURL = 'https://www.rfidak.com';
+const canonicalURL = `${siteURL}/rfid-frequency-guide`;
+
+const techArticleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  '@id': `${canonicalURL}#article`,
+  headline: 'RFID Frequency Guide (LF, HF / NFC and UHF)',
+  description: 'A procurement-focused pillar guide to LF (125-134 kHz), HF / NFC (13.56 MHz) and UHF (860-960 MHz) frequency selection for B2B RFID projects.',
+  url: canonicalURL,
+  author: { '@id': `${siteURL}/#organization` },
+  publisher: { '@id': `${siteURL}/#organization` },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
+  about: [
+    { '@type': 'Thing', name: 'RFID frequency bands' },
+    { '@type': 'Thing', name: 'LF RFID 125 kHz' },
+    { '@type': 'Thing', name: 'HF RFID 13.56 MHz' },
+    { '@type': 'Thing', name: 'UHF RFID 860-960 MHz' },
+    { '@type': 'Thing', name: 'RFID product selection' },
+  ],
+};
+
+const howToJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to choose the right RFID frequency',
+  description: 'A 4-question decision framework for picking between LF, HF / NFC and UHF RFID for a real-world B2B application.',
+  step: decisionTree.map((step, index) => ({
+    '@type': 'HowToStep',
+    position: index + 1,
+    name: step.q,
+    text: `If yes: ${step.yes}. If no: ${step.no}.`,
+  })),
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: frequencyFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteURL}/` },
+    { '@type': 'ListItem', position: 2, name: 'RFID Technology Guide', item: `${siteURL}/rfid-technology` },
+    { '@type': 'ListItem', position: 3, name: 'RFID Frequency Guide', item: canonicalURL },
+  ],
+};
+
+const speakableJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SpeakableSpecification',
+  cssSelector: ['[data-speakable="answer"]', '[data-speakable="key-takeaways"]'],
+};
+---
+
+<Layout
+  title="RFID Frequency Guide 2026 \u2014 LF / HF / UHF Pillar Reference"
+  description="Pick LF, HF/NFC or UHF RFID with a 4-question decision framework, regional compliance map, cost benchmarks by frequency and migration scenarios. Free PDF."
+  keywords="RFID frequency guide, LF 125 kHz, HF 13.56 MHz, UHF 860-960 MHz, ISO 18000-63, FCC vs ETSI RFID, RFID frequency selection"
+  canonicalURL={canonicalURL}
+  jsonLd={[techArticleJsonLd, howToJsonLd, faqJsonLd, breadcrumbJsonLd, speakableJsonLd]}
+>
+  <Header />
+  <main>
+    <section class="bg-gradient-to-r from-[#0d7377] to-[#0a5c5f] py-16 text-white">
+      <div class="container mx-auto px-4">
+        <nav class="text-sm mb-4 text-white/80" aria-label="Breadcrumb">
+          <a href="/" class="hover:underline">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/rfid-technology" class="hover:underline">RFID Technology</a>
+          <span class="mx-2">/</span>
+          <span>Frequency Guide</span>
+        </nav>
+        <div class="max-w-4xl">
+          <p class="eyebrow-label eyebrow-label-wide text-[#0d7377]/70 mb-4">Pillar Guide</p>
+          <h1 class="title-balance text-4xl md:text-5xl font-bold mb-5">RFID frequency guide: LF, HF / NFC and UHF for procurement teams</h1>
+          <p class="text-lg md:text-xl text-white/90 max-w-3xl">
+            Pick the right RFID frequency before you pick the chip, the inlay or the supplier. This pillar guide covers the 4-question decision framework, regional compliance, cost benchmarks and migration scenarios used by B2B sourcing teams.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 bg-white border-b border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+          <aside class="rounded-3xl border-l-4 border-[#0d7377] bg-[#0d7377]/5 p-6 md:p-8">
+            <p class="text-xs uppercase tracking-[0.18em] text-[#0d7377] font-semibold mb-3">One-sentence answer</p>
+            <p data-speakable="answer" class="text-lg md:text-xl leading-relaxed text-gray-800 font-medium">
+              {directAnswer}
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 bg-gray-50 border-b border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto grid lg:grid-cols-[0.85fr_1.15fr] gap-8 items-start">
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800 mb-3">On this page</h2>
+            <nav class="space-y-2">
+              {tocItems.map((item) => (
+                <a href={item.href} class="block text-sm text-[#0d7377] hover:underline">{item.label}</a>
+              ))}
+            </nav>
+          </div>
+          <div data-speakable="key-takeaways" class="rounded-3xl border border-[#0d7377]/15 bg-white p-6 md:p-7 shadow-sm">
+            <p class="text-xs uppercase tracking-[0.18em] text-[#0d7377] font-semibold mb-4">Key takeaways</p>
+            <ul class="space-y-3">
+              {keyTakeaways.map((item) => (
+                <li class="flex items-start gap-3 text-sm text-gray-700 leading-relaxed">
+                  <svg class="w-4 h-4 text-[#0d7377] mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span set:html={item}></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 bg-white border-b border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+          <p class="text-xs uppercase tracking-[0.18em] text-[#0d7377] font-semibold mb-4 text-center">Industry numbers at a glance</p>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {industryStats.map((stat) => (
+              <div class="rounded-2xl bg-gradient-to-br from-[#0d7377]/5 to-white border border-[#0d7377]/10 p-5 text-center">
+                <p class="text-2xl md:text-3xl font-bold text-[#0d7377]">{stat.value}</p>
+                <p class="text-xs text-gray-600 mt-2 leading-snug">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <article class="py-12 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto space-y-14">
+          <section id="why-frequency-matters">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">1. Why frequency is the first decision</h2>
+            <div class="space-y-4 text-gray-600 leading-relaxed">
+              <p>
+                Every other RFID choice \u2014 chip family, inlay design, reader brand, encoding, software stack \u2014 is downstream of the frequency decision. The chip families available at LF, HF and UHF are not interchangeable; the reader firmware that speaks ISO 14443 cannot read ISO/IEC 18000-63; the regional regulators that license 902-928 MHz UHF are entirely separate from the regulators licensing 13.56 MHz HF.
+              </p>
+              <p>
+                Most failed or over-budget RFID projects trace back to a frequency chosen for the wrong reason \u2014 usually chip-price comparisons on a data sheet rather than a workflow analysis. The procurement-correct order is <strong class="text-gray-800">application \u2192 required read distance \u2192 environment \u2192 frequency \u2192 chip \u2014 not the reverse.</strong>
+              </p>
+              <p>
+                This pillar guide covers each band as a procurement decision, not a physics lesson: where it wins, where it fails, which chips matter, what it costs at volume, and when to migrate to a different band. For a broader systems-level overview (readers, form factors, install considerations) see the <a href="/rfid-technology" class="text-[#0d7377] font-medium hover:underline">RFID technology pillar</a>.
+              </p>
+            </div>
+          </section>
+
+          <section id="lf-deep-dive">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">2. LF (125-134 kHz) \u2014 short-range, niche-stable</h2>
+            <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
+              <div class="space-y-4 text-gray-600 leading-relaxed">
+                <p>
+                  Low-frequency RFID operates at 125 kHz for most legacy access applications and 134.2 kHz for animal ID under ISO 11784/11785. Read range is capped near 10 cm in practice, data rate is slow (roughly 8 kbit/s), and multi-tag anti-collision is basic compared to UHF.
+                </p>
+                <p>
+                  The reason LF survives in 2026: it is the only band that reads reliably through biological tissue (livestock microchips), metal-rich environments (vehicle immobilizers, industrial equipment) and wet or muddy substrates (mining tool inventory). HF and UHF degrade sharply under those conditions.
+                </p>
+                <p>
+                  LF has the largest installed base of legacy access hardware globally \u2014 HID Prox, Indala, AWID and EM-compatible readers are still deployed in hundreds of thousands of buildings. That installed base is the single biggest factor in whether a project should choose LF or migrate to HF DESFire.
+                </p>
+              </div>
+              <div class="rounded-3xl bg-gray-50 border border-gray-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">LF at a glance</h3>
+                <dl class="text-sm space-y-3">
+                  <div>
+                    <dt class="font-semibold text-gray-700">Frequency</dt>
+                    <dd class="text-gray-600">125 kHz (access) / 134.2 kHz (animal)</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Standard</dt>
+                    <dd class="text-gray-600">ISO 11784 / 11785 (animal); de-facto industry (access)</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Read range</dt>
+                    <dd class="text-gray-600">Up to 10 cm</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Typical tag cost</dt>
+                    <dd class="text-gray-600">$0.18 \u2013 $1.50</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Strengths</dt>
+                    <dd class="text-gray-600">Penetrates water, tissue, metal; large legacy installed base</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Weaknesses</dt>
+                    <dd class="text-gray-600">Short range, slow data, limited anti-collision</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div class="mt-8">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">LF chip families</h3>
+              <div class="overflow-x-auto rounded-2xl border border-gray-200">
+                <table class="w-full text-sm bg-white">
+                  <thead class="bg-gray-100 text-gray-700">
+                    <tr>
+                      <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Chip</th>
+                      <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Memory</th>
+                      <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Typical use</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {lfChips.map((chip, index) => (
+                      <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                        <td class="px-4 py-3 border-b border-gray-100 text-gray-800 font-semibold align-top">{chip.name}</td>
+                        <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.memory}</td>
+                        <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.use}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="mt-6 rounded-2xl bg-[#0d7377]/5 border border-[#0d7377]/15 p-5 text-sm text-gray-700">
+              <p>
+                <strong class="text-[#0d7377]">RFIDAK LF products:</strong>
+                <a href="/product/rfid-keyfob" class="text-[#0d7377] font-medium hover:underline">RFID keyfob (EM / T5577)</a> \u2022
+                <a href="/category/rfid-keyfob" class="text-[#0d7377] font-medium hover:underline">LF keyfob range</a> \u2022
+                <a href="/product/rfid-cards" class="text-[#0d7377] font-medium hover:underline">LF 125 kHz cards</a>
+              </p>
+            </div>
+          </section>
+
+          <section id="hf-deep-dive">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">3. HF / NFC (13.56 MHz) \u2014 the interoperable middle</h2>
+            <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
+              <div class="space-y-4 text-gray-600 leading-relaxed">
+                <p>
+                  HF at 13.56 MHz is the most standardized RFID band because it supports contactless payments, transit, passports, and smartphone tap workflows via NFC. Four standards govern HF usage: ISO/IEC 14443 A and B (proximity, used for most smart cards and NFC), ISO/IEC 15693 (vicinity, up to 1 m, used for library media and industrial), and ISO/IEC 18092 (the NFC Forum standard that extends 14443).
+                </p>
+                <p>
+                  The HF chip universe is dominated by NXP (formerly Philips Semiconductors) with the MIFARE family for secure access and NTAG family for consumer NFC interactions. A newer tier \u2014 NTAG424 DNA with AES-128 SUN (Secure Unique NFC) authentication \u2014 is the foundation of EU Digital Product Passport and brand anti-counterfeit programs.
+                </p>
+                <p>
+                  HF wins when: smartphone interaction is required, short intentional read distance is a feature (access control, payments), and liquid penetration matters more than metal penetration. HF loses to UHF when: bulk read of many tags per second is needed, or read distance beyond 1 m is required.
+                </p>
+              </div>
+              <div class="rounded-3xl bg-gray-50 border border-gray-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">HF / NFC at a glance</h3>
+                <dl class="text-sm space-y-3">
+                  <div>
+                    <dt class="font-semibold text-gray-700">Frequency</dt>
+                    <dd class="text-gray-600">13.56 MHz</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Standards</dt>
+                    <dd class="text-gray-600">ISO/IEC 14443 A/B, 15693, 18092 (NFC Forum)</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Read range</dt>
+                    <dd class="text-gray-600">4 cm (NFC) \u2013 1 m (ISO 15693 vicinity)</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Typical tag cost</dt>
+                    <dd class="text-gray-600">$0.05 \u2013 $2.50</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Strengths</dt>
+                    <dd class="text-gray-600">Smartphone ubiquity (2.4 B+ NFC phones); strong crypto options; liquid-tolerant</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Weaknesses</dt>
+                    <dd class="text-gray-600">Short range; not suitable for bulk inventory; metal detunes sharply</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div class="mt-8">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">HF / NFC chip families</h3>
+              <div class="overflow-x-auto rounded-2xl border border-gray-200">
+                <table class="w-full text-sm bg-white">
+                  <thead class="bg-gray-100 text-gray-700">
+                    <tr>
+                      <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Chip</th>
+                      <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Memory</th>
+                      <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Typical use</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {hfChips.map((chip, index) => (
+                      <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                        <td class="px-4 py-3 border-b border-gray-100 text-gray-800 font-semibold align-top">{chip.name}</td>
+                        <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.memory}</td>
+                        <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.use}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="mt-6 rounded-2xl bg-[#0d7377]/5 border border-[#0d7377]/15 p-5 text-sm text-gray-700">
+              <p>
+                <strong class="text-[#0d7377]">RFIDAK HF / NFC products:</strong>
+                <a href="/product/rfid-cards" class="text-[#0d7377] font-medium hover:underline">MIFARE / DESFire cards</a> \u2022
+                <a href="/product/rfid-silicone-wristband" class="text-[#0d7377] font-medium hover:underline">HF silicone wristbands</a> \u2022
+                <a href="/compare/mifare-classic-vs-desfire" class="text-[#0d7377] font-medium hover:underline">MIFARE Classic vs DESFire</a> \u2022
+                <a href="/blogs/nfc-technology" class="text-[#0d7377] font-medium hover:underline">NFC technology deep-dive</a>
+              </p>
+            </div>
+          </section>
+
+          <section id="uhf-deep-dive">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">4. UHF (860-960 MHz) \u2014 supply chain workhorse</h2>
+            <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
+              <div class="space-y-4 text-gray-600 leading-relaxed">
+                <p>
+                  UHF RFID under ISO/IEC 18000-63 (also called EPC Gen2v2 or RAIN RFID) is the backbone of retail item-level inventory, logistics, and industrial asset tracking. Passive Gen2v2 tags read up to 12 m under line-of-sight, 700+ tags per second on modern readers, and cost $0.04 \u2013 $0.08 per inlay at MOQ 100,000 (IDTechEx, 2024).
+                </p>
+                <p>
+                  The UHF band is regionally allocated: US FCC 902-928 MHz, EU ETSI 865.6-867.6 MHz, China 920-925 MHz, Japan 916-921 MHz. Wrong-region inlays lose 30-50% of their read range because the antenna resonance is mismatched. For global products, specify a multi-band chip (NXP UCODE 9 or Impinj Monza M730 / M770) and test read performance in every target region.
+                </p>
+                <p>
+                  Walmart has mandated UHF item-level RFID across apparel, eyewear, jewelry, home, footwear and sporting-goods categories since 2022; Macy\u2019s, Marks &amp; Spencer, Target and Decathlon have similar programs. RAIN Alliance reports 42 billion UHF tags shipped in 2024 \u2014 roughly 10\u00d7 the combined LF + HF volume.
+                </p>
+                <p>
+                  UHF fails when tags are mounted directly on metal (unless an on-metal design with a tuned spacer is used), when submerged in water, or when tag population is too sparse to justify the reader infrastructure cost.
+                </p>
+              </div>
+              <div class="rounded-3xl bg-gray-50 border border-gray-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">UHF at a glance</h3>
+                <dl class="text-sm space-y-3">
+                  <div>
+                    <dt class="font-semibold text-gray-700">Frequency</dt>
+                    <dd class="text-gray-600">860 \u2013 960 MHz (region-specific)</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Standard</dt>
+                    <dd class="text-gray-600">ISO/IEC 18000-63 (EPC Gen2 v2.1)</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Read range</dt>
+                    <dd class="text-gray-600">Up to 12 m (passive) / 100+ m (active)</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Typical tag cost</dt>
+                    <dd class="text-gray-600">$0.04 \u2013 $4.50 (on-metal)</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Strengths</dt>
+                    <dd class="text-gray-600">Long range, bulk read, lowest unit cost, global supply-chain ecosystem</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-700">Weaknesses</dt>
+                    <dd class="text-gray-600">Detuned by water, metal without special design, regional regulation differences</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div class="mt-8">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">UHF chip families</h3>
+              <div class="overflow-x-auto rounded-2xl border border-gray-200">
+                <table class="w-full text-sm bg-white">
+                  <thead class="bg-gray-100 text-gray-700">
+                    <tr>
+                      <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Chip</th>
+                      <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Memory</th>
+                      <th class="px-4 py-3 text-left font-semibold border-b border-gray-200">Typical use</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {uhfChips.map((chip, index) => (
+                      <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                        <td class="px-4 py-3 border-b border-gray-100 text-gray-800 font-semibold align-top">{chip.name}</td>
+                        <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.memory}</td>
+                        <td class="px-4 py-3 border-b border-gray-100 text-gray-600 align-top">{chip.use}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="mt-6 rounded-2xl bg-[#0d7377]/5 border border-[#0d7377]/15 p-5 text-sm text-gray-700">
+              <p>
+                <strong class="text-[#0d7377]">RFIDAK UHF products:</strong>
+                <a href="/product/textile-rfid-laundry-tag" class="text-[#0d7377] font-medium hover:underline">Textile UHF laundry tag</a> \u2022
+                <a href="/product/rfid-metal-tag" class="text-[#0d7377] font-medium hover:underline">UHF on-metal tag</a> \u2022
+                <a href="/category/rfid-tags" class="text-[#0d7377] font-medium hover:underline">Full UHF tag range</a> \u2022
+                <a href="/blogs/rfid-retail-inventory-guide" class="text-[#0d7377] font-medium hover:underline">UHF retail inventory guide</a>
+              </p>
+            </div>
+          </section>
+
+          <section id="decision-matrix">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">5. 4-question decision framework</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Use this flow before requesting any sample. Most procurement teams can isolate the correct band in under five minutes; the harder work is then selecting the chip within that band.
+            </p>
+            <div class="space-y-4">
+              {decisionTree.map((step, index) => (
+                <div class="rounded-2xl border border-gray-200 bg-white p-5 md:p-6">
+                  <div class="flex items-start gap-4">
+                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0d7377] text-white font-semibold">{`Q${index + 1}`}</span>
+                    <div class="flex-1">
+                      <p class="text-base font-semibold text-gray-800">{step.q}</p>
+                      <div class="mt-3 grid sm:grid-cols-2 gap-3 text-sm">
+                        <div class="rounded-lg bg-green-50 border border-green-200 px-4 py-3">
+                          <span class="font-semibold text-green-700">Yes \u2192</span>
+                          <span class="text-gray-700 ml-2">{step.yes}</span>
+                        </div>
+                        <div class="rounded-lg bg-gray-50 border border-gray-200 px-4 py-3">
+                          <span class="font-semibold text-gray-500">No \u2192</span>
+                          <span class="text-gray-600 ml-2">{step.no === 'continue' ? 'go to next question' : step.no}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p class="text-sm text-gray-500 mt-6 italic">
+              Edge cases: for sub-dermal animal ID use LF 134.2 kHz regardless of other answers; for passport / ID workflows use HF ISO 14443 regardless of range requirement.
+            </p>
+          </section>
+
+          <section id="regional-compliance">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">6. Regional UHF compliance map</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              UHF is the only band with meaningful regional variance at B2B scale. LF and HF allocations are largely harmonized globally; UHF is not. Confirm the target market sub-band before tag tooling and tag print buy.
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">Region</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">UHF sub-band</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">Power limit</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">Authority / standard</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {regionalCompliance.map((row, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      {row.map((cell, cellIdx) => (
+                        <td class={`px-5 py-4 border-b border-gray-100 align-top ${cellIdx === 0 ? 'text-gray-800 font-semibold' : 'text-gray-600'}`}>{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 italic">
+              Sources: FCC Part 15.247, ETSI EN 302 208, ARIB STD-T107, GB/T 29768 (MIIT), ANATEL Resolution 506, WPC India Notification 2008-S.O.1763(E), ACMA Australian Class Licence 2015, KCC Radio Regulation Article 49. Power limits expressed at antenna; system EIRP / ERP varies with antenna gain.
+            </p>
+          </section>
+
+          <section id="cost-by-frequency">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">7. Cost benchmarks by frequency</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Indicative single-unit pricing at MOQ 10,000 pieces, in USD. Below MOQ 1,000 expect 30-60% premiums; above MOQ 100,000 expect 15-25% discounts. Cryptographic chips (MIFARE DESFire EV3, NTAG424 DNA, UCODE DNA) add $0.40 \u2013 $1.20 per unit to the baseline format price.
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">Format</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">LF</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">HF / NFC</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">UHF</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {costByFrequency.map((row, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      <td class="px-5 py-4 border-b border-gray-100 text-gray-800 font-semibold align-top">{row.format}</td>
+                      <td class="px-5 py-4 border-b border-gray-100 text-gray-600 align-top">{row.lf}</td>
+                      <td class="px-5 py-4 border-b border-gray-100 text-gray-600 align-top">{row.hf}</td>
+                      <td class="px-5 py-4 border-b border-gray-100 text-gray-600 align-top">{row.uhf}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 italic">Sources: IDTechEx 2024 RAIN RFID Forecasts; RFIDAK 2026 published price book at MOQ 10,000.</p>
+          </section>
+
+          <section id="migration">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">8. Upgrade and migration scenarios</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Most real-world frequency decisions are actually migration decisions: replacing a legacy deployment with a more secure or higher-throughput successor. Four scenarios cover 90% of live migrations at RFIDAK customers in 2024-2026.
+            </p>
+            <div class="grid md:grid-cols-2 gap-5">
+              {migrationScenarios.map((scenario) => (
+                <div class="rounded-2xl border border-gray-200 bg-white p-6">
+                  <p class="text-xs uppercase tracking-[0.15em] text-[#0d7377] font-semibold mb-3">Migration</p>
+                  <p class="text-base font-semibold text-gray-800">
+                    <span class="text-gray-500">from</span> {scenario.from}
+                  </p>
+                  <p class="text-base font-semibold text-gray-800 mt-1">
+                    <span class="text-gray-500">to</span> {scenario.to}
+                  </p>
+                  <p class="text-sm text-gray-600 leading-relaxed mt-3">
+                    <strong class="text-gray-800">Why:</strong> {scenario.why}
+                  </p>
+                  <p class="text-sm text-gray-600 leading-relaxed mt-2">
+                    <strong class="text-gray-800">Watch for:</strong> {scenario.watchFor}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="cluster-articles">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">9. Continue your research \u2014 8 deep-dive articles</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              These eight articles form the cluster around this pillar. Read in any order; each is self-contained and links back here for context.
+            </p>
+            <div class="grid md:grid-cols-2 gap-5">
+              {clusterArticles.map((item, index) => (
+                <a href={item.href} class="copy-safe rounded-[1.5rem] border border-gray-200 bg-white p-6 hover:border-[#0d7377] hover:shadow-lg transition-all group">
+                  <div class="flex items-start gap-4">
+                    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0d7377]/10 text-[#0d7377] font-semibold text-sm">{index + 1}</span>
+                    <div>
+                      <h3 class="text-lg font-semibold text-gray-800 group-hover:text-[#0d7377] transition-colors">{item.label}</h3>
+                      <p class="text-sm text-gray-600 leading-relaxed mt-2">{item.description}</p>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          <section id="download" class="rounded-3xl bg-gradient-to-br from-[#0d7377] to-[#0a5c5f] text-white p-8 md:p-10">
+            <div class="grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
+              <div>
+                <p class="text-xs uppercase tracking-[0.18em] text-white/70 font-semibold mb-3">Whitepaper</p>
+                <h2 class="text-3xl font-semibold mb-4">10. Download the RFID Buyer&rsquo;s Guide 2026 (PDF)</h2>
+                <p class="text-white/90 leading-relaxed mb-6">
+                  A 28-page printable companion to this pillar: 4-question decision framework, regional UHF compliance map, cost benchmarks at 1K / 10K / 100K MOQ, chip family reference and the 7-mistake procurement checklist.
+                </p>
+                <ul class="space-y-2 text-sm text-white/85 mb-6">
+                  <li>&bull; Decision framework printable one-pager</li>
+                  <li>&bull; Regional UHF map (FCC / ETSI / ARIB / MIIT / ANATEL / WPC / ACMA / KCC)</li>
+                  <li>&bull; Chip selection guides for LF, HF and UHF</li>
+                  <li>&bull; Cost benchmark tables by format and volume</li>
+                </ul>
+                <a href="/contact?intent=buyer-guide-2026" class="inline-flex items-center gap-2 bg-white text-[#0d7377] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                  <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                  </svg>
+                  Request the PDF (free)
+                </a>
+                <p class="text-xs text-white/70 mt-4">Same PDF as linked from the RFID technology pillar. Localized editions (DE / FR / ES / JP) available on request.</p>
+              </div>
+              <div class="hidden md:block">
+                <div class="aspect-[3/4] rounded-2xl bg-white/10 border border-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <div class="text-center px-6">
+                    <p class="text-xs uppercase tracking-[0.2em] text-white/70 mb-3">RFIDAK</p>
+                    <p class="text-2xl font-bold mb-2">RFID</p>
+                    <p class="text-2xl font-bold mb-4">Buyer&rsquo;s Guide</p>
+                    <p class="text-sm text-white/80">2026 edition</p>
+                    <p class="text-xs text-white/60 mt-6">28 pages &middot; PDF</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="faq">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">11. Frequently asked questions</h2>
+            <div class="space-y-4">
+              {frequencyFaqs.map((faq) => (
+                <details class="copy-safe group rounded-2xl border border-gray-200 bg-white p-6">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-gray-800">
+                    {faq.question}
+                    <span class="text-[#0d7377] transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p class="mt-4 text-gray-600 leading-relaxed">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+
+          <section id="related-guides">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">Related pillar guides and category pages</h2>
+            <div class="grid md:grid-cols-2 gap-5">
+              {relatedGuides.map((item) => (
+                <a href={item.href} class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-6 hover:border-[#0d7377] hover:shadow-lg transition-all">
+                  <h3 class="text-xl font-semibold text-gray-800">{item.label}</h3>
+                  <p class="text-gray-600 leading-relaxed mt-3">{item.description}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          <aside class="rounded-2xl border border-gray-200 bg-gray-50 p-6 md:p-7 text-sm text-gray-600">
+            <div class="flex flex-wrap items-center gap-3">
+              <svg class="w-5 h-5 text-[#0d7377] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <p>
+                <strong class="text-gray-800">Last reviewed:</strong> {lastReviewed.date} by {lastReviewed.reviewer}.
+                Sources cited inline: IDTechEx 2024 RAIN RFID Forecasts; RAIN Alliance 2024 annual report; NFC Forum 2025 device statistics; FCC, ETSI, ARIB, MIIT, ANATEL, WPC, ACMA, KCC public regulations; Garcia et al. "Dismantling MIFARE Classic" USENIX Security 2008. Numbers confirmed against RFIDAK 2026 production records.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </article>
+
+    <section class="py-14 bg-[#0d7377]">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Need help matching frequency to a real-world application?</h2>
+        <p class="text-white/90 max-w-3xl mx-auto mb-7">
+          Share your reader type, environment, read distance and target region. We will suggest the right band, chip family and sample shortlist within one business day.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href={frequencyContactHref} class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            Contact our engineering team
+          </a>
+          <a href="/rfid" class="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+            Browse products
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <Newsletter />
+  </main>
+  <Footer />
+</Layout>

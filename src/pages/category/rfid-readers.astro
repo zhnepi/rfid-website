@@ -2,19 +2,31 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import CategoryStickyNav from '../../components/CategoryStickyNav.astro';
+import CategoryDecisionCards from '../../components/CategoryDecisionCards.astro';
+import ScrollCTA from '../../components/cta/ScrollCTA.astro';
+import ExitIntent from '../../components/cta/ExitIntent.astro';
 import { products } from '../../data/products';
+import { buildCategoryJsonLd } from '../../utils/categoryJsonLd';
+import { getContextualContactAction, getContextualWhatsAppAction } from '../../utils/contact';
 
 const categoryName = 'RFID Readers';
 const categoryProducts = products.filter(p => p.category === categoryName);
+const description = "RFID readers and writers from RFIDAK: desktop, USB and handheld readers supporting LF, HF and UHF — compatible with MIFARE, EM, NTAG and UHF chips.";
+const categoryJsonLd = buildCategoryJsonLd({ categoryName, categorySlug: 'rfid-readers', categoryProducts, description });
+const categoryContact = getContextualContactAction(Astro.url.pathname);
+const categoryWhatsApp = getContextualWhatsAppAction(Astro.url.pathname);
 ---
 
 <Layout
-  title="RFID Readers & Writers - Desktop, Handheld & Fixed RFID Readers | ProudTek"
-  description="RFID readers and writers from ProudTek: desktop RFID readers, USB readers, handheld readers supporting LF, HF, UHF frequencies. Compatible with Mifare, EM, and UHF chips."
+  title="RFID Readers & Writers | Desktop, USB, Handheld — RFIDAK"
+  description={description}
   keywords="RFID reader, RFID writer, USB RFID reader, desktop RFID reader, NFC reader, RFID scanner, RFID reader manufacturer"
+  jsonLd={categoryJsonLd}
 >
   <Header />
-  
+  <CategoryStickyNav activeCategory={categoryName} />
+
   <!-- Hero Section -->
   <section class="bg-gradient-to-r from-[#0d7377] to-[#0a5c5f] text-white py-16">
     <div class="container mx-auto px-4">
@@ -33,6 +45,8 @@ const categoryProducts = products.filter(p => p.category === categoryName);
     </div>
   </section>
 
+  <CategoryDecisionCards categorySlug="rfid-readers" />
+
   <!-- Products Grid -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
@@ -49,7 +63,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
             <div class="aspect-square overflow-hidden bg-gray-100">
               <img 
                 src={product.images[0]} 
-                alt={product.name}
+                alt={`${product.name} — ${categoryName} manufactured by RFIDAK in Shenzhen, China`}
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 loading="lazy"
               />
@@ -81,7 +95,7 @@ const categoryProducts = products.filter(p => p.category === categoryName);
         <h2 class="text-3xl font-bold text-gray-800 mb-6">RFID Reader Buying Guide</h2>
         <div class="prose prose-lg text-gray-600">
           <p>
-            RFID readers are electronic devices that emit radio waves to communicate with RFID tags, reading or writing data wirelessly. The global RFID reader market is projected to reach $8.5 billion by 2028. ProudTek offers desktop, handheld, and fixed RFID readers supporting LF (125KHz), HF (13.56MHz), and UHF (860-960MHz) frequencies, each supplied with SDK, demo software, and technical documentation.
+            RFID readers are electronic devices that emit radio waves to communicate with RFID tags, reading or writing data wirelessly. The global RFID reader market is projected to reach $8.5 billion by 2028. RFIDAK offers desktop, handheld, and fixed RFID readers supporting LF (125KHz), HF (13.56MHz), and UHF (860-960MHz) frequencies, each supplied with SDK, demo software, and technical documentation.
           </p>
 
           <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">RFID Reader Types Comparison</h3>
@@ -110,13 +124,13 @@ const categoryProducts = products.filter(p => p.category === categoryName);
             <li><strong>Frequency match:</strong> Your reader must match your tag frequency. LF (125KHz) for legacy access control; HF (13.56MHz) for Mifare, NFC, and payment; UHF (860-960MHz) for supply chain and long-range identification.</li>
             <li><strong>Interface requirements:</strong> USB HID readers output data like a keyboard (no driver needed); USB serial readers offer more control via SDK; Ethernet/WiFi readers for networked deployments across multiple locations.</li>
             <li><strong>Protocol support:</strong> Ensure the reader supports your chip protocol. ISO 14443A/B for Mifare and NFC; ISO 15693 for vicinity cards; ISO 18000-6C (EPC Gen2) for UHF tags.</li>
-            <li><strong>Software ecosystem:</strong> ProudTek readers include SDK support for C#, Java, Python, Delphi, and VB.NET. Demo software and sample code included for rapid development.</li>
+            <li><strong>Software ecosystem:</strong> RFIDAK readers include SDK support for C#, Java, Python, Delphi, and VB.NET. Demo software and sample code included for rapid development.</li>
             <li><strong>Deployment scale:</strong> Desktop readers for single-point use; fixed readers with multi-antenna ports for dock doors and conveyor lines; handheld for mobile inventory counts covering 1,000+ items per hour.</li>
           </ol>
 
           <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">Integration & Support</h3>
           <p>
-            Every ProudTek reader ships with comprehensive developer resources: SDK libraries for 5+ programming languages, API documentation, hardware integration guides, and sample applications. Our engineering team provides free technical support for system integration, custom firmware development, and protocol customization. OEM buyers receive volume pricing, custom branding, and dedicated technical account management.
+            Every RFIDAK reader ships with comprehensive developer resources: SDK libraries for 5+ programming languages, API documentation, hardware integration guides, and sample applications. Our engineering team provides free technical support for system integration, custom firmware development, and protocol customization. OEM buyers receive volume pricing, custom branding, and dedicated technical account management.
           </p>
         </div>
       </div>
@@ -127,13 +141,16 @@ const categoryProducts = products.filter(p => p.category === categoryName);
   <section class="py-12 bg-[#0d7377]">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-2xl font-bold text-white mb-4">Need RFID Readers for Your Project?</h2>
-      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free SDK access and technical consultation. ProudTek provides complete RFID reader solutions with dedicated engineering support.</p>
+      <p class="text-white/90 mb-6 max-w-2xl mx-auto">Get free SDK access and technical consultation. RFIDAK provides complete RFID reader solutions with dedicated engineering support.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="/contact" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
-        <a href="https://wa.me/8618665820632?text=Hi, I need RFID readers for my project" target="_blank" rel="noopener noreferrer" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
+        <a href={categoryContact.href} data-analytics="quote_click_category_cta_rfid-readers" class="bg-white text-[#0d7377] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Request a Quote</a>
+        <a href={categoryWhatsApp.href} target="_blank" rel="noopener noreferrer" data-analytics="whatsapp_click_category_cta_rfid-readers" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">WhatsApp Us</a>
       </div>
     </div>
   </section>
+
+  <ScrollCTA contactHref={categoryContact.href} contactLabel="Get Quote" whatsappHref={categoryWhatsApp.href} source="category" />
+  <ExitIntent sampleHref="/contact?intent=samples&category=rfid-readers&express=1&source=exit-intent#contactForm" whatsappHref={categoryWhatsApp.href} contextName="RFID Readers" />
 
   <Footer />
 </Layout>

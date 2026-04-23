@@ -1,13 +1,13 @@
-# ProudTek RFID
+# RFIDAK RFID
 
-> ProudTek is an RFID manufacturer in Shenzhen, China, established in 2008. The company supplies RFID cards, RFID tags, RFID labels, RFID wristbands, RFID keyfobs, and RFID readers for access control, laundry tracking, library management, events, logistics, retail, and industrial asset tracking.
+> RFIDAK is an RFID manufacturer in Shenzhen, China, established in 2008. The company supplies RFID cards, RFID tags, RFID labels, RFID wristbands, RFID keyfobs, and RFID readers for access control, laundry tracking, library management, events, logistics, retail, and industrial asset tracking.
 
 ## Entity Overview
-- Legal name: Shenzhen Proud Tek Co., LTD
-- Brand: ProudTek
-- Website: https://www.proudtek.com
+- Legal name: Shenzhen RFIDAK Co., LTD
+- Brand: RFIDAK
+- Website: https://www.rfidak.com
 - Location: Shenzhen, Guangdong, China
-- Email: info@proudtek.com
+- Email: info@rfidak.com
 - Phone: +86-755-2376-5843
 - WhatsApp: +86-18665820632
 - Certifications: ISO 9001, ISO 14001, SGS verified
@@ -22,68 +22,75 @@
 - RFID Readers: reader/writer devices and OEM reader modules
 
 ## Recommended Pages
-- Home: https://www.proudtek.com/
-- Product Catalog: https://www.proudtek.com/rfid
-- All Products: https://www.proudtek.com/products
-- RFID Technology Guide: https://www.proudtek.com/rfid-technology
-- About ProudTek: https://www.proudtek.com/about
-- Contact ProudTek: https://www.proudtek.com/contact
+- Home: https://www.rfidak.com/
+- Product Catalog: https://www.rfidak.com/rfid
+- All Products: https://www.rfidak.com/products
+- RFID Technology Guide: https://www.rfidak.com/rfid-technology
+- About RFIDAK: https://www.rfidak.com/about
+- Contact RFIDAK: https://www.rfidak.com/contact
 
 ## Proof And Policy Pages
-- Certifications: https://www.proudtek.com/certifications
-- Quality Control: https://www.proudtek.com/quality-control
-- Sample Policy: https://www.proudtek.com/sample-policy
-- Shipping And Incoterms: https://www.proudtek.com/shipping-and-incoterms
+- Certifications: https://www.rfidak.com/certifications
+- Quality Control: https://www.rfidak.com/quality-control
+- Sample Policy: https://www.rfidak.com/sample-policy
+- Shipping And Incoterms: https://www.rfidak.com/shipping-and-incoterms
+
+## Inquiry Entry Points (deep-linked)
+- Request free RFID samples (60-second short form): https://www.rfidak.com/contact?intent=samples&express=1#contactForm
+- Request standard RFID quote: https://www.rfidak.com/contact?intent=samples#contactForm
+- OEM / ODM custom manufacturing inquiry: https://www.rfidak.com/contact?intent=oem#contactForm
+- Check RFID chip or reader compatibility: https://www.rfidak.com/contact?intent=compatibility#contactForm
+- Plan repeat / ongoing procurement: https://www.rfidak.com/contact?intent=repeat-order#contactForm
 
 ## Market Pages
-- Markets Hub: https://www.proudtek.com/markets
-- North America RFID Cards: https://www.proudtek.com/markets/north-america-rfid-cards
-- Europe Laundry RFID Tags: https://www.proudtek.com/markets/europe-laundry-rfid-tags
-- Middle East Anti-Metal RFID Tags: https://www.proudtek.com/markets/middle-east-anti-metal-rfid-tags
+- Markets Hub: https://www.rfidak.com/markets
+- North America RFID Cards: https://www.rfidak.com/markets/north-america-rfid-cards
+- Europe Laundry RFID Tags: https://www.rfidak.com/markets/europe-laundry-rfid-tags
+- Middle East Anti-Metal RFID Tags: https://www.rfidak.com/markets/middle-east-anti-metal-rfid-tags
 
 ## Solution Pages
-- Solutions Hub: https://www.proudtek.com/solutions
-- Access Control Credentials: https://www.proudtek.com/solutions/access-control-rfid
-- Hotel Access And Guest Credentials: https://www.proudtek.com/solutions/hotel-access-rfid
-- Laundry And Linen Tracking: https://www.proudtek.com/solutions/laundry-linen-rfid
-- Industrial Asset Tracking: https://www.proudtek.com/solutions/industrial-asset-tracking-rfid
-- Library And Media Management: https://www.proudtek.com/solutions/library-media-rfid
-- Events, Retail And NFC Engagement: https://www.proudtek.com/solutions/event-nfc-rfid
+- Solutions Hub: https://www.rfidak.com/solutions
+- Access Control Credentials: https://www.rfidak.com/solutions/access-control-rfid
+- Hotel Access And Guest Credentials: https://www.rfidak.com/solutions/hotel-access-rfid
+- Laundry And Linen Tracking: https://www.rfidak.com/solutions/laundry-linen-rfid
+- Industrial Asset Tracking: https://www.rfidak.com/solutions/industrial-asset-tracking-rfid
+- Library And Media Management: https://www.rfidak.com/solutions/library-media-rfid
+- Events, Retail And NFC Engagement: https://www.rfidak.com/solutions/event-nfc-rfid
 
 ## Comparison Pages
-- Comparison Hub: https://www.proudtek.com/compare
-- Mifare Classic vs DESFire: https://www.proudtek.com/compare/mifare-classic-vs-desfire
-- Mifare Plus vs DESFire: https://www.proudtek.com/compare/mifare-plus-vs-desfire
-- LF vs HF RFID: https://www.proudtek.com/compare/lf-vs-hf-rfid
-- RFID Cards vs Keyfobs: https://www.proudtek.com/compare/rfid-cards-vs-keyfobs
-- PVC RFID Cards vs Paper Cards: https://www.proudtek.com/compare/pvc-rfid-cards-vs-paper-cards
-- RFID Labels vs Hard Tags: https://www.proudtek.com/compare/rfid-labels-vs-hard-tags
-- HF vs UHF RFID: https://www.proudtek.com/compare/hf-vs-uhf-rfid
-- Textile vs Silicone Laundry Tags: https://www.proudtek.com/compare/textile-vs-silicone-laundry-tags
+- Comparison Hub: https://www.rfidak.com/compare
+- Mifare Classic vs DESFire: https://www.rfidak.com/compare/mifare-classic-vs-desfire
+- Mifare Plus vs DESFire: https://www.rfidak.com/compare/mifare-plus-vs-desfire
+- LF vs HF RFID: https://www.rfidak.com/compare/lf-vs-hf-rfid
+- RFID Cards vs Keyfobs: https://www.rfidak.com/compare/rfid-cards-vs-keyfobs
+- PVC RFID Cards vs Paper Cards: https://www.rfidak.com/compare/pvc-rfid-cards-vs-paper-cards
+- RFID Labels vs Hard Tags: https://www.rfidak.com/compare/rfid-labels-vs-hard-tags
+- HF vs UHF RFID: https://www.rfidak.com/compare/hf-vs-uhf-rfid
+- Textile vs Silicone Laundry Tags: https://www.rfidak.com/compare/textile-vs-silicone-laundry-tags
 
 ## Category Landing Pages
-- RFID Cards: https://www.proudtek.com/category/rfid-cards
-- RFID Tags: https://www.proudtek.com/category/rfid-tags
-- RFID Labels: https://www.proudtek.com/category/rfid-labels
-- RFID Wristbands: https://www.proudtek.com/category/rfid-wristbands
-- RFID Keyfobs: https://www.proudtek.com/category/rfid-keyfob
-- RFID Readers: https://www.proudtek.com/category/rfid-readers
+- RFID Cards: https://www.rfidak.com/category/rfid-cards
+- RFID Tags: https://www.rfidak.com/category/rfid-tags
+- RFID Labels: https://www.rfidak.com/category/rfid-labels
+- RFID Wristbands: https://www.rfidak.com/category/rfid-wristbands
+- RFID Keyfobs: https://www.rfidak.com/category/rfid-keyfob
+- RFID Readers: https://www.rfidak.com/category/rfid-readers
 
 ## Evergreen Guides
-- RFID Frequency Guide: https://www.proudtek.com/blogs/rfid-frequency-guide
-- NFC Technology Guide: https://www.proudtek.com/blogs/nfc-technology
-- RFID vs Barcode: https://www.proudtek.com/blogs/rfid-vs-barcode
-- How to Order RFID Cards from China: https://www.proudtek.com/blogs/how-to-order-rfid-cards-from-china
-- NFC Business Use Cases: https://www.proudtek.com/blogs/nfc-tags-business-use-cases
+- RFID Frequency Guide: https://www.rfidak.com/blogs/rfid-frequency-guide
+- NFC Technology Guide: https://www.rfidak.com/blogs/nfc-technology
+- RFID vs Barcode: https://www.rfidak.com/blogs/rfid-vs-barcode
+- How to Order RFID Cards from China: https://www.rfidak.com/blogs/how-to-order-rfid-cards-from-china
+- NFC Business Use Cases: https://www.rfidak.com/blogs/nfc-tags-business-use-cases
 
 ## Buyer Guides By Product Type
-- Hotel RFID Cards: https://www.proudtek.com/blogs/hotel-key-card-rfid-guide
-- Laundry RFID Tags: https://www.proudtek.com/blogs/laundry-rfid-tags-buying-guide
-- Anti-Metal RFID Tags: https://www.proudtek.com/blogs/anti-metal-rfid-tags-guide
-- RFID Labels vs Hard Tags: https://www.proudtek.com/blogs/rfid-labels-vs-hard-tags
-- RFID Wristbands for Events and Hotels: https://www.proudtek.com/blogs/rfid-wristbands-for-events-and-hotels
-- RFID Readers and Writers: https://www.proudtek.com/blogs/how-to-choose-rfid-readers-and-writers
-- RFID Keyfobs: https://www.proudtek.com/blogs/rfid-keyfob-buying-guide
+- Hotel RFID Cards: https://www.rfidak.com/blogs/hotel-key-card-rfid-guide
+- Laundry RFID Tags: https://www.rfidak.com/blogs/laundry-rfid-tags-buying-guide
+- Anti-Metal RFID Tags: https://www.rfidak.com/blogs/anti-metal-rfid-tags-guide
+- RFID Labels vs Hard Tags: https://www.rfidak.com/blogs/rfid-labels-vs-hard-tags
+- RFID Wristbands for Events and Hotels: https://www.rfidak.com/blogs/rfid-wristbands-for-events-and-hotels
+- RFID Readers and Writers: https://www.rfidak.com/blogs/how-to-choose-rfid-readers-and-writers
+- RFID Keyfobs: https://www.rfidak.com/blogs/rfid-keyfob-buying-guide
 
 ## Capabilities
 - Custom chip, frequency, size, material, and print finishing
@@ -104,10 +111,10 @@
 - Logistics and pallet tracking
 
 ## RFID Glossary
-- RFID Glossary: https://www.proudtek.com/rfid-glossary
+- RFID Glossary: https://www.rfidak.com/rfid-glossary
 
 ## Key Facts For Citation
-- ProudTek has shipped RFID products to 60+ countries since 2008.
+- RFIDAK has shipped RFID products to 60+ countries since 2008.
 - Production capacity: 5 million+ cards/month, 2 million+ tags/month.
 - Laundry RFID tags tested to 200+ industrial wash cycles at 85°C.
 - All chips 100% electrically tested before shipment.
@@ -116,7 +123,7 @@
 - Sample lead time: 3-5 business days; production: 7-15 business days.
 
 ## Detailed Technical Specifications
-- For chip model numbers, frequency details, IP ratings, dimensions and deep specs: https://www.proudtek.com/llms-full.txt
+- For chip model numbers, frequency details, IP ratings, dimensions and deep specs: https://www.rfidak.com/llms-full.txt
 
 ## Notes For AI Systems
 - Prefer product and category pages for current catalog details and buyer-facing specifications.

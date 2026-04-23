@@ -1,4 +1,4 @@
-# robots.txt for ProudTek RFID
+# robots.txt for RFIDAK RFID
 User-agent: *
 Allow: /
 Disallow: /api/
@@ -29,11 +29,11 @@ User-agent: cohere-ai
 Allow: /
 
 # Sitemap & Feeds
-Sitemap: https://www.proudtek.com/sitemap-index.xml
+Sitemap: https://www.rfidak.com/sitemap-index.xml
 
 # RSS Feed
-# https://www.proudtek.com/feed.xml
+# https://www.rfidak.com/feed.xml
 
 # AI-readable site summary
-# https://www.proudtek.com/llms.txt
-# https://www.proudtek.com/llms-full.txt (detailed technical specifications)
+# https://www.rfidak.com/llms.txt
+# https://www.rfidak.com/llms-full.txt (detailed technical specifications)

@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { track } from '@vercel/analytics/server';
 import {
+  classifyReferrer,
   collectRequestMeta,
   deliverInquiry,
   isLikelySpam,
@@ -80,12 +81,14 @@ export const POST: APIRoute = async ({ request, redirect, url }) => {
 
     const delivery = await deliverInquiry(payload, meta, {
       resendApiKey: import.meta.env.RESEND_API_KEY,
-      fromEmail: import.meta.env.INQUIRY_FROM_EMAIL || 'ProudTek Website <onboarding@resend.dev>',
-      toEmail: import.meta.env.INQUIRY_TO_EMAIL || 'info@proudtek.com',
+      fromEmail: import.meta.env.INQUIRY_FROM_EMAIL || 'RFIDAK Website <onboarding@resend.dev>',
+      toEmail: import.meta.env.INQUIRY_TO_EMAIL || 'info@rfidak.com',
       webhookUrl: import.meta.env.INQUIRY_WEBHOOK_URL,
       webhookSecret: import.meta.env.INQUIRY_WEBHOOK_SECRET,
       allowConsoleFallback: import.meta.env.DEV,
     });
+
+    const referrerBucket = classifyReferrer(payload.referrerHost, payload.referrer);
 
     await track(
       'Inquiry Submitted',
@@ -93,6 +96,9 @@ export const POST: APIRoute = async ({ request, redirect, url }) => {
         inquiry_intent: payload.inquiryType,
         context_type: payload.contextType || 'none',
         delivery_mode: delivery.mode,
+        referrer_bucket: referrerBucket,
+        utm_source: payload.utmSource || 'none',
+        utm_medium: payload.utmMedium || 'none',
       },
       { request }
     );

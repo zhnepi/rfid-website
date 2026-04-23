@@ -20,14 +20,14 @@ export interface AuthorProfile {
 
 export const authors: AuthorProfile[] = [
   {
-    id: 'proudtek-rfid-editorial-team',
-    slug: 'proudtek-rfid-editorial-team',
-    name: 'ProudTek RFID Editorial Team',
+    id: 'rfidak-rfid-editorial-team',
+    slug: 'rfidak-rfid-editorial-team',
+    name: 'RFIDAK RFID Editorial Team',
     role: 'Manufacturer editorial team',
     shortBio:
-      'ProudTek publishes practical RFID guides to help buyers compare chips, product formats, sampling plans and sourcing options before production.',
+      'RFIDAK publishes practical RFID guides to help buyers compare chips, product formats, sampling plans and sourcing options before production.',
     bio:
-      'This editorial profile represents the ProudTek team responsible for educational content, buyer guides and category explainers across the website. The content focuses on practical product selection questions covering RFID cards, tags, labels, wristbands, keyfobs and readers, with an emphasis on compatibility, customization and sample planning.',
+      'This editorial profile represents the RFIDAK team responsible for educational content, buyer guides and category explainers across the website. The content focuses on practical product selection questions covering RFID cards, tags, labels, wristbands, keyfobs and readers, with an emphasis on compatibility, customization and sample planning.',
     expertise: [
       'RFID product selection',
       'NFC and HF card applications',
@@ -65,8 +65,8 @@ export const authors: AuthorProfile[] = [
       },
     ],
     sameAs: [
-      'https://www.linkedin.com/company/proudtek',
-      'https://www.youtube.com/@proudtek',
+      'https://www.linkedin.com/company/rfidak',
+      'https://www.youtube.com/@rfidak',
     ],
   },
 ];

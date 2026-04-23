@@ -13,7 +13,10 @@ import {
   getBlogInquiryIntent,
   getComparisonContactHref,
   getContextualInquiryLabel,
+  getContextualWhatsAppAction,
 } from '../../utils/contact';
+import ScrollCTA from '../../components/cta/ScrollCTA.astro';
+import ExitIntent from '../../components/cta/ExitIntent.astro';
 
 export function getStaticPaths() {
   return blogPosts.map((post) => ({
@@ -27,12 +30,13 @@ const { content, headings } = addHeadingAnchors(post.content);
 const { wordCount, readingTime } = estimateReadingTime(post.content);
 const publishedIso = new Date(post.date).toISOString();
 const modifiedIso = post.updatedDate ? new Date(post.updatedDate).toISOString() : undefined;
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/blogs/${post.slug}`;
-const author = getAuthorById(post.authorId || 'proudtek-rfid-editorial-team');
+const author = getAuthorById(post.authorId || 'rfidak-rfid-editorial-team');
 const comparisonLinks = getBlogComparisonLinks(post.slug, post.category, 3);
 const blogContactHref = getBlogContactHref(post);
 const blogInquiryLabel = getContextualInquiryLabel(getBlogInquiryIntent(post), 'blog');
+const blogWhatsApp = getContextualWhatsAppAction(Astro.url.pathname);
 const faqItems = blogFaqs[post.slug] || [];
 const clusterRelatedSlugs = [...new Set(getClusterRelatedSlugs(post.slug))];
 const clusterPriority = new Map(clusterRelatedSlugs.map((slug, index) => [slug, index]));
@@ -307,14 +311,14 @@ const articleJsonLd = {
         author: {
           '@type': 'Organization',
           '@id': `${siteURL}/#organization`,
-          name: 'ProudTek',
+          name: 'RFIDAK',
           url: siteURL,
         },
       }),
   publisher: {
     '@type': 'Organization',
     '@id': `${siteURL}/#organization`,
-    name: 'ProudTek',
+    name: 'RFIDAK',
     logo: {
       '@type': 'ImageObject',
       url: `${siteURL}/favicon.svg`,
@@ -327,7 +331,7 @@ const articleJsonLd = {
   isPartOf: {
     '@type': 'Blog',
     '@id': `${siteURL}/blogs#blog`,
-    name: 'ProudTek RFID Blog',
+    name: 'RFIDAK RFID Blog',
   },
   about: {
     '@type': 'Thing',
@@ -365,7 +369,15 @@ const faqJsonLd = faqItems.length
 ---
 
 <Layout
-  title={post.seoTitle || `${post.title} | ProudTek RFID Blog`}
+  title={(() => {
+    const raw = post.seoTitle || `${post.title} | RFIDAK`;
+    if (raw.length <= 60) return raw;
+    // Try without the suffix first.
+    const noSuffix = post.seoTitle ? raw : post.title;
+    if (noSuffix.length <= 60) return noSuffix;
+    // Fall back to truncate at last word boundary <= 57, append ellipsis.
+    return noSuffix.slice(0, 57).replace(/\s+\S*$/, '') + '\u2026';
+  })()}
   description={post.metaDescription}
   keywords={post.keywords}
   canonicalURL={canonicalURL}
@@ -373,7 +385,7 @@ const faqJsonLd = faqItems.length
   ogType="article"
   publishedTime={publishedIso}
   modifiedTime={modifiedIso}
-  articleAuthor={author?.name || 'ProudTek'}
+  articleAuthor={author?.name || 'RFIDAK'}
   jsonLd={faqJsonLd ? [articleJsonLd, breadcrumbJsonLd, faqJsonLd] : [articleJsonLd, breadcrumbJsonLd]}
 >
   <Header />
@@ -405,7 +417,7 @@ const faqJsonLd = faqItems.length
               <span>{readingTime} min read</span>
               <span>{wordCount} words</span>
               <a href={author ? `/authors/${author.slug}` : '/about'} class="font-medium text-gray-600 hover:text-[#0d7377] transition-colors">
-                By {author?.name || 'ProudTek'}
+                By {author?.name || 'RFIDAK'}
               </a>
             </div>
           </header>
@@ -413,7 +425,7 @@ const faqJsonLd = faqItems.length
           <div class="aspect-[16/9] rounded-3xl overflow-hidden mb-10 bg-gray-100">
             <img
               src={post.image}
-              alt={`${post.title} - ProudTek RFID buyer guide covering ${post.category.toLowerCase()}`}
+              alt={`${post.title} - RFIDAK RFID buyer guide covering ${post.category.toLowerCase()}`}
               class="w-full h-full object-cover"
               width="1200"
               height="675"
@@ -508,7 +520,7 @@ const faqJsonLd = faqItems.length
 
               <div class="mt-8 rounded-3xl bg-[#072a31] text-white p-8">
                 <p class="text-[#0d7377] text-sm uppercase tracking-[0.2em] mb-2">Author</p>
-                <h2 class="text-2xl font-bold mb-2">{author?.name || 'ProudTek RFID Team'}</h2>
+                <h2 class="text-2xl font-bold mb-2">{author?.name || 'RFIDAK RFID Team'}</h2>
                 <p class="text-[#0d7377]/70 text-sm font-medium mb-3">{author?.role || 'RFID manufacturer editorial team'}</p>
                 <p class="text-white/75 leading-relaxed">
                   {author?.shortBio || 'We publish practical RFID content to help buyers and project teams compare card, tag, label, wristband and reader options before sampling or production.'}
@@ -573,7 +585,7 @@ const faqJsonLd = faqItems.length
               <div class="aspect-[16/10] overflow-hidden">
                 <img
                   src={related.image}
-                  alt={related.title}
+                  alt={`${related.title} — Related RFIDAK RFID guide`}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                   decoding="async"
@@ -596,5 +608,17 @@ const faqJsonLd = faqItems.length
 
     <Newsletter />
   </main>
+  <ScrollCTA
+    contactHref={blogContactHref}
+    contactLabel="Get Quote"
+    whatsappHref={blogWhatsApp.href}
+    source="blog"
+  />
+  <ExitIntent
+    sampleHref={`/contact?intent=samples&blog=${post.slug}&express=1&source=exit-intent#contactForm`}
+    whatsappHref={blogWhatsApp.href}
+    contextName="RFID Sample"
+  />
+
   <Footer />
 </Layout>

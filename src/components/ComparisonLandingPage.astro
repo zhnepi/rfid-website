@@ -24,7 +24,7 @@ interface Props {
 
 const { comparisonKey } = Astro.props;
 const config = comparisonPages[comparisonKey];
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/compare/${config.slug}`;
 const featuredProducts = config.productSlugs
   .map((slug) => products.find((product) => product.slug === slug))
@@ -248,7 +248,7 @@ const faqJsonLd = {
                 <div class="aspect-square overflow-hidden bg-gray-100">
                   <img
                     src={product.images[0]}
-                    alt={product.name}
+                    alt={`${product.name} — Compared RFID product on RFIDAK comparison page`}
                     class="h-full w-full object-cover"
                     loading="lazy"
                     width="500"

@@ -7,49 +7,6 @@ import { products } from '../data/products';
 import { getProductComparisonLinks } from '../utils/comparisons';
 import { getProductBuyerQuestion, getProductBuyerSummary } from '../utils/productCopy';
 
-const localImages: Record<string, string> = {
-  'rfid-card-inlay': '/images/products/RFID-card-inaly-2x5-TK4100-500x500.webp',
-  'mini-rfid-tag': '/images/products/plastic-rfid-tag-500x500.webp',
-  'rfid-cable-tie-tag': '/images/products/rfid-cable-tie-1.webp',
-  'rfid-waste-bin-tag': '/images/products/rfid-bin-tag-500x500.webp',
-  'rfid-nail-tag': '/images/products/RFID-Nail-Tag-3608.webp',
-  'pallet-rfid-tag': '/images/products/Pallet-RFID-tag.webp',
-  'rfid-tyre-tag': '/images/products/rfid-tyre-tag02.webp',
-  'spring-rfid-tire-tag': '/images/products/rfid-tire-tag-500x443.webp',
-  'high-temperature-rfid-tag': '/images/products/high-temperature-rfid-tag-500x500.webp',
-  'key-transponder': '/images/products/key-transponder.webp',
-  'rfid-fpc-tag': '/images/products/13.56MHz-FPC-tag.webp',
-  'rfid-ceramic-tag': '/images/products/UHF-Ceramic-Tag.webp',
-  'rfid-pcb-tag': '/images/products/RFID-PCB-Tag-HF.webp',
-  'rfid-pcb': '/images/products/PCB-RFID-Tag-1.webp',
-  'silicone-laundry-tag': '/images/products/Silicone-laundry-tag.webp',
-  'pps-laundry-tag-rfid-button': '/images/products/laundry-tag-rfid.webp',
-  'rfid-windshield-tag': '/images/products/RFID-Windshield-Tag.webp',
-  'tamper-proof-rfid-tag': '/images/products/tamper-proof-rfid-tag-500x500.webp',
-  'library-rfid-tags': '/images/products/library-rfid-tags.webp',
-  'uhf-library-label': '/images/products/uhf-library-500x500.webp',
-  'rfid-jewellery-tags': '/images/products/rfid-jewellery-tags.webp',
-  'uhf-sticker': '/images/products/UHF-sticker-500x500.webp',
-  'nfc-sticker': '/images/products/nfc-sticker.webp',
-  'nfc-epoxy-card': '/images/products/NFC-epoxy-card.webp',
-  'nfc-coin': '/images/products/NFC-coin.webp',
-  'rfid-clear-tag': '/images/products/RFID-Clear-tag.webp',
-  'rfid-clamshell-card': '/images/products/clamshel-card-500x500.webp',
-  'rfid-wood-card-2': '/images/products/RFID-wood-card.webp',
-  'rfid-paper-card': '/images/products/RFID-Paper-Card-500x500.webp',
-  'rfid-glass-tag': '/images/products/RFID-glass-tag-500x500.webp',
-  'rfid-metal-tag': '/images/products/Printable-RFID-metal-tag.webp',
-  'rfid-reader-writer': '/images/products/RFID_reader_writer.webp',
-  'textile-rfid-laundry-tag': '/images/products/textile-RFID-laundry-tag-heat-seal.webp',
-  'rfid-silicone-wristband': '/images/products/RFID-SIlicone-wristbands-006.webp',
-  'rfid-cards': '/images/products/ticket-smart-card.webp',
-  'rfid-keyfob': '/images/products/PROUDTEK-RFID-KEYFOB.webp',
-};
-
-function getProductImage(slug: string): string {
-  return localImages[slug] || '/images/products/placeholder.webp';
-}
-
 const catalogProducts = products.map((product) => ({
   product,
   topComparison: getProductComparisonLinks(product, 1)[0],
@@ -64,30 +21,70 @@ const categoryLinks = [
   { name: 'RFID Wristbands', href: '/category/rfid-wristbands' },
   { name: 'RFID Keyfobs', href: '/category/rfid-keyfob' },
   { name: 'RFID Readers', href: '/category/rfid-readers' },
+  { name: 'RFID Rings', href: '/category/rfid-rings' },
 ];
+
+// 按产品分类分组，并计算每个分类的产品数量
+const slugify = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+
+const groupedProducts = catalogProducts.reduce<Record<string, typeof catalogProducts>>((acc, item) => {
+  const key = item.product.category || 'Other';
+  if (!acc[key]) acc[key] = [];
+  acc[key].push(item);
+  return acc;
+}, {});
+
+// 按自定义顺序展示分类
+const categoryOrder = ['RFID Cards', 'RFID Tags', 'RFID Labels', 'RFID Wristbands', 'RFID Keyfob', 'RFID Readers', 'RFID Rings'];
+const sidebarSections = categoryOrder
+  .filter((cat) => groupedProducts[cat] && groupedProducts[cat].length > 0)
+  .map((cat) => ({
+    name: cat,
+    id: `cat-${slugify(cat)}`,
+    count: groupedProducts[cat].length,
+    items: groupedProducts[cat],
+  }));
+
+// 额外分类（兜底）
+Object.keys(groupedProducts)
+  .filter((cat) => !categoryOrder.includes(cat))
+  .forEach((cat) => {
+    sidebarSections.push({
+      name: cat,
+      id: `cat-${slugify(cat)}`,
+      count: groupedProducts[cat].length,
+      items: groupedProducts[cat],
+    });
+  });
+
+const totalProductCount = catalogProducts.length;
 
 const catalogJsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "ProudTek RFID Catalog",
-  "url": "https://www.proudtek.com/rfid",
-  "description": "Full RFID catalog from ProudTek including cards, tags, labels, wristbands, keyfobs, and readers.",
+  "name": "RFIDAK RFID Catalog",
+  "url": "https://www.rfidak.com/rfid",
+  "description": "Full RFID catalog from RFIDAK including cards, tags, labels, wristbands, keyfobs, and readers.",
   "mainEntity": {
     "@type": "ItemList",
     "itemListElement": products.slice(0, 24).map((product, index) => ({
       "@type": "ListItem",
       "position": index + 1,
       "name": product.name,
-      "url": `https://www.proudtek.com/product/${product.slug}`
+      "url": `https://www.rfidak.com/product/${product.slug}`
     }))
   }
 };
 ---
 
 <Layout
-  title="RFID Product Catalog - Cards, Tags, Labels, Wristbands & Readers | ProudTek"
-  description="Browse ProudTek's complete RFID catalog with product images and application-focused descriptions: RFID cards, RFID tags, NFC stickers, laundry tags, wristbands, keyfobs, and readers."
-  keywords="RFID catalog, RFID products, RFID cards, RFID tags, NFC stickers, laundry tags, RFID keyfobs, RFID readers, ProudTek"
+  title="RFID Product Catalog - Cards, Tags, Labels, Wristbands & Readers | RFIDAK"
+  description="Browse RFIDAK's complete RFID catalog with product images and application-focused descriptions: RFID cards, RFID tags, NFC stickers, laundry tags, wristbands, keyfobs, and readers."
+  keywords="RFID catalog, RFID products, RFID cards, RFID tags, NFC stickers, laundry tags, RFID keyfobs, RFID readers, RFIDAK"
   jsonLd={catalogJsonLd}
 >
   <Header />
@@ -144,41 +141,124 @@ const catalogJsonLd = {
       </div>
     </section>
 
-    <section class="py-8 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {catalogProducts.map(({ product, topComparison, cardQuestion, cardSummary }) => (
-            <article class="copy-safe group overflow-hidden rounded-[1.25rem] border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-              <a href={`/product/${product.slug}`} class="block">
-                <div class="aspect-square overflow-hidden bg-gray-100">
-                  <img
-                    src={getProductImage(product.slug)}
-                    alt={product.name}
-                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="p-4">
-                  <p class="eyebrow-label text-[#0d7377] mb-2">{product.category}</p>
-                  <h3 class="title-balance text-sm md:text-base font-semibold text-gray-900">{product.name}</h3>
-                  <p class="mt-2 text-xs font-semibold leading-relaxed text-gray-800 line-clamp-2">{cardQuestion}</p>
-                  <p class="card-copy mt-2 text-xs text-gray-500 line-clamp-3">{cardSummary}</p>
-                </div>
-              </a>
-              <div class="border-t border-gray-100 px-4 pb-4 pt-3">
-                {topComparison ? (
-                  <a href={`/compare/${topComparison.slug}`} class="block text-xs font-medium text-[#0d7377] transition-colors hover:text-[#0a5c5f] line-clamp-2">
-                    Compare: {topComparison.name}
-                  </a>
-                ) : (
-                  <span class="block text-xs text-gray-400">Open product details for full specs</span>
-                )}
+    <section class="py-8 bg-white relative">
+      <!-- Floating Sticky Sidebar Nav — only appears while this section is in view -->
+      <aside
+        aria-label="Product categories"
+        class="hidden min-[1600px]:block absolute top-0 bottom-0 w-48 pointer-events-none"
+        style="left: max(1rem, calc((100vw - 1280px) / 2 - 12.5rem - 1rem));"
+      >
+        <div class="sticky top-24 pointer-events-auto">
+          <nav class="rounded-[1.25rem] border border-gray-200 bg-white/95 backdrop-blur shadow-lg overflow-hidden">
+            <div class="flex items-center justify-between px-5 py-4 bg-gradient-to-br from-[#0d7377] to-[#0a5c5f] text-white">
+              <div>
+                <p class="text-[0.65rem] uppercase tracking-[0.18em] text-white/70">Catalog</p>
+                <p class="text-sm font-semibold mt-0.5">All Categories</p>
               </div>
-            </article>
-          ))}
+              <span class="inline-flex items-center justify-center rounded-full bg-white/15 px-2.5 py-0.5 text-xs font-semibold text-white">{totalProductCount}</span>
+            </div>
+            <ul class="py-2" id="catalog-sidebar-list">
+              {sidebarSections.map((section) => (
+                <li>
+                  <a
+                    href={`#${section.id}`}
+                    data-cat-link={section.id}
+                    class="group flex items-center justify-between gap-2 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-[#0d7377]/5 hover:text-[#0d7377] border-l-2 border-transparent transition-colors"
+                  >
+                    <span class="truncate">{section.name}</span>
+                    <span class="inline-flex items-center justify-center rounded-full bg-gray-100 text-gray-600 group-hover:bg-[#0d7377]/10 group-hover:text-[#0d7377] px-2 py-0.5 text-xs font-semibold min-w-[2rem] transition-colors">
+                      {section.count}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
+      </aside>
+
+      <div class="container mx-auto px-4 max-w-screen-xl">
+        {sidebarSections.map((section) => (
+          <section id={section.id} class="scroll-mt-24 mb-12">
+            <div class="flex items-baseline justify-between border-b border-gray-200 pb-3 mb-6">
+              <h2 class="title-balance text-2xl font-semibold text-gray-900">
+                {section.name}
+                <span class="ml-2 text-sm font-medium text-gray-500">({section.count})</span>
+              </h2>
+              <a href={`/category/${slugify(section.name)}`} class="text-xs font-medium text-[#0d7377] hover:text-[#0a5c5f]">
+                View category →
+              </a>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+              {section.items.map(({ product, topComparison, cardQuestion, cardSummary }) => (
+                <article class="copy-safe group overflow-hidden rounded-[1.25rem] border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <a href={`/product/${product.slug}`} class="block">
+                    <div class="aspect-square overflow-hidden bg-gray-100">
+                      <img
+                        src={product.images[0]}
+                        alt={`${product.name} — ${product.category} manufactured by RFIDAK`}
+                        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <p class="eyebrow-label text-[#0d7377] mb-2">{product.category}</p>
+                      <h3 class="title-balance text-sm md:text-base font-semibold text-gray-900">{product.name}</h3>
+                      <p class="mt-2 text-xs font-semibold leading-relaxed text-gray-800 line-clamp-2">{cardQuestion}</p>
+                      <p class="card-copy mt-2 text-xs text-gray-500 line-clamp-3">{cardSummary}</p>
+                    </div>
+                  </a>
+                  <div class="border-t border-gray-100 px-4 pb-4 pt-3">
+                    {topComparison ? (
+                      <a href={`/compare/${topComparison.slug}`} class="block text-xs font-medium text-[#0d7377] transition-colors hover:text-[#0a5c5f] line-clamp-2">
+                        Compare: {topComparison.name}
+                      </a>
+                    ) : (
+                      <span class="block text-xs text-gray-400">Open product details for full specs</span>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
     </section>
+
+    <script is:inline>
+      // 滚动时高亮当前分类
+      (function () {
+        const links = document.querySelectorAll('[data-cat-link]');
+        const sections = Array.from(links)
+          .map((link) => document.getElementById(link.getAttribute('data-cat-link')))
+          .filter(Boolean);
+        if (!sections.length) return;
+
+        const activeClasses = ['bg-[#0d7377]/10', 'text-[#0d7377]', 'border-[#0d7377]'];
+
+        function setActive(id) {
+          links.forEach((link) => {
+            const target = link.getAttribute('data-cat-link');
+            if (target === id) {
+              link.classList.add(...activeClasses);
+            } else {
+              link.classList.remove(...activeClasses);
+            }
+          });
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const visible = entries
+              .filter((e) => e.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+            if (visible[0]) setActive(visible[0].target.id);
+          },
+          { rootMargin: '-96px 0px -55% 0px', threshold: [0, 0.25, 0.5, 1] }
+        );
+        sections.forEach((s) => observer.observe(s));
+      })();
+    </script>
 
     <section class="py-16 bg-gray-50">
       <div class="container mx-auto px-4">

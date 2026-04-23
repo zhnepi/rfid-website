@@ -39,7 +39,7 @@ export const solutionPages: Record<string, SolutionPageContent> = {
     key: 'access-control-rfid',
     slug: 'access-control-rfid',
     name: 'Access control credentials',
-    title: 'Access Control RFID Solutions - Cards, Keyfobs and Credential Supply | ProudTek',
+    title: 'Access Control RFID Solutions - Cards, Keyfobs and Credential Supply | RFIDAK',
     description:
       'Use-case hub for RFID access control covering cards, keyfobs, credential matching, legacy reader compatibility, sample testing and repeat credential supply.',
     keywords:
@@ -134,7 +134,7 @@ export const solutionPages: Record<string, SolutionPageContent> = {
     key: 'hotel-access-rfid',
     slug: 'hotel-access-rfid',
     name: 'Hotel access and guest credentials',
-    title: 'Hotel RFID Solutions - Key Cards, Wristbands and Guest Credentials | ProudTek',
+    title: 'Hotel RFID Solutions - Key Cards, Wristbands and Guest Credentials | RFIDAK',
     description:
       'Use-case hub for hotel RFID projects covering key cards, resort wristbands, guest credentials, lock compatibility, sample approval and repeat replenishment.',
     keywords:
@@ -215,7 +215,7 @@ export const solutionPages: Record<string, SolutionPageContent> = {
           'A saved approval set for chip, print, numbering and finish helps repeat orders move quickly without rebuilding the whole specification each time.',
       },
       {
-        question: 'Can ProudTek support both branded guest cards and testing samples?',
+        question: 'Can RFIDAK support both branded guest cards and testing samples?',
         answer:
           'Yes. Hospitality projects usually start with compatibility or sample approval, then move into the branded production version once the credential and print finish are confirmed.',
       },
@@ -229,7 +229,7 @@ export const solutionPages: Record<string, SolutionPageContent> = {
     key: 'laundry-linen-rfid',
     slug: 'laundry-linen-rfid',
     name: 'Laundry and linen tracking',
-    title: 'Laundry RFID Solutions - Linen, Uniform and Textile Tracking | ProudTek',
+    title: 'Laundry RFID Solutions - Linen, Uniform and Textile Tracking | RFIDAK',
     description:
       'Use-case hub for laundry RFID projects covering textile tags, silicone tags, PPS tags, wash-cycle planning, pilot testing and repeat supply for linen and garment programs.',
     keywords:
@@ -324,7 +324,7 @@ export const solutionPages: Record<string, SolutionPageContent> = {
     key: 'industrial-asset-tracking-rfid',
     slug: 'industrial-asset-tracking-rfid',
     name: 'Industrial asset tracking',
-    title: 'Industrial RFID Solutions - Asset Tracking for Tools, Equipment and Containers | ProudTek',
+    title: 'Industrial RFID Solutions - Asset Tracking for Tools, Equipment and Containers | RFIDAK',
     description:
       'Use-case hub for industrial RFID asset tracking with anti-metal tags, cable ties, pallet tags and rugged transponders for tools, equipment, bins and reusable assets.',
     keywords:
@@ -419,7 +419,7 @@ export const solutionPages: Record<string, SolutionPageContent> = {
     key: 'library-media-rfid',
     slug: 'library-media-rfid',
     name: 'Library and media management',
-    title: 'Library RFID Solutions - Books, Media and Self-Service Workflows | ProudTek',
+    title: 'Library RFID Solutions - Books, Media and Self-Service Workflows | RFIDAK',
     description:
       'Use-case hub for library RFID projects covering book labels, media tags, desk readers, patron cards and self-check workflows for schools, public libraries and media centers.',
     keywords:
@@ -514,7 +514,7 @@ export const solutionPages: Record<string, SolutionPageContent> = {
     key: 'event-nfc-rfid',
     slug: 'event-nfc-rfid',
     name: 'Events, retail and NFC engagement',
-    title: 'Event And NFC RFID Solutions - Wristbands, Stickers and Smart Interaction Products | ProudTek',
+    title: 'Event And NFC RFID Solutions - Wristbands, Stickers and Smart Interaction Products | RFIDAK',
     description:
       'Use-case hub for events, retail NFC and smart interaction projects covering wristbands, NFC stickers, labels, attendance workflows and guest or shopper engagement.',
     keywords:

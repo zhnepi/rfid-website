@@ -1,0 +1,73 @@
+---
+import { products } from '../data/products';
+
+interface Props {
+  activeCategory: string;
+}
+
+const { activeCategory } = Astro.props;
+
+const categoryNavItems = [
+  { name: 'RFID Cards',      href: '/category/rfid-cards',      label: 'Cards' },
+  { name: 'RFID Tags',       href: '/category/rfid-tags',       label: 'Tags' },
+  { name: 'RFID Labels',     href: '/category/rfid-labels',     label: 'Labels' },
+  { name: 'RFID Wristbands', href: '/category/rfid-wristbands', label: 'Wristbands' },
+  { name: 'RFID Keyfob',     href: '/category/rfid-keyfob',     label: 'Keyfobs' },
+  { name: 'RFID Readers',    href: '/category/rfid-readers',    label: 'Readers' },
+  { name: 'RFID Rings',      href: '/category/rfid-rings',      label: 'Rings' },
+];
+
+const totalCount = products.length;
+const items = categoryNavItems.map((item) => ({
+  ...item,
+  count: products.filter((p) => p.category === item.name).length,
+  isActive: item.name === activeCategory,
+}));
+---
+
+<nav
+  aria-label="Product categories"
+  class="category-sticky-nav sticky top-[68px] z-40 bg-white/95 backdrop-blur border-y border-gray-200 shadow-sm"
+>
+  <div class="container mx-auto px-4">
+    <div class="flex items-center gap-3 py-2">
+      <span class="hidden lg:inline-flex items-center gap-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-gray-500 shrink-0">
+        Catalog
+        <span class="inline-flex items-center justify-center rounded-full bg-gray-100 px-2 py-0.5 text-[0.65rem] font-bold text-gray-600">{totalCount}</span>
+      </span>
+      <div class="flex-1 overflow-x-auto scrollbar-hide -mx-2 px-2">
+        <div class="flex gap-1.5 min-w-max">
+          {items.map((item) => (
+            <a
+              href={item.href}
+              aria-current={item.isActive ? 'page' : undefined}
+              class:list={[
+                'group inline-flex items-center gap-2 whitespace-nowrap px-3.5 py-1.5 text-sm font-medium rounded-full border transition-colors',
+                item.isActive
+                  ? 'bg-[#0d7377] text-white border-[#0d7377]'
+                  : 'text-gray-700 border-gray-200 hover:text-[#0d7377] hover:border-[#0d7377]/40 hover:bg-[#0d7377]/5',
+              ]}
+            >
+              <span>{item.label}</span>
+              <span
+                class:list={[
+                  'inline-flex items-center justify-center rounded-full px-1.5 py-0.5 text-[0.65rem] font-bold min-w-[1.5rem]',
+                  item.isActive
+                    ? 'bg-white/20 text-white'
+                    : 'bg-gray-100 text-gray-600 group-hover:bg-[#0d7377]/10 group-hover:text-[#0d7377]',
+                ]}
+              >
+                {item.count}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .category-sticky-nav .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .category-sticky-nav .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>

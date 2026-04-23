@@ -39,11 +39,11 @@ export interface EvidencePageConfig {
 export const evidencePages: Record<string, EvidencePageConfig> = {
   certifications: {
     slug: 'certifications',
-    title: 'RFID Certifications and Supplier Validation | ProudTek',
+    title: 'RFID Certifications and Supplier Validation | RFIDAK',
     description:
-      'Review ProudTek certifications, supplier validation signals and the documents buyers often request before approving RFID cards, tags, labels and OEM projects.',
+      'Review RFIDAK certifications, supplier validation signals and the documents buyers often request before approving RFID cards, tags, labels and OEM projects.',
     keywords:
-      'RFID certifications, RFID supplier validation, ISO 9001 RFID factory, ISO 14001 RFID manufacturer, ProudTek certifications',
+      'RFID certifications, RFID supplier validation, ISO 9001 RFID factory, ISO 14001 RFID manufacturer, RFIDAK certifications',
     heroEyebrow: 'Trust Signals',
     heroTitle: 'Certifications and supplier validation buyers often ask for before shortlisting an RFID factory',
     heroDescription:
@@ -139,7 +139,7 @@ export const evidencePages: Record<string, EvidencePageConfig> = {
           'Yes. Product-specific checks such as chip verification, encoding accuracy, material suitability and packaging review are often more important than general supplier certificates once the project moves into sampling.',
       },
       {
-        question: 'When should I discuss certifications with ProudTek?',
+        question: 'When should I discuss certifications with RFIDAK?',
         answer:
           'The best time is during supplier shortlisting or before internal procurement approval, especially if your company has onboarding or vendor-compliance steps.',
       },
@@ -150,9 +150,9 @@ export const evidencePages: Record<string, EvidencePageConfig> = {
   },
   'quality-control': {
     slug: 'quality-control',
-    title: 'RFID Quality Control and Testing Workflow | ProudTek',
+    title: 'RFID Quality Control and Testing Workflow | RFIDAK',
     description:
-      'Learn how ProudTek approaches RFID quality control across materials, chip verification, encoding checks, print inspection and final packing review.',
+      'Learn how RFIDAK approaches RFID quality control across materials, chip verification, encoding checks, print inspection and final packing review.',
     keywords:
       'RFID quality control, RFID testing process, RFID card quality check, RFID tag inspection, encoding verification RFID',
     heroEyebrow: 'Quality Control',
@@ -250,7 +250,7 @@ export const evidencePages: Record<string, EvidencePageConfig> = {
           'Yes. Cards may focus more on print, finish and encoding, while industrial tags often depend more heavily on environment fit, attachment method and reading performance.',
       },
       {
-        question: 'When should I raise quality-control questions with ProudTek?',
+        question: 'When should I raise quality-control questions with RFIDAK?',
         answer:
           'Ideally before sample approval or bulk quotation, especially if your buyer team already knows which checks are commercially critical for the project.',
       },
@@ -261,9 +261,9 @@ export const evidencePages: Record<string, EvidencePageConfig> = {
   },
   'sample-policy': {
     slug: 'sample-policy',
-    title: 'RFID Sample Policy and Pilot-Order Guidance | ProudTek',
+    title: 'RFID Sample Policy and Pilot-Order Guidance | RFIDAK',
     description:
-      'Understand how ProudTek approaches standard samples, custom samples, pilot quantities and the information buyers should share before ordering RFID samples.',
+      'Understand how RFIDAK approaches standard samples, custom samples, pilot quantities and the information buyers should share before ordering RFID samples.',
     keywords:
       'RFID sample policy, RFID samples, RFID pilot order, custom RFID sample, RFID sampling process',
     heroEyebrow: 'Sample Planning',
@@ -361,9 +361,9 @@ export const evidencePages: Record<string, EvidencePageConfig> = {
           'Because RFID products can fail for compatibility reasons even when the format looks correct. Reader type, material, mounting surface and encoding requirements all matter early.',
       },
       {
-        question: 'Can ProudTek help buyers narrow the sample list?',
+        question: 'Can RFIDAK help buyers narrow the sample list?',
         answer:
-          'Yes. If you share the application, reader requirement and any customization needs, ProudTek can usually recommend a more focused sample path.',
+          'Yes. If you share the application, reader requirement and any customization needs, RFIDAK can usually recommend a more focused sample path.',
       },
     ],
     ctaTitle: 'Ready to request RFID samples with a clearer plan?',
@@ -372,11 +372,11 @@ export const evidencePages: Record<string, EvidencePageConfig> = {
   },
   'shipping-and-incoterms': {
     slug: 'shipping-and-incoterms',
-    title: 'RFID Shipping, Export Terms and Incoterms | ProudTek',
+    title: 'RFID Shipping, Export Terms and Incoterms | RFIDAK',
     description:
-      'Review shipping topics buyers often discuss with ProudTek, including export terms, delivery planning, packaging expectations and international order coordination.',
+      'Review shipping topics buyers often discuss with RFIDAK, including export terms, delivery planning, packaging expectations and international order coordination.',
     keywords:
-      'RFID shipping terms, RFID export shipping, RFID incoterms, RFID supplier delivery terms, ProudTek shipping',
+      'RFID shipping terms, RFID export shipping, RFID incoterms, RFID supplier delivery terms, RFIDAK shipping',
     heroEyebrow: 'Shipping And Delivery',
     heroTitle: 'Shipping and incoterms buyers often clarify before they approve an RFID order',
     heroDescription:
@@ -472,9 +472,9 @@ export const evidencePages: Record<string, EvidencePageConfig> = {
           'The full shipping plan usually comes later, but it is smart to raise destination, urgency and trade-term expectations early so the quotation path stays realistic.',
       },
       {
-        question: 'Can ProudTek help buyers talk through delivery planning during quotation?',
+        question: 'Can RFIDAK help buyers talk through delivery planning during quotation?',
         answer:
-          'Yes. Once the project direction, quantity and destination are clearer, ProudTek can discuss practical delivery considerations alongside the quote.',
+          'Yes. Once the project direction, quantity and destination are clearer, RFIDAK can discuss practical delivery considerations alongside the quote.',
       },
     ],
     ctaTitle: 'Need to align quote, lead time and delivery terms?',

@@ -1,6 +1,6 @@
 import { blogPosts } from '../data/blogs';
 
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 
 function escapeXml(str: string): string {
   return str
@@ -35,7 +35,7 @@ export async function GET() {
       <description>${escapeXml(post.metaDescription || post.excerpt)}</description>
       <pubDate>${toRFC822(post.date)}</pubDate>
       <category>${escapeXml(post.category)}</category>
-      <author>info@proudtek.com (ProudTek Editorial Team)</author>
+      <author>info@rfidak.com (RFIDAK Editorial Team)</author>
     </item>`,
     )
     .join('\n');
@@ -45,15 +45,15 @@ export async function GET() {
   xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>ProudTek RFID Blog</title>
+    <title>RFIDAK RFID Blog</title>
     <link>${siteURL}/blogs</link>
-    <description>RFID buying guides, technology comparisons, and application insights from ProudTek — an RFID card, tag, and label manufacturer since 2008.</description>
+    <description>RFID buying guides, technology comparisons, and application insights from RFIDAK — an RFID card, tag, and label manufacturer since 2008.</description>
     <language>en-us</language>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
     <atom:link href="${siteURL}/feed.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>${siteURL}/favicon.svg</url>
-      <title>ProudTek RFID Blog</title>
+      <title>RFIDAK RFID Blog</title>
       <link>${siteURL}</link>
     </image>
 ${items}

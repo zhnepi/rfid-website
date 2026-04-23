@@ -14,10 +14,10 @@ export function getStaticPaths() {
 }
 
 const { author } = Astro.props;
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/authors/${author.slug}`;
 const authorPosts = blogPosts
-  .filter((post) => (post.authorId || 'proudtek-rfid-editorial-team') === author.id)
+  .filter((post) => (post.authorId || 'rfidak-rfid-editorial-team') === author.id)
   .sort((a, b) => new Date(b.updatedDate || b.date).getTime() - new Date(a.updatedDate || a.date).getTime())
   .slice(0, 6);
 
@@ -26,7 +26,7 @@ const profileJsonLd = {
   '@type': 'ProfilePage',
   '@id': `${canonicalURL}#profile`,
   url: canonicalURL,
-  name: `${author.name} | ProudTek`,
+  name: `${author.name} | RFIDAK`,
   dateModified: authorPosts[0]?.updatedDate || authorPosts[0]?.date || new Date().toISOString().split('T')[0],
   isPartOf: { '@id': `${siteURL}/#website` },
   about: { '@id': `${siteURL}/#organization` },
@@ -74,7 +74,7 @@ const breadcrumbJsonLd = {
 ---
 
 <Layout
-  title={`${author.name} | ProudTek`}
+  title={`${author.name} | RFIDAK`}
   description={author.shortBio}
   canonicalURL={canonicalURL}
   jsonLd={[profileJsonLd, breadcrumbJsonLd]}

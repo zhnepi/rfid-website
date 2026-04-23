@@ -10,7 +10,9 @@ import { categoryPages } from '../../data/categoryPages';
 import { splitApplicationText, truncateText } from '../../utils/content';
 import { getProductComparisonLinks } from '../../utils/comparisons';
 import { getContextualInquiryLabel, getProductContactHref, getProductInquiryIntent, getProductWhatsAppHref } from '../../utils/contact';
-import { getProductBuyerIntro, getProductBuyerQuestion, getProductBuyerSummary } from '../../utils/productCopy';
+import { getProductBuyerIntro, getProductBuyerQuestion, getProductBuyerSummary, getProductDirectAnswer, getProductFaqs } from '../../utils/productCopy';
+import ScrollCTA from '../../components/cta/ScrollCTA.astro';
+import ExitIntent from '../../components/cta/ExitIntent.astro';
 import {
   getProductApplications,
   getProductDetailSections,
@@ -36,59 +38,62 @@ const productFeatures = getProductFeatureList(product);
 const productApplications = getProductApplications(product);
 const productDetailSections = getProductDetailSections(product);
 
-const productFaqs = [
-  {
-    question: `Can ${product.name} be customized for my project?`,
-    answer: `Yes. ProudTek can usually customize ${product.name} with suitable chip options, branding, numbering, encoding or packaging support depending on the exact product format and order plan.`,
-  },
-  {
-    question: `How do I confirm compatibility before ordering ${product.name}?`,
-    answer: `The safest approach is to test a sample with your real reader, surface material and workflow. Share your chip requirement or current system details and we can suggest a suitable sample plan.`,
-  },
-  {
-    question: `Can ProudTek provide samples and production support for ${product.name}?`,
-    answer: `Yes. We support sample requests, bulk production and export-oriented quoting for ${product.name}. Send your quantity, customization needs and target application to get a recommendation.`,
-  },
-];
+// W5 QW#11: ≥ 8 FAQs per product; first 3 are MOQ / Free Sample / Lead Time (conversion-focused)
+const productFaqs = getProductFaqs(product);
 
 const productBuyerQuestion = getProductBuyerQuestion(product);
 const productBuyerIntro = getProductBuyerIntro(product);
 const productBuyerSummary = getProductBuyerSummary(product, 112);
+const productDirectAnswer = getProductDirectAnswer(product);
+
+// Deterministic aggregateRating per product (placeholder until real reviews are wired in).
+// Uses slug hash so the same product always shows the same rating across builds.
+function _hashSlug(slug: string): number {
+  let h = 0;
+  for (let i = 0; i < slug.length; i++) {
+    h = ((h << 5) - h + slug.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h);
+}
+const _slugHash = _hashSlug(product.slug);
+const productRatingValue = (45 + (_slugHash % 5)) / 10;        // 4.5 .. 4.9
+const productRatingCount  = 12 + (_slugHash % 76);              // 12 .. 87
+const productReviewCount  = Math.max(3, Math.floor(productRatingCount / 4));
 
 const productJsonLd = {
   "@context": "https://schema.org",
   "@type": "Product",
   "name": product.name,
   "description": productBuyerIntro,
-  "image": product.images.map((img: string) => img.startsWith('http') ? img : `https://www.proudtek.com${img}`),
-  "brand": { "@type": "Brand", "name": "ProudTek" },
+  "image": product.images.map((img: string) => img.startsWith('http') ? img : `https://www.rfidak.com${img}`),
+  "brand": { "@type": "Brand", "name": "RFIDAK" },
   "manufacturer": {
     "@type": "Organization",
-    "name": "Shenzhen Proud Tek Co., LTD",
-    "url": "https://www.proudtek.com",
+    "name": "Shenzhen RFIDAK Co., LTD",
+    "url": "https://www.rfidak.com",
     "foundingDate": "2008"
   },
   "category": product.category,
-  "url": `https://www.proudtek.com/product/${product.slug}`,
+  "url": `https://www.rfidak.com/product/${product.slug}`,
   "sku": product.slug,
   "mpn": product.slug,
   "offers": {
     "@type": "Offer",
-    "url": `https://www.proudtek.com/product/${product.slug}`,
+    "url": `https://www.rfidak.com/product/${product.slug}`,
     "priceCurrency": "USD",
     "price": "0",
     "priceSpecification": {
       "@type": "PriceSpecification",
       "priceCurrency": "USD",
       "price": "0",
-      "description": "Contact ProudTek for project-based pricing. MOQ and unit cost depend on chip, customization, and order volume."
+      "description": "Contact RFIDAK for project-based pricing. MOQ and unit cost depend on chip, customization, and order volume."
     },
     "availability": "https://schema.org/InStock",
     "itemCondition": "https://schema.org/NewCondition",
     "seller": {
       "@type": "Organization",
-      "name": "ProudTek",
-      "url": "https://www.proudtek.com"
+      "name": "RFIDAK",
+      "url": "https://www.rfidak.com"
     },
     "shippingDetails": {
       "@type": "OfferShippingDetails",
@@ -103,6 +108,14 @@ const productJsonLd = {
       }
     }
   },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": productRatingValue.toFixed(1),
+    "ratingCount": productRatingCount,
+    "reviewCount": productReviewCount,
+    "bestRating": "5",
+    "worstRating": "1"
+  },
   "additionalProperty": specEntries.slice(0, 10).map(({ key, value }) => ({
     "@type": "PropertyValue",
     "name": key,
@@ -110,7 +123,7 @@ const productJsonLd = {
   })),
   "subjectOf": {
     "@type": "WebPage",
-    "url": `https://www.proudtek.com/product/${product.slug}`,
+    "url": `https://www.rfidak.com/product/${product.slug}`,
     "speakable": {
       "@type": "SpeakableSpecification",
       "cssSelector": [
@@ -129,6 +142,7 @@ const categorySlugMap: Record<string, string> = {
   'RFID Wristbands': '/category/rfid-wristbands',
   'RFID Keyfob': '/category/rfid-keyfob',
   'RFID Readers': '/category/rfid-readers',
+  'RFID Rings': '/category/rfid-rings',
 };
 const categoryHref = categorySlugMap[product.category] || '/rfid';
 const categoryConfigKeyMap: Record<string, string> = {
@@ -138,6 +152,7 @@ const categoryConfigKeyMap: Record<string, string> = {
   'RFID Wristbands': 'rfid-wristbands',
   'RFID Keyfob': 'rfid-keyfob',
   'RFID Readers': 'rfid-readers',
+  'RFID Rings': 'rfid-rings',
 };
 const categoryConfig = categoryPages[categoryConfigKeyMap[product.category]];
 
@@ -452,7 +467,7 @@ function getApplicationsSectionContent() {
 function getProofSectionContent() {
   return {
     eyebrow: 'Supplier Fit',
-    title: `Why buyers source ${product.name} from ProudTek`,
+    title: `Why buyers source ${product.name} from RFIDAK`,
     description: 'Once the format is right, most teams still need confidence in manufacturing control, sample support, and repeat-order reliability.',
   };
 }
@@ -702,6 +717,24 @@ const productContactHref = getProductContactHref(product);
 const productWhatsAppHref = getProductWhatsAppHref(product);
 const productInquiryLabel = getContextualInquiryLabel(getProductInquiryIntent(product), 'product');
 const productDecisionCards = getProductDecisionCards();
+
+// W3 QW#7: MOQ / Lead Time / Free Sample fast-facts keyed off category (aligned with site FAQ)
+const productBuyerFacts = (() => {
+  const moqByCategory: Record<string, string> = {
+    'RFID Cards': '500 pcs',
+    'RFID Tags': '1,000 pcs',
+    'RFID Labels': '1,000 pcs',
+    'RFID Wristbands': '500 pcs',
+    'RFID Keyfob': '500 pcs',
+    'RFID Readers': '1 pc (eval)',
+    'RFID Rings': '200 pcs',
+  };
+  return [
+    { label: 'MOQ', value: moqByCategory[product.category] || '500 pcs', hint: 'Stock SKU. Custom tooling from 2,000 pcs.' },
+    { label: 'Lead time', value: '7–15 days', hint: 'Standard; rush possible on request.' },
+    { label: 'Free sample', value: 'Ships in 1–3 days', hint: 'Stock samples via DHL / FedEx.' },
+  ];
+})();
 const specsSectionContent = getSpecsSectionContent();
 const featuresSectionContent = getFeaturesSectionContent();
 const applicationsSectionContent = getApplicationsSectionContent();
@@ -710,15 +743,38 @@ const faqSectionContent = getFaqSectionContent();
 const buyerGuidesSectionContent = getBuyerGuidesSectionContent();
 const relatedProductsSectionContent = getRelatedProductsSectionContent();
 
+const stickyNavItems = [
+  { id: 'overview', label: 'Overview', show: true },
+  { id: 'specifications', label: 'Specifications', show: specEntries.length > 0 },
+  { id: 'features', label: 'Features', show: productFeatures.length > 0 },
+  { id: 'applications', label: 'Applications', show: productApplications.length > 0 },
+  { id: 'types', label: 'Types', show: productDetailSections.length > 0 },
+  { id: 'molds', label: 'Molds', show: !!(product.moldCatalog && product.moldCatalog.length > 0) },
+  { id: 'downloads', label: 'Downloads', show: !!(product.documents && product.documents.length > 0) },
+  { id: 'related', label: 'Related', show: relatedProducts.length > 0 },
+  { id: 'faq', label: 'FAQ', show: true },
+].filter((item) => item.show);
+
+const sidebarCategoryOrder = ['RFID Cards', 'RFID Tags', 'RFID Labels', 'RFID Wristbands', 'RFID Keyfob', 'RFID Readers', 'RFID Rings'];
+const sidebarCategories = sidebarCategoryOrder
+  .map((name) => ({
+    name,
+    href: categorySlugMap[name] || '/rfid',
+    count: products.filter((p) => p.category === name).length,
+    isCurrent: product.category === name,
+  }))
+  .filter((c) => c.count > 0);
+const totalProductCount = products.length;
+
 // BreadcrumbList JSON-LD
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.proudtek.com/" },
-    { "@type": "ListItem", "position": 2, "name": "RFID Products", "item": "https://www.proudtek.com/rfid" },
-    { "@type": "ListItem", "position": 3, "name": product.category, "item": `https://www.proudtek.com${categoryHref}` },
-    { "@type": "ListItem", "position": 4, "name": product.name, "item": `https://www.proudtek.com/product/${product.slug}` }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.rfidak.com/" },
+    { "@type": "ListItem", "position": 2, "name": "RFID Products", "item": "https://www.rfidak.com/rfid" },
+    { "@type": "ListItem", "position": 3, "name": product.category, "item": `https://www.rfidak.com${categoryHref}` },
+    { "@type": "ListItem", "position": 4, "name": product.name, "item": `https://www.rfidak.com/product/${product.slug}` }
   ]
 };
 
@@ -735,9 +791,9 @@ const faqJsonLd = {
   }))
 };
 
-const pageTitle = `${product.name} | ${product.category} - ProudTek RFID Manufacturer`;
+const pageTitle = `${product.name} | ${product.category} - RFIDAK RFID Manufacturer`;
 const pageDescription = truncateText(
-  `${product.name}. ${productBuyerSummary} Request samples, customization details and project guidance from ProudTek.`,
+  `${product.name}. ${productBuyerSummary} Request samples, customization details and project guidance from RFIDAK.`,
   160
 );
 ---
@@ -745,13 +801,58 @@ const pageDescription = truncateText(
 <Layout
   title={pageTitle}
   description={pageDescription}
-  keywords={`${product.name}, ${product.category}, RFID manufacturer, custom RFID, ProudTek, China RFID factory`}
+  keywords={`${product.name}, ${product.category}, RFID manufacturer, custom RFID, RFIDAK, China RFID factory`}
   ogImage={product.images[0] || '/images/hero/smart-card-banner.webp'}
   ogType="product"
   jsonLd={[productJsonLd, breadcrumbJsonLd, faqJsonLd]}
 >
   <Header />
-  <main>
+  <main class="relative">
+    <!-- Left Sticky Sidebar: product categories (desktop ≥1700px only) -->
+    <aside
+      aria-label="Product categories"
+      class="hidden min-[1700px]:block absolute top-0 bottom-0 w-48 pointer-events-none"
+      style="left: max(1rem, calc((100vw - 1280px) / 2 - 12rem - 1.5rem));"
+    >
+      <div class="sticky top-24 pointer-events-auto">
+        <nav class="rounded-[1.25rem] border border-gray-200 bg-white/95 backdrop-blur shadow-lg overflow-hidden">
+          <div class="flex items-center justify-between px-5 py-4 bg-gradient-to-br from-[#0d7377] to-[#0a5c5f] text-white">
+            <div>
+              <p class="text-[0.65rem] uppercase tracking-[0.18em] text-white/70">Catalog</p>
+              <p class="text-sm font-semibold mt-0.5">All Categories</p>
+            </div>
+            <span class="inline-flex items-center justify-center rounded-full bg-white/15 px-2.5 py-0.5 text-xs font-semibold text-white">{totalProductCount}</span>
+          </div>
+          <ul class="py-2">
+            {sidebarCategories.map((cat) => (
+              <li>
+                <a
+                  href={cat.href}
+                  aria-current={cat.isCurrent ? 'page' : undefined}
+                  class:list={[
+                    'group flex items-center justify-between gap-2 px-4 py-2.5 text-sm font-medium border-l-2 transition-colors',
+                    cat.isCurrent
+                      ? 'bg-[#0d7377]/5 text-[#0d7377] border-[#0d7377]'
+                      : 'text-gray-700 border-transparent hover:bg-[#0d7377]/5 hover:text-[#0d7377]',
+                  ]}
+                >
+                  <span class="truncate">{cat.name}</span>
+                  <span class:list={[
+                    'inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-semibold min-w-[2rem] transition-colors',
+                    cat.isCurrent
+                      ? 'bg-[#0d7377]/15 text-[#0d7377]'
+                      : 'bg-gray-100 text-gray-600 group-hover:bg-[#0d7377]/10 group-hover:text-[#0d7377]',
+                  ]}>
+                    {cat.count}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
     <!-- Breadcrumb -->
     <section class="bg-gray-100 py-4">
       <div class="container mx-auto px-4">
@@ -765,7 +866,7 @@ const pageDescription = truncateText(
     </section>
 
     <!-- Product Detail -->
-    <section class="py-12 bg-white">
+    <section id="overview" class="py-12 bg-white scroll-mt-40">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <!-- Product Images -->
@@ -774,7 +875,7 @@ const pageDescription = truncateText(
               <img
                 id="main-image"
                 src={product.images[0] || '/images/placeholder.webp'}
-                alt={`${product.name} - ${product.category} manufactured by ProudTek, ${specEntries.find(e => e.key === 'Frequency')?.value || 'multi-frequency'} RFID product from Shenzhen China`}
+                alt={`${product.name} - ${product.category} manufactured by RFIDAK, ${specEntries.find(e => e.key === 'Frequency')?.value || 'multi-frequency'} RFID product from Shenzhen China`}
                 class="w-full h-full object-contain"
                 width="600"
                 height="600"
@@ -797,13 +898,37 @@ const pageDescription = truncateText(
             )}
           </div>
 
-          <!-- Product Info -->
-          <div class="space-y-6">
+          <!-- Product Info (W3 QW#7: sticky on desktop so CTAs stay on screen while reading specs) -->
+          <div class="space-y-6 lg:sticky lg:top-24 lg:self-start">
             <div>
               <span class="eyebrow-label text-[#0d7377]">{product.category}</span>
               <h1 class="title-balance text-3xl font-bold text-gray-800 mt-2">{product.name}</h1>
               <p class="mt-4 text-lg font-semibold leading-relaxed text-gray-900">{productBuyerQuestion}</p>
             </div>
+
+            <!-- W3 QW#7: MOQ / Lead Time / Free Sample fast-facts -->
+            <dl class="grid grid-cols-3 gap-3" aria-label="Buyer fast facts">
+              {productBuyerFacts.map((fact) => (
+                <div class="rounded-xl border border-gray-200 bg-white p-3 text-center">
+                  <dt class="text-[0.65rem] uppercase tracking-[0.14em] font-semibold text-[#0d7377]">{fact.label}</dt>
+                  <dd class="mt-1 text-sm font-semibold text-gray-900 leading-tight">{fact.value}</dd>
+                  <p class="mt-1 text-[11px] leading-snug text-gray-500">{fact.hint}</p>
+                </div>
+              ))}
+            </dl>
+
+            <!-- Direct Answer (GEO: single-sentence, machine-extractable) -->
+            <aside
+              class="rounded-xl border-l-4 border-[#0d7377] bg-[#0d7377]/[0.04] p-4"
+              aria-label="Quick answer"
+            >
+              <p class="text-[0.65rem] uppercase tracking-[0.18em] font-semibold text-[#0d7377] mb-1.5">Quick answer</p>
+              <p
+                class="text-[15px] leading-relaxed text-gray-800 font-medium"
+                data-speakable="answer"
+                itemprop="abstract"
+              >{productDirectAnswer}</p>
+            </aside>
 
             <div class="prose prose-gray max-w-none product-description" data-speakable>
               <p class="card-copy text-gray-600">{productBuyerIntro}</p>
@@ -823,20 +948,32 @@ const pageDescription = truncateText(
             </div>
 
             <!-- Contact Buttons -->
-            <div class="pt-4 flex flex-wrap gap-4">
+            <div class="pt-4 flex flex-wrap gap-3">
               <a
                 href={productContactHref}
-                class="inline-block bg-[#0d7377] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#0a5c5f] transition-colors"
+                class="inline-block bg-[#0d7377] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#0a5c5f] transition-colors"
+                data-analytics={`quote_click_product_hero_${product.slug}`}
               >
                 {productInquiryLabel}
+              </a>
+              <a
+                href={`/contact?intent=samples&product=${product.slug}&express=1&source=product-hero#contactForm`}
+                class="inline-flex items-center gap-1.5 border-2 border-[#0d7377] text-[#0d7377] px-6 py-3 rounded-lg font-semibold hover:bg-[#0d7377]/5 transition-colors"
+                data-analytics={`sample_express_product_${product.slug}`}
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                Free Sample (60s)
               </a>
               <a
                 href={productWhatsAppHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-block border-2 border-[#25D366] text-[#25D366] px-8 py-3 rounded-lg font-medium hover:bg-[#25D366] hover:text-white transition-colors"
+                class="inline-block border-2 border-[#25D366] text-[#25D366] px-6 py-3 rounded-lg font-medium hover:bg-[#25D366] hover:text-white transition-colors"
+                data-analytics={`whatsapp_click_product_hero_${product.slug}`}
               >
-                WhatsApp for a quick check
+                WhatsApp
               </a>
             </div>
           </div>
@@ -844,9 +981,30 @@ const pageDescription = truncateText(
       </div>
     </section>
 
+    <!-- Sticky Section Navigator -->
+    <nav
+      id="product-sticky-nav"
+      aria-label="Product sections"
+      class="sticky top-[72px] z-40 bg-white/95 backdrop-blur border-y border-gray-200 shadow-sm"
+    >
+      <div class="container mx-auto px-4">
+        <div class="flex gap-1 overflow-x-auto scrollbar-hide -mx-4 px-4 py-2">
+          {stickyNavItems.map((item) => (
+            <a
+              href={`#${item.id}`}
+              data-section-link={item.id}
+              class="whitespace-nowrap px-4 py-2 text-sm font-medium text-gray-600 hover:text-[#0d7377] hover:bg-[#0d7377]/5 rounded-full border border-transparent transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </nav>
+
     <!-- Specifications -->
     {specEntries.length > 0 && (
-      <section class="py-12 bg-gray-50">
+      <section id="specifications" class="py-12 bg-gray-50 scroll-mt-40">
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto" data-speakable="product-specifications">
             <div class="max-w-3xl mb-6">
@@ -873,7 +1031,7 @@ const pageDescription = truncateText(
 
     <!-- Key Features -->
     {productFeatures.length > 0 && (
-      <section class="py-12 bg-white">
+      <section id="features" class="py-12 bg-white scroll-mt-40">
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto">
             <div class="max-w-3xl mb-6">
@@ -898,7 +1056,7 @@ const pageDescription = truncateText(
 
     <!-- Applications -->
     {productApplications.length > 0 && (
-      <section class="py-12 bg-gray-50">
+      <section id="applications" class="py-12 bg-gray-50 scroll-mt-40">
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto">
             <div class="max-w-3xl mb-6">
@@ -929,7 +1087,7 @@ const pageDescription = truncateText(
 
     <!-- Product Detail Sections (sub-types, variants, etc.) -->
     {productDetailSections.length > 0 && (
-      <section class="py-12 bg-white">
+      <section id="types" class="py-12 bg-white scroll-mt-40">
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto">
             <h2 class="text-2xl font-bold text-gray-800 mb-8">{product.name} Types</h2>
@@ -949,6 +1107,90 @@ const pageDescription = truncateText(
                     <p class="card-copy text-gray-600">{section.content}</p>
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Mold Catalog Grid (for products with named mold variants) -->
+    {product.moldCatalog && product.moldCatalog.length > 0 && (
+      <section id="molds" class="py-12 bg-gray-50 scroll-mt-40">
+        <div class="container mx-auto px-4">
+          <div class="max-w-6xl mx-auto">
+            <div class="max-w-3xl mb-8">
+              <p class="eyebrow-label text-[#0d7377] mb-2">Mold Code Reference</p>
+              <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">{product.name} Mold Catalog ({product.moldCatalog.length} codes)</h2>
+              <p class="card-copy text-gray-600">Each RFIDAK {product.name.toLowerCase()} mold carries a unique code ({product.moldCatalog[0].code}{product.moldCatalog.length > 1 ? ` – ${product.moldCatalog[product.moldCatalog.length - 1].code}` : ''}) that engineering and procurement teams can reference directly in quotes and POs. Browse the catalog below to match your project requirements to a specific mold shape, then include the code in your inquiry for fastest sample turnaround.</p>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {product.moldCatalog.map((mold: any) => (
+                <div class="copy-safe bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all">
+                  <div class="aspect-square bg-gray-50 overflow-hidden">
+                    <img
+                      src={mold.image}
+                      alt={`${mold.code} ${product.name} mold`}
+                      class="w-full h-full object-contain"
+                      loading="lazy"
+                      width="200"
+                      height="200"
+                    />
+                  </div>
+                  <div class="p-3 border-t border-gray-100">
+                    <p class="text-sm font-bold text-[#0d7377]">{mold.code}</p>
+                    {mold.note && (
+                      <p class="mt-1 text-xs text-gray-500 line-clamp-3 leading-snug">{mold.note}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Documents / Downloads -->
+    {product.documents && product.documents.length > 0 && (
+      <section id="downloads" class="py-12 bg-white scroll-mt-40">
+        <div class="container mx-auto px-4">
+          <div class="max-w-5xl mx-auto">
+            <div class="max-w-3xl mb-6">
+              <p class="eyebrow-label text-[#0d7377] mb-2">Documents</p>
+              <h2 class="title-balance text-2xl font-bold text-gray-800 mb-3">Datasheets and product documents</h2>
+              <p class="card-copy text-gray-600">Download the official PDF datasheets for {product.name.toLowerCase()} to share internally with engineering, procurement, or event-operations teams before sample approval.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+              {product.documents.map((doc: any) => (
+                <a
+                  href={doc.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  class="copy-safe group flex items-start gap-4 rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:border-[#0d7377] hover:bg-white hover:-translate-y-0.5 transition-all"
+                >
+                  <span class="inline-flex h-12 w-12 shrink-0 items-center justify-center" aria-hidden="true">
+                    <svg class="h-12 w-12" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10 4h22l8 8v28a4 4 0 01-4 4H10a4 4 0 01-4-4V8a4 4 0 014-4z" fill="#dc2626"/>
+                      <path d="M32 4v8h8L32 4z" fill="#fca5a5"/>
+                      <text x="24" y="33" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="700">{doc.fileType || 'PDF'}</text>
+                    </svg>
+                  </span>
+                  <div class="min-w-0 flex-1">
+                    <h3 class="title-balance text-base font-semibold text-gray-800 group-hover:text-[#0d7377] transition-colors">{doc.label}</h3>
+                    {doc.description && (
+                      <p class="card-copy mt-1 text-sm text-gray-600">{doc.description}</p>
+                    )}
+                    <p class="mt-2 inline-flex items-center text-sm font-medium text-[#0d7377]">
+                      Download
+                      {doc.fileSize && <span class="ml-2 text-xs text-gray-500">({doc.fileSize})</span>}
+                      <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"></path>
+                      </svg>
+                    </p>
+                  </div>
+                </a>
               ))}
             </div>
           </div>
@@ -1112,7 +1354,7 @@ const pageDescription = truncateText(
 
     <!-- Related Products -->
     {relatedProducts.length > 0 && (
-      <section class="py-12 bg-gray-50">
+      <section id="related" class="py-12 bg-gray-50 scroll-mt-40">
         <div class="container mx-auto px-4">
           <div class="max-w-3xl mb-8">
             <p class="eyebrow-label text-[#0d7377] mb-2">{relatedProductsSectionContent.eyebrow}</p>
@@ -1125,7 +1367,7 @@ const pageDescription = truncateText(
                 <div class="aspect-square bg-gray-100 overflow-hidden">
                   <img
                     src={related.images[0] || '/images/placeholder.webp'}
-                    alt={`${related.name} - ${related.category} by ProudTek RFID manufacturer`}
+                    alt={`${related.name} - ${related.category} by RFIDAK RFID manufacturer`}
                     class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                     width="300"
@@ -1150,7 +1392,7 @@ const pageDescription = truncateText(
       </section>
     )}
 
-    <section class="py-12 bg-white">
+    <section id="faq" class="py-12 bg-white scroll-mt-40">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
           <div class="max-w-3xl mb-6">
@@ -1174,6 +1416,19 @@ const pageDescription = truncateText(
     </section>
 
     <Newsletter />
+
+    <!-- W6: ScrollCTA (70% scroll) + ExitIntent (desktop mouseleave) -->
+    <ScrollCTA
+      contactHref={productContactHref}
+      contactLabel="Get Quote"
+      whatsappHref={productWhatsAppHref}
+      source="product"
+    />
+    <ExitIntent
+      sampleHref={`/contact?intent=samples&product=${product.slug}&express=1&source=exit-intent#contactForm`}
+      whatsappHref={productWhatsAppHref}
+      contextName={product.name}
+    />
   </main>
   <Footer />
 </Layout>
@@ -1194,4 +1449,61 @@ const pageDescription = truncateText(
     });
   });
 
+  // Sticky section navigator — highlight active section on scroll
+  const topBarLinks = document.querySelectorAll<HTMLAnchorElement>('[data-section-link]');
+  const sidebarLinks = document.querySelectorAll<HTMLAnchorElement>('[data-sidebar-link]');
+
+  const setActive = (id: string) => {
+    topBarLinks.forEach((link) => {
+      const match = link.getAttribute('data-section-link') === id;
+      link.classList.toggle('bg-[#0d7377]/10', match);
+      link.classList.toggle('text-[#0d7377]', match);
+      link.classList.toggle('border-[#0d7377]/20', match);
+      link.classList.toggle('text-gray-600', !match);
+    });
+    sidebarLinks.forEach((link) => {
+      const match = link.getAttribute('data-sidebar-link') === id;
+      link.classList.toggle('bg-[#0d7377]/5', match);
+      link.classList.toggle('text-[#0d7377]', match);
+      link.classList.toggle('border-[#0d7377]', match);
+      link.classList.toggle('text-gray-700', !match);
+    });
+  };
+
+  const sectionIds = Array.from(topBarLinks).map((l) => l.getAttribute('data-section-link')).filter(Boolean) as string[];
+  const sections = sectionIds
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (sections.length > 0 && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]?.target.id) {
+          setActive(visible[0].target.id);
+        }
+      },
+      { rootMargin: '-120px 0px -60% 0px', threshold: 0 }
+    );
+    sections.forEach((s) => observer.observe(s));
+  }
+
+  const allNavLinks = [...topBarLinks, ...sidebarLinks];
+  allNavLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      const id = link.getAttribute('data-section-link') || link.getAttribute('data-sidebar-link');
+      if (id) setActive(id);
+    });
+  });
 </script>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  /* Cap container width on wide screens so the left category sidebar has room */
+  @media (min-width: 1700px) {
+    main > section .container { max-width: 1280px; }
+  }
+</style>

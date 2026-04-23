@@ -1,0 +1,170 @@
+---
+// W6 QW#14: Desktop-only exit-intent modal. Triggers once per 7 days per host.
+// - No mobile: mouseleave at top edge is unreliable on touch devices
+// - localStorage gate prevents nagging repeat visitors
+// - All CTAs carry data-analytics; W4 global delegation catches clicks + we
+//   explicitly rfidakTrack shown / dismissed.
+
+interface Props {
+  sampleHref: string;
+  whatsappHref: string;
+  contextName?: string; // e.g. "RFID Cards" or product name — personalizes title
+}
+
+const {
+  sampleHref,
+  whatsappHref,
+  contextName = '',
+} = Astro.props;
+
+const headline = contextName
+  ? `Before you go — request a ${contextName} sample`
+  : 'Before you go — request a free RFID sample';
+---
+
+<div
+  id="exit-intent-modal"
+  class="exit-intent-modal fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/60 backdrop-blur-sm p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="exit-intent-title"
+  aria-hidden="true"
+>
+  <div class="relative w-full max-w-md brand-panel p-7 pt-8">
+    <button
+      type="button"
+      id="exit-intent-close"
+      class="absolute top-3 right-3 inline-flex items-center justify-center w-8 h-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+      aria-label="Dismiss"
+      data-analytics="exit_intent_dismissed"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <p class="eyebrow-label text-[#0d7377] mb-2">Free Sample Offer</p>
+    <h2 id="exit-intent-title" class="title-balance text-xl font-semibold text-gray-900 mb-2">{headline}</h2>
+    <p class="card-copy text-sm text-gray-600 mb-5">60-second form — we only ask for name, email, country, product and quantity. Stock samples ship in 1–3 business days via DHL / FedEx.</p>
+
+    <ul class="space-y-2 mb-6 text-sm text-gray-700">
+      <li class="flex items-start gap-2">
+        <svg class="w-4 h-4 mt-0.5 text-[#0d7377] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        Samples free on standard SKUs
+      </li>
+      <li class="flex items-start gap-2">
+        <svg class="w-4 h-4 mt-0.5 text-[#0d7377] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        Reply in 2–4 business hours (24h max)
+      </li>
+      <li class="flex items-start gap-2">
+        <svg class="w-4 h-4 mt-0.5 text-[#0d7377] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        ISO 9001 · ISO 14001 · SGS certified factory
+      </li>
+    </ul>
+
+    <div class="flex flex-col gap-2">
+      <a
+        href={sampleHref}
+        class="cta-primary w-full"
+        data-analytics="exit_intent_click_sample"
+      >
+        Request Free Sample
+      </a>
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="cta-whatsapp w-full"
+        data-analytics="exit_intent_click_whatsapp"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+      </a>
+      <button
+        type="button"
+        id="exit-intent-decline"
+        class="mt-1 text-xs font-medium text-gray-500 hover:text-gray-700 self-center"
+        data-analytics="exit_intent_declined"
+      >
+        No thanks, I'll keep browsing
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var modal = document.getElementById('exit-intent-modal');
+    if (!modal) return;
+
+    // Desktop only — mouseleave at top is unreliable on touch devices
+    if (!window.matchMedia || !window.matchMedia('(min-width: 1024px)').matches) return;
+
+    var key = 'rfidak_exit_intent_v1:' + location.host;
+    var now = Date.now();
+    var sevenDays = 7 * 24 * 3600 * 1000;
+
+    try {
+      var raw = localStorage.getItem(key);
+      if (raw) {
+        var until = parseInt(raw, 10);
+        if (!Number.isNaN(until) && until > now) return;
+      }
+    } catch (_) {}
+
+    var shown = false;
+
+    function open() {
+      if (shown) return;
+      shown = true;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      try { window.rfidakTrack && window.rfidakTrack('exit_intent_shown', { page: location.pathname }); } catch (_) {}
+    }
+
+    function dismiss() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      try { localStorage.setItem(key, String(now + sevenDays)); } catch (_) {}
+    }
+
+    function onMouseLeave(e) {
+      // Fired when cursor leaves viewport through the top edge
+      if (!e.relatedTarget && e.clientY <= 0) {
+        open();
+        document.documentElement.removeEventListener('mouseleave', onMouseLeave);
+      }
+    }
+
+    document.documentElement.addEventListener('mouseleave', onMouseLeave);
+
+    // Close handlers
+    var closeBtn = document.getElementById('exit-intent-close');
+    var declineBtn = document.getElementById('exit-intent-decline');
+    closeBtn && closeBtn.addEventListener('click', dismiss);
+    declineBtn && declineBtn.addEventListener('click', dismiss);
+
+    // Clicking backdrop (not inner panel) dismisses
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) dismiss();
+    });
+
+    // Esc key dismisses
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && shown) dismiss();
+    });
+
+    // When user clicks a primary CTA inside the modal, also mark suppressed
+    // (global delegation will fire rfidakTrack; we also gate localStorage here)
+    var links = modal.querySelectorAll('a[data-analytics]');
+    links.forEach(function (a) {
+      a.addEventListener('click', function () {
+        try { localStorage.setItem(key, String(now + sevenDays)); } catch (_) {}
+      });
+    });
+  })();
+</script>

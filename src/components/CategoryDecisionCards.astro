@@ -1,0 +1,295 @@
+---
+// W5 A1.3: 3 decision cards per category ("Pick by X") to help buyers narrow shortlist
+// before scrolling the product grid. Each card links to either a comparison, landing page,
+// or scrolls to filtered products.
+
+interface Props {
+  categorySlug: string;
+}
+
+interface DecisionCard {
+  label: string;
+  title: string;
+  description: string;
+  options: Array<{ name: string; hint: string; href: string }>;
+}
+
+const deckMap: Record<string, DecisionCard[]> = {
+  'rfid-cards': [
+    {
+      label: 'Pick by Frequency',
+      title: 'Which band fits your reader?',
+      description: 'LF for basic access, HF for payment + NFC, UHF for long-range tracking.',
+      options: [
+        { name: 'LF 125 kHz', hint: 'Short-range access, legacy EM / T5577', href: '/rfid-frequency-guide#lf' },
+        { name: 'HF 13.56 MHz', hint: 'MIFARE, NTAG, payment, hotel keys', href: '/rfid-frequency-guide#hf' },
+        { name: 'UHF 860–960 MHz', hint: 'Long-range asset + inventory', href: '/rfid-frequency-guide#uhf' },
+      ],
+    },
+    {
+      label: 'Pick by Chip',
+      title: 'Which chip family matches your system?',
+      description: 'Stay close to legacy or move to a stronger security path — here are the three paths buyers usually compare.',
+      options: [
+        { name: 'MIFARE Classic vs DESFire', hint: 'Legacy vs AES-128 security', href: '/compare/mifare-classic-vs-desfire' },
+        { name: 'NTAG 213 / 215 / 216', hint: 'NFC smartphone interaction', href: '/compare/ntag213-vs-ntag215-vs-ntag216' },
+        { name: 'EM4100 / T5577 (LF)', hint: 'Basic access / time attendance', href: '/rfid-chip-comparison' },
+      ],
+    },
+    {
+      label: 'Pick by Application',
+      title: 'What will the card actually do?',
+      description: 'The application usually decides frequency, chip and printing needs in one step.',
+      options: [
+        { name: 'Access control / hotel keys', hint: 'HF 13.56 MHz, MIFARE / DESFire', href: '/solutions/hotel-access-rfid' },
+        { name: 'Transit / payment', hint: 'HF, pre-encoded, branded print', href: '/solutions/access-control-rfid' },
+        { name: 'Membership / loyalty', hint: 'HF NFC, CMYK print, QR combo', href: '/contact?intent=samples&category=rfid-cards#contactForm' },
+      ],
+    },
+  ],
+  'rfid-tags': [
+    {
+      label: 'Pick by Environment',
+      title: 'Where does the tag live?',
+      description: 'Tag survival rate is the #1 cost driver — start from the environment, not the chip.',
+      options: [
+        { name: 'Laundry / linen', hint: 'Silicone or textile, 200+ cycles @ 180°C', href: '/solutions/laundry-linen-rfid' },
+        { name: 'On metal / industrial', hint: 'Ceramic, PCB or FR4 anti-metal tags', href: '/contact?intent=samples&category=rfid-tags#contactForm' },
+        { name: 'Outdoor / logistics', hint: 'Tyre, pallet, waste-bin, IP68', href: '/solutions/industrial-asset-tracking-rfid' },
+      ],
+    },
+    {
+      label: 'Pick by Frequency',
+      title: 'Range + chip family go together',
+      description: 'Pick band first; chip selection narrows automatically within that band.',
+      options: [
+        { name: 'UHF 860–960 MHz', hint: 'Impinj Monza, NXP UCODE — long-range', href: '/rfid-frequency-guide#uhf' },
+        { name: 'HF 13.56 MHz', hint: 'ICODE SLIX, MIFARE — library, access', href: '/rfid-frequency-guide#hf' },
+        { name: 'LF 125 kHz', hint: 'EM4100, HITAG — livestock, access', href: '/rfid-frequency-guide#lf' },
+      ],
+    },
+    {
+      label: 'Pick by Application',
+      title: 'Common deployments',
+      description: 'Each application maps cleanly to a tag format we already stock — save tooling cost where possible.',
+      options: [
+        { name: 'Laundry management', hint: 'Textile 75×15mm / silicone button', href: '/solutions/laundry-linen-rfid' },
+        { name: 'Asset / tool tracking', hint: 'Anti-metal PCB or ceramic', href: '/solutions/industrial-asset-tracking-rfid' },
+        { name: 'Library media', hint: 'HF book / DVD inlays', href: '/solutions/library-media-rfid' },
+      ],
+    },
+  ],
+  'rfid-labels': [
+    {
+      label: 'Pick by Chip',
+      title: 'Chip class decides read range + memory',
+      description: 'UHF for bulk inventory, HF/NFC for touch interaction, LF for legacy systems.',
+      options: [
+        { name: 'UHF (Monza / UCODE)', hint: 'Bulk scan 3–10m range', href: '/rfid-chip-comparison' },
+        { name: 'HF / NFC (NTAG / ICODE)', hint: 'Smartphone tap, NDEF URL', href: '/compare/ntag213-vs-ntag215-vs-ntag216' },
+        { name: 'Tamper-evident', hint: 'Destructive layer for anti-counterfeit', href: '/contact?intent=samples&category=rfid-labels#contactForm' },
+      ],
+    },
+    {
+      label: 'Pick by Adhesive',
+      title: 'Stick surface matters',
+      description: 'Adhesive spec drives success rate on glass, metal, curved or wet surfaces.',
+      options: [
+        { name: 'Paper face + acrylic', hint: 'Standard retail / warehouse', href: '/contact?intent=samples&category=rfid-labels#contactForm' },
+        { name: 'PET + strong adhesive', hint: 'Outdoor / rough surface', href: '/contact?intent=samples&category=rfid-labels#contactForm' },
+        { name: 'Windshield / glass', hint: 'Low-tack removable adhesive', href: '/contact?intent=samples&category=rfid-labels#contactForm' },
+      ],
+    },
+    {
+      label: 'Pick by Application',
+      title: 'Common deployments',
+      description: 'Tie label spec to the actual workflow — scan rate or marketing touch.',
+      options: [
+        { name: 'Retail inventory', hint: 'UHF, bulk read, EPC encoding', href: '/solutions/industrial-asset-tracking-rfid' },
+        { name: 'Anti-counterfeit / brand', hint: 'Tamper-evident NFC with NDEF', href: '/contact?intent=samples&category=rfid-labels#contactForm' },
+        { name: 'Document / file tracking', hint: 'HF slim inlay, long memory', href: '/solutions/library-media-rfid' },
+      ],
+    },
+  ],
+  'rfid-wristbands': [
+    {
+      label: 'Pick by Material',
+      title: 'Reusable or disposable?',
+      description: 'Material decides cost per wear and comfort for the end user.',
+      options: [
+        { name: 'Silicone (reusable)', hint: 'Hotels, water parks, fitness', href: '/solutions/event-nfc-rfid' },
+        { name: 'Fabric / woven', hint: 'Festivals, multi-day events', href: '/solutions/event-nfc-rfid' },
+        { name: 'Paper / PVC (disposable)', hint: 'Single-event, low cost', href: '/solutions/event-nfc-rfid' },
+      ],
+    },
+    {
+      label: 'Pick by Chip',
+      title: 'Chip decides what the wristband can do',
+      description: 'Cashless payment, access control and simple ticketing each need different security levels.',
+      options: [
+        { name: 'MIFARE DESFire EV3', hint: 'Cashless payment, AES-128', href: '/compare/mifare-classic-vs-desfire' },
+        { name: 'NTAG 213 / 215', hint: 'NFC tap, NDEF URL, social', href: '/compare/ntag213-vs-ntag215-vs-ntag216' },
+        { name: 'UHF (Monza R6)', hint: 'Crowd-flow tracking, 1–3m', href: '/rfid-chip-comparison' },
+      ],
+    },
+    {
+      label: 'Pick by Application',
+      title: 'Common deployments',
+      description: 'Event, hospitality and healthcare use different wristband specs.',
+      options: [
+        { name: 'Events / festivals', hint: 'Fabric + NTAG or disposable PVC', href: '/solutions/event-nfc-rfid' },
+        { name: 'Hotels / resorts', hint: 'Silicone + DESFire payment', href: '/solutions/hotel-access-rfid' },
+        { name: 'Water parks / fitness', hint: 'Silicone waterproof, 300+ wears', href: '/solutions/event-nfc-rfid' },
+      ],
+    },
+  ],
+  'rfid-keyfob': [
+    {
+      label: 'Pick by Material',
+      title: 'Housing sets durability + aesthetics',
+      description: 'Office keychain, gym or industrial — each environment favors a different housing.',
+      options: [
+        { name: 'ABS (standard)', hint: 'Office / apartment access', href: '/contact?intent=samples&category=rfid-keyfob#contactForm' },
+        { name: 'Leather / epoxy (premium)', hint: 'Hospitality, branded giveaways', href: '/contact?intent=samples&category=rfid-keyfob#contactForm' },
+        { name: 'PPS / FR4 (industrial)', hint: 'High-temp, rough handling', href: '/contact?intent=samples&category=rfid-keyfob#contactForm' },
+      ],
+    },
+    {
+      label: 'Pick by Chip',
+      title: 'Chip matches the installed reader',
+      description: 'If you already have a reader, chip is the first thing we confirm.',
+      options: [
+        { name: 'MIFARE Classic / DESFire', hint: 'Most modern access systems', href: '/compare/mifare-classic-vs-desfire' },
+        { name: 'EM4100 / T5577 (LF)', hint: 'Legacy access, time attendance', href: '/rfid-chip-comparison' },
+        { name: 'HID Prox / iClass compatible', hint: 'US / enterprise corporate', href: '/contact?intent=compatibility&category=rfid-keyfob#contactForm' },
+      ],
+    },
+    {
+      label: 'Pick by Application',
+      title: 'Common deployments',
+      description: 'Right housing + chip combo per use case.',
+      options: [
+        { name: 'Apartment / office access', hint: 'ABS + MIFARE', href: '/solutions/access-control-rfid' },
+        { name: 'Gym / fitness club', hint: 'Silicone + NTAG or MIFARE', href: '/contact?intent=samples&category=rfid-keyfob#contactForm' },
+        { name: 'Car parking', hint: 'UHF long-range or LF short-range', href: '/solutions/access-control-rfid' },
+      ],
+    },
+  ],
+  'rfid-readers': [
+    {
+      label: 'Pick by Interface',
+      title: 'How does the reader talk to your system?',
+      description: 'Integration effort and deployment style are both set by the interface.',
+      options: [
+        { name: 'USB (HID keyboard)', hint: 'Desktop enrollment, zero integration', href: '/contact?intent=compatibility&category=rfid-readers#contactForm' },
+        { name: 'TCP/IP Ethernet', hint: 'Backend integration, multi-site', href: '/contact?intent=compatibility&category=rfid-readers#contactForm' },
+        { name: 'RS232 / RS485', hint: 'Industrial PLC / legacy controller', href: '/contact?intent=compatibility&category=rfid-readers#contactForm' },
+      ],
+    },
+    {
+      label: 'Pick by Frequency',
+      title: 'Reader must match credential band',
+      description: 'One reader per band — confirm your credential first.',
+      options: [
+        { name: 'LF 125 kHz', hint: 'EM4100 / HITAG / T5577', href: '/rfid-frequency-guide#lf' },
+        { name: 'HF 13.56 MHz', hint: 'MIFARE / NTAG / ICODE / Felica', href: '/rfid-frequency-guide#hf' },
+        { name: 'UHF 860–960 MHz', hint: 'Gen2 long-range bulk scan', href: '/rfid-frequency-guide#uhf' },
+      ],
+    },
+    {
+      label: 'Pick by Application',
+      title: 'Common deployments',
+      description: 'Enrollment station, door access and self-service have different reader needs.',
+      options: [
+        { name: 'Card enrollment', hint: 'USB desktop, SDK + sample code', href: '/contact?intent=compatibility&category=rfid-readers#contactForm' },
+        { name: 'Door access', hint: 'Wiegand / OSDP wall-mount', href: '/solutions/access-control-rfid' },
+        { name: 'Library / self-checkout', hint: 'HF multi-tag pad reader', href: '/solutions/library-media-rfid' },
+      ],
+    },
+  ],
+  'rfid-rings': [
+    {
+      label: 'Pick by Material',
+      title: 'Finish matches the wearer',
+      description: 'Ceramic for elegance, silicone for sport, metal for premium.',
+      options: [
+        { name: 'Ceramic (Zirconia)', hint: 'Scratch-resistant, dress wear', href: '/contact?intent=samples&category=rfid-rings#contactForm' },
+        { name: 'Silicone', hint: 'Sport, waterproof, comfortable', href: '/contact?intent=samples&category=rfid-rings#contactForm' },
+        { name: 'Stainless steel / titanium', hint: 'Premium look, longer read', href: '/contact?intent=samples&category=rfid-rings#contactForm' },
+      ],
+    },
+    {
+      label: 'Pick by Chip',
+      title: 'What do you want to trigger?',
+      description: 'NFC chip family decides read distance, memory and phone compatibility.',
+      options: [
+        { name: 'NTAG 213 (144 bytes)', hint: 'URL tap, social share', href: '/compare/ntag213-vs-ntag215-vs-ntag216' },
+        { name: 'NTAG 215 (504 bytes)', hint: 'Amiibo, multi-URL, Tesla unlock', href: '/compare/ntag213-vs-ntag215-vs-ntag216' },
+        { name: 'NTAG 216 (888 bytes)', hint: 'Max memory for custom data', href: '/compare/ntag213-vs-ntag215-vs-ntag216' },
+      ],
+    },
+    {
+      label: 'Pick by Application',
+      title: 'Common deployments',
+      description: 'Consumer, enterprise and promotional rings diverge on chip + printing needs.',
+      options: [
+        { name: 'Tesla / car unlock', hint: 'NTAG 215, short distance', href: '/contact?intent=compatibility&category=rfid-rings#contactForm' },
+        { name: 'Contactless payment', hint: 'Secure element (project-based)', href: '/contact?intent=compatibility&category=rfid-rings#contactForm' },
+        { name: 'Promo / event giveaway', hint: 'NTAG 213 + branded insert', href: '/contact?intent=samples&category=rfid-rings#contactForm' },
+      ],
+    },
+  ],
+};
+
+const { categorySlug } = Astro.props;
+const cards = deckMap[categorySlug] || [];
+---
+
+{cards.length > 0 && (
+  <section class="py-12 bg-white border-b border-gray-100" aria-label="Decision cards">
+    <div class="container mx-auto px-4">
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p class="eyebrow-label text-[#0d7377] mb-1">Decide Faster</p>
+            <h2 class="title-balance text-xl md:text-2xl font-semibold text-gray-900">Pick your fit in 3 questions</h2>
+          </div>
+          <a
+            href={`/contact?intent=samples&category=${categorySlug}#contactForm`}
+            data-analytics={`decision_skip_${categorySlug}`}
+            class="text-sm font-medium text-[#0d7377] hover:text-[#0a5c5f] inline-flex items-center gap-1"
+          >
+            Not sure? Ask us
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-3">
+          {cards.map((card) => (
+            <div class="brand-panel p-5">
+              <p class="eyebrow-label text-[#0d7377] mb-1.5">{card.label}</p>
+              <h3 class="title-balance text-base font-semibold text-gray-900 mb-1.5">{card.title}</h3>
+              <p class="card-copy text-xs text-gray-600 mb-4">{card.description}</p>
+              <ul class="space-y-2">
+                {card.options.map((opt) => (
+                  <li>
+                    <a
+                      href={opt.href}
+                      data-analytics={`decision_option_${categorySlug}_${opt.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`}
+                      class="group block rounded-lg border border-gray-200 px-3 py-2 hover:border-[#0d7377] hover:bg-[#0d7377]/[0.03] transition-colors"
+                    >
+                      <span class="block text-sm font-medium text-gray-900 group-hover:text-[#0d7377]">{opt.name}</span>
+                      <span class="block text-xs text-gray-500 mt-0.5">{opt.hint}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+)}

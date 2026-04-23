@@ -76,24 +76,24 @@ const productCategoryCards = productCategories.map((category) => ({
 const pageJsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "ProudTek RFID Products",
-  "url": "https://www.proudtek.com/products",
-  "description": "Overview of ProudTek RFID product categories including cards, tags, labels, wristbands, keyfobs, readers, and laundry tags.",
+  "name": "RFIDAK RFID Products",
+  "url": "https://www.rfidak.com/products",
+  "description": "Overview of RFIDAK RFID product categories including cards, tags, labels, wristbands, keyfobs, readers, and laundry tags.",
   "mainEntity": {
     "@type": "ItemList",
     "itemListElement": productCategories.map((category, index) => ({
       "@type": "ListItem",
       "position": index + 1,
       "name": category.name,
-      "url": `https://www.proudtek.com${category.href}`
+      "url": `https://www.rfidak.com${category.href}`
     }))
   }
 };
 ---
 
 <Layout
-  title="RFID Product Categories - Cards, Tags, Labels, Wristbands & Readers | ProudTek"
-  description="Explore ProudTek's RFID product categories: RFID cards, tags, labels, NFC stickers, wristbands, keyfobs, readers and industrial laundry tags."
+  title="RFID Product Categories - Cards, Tags, Labels, Wristbands & Readers | RFIDAK"
+  description="Explore RFIDAK's RFID product categories: RFID cards, tags, labels, NFC stickers, wristbands, keyfobs, readers and industrial laundry tags."
   keywords="RFID product categories, RFID cards supplier, RFID tags manufacturer, NFC stickers, RFID wristbands, RFID keyfobs, RFID readers, laundry RFID tags"
   jsonLd={pageJsonLd}
 >
@@ -148,7 +148,7 @@ const pageJsonLd = {
                 <div class="aspect-[5/4] overflow-hidden bg-gray-100">
                   <img
                     src={category.image}
-                    alt={category.name}
+                    alt={`${category.name} category — RFIDAK RFID products manufactured in Shenzhen, China`}
                     class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />

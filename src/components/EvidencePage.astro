@@ -12,7 +12,7 @@ interface Props {
 
 const { pageKey } = Astro.props;
 const config = evidencePages[pageKey];
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/${config.slug}`;
 const evidenceContactHref = getEvidenceContactHref(config.slug);
 const evidenceInquiryLabel = getContextualInquiryLabel(getEvidenceInquiryIntent(config.slug), 'evidence');
@@ -136,12 +136,18 @@ const faqJsonLd = {
             <p class="card-copy text-gray-600 leading-relaxed">{config.proofDescription}</p>
           </div>
           <div class="grid gap-4 sm:grid-cols-2">
-            {config.proofCards.map((item) => (
-              <div class="copy-safe rounded-2xl border border-gray-200 bg-gray-50 p-6">
-                <h3 class="title-balance text-lg font-semibold text-gray-900">{item.title}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-gray-600">{item.description}</p>
-              </div>
-            ))}
+            {config.proofCards.map((item) => {
+              const anchorId = item.title
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+              return (
+                <div id={anchorId} class="copy-safe rounded-2xl border border-gray-200 bg-gray-50 p-6 scroll-mt-24">
+                  <h3 class="title-balance text-lg font-semibold text-gray-900">{item.title}</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-gray-600">{item.description}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

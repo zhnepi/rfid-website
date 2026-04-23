@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.proudtek.com',
+  site: 'https://www.rfidak.com',
   adapter: vercel(),
   integrations: [
     sitemap({
@@ -15,7 +15,7 @@ export default defineConfig({
       lastmod: new Date(),
       filter: (page) => !page.includes('/api/'),
       serialize(item) {
-        if (item.url === 'https://www.proudtek.com/') {
+        if (item.url === 'https://www.rfidak.com/') {
           item.priority = 1.0;
           item.changefreq = 'daily';
         } else if (item.url.includes('/category/') || item.url.includes('/products')) {

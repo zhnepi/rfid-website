@@ -40,7 +40,7 @@ export const marketPages: Record<string, MarketPageContent> = {
     slug: 'north-america-rfid-cards',
     regionName: 'North America',
     productFocus: 'RFID cards for access, hotel and membership programs',
-    title: 'RFID Cards for North America - Access, Hotel and Membership Card Supply | ProudTek',
+    title: 'RFID Cards for North America - Access, Hotel and Membership Card Supply | RFIDAK',
     description:
       'Buyer-focused landing page for North American RFID card sourcing. Compare access cards, hotel key cards, clamshell cards and card inlays with sample planning, compatibility checks and repeat-order support.',
     keywords:
@@ -145,7 +145,7 @@ export const marketPages: Record<string, MarketPageContent> = {
           'Send a clear photo of the working card, the reader or lock brand if known, and the target quantity. That is usually enough to start a card-matching conversation and shortlist samples.',
       },
       {
-        question: 'Can ProudTek support hotel card replenishment for North American properties?',
+        question: 'Can RFIDAK support hotel card replenishment for North American properties?',
         answer:
           'Yes. The usual process is to confirm lock compatibility first, then align branding, numbering or encoding details so repeat orders stay consistent across properties.',
       },
@@ -170,7 +170,7 @@ export const marketPages: Record<string, MarketPageContent> = {
     slug: 'europe-laundry-rfid-tags',
     regionName: 'Europe',
     productFocus: 'Laundry RFID tags for linen, garment and textile tracking',
-    title: 'Laundry RFID Tags for Europe - Linen, Workwear and Textile Tracking | ProudTek',
+    title: 'Laundry RFID Tags for Europe - Linen, Workwear and Textile Tracking | RFIDAK',
     description:
       'Buyer-focused landing page for European laundry RFID projects. Compare textile, silicone and PPS laundry tags with wash-cycle planning, attachment choices and repeat supply support.',
     keywords:
@@ -285,7 +285,7 @@ export const marketPages: Record<string, MarketPageContent> = {
           'There is no single best format. Garments, workwear and flat linen often suit different tag shapes or attachment methods, so matching the tag to the textile and handling routine is important.',
       },
       {
-        question: 'Can ProudTek support repeat orders once the approved laundry tag is fixed?',
+        question: 'Can RFIDAK support repeat orders once the approved laundry tag is fixed?',
         answer:
           'Yes. After the approved tag format is confirmed, repeat orders are usually organized around the same construction, chip and attachment expectations so replenishment stays predictable.',
       },
@@ -300,7 +300,7 @@ export const marketPages: Record<string, MarketPageContent> = {
     slug: 'middle-east-anti-metal-rfid-tags',
     regionName: 'Middle East',
     productFocus: 'Anti-metal RFID tags for facilities, equipment and outdoor assets',
-    title: 'Anti-Metal RFID Tags for the Middle East - Asset, Utility and Facility Tracking | ProudTek',
+    title: 'Anti-Metal RFID Tags for the Middle East - Asset, Utility and Facility Tracking | RFIDAK',
     description:
       'Buyer-focused landing page for Middle East anti-metal RFID projects. Compare printable metal tags, ceramic tags and rugged on-metal formats with mounting guidance, sample validation and shipping support.',
     keywords:
@@ -415,7 +415,7 @@ export const marketPages: Record<string, MarketPageContent> = {
           'Photos of the actual asset, approximate dimensions, the target read point, environmental exposure and the preferred mounting method all make sample matching much more accurate.',
       },
       {
-        question: 'Can ProudTek help after the sample stage if the project expands into a wider rollout?',
+        question: 'Can RFIDAK help after the sample stage if the project expands into a wider rollout?',
         answer:
           'Yes. Once the approved tag format is clear, the discussion usually shifts into consistent repeat supply, numbering or encoding needs and delivery scheduling for rollout phases.',
       },

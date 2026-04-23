@@ -147,6 +147,124 @@ export function isLikelySpam(payload: InquiryPayload) {
   return Boolean(payload.website);
 }
 
+// W4 QW#10: bucket referrer host into a small, analytics-friendly label so
+// inbound AI-engine, search-engine and social traffic can be attributed.
+export type ReferrerBucket =
+  | `ai_engine:${'chatgpt' | 'perplexity' | 'gemini' | 'claude' | 'copilot' | 'you' | 'phind' | 'deepseek' | 'kimi' | 'doubao' | 'other'}`
+  | `search:${'google' | 'bing' | 'duckduckgo' | 'yahoo' | 'baidu' | 'yandex' | 'naver' | 'other'}`
+  | `social:${'linkedin' | 'twitter' | 'facebook' | 'youtube' | 'reddit' | 'tiktok' | 'xiaohongshu' | 'other'}`
+  | 'email'
+  | 'self'
+  | 'internal'
+  | 'other'
+  | 'direct';
+
+const aiEngineHosts: Record<string, Exclude<ReferrerBucket, `search:${string}` | `social:${string}` | 'email' | 'self' | 'internal' | 'other' | 'direct'>> = {
+  'chat.openai.com': 'ai_engine:chatgpt',
+  'chatgpt.com': 'ai_engine:chatgpt',
+  'www.perplexity.ai': 'ai_engine:perplexity',
+  'perplexity.ai': 'ai_engine:perplexity',
+  'gemini.google.com': 'ai_engine:gemini',
+  'bard.google.com': 'ai_engine:gemini',
+  'claude.ai': 'ai_engine:claude',
+  'copilot.microsoft.com': 'ai_engine:copilot',
+  'www.bing.com/chat': 'ai_engine:copilot',
+  'you.com': 'ai_engine:you',
+  'www.phind.com': 'ai_engine:phind',
+  'phind.com': 'ai_engine:phind',
+  'www.deepseek.com': 'ai_engine:deepseek',
+  'chat.deepseek.com': 'ai_engine:deepseek',
+  'kimi.moonshot.cn': 'ai_engine:kimi',
+  'www.doubao.com': 'ai_engine:doubao',
+};
+
+const searchEngineHosts: Record<string, `search:${'google' | 'bing' | 'duckduckgo' | 'yahoo' | 'baidu' | 'yandex' | 'naver'}`> = {
+  'www.google.com': 'search:google',
+  'www.google.co.uk': 'search:google',
+  'www.google.de': 'search:google',
+  'www.google.fr': 'search:google',
+  'www.google.co.jp': 'search:google',
+  'www.google.com.hk': 'search:google',
+  'google.com': 'search:google',
+  'www.bing.com': 'search:bing',
+  'bing.com': 'search:bing',
+  'duckduckgo.com': 'search:duckduckgo',
+  'www.duckduckgo.com': 'search:duckduckgo',
+  'search.yahoo.com': 'search:yahoo',
+  'www.baidu.com': 'search:baidu',
+  'baidu.com': 'search:baidu',
+  'yandex.com': 'search:yandex',
+  'www.yandex.com': 'search:yandex',
+  'www.naver.com': 'search:naver',
+  'naver.com': 'search:naver',
+};
+
+const socialHosts: Record<string, `social:${'linkedin' | 'twitter' | 'facebook' | 'youtube' | 'reddit' | 'tiktok' | 'xiaohongshu'}`> = {
+  'www.linkedin.com': 'social:linkedin',
+  'linkedin.com': 'social:linkedin',
+  'lnkd.in': 'social:linkedin',
+  'twitter.com': 'social:twitter',
+  'x.com': 'social:twitter',
+  't.co': 'social:twitter',
+  'www.facebook.com': 'social:facebook',
+  'facebook.com': 'social:facebook',
+  'm.facebook.com': 'social:facebook',
+  'l.facebook.com': 'social:facebook',
+  'www.youtube.com': 'social:youtube',
+  'youtube.com': 'social:youtube',
+  'm.youtube.com': 'social:youtube',
+  'www.reddit.com': 'social:reddit',
+  'old.reddit.com': 'social:reddit',
+  'www.tiktok.com': 'social:tiktok',
+  'www.xiaohongshu.com': 'social:xiaohongshu',
+  'xhslink.com': 'social:xiaohongshu',
+};
+
+const selfHosts = new Set(['www.rfidak.com', 'rfidak.com', 'localhost', 'localhost:4321']);
+const emailHosts = new Set(['mail.google.com', 'outlook.live.com', 'outlook.office.com', 'mail.yahoo.com', 'mail.qq.com', 'mail.163.com']);
+
+function normalizeHost(raw: string): string {
+  const trimmed = (raw || '').trim().toLowerCase();
+
+  if (!trimmed) return '';
+
+  try {
+    if (trimmed.includes('://')) {
+      return new URL(trimmed).host;
+    }
+
+    return new URL(`https://${trimmed}`).host;
+  } catch {
+    return trimmed.replace(/\/.*$/, '');
+  }
+}
+
+export function classifyReferrer(referrerHost: string, referrer?: string): ReferrerBucket {
+  const host = normalizeHost(referrerHost || referrer || '');
+
+  if (!host) return 'direct';
+  if (selfHosts.has(host)) return 'self';
+  if (emailHosts.has(host)) return 'email';
+
+  if (host in aiEngineHosts) return aiEngineHosts[host]!;
+  if (host in searchEngineHosts) return searchEngineHosts[host]!;
+  if (host in socialHosts) return socialHosts[host]!;
+
+  // Bing Chat / Copilot sometimes sends as www.bing.com but with /chat path in referrer
+  if ((referrer || '').toLowerCase().includes('bing.com/chat')) return 'ai_engine:copilot';
+
+  // Catch all google.* / bing.* / yandex.* /baidu.* country subdomains not listed above
+  if (/^(www\.)?google\.[a-z.]{2,8}$/i.test(host)) return 'search:google';
+  if (/^(www\.)?bing\.[a-z.]{2,8}$/i.test(host)) return 'search:bing';
+  if (/^(www\.)?yandex\.[a-z.]{2,8}$/i.test(host)) return 'search:yandex';
+  if (/^(www\.)?baidu\.com$/i.test(host)) return 'search:baidu';
+
+  // Internal deployments (Vercel preview URLs, staging, .local)
+  if (/\.vercel\.app$|\.netlify\.app$|\.localhost$|\.local$/i.test(host)) return 'internal';
+
+  return 'other';
+}
+
 export function collectRequestMeta(headers: Headers, submissionId: string): InquiryRequestMeta {
   return {
     ipAddress: singleLine((headers.get('x-forwarded-for') || '').split(',')[0], 120),
@@ -286,7 +404,7 @@ async function sendViaWebhook(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(config.webhookSecret ? { 'x-proudtek-webhook-secret': config.webhookSecret } : {}),
+      ...(config.webhookSecret ? { 'x-rfidak-webhook-secret': config.webhookSecret } : {}),
     },
     body: JSON.stringify({
       submissionId: meta.submissionId,

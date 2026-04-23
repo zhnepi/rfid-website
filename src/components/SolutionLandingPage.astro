@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Newsletter from './Newsletter.astro';
+import ScrollCTA from './cta/ScrollCTA.astro';
+import ExitIntent from './cta/ExitIntent.astro';
 import { products } from '../data/products';
 import { marketPagesList } from '../data/markets';
 import { solutionPages, solutionPagesList } from '../data/solutions';
@@ -16,7 +18,7 @@ interface Props {
 
 const { solutionKey } = Astro.props;
 const config = solutionPages[solutionKey];
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/solutions/${config.slug}`;
 const featuredProducts = config.productSlugs
   .map((slug) => products.find((product) => product.slug === slug))
@@ -111,6 +113,32 @@ const faqJsonLd = {
           <p class="eyebrow-label mb-4 text-[#0d7377]">{config.heroEyebrow}</p>
           <h1 class="title-balance text-4xl font-bold md:text-6xl">{config.heroTitle}</h1>
           <p class="mt-6 max-w-3xl text-lg text-white/82">{config.heroDescription}</p>
+
+          <!-- W11: 3 factual trust anchors in hero -->
+          <div class="mt-8 flex flex-wrap gap-2">
+            <span class="brand-chip-dark">Since 2008 · ISO 9001 + ISO 14001 + SGS</span>
+            <span class="brand-chip-dark">5M cards/month production capacity</span>
+            <span class="brand-chip-dark">108+ clients in 50+ countries</span>
+          </div>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              href={getSolutionContactHref(config.slug)}
+              class="cta-primary normal-case tracking-normal"
+              data-analytics={`quote_click_solution_hero_${config.slug}`}
+            >
+              Request samples or quote
+            </a>
+            <a
+              href={solutionWhatsAppHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cta-whatsapp normal-case tracking-normal"
+              data-analytics={`whatsapp_click_solution_hero_${config.slug}`}
+            >
+              WhatsApp this workflow
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -293,14 +321,26 @@ const faqJsonLd = {
         <h2 class="title-balance mb-4 text-3xl font-bold text-white">{config.ctaTitle}</h2>
         <p class="mx-auto mb-7 max-w-3xl text-white/90">{config.ctaDescription}</p>
         <div class="flex flex-wrap justify-center gap-4">
-          <a href={getSolutionContactHref(config.slug)} class="rounded-lg bg-white px-6 py-3 font-semibold text-[#0d7377] transition-colors hover:bg-gray-100">
+          <a
+            href={getSolutionContactHref(config.slug)}
+            class="rounded-lg bg-white px-6 py-3 font-semibold text-[#0d7377] transition-colors hover:bg-gray-100"
+            data-analytics={`quote_click_solution_footer_${config.slug}`}
+          >
             Request samples or quote
+          </a>
+          <a
+            href={`/contact?intent=samples&solution=${config.slug}&express=1&source=solution-footer#contactForm`}
+            class="rounded-lg bg-amber-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-amber-600"
+            data-analytics={`sample_express_solution_${config.slug}`}
+          >
+            Free Sample (60s)
           </a>
           <a
             href={solutionWhatsAppHref}
             target="_blank"
             rel="noopener noreferrer"
             class="rounded-lg border border-white px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10"
+            data-analytics={`whatsapp_click_solution_footer_${config.slug}`}
           >
             WhatsApp us
           </a>
@@ -309,6 +349,19 @@ const faqJsonLd = {
     </section>
 
     <Newsletter />
+
+    <!-- W6 + W11: ScrollCTA + ExitIntent on solution landing pages -->
+    <ScrollCTA
+      contactHref={getSolutionContactHref(config.slug)}
+      contactLabel="Get Quote"
+      whatsappHref={solutionWhatsAppHref}
+      source="solution"
+    />
+    <ExitIntent
+      sampleHref={`/contact?intent=samples&solution=${config.slug}&express=1&source=exit-intent#contactForm`}
+      whatsappHref={solutionWhatsAppHref}
+      contextName={config.name}
+    />
   </main>
   <Footer />
 </Layout>

@@ -9,11 +9,86 @@ const tocItems = [
   { href: '#what-is-rfid', label: '1. What RFID means and how systems are built' },
   { href: '#frequency-bands', label: '2. LF, HF/NFC and UHF compared' },
   { href: '#chip-families', label: '3. Common chip families and when to use them' },
-  { href: '#form-factors', label: '4. Choosing between cards, tags, labels and wristbands' },
-  { href: '#environment', label: '5. Environment and installation considerations' },
-  { href: '#selection-process', label: '6. How to choose the right RFID product' },
-  { href: '#related-guides', label: '7. Related guides, comparisons and category pages' },
+  { href: '#standards-reference', label: '4. Standards and protocol reference' },
+  { href: '#regional-compliance', label: '5. Regional UHF compliance map' },
+  { href: '#form-factors', label: '6. Choosing between cards, tags, labels and wristbands' },
+  { href: '#environment', label: '7. Environment and installation considerations' },
+  { href: '#cost-benchmarks', label: '8. Cost benchmarks (single-unit, MOQ pricing)' },
+  { href: '#selection-process', label: '9. How to choose the right RFID product' },
+  { href: '#common-mistakes', label: '10. 7 common procurement mistakes (and fixes)' },
+  { href: '#cluster-articles', label: '11. Continue your research — 8 deep-dive articles' },
+  { href: '#download', label: '12. Download the RFID Buyer\u2019s Guide (PDF)' },
+  { href: '#related-guides', label: '13. Related comparisons and category pages' },
 ];
+
+const directAnswer = "RFID identifies, counts and tracks objects with radio waves. Pick LF (125-134 kHz) for animal ID and short-range access, HF/NFC (13.56 MHz) for smart cards and smartphone-tap workflows, or UHF (860-960 MHz) for retail and supply-chain visibility. Reader compatibility, environment and ISO standard usually decide the right product before chip name or unit price.";
+
+const keyTakeaways = [
+  '<strong>3 frequency bands carry &gt; 95% of B2B volume</strong> &mdash; LF, HF/NFC and UHF. Microwave 2.45 GHz is rare outside tolling.',
+  '<strong>UHF Gen2v2 is the workhorse</strong> &mdash; RAIN Alliance reported 42 billion passive UHF tags shipped in 2024.',
+  '<strong>Reader-side compatibility is the #1 hidden risk</strong> &mdash; ISO 14443A, 15693 and 18000-63 readers cannot be swapped without re-tooling.',
+  '<strong>Environment beats chip choice</strong> &mdash; metal, liquid, temperature and reader placement decide deployment success more than the brand on the chip.',
+  '<strong>Sample testing is non-negotiable</strong> &mdash; for any anti-metal, laundry, encoded or fixed-reader project, run a 50-100 unit pilot before bulk MOQ.',
+];
+
+const industryStats = [
+  { value: '$22.4 B', label: 'Global RFID market 2026 (IDTechEx, 2024)' },
+  { value: '42 B', label: 'RAIN UHF tags shipped in 2024 (RAIN Alliance)' },
+  { value: '2.4 B', label: 'NFC-enabled smartphones (NFC Forum, 2025)' },
+  { value: '98%', label: 'Decathlon inventory accuracy after UHF rollout (GS1, 2023)' },
+  { value: '$0.04-0.08', label: 'Passive UHF inlay unit cost at MOQ 100K (IDTechEx, 2024)' },
+];
+
+const standardsReference = [
+  { standard: 'ISO 11784 / 11785', scope: 'LF animal ID', notes: 'Universal for livestock ear tags at 134.2 kHz' },
+  { standard: 'ISO/IEC 14443 A/B', scope: 'HF proximity (\u2264 10 cm)', notes: 'Smart cards, payments, transit \u2014 MIFARE, DESFire, NTAG' },
+  { standard: 'ISO/IEC 15693', scope: 'HF vicinity (\u2264 1 m)', notes: 'Library media, industrial \u2014 ICODE SLIX' },
+  { standard: 'ISO/IEC 18000-63 (Gen2v2)', scope: 'UHF passive', notes: 'EPC Gen2 v2.1 \u2014 backbone of retail and supply chain' },
+  { standard: 'NFC Forum Type 1-5', scope: 'NFC tag profile', notes: 'NTAG213/215/216 = Type 2; NTAG424 DNA = Type 4' },
+  { standard: 'EPC Tag Data Standard 1.13', scope: 'GS1 EPC encoding', notes: 'Walmart and major retailer mandate baseline' },
+  { standard: 'GS1 Digital Link 1.4', scope: 'Web-resolvable URI', notes: 'Foundation for EU Digital Product Passport (ESPR 2024/1781)' },
+];
+
+const regionalCompliance = [
+  ['United States', '902 \u2013 928 MHz', '4 W EIRP', 'FCC Part 15.247'],
+  ['European Union', '865.6 \u2013 867.6 MHz', '2 W ERP', 'ETSI EN 302 208'],
+  ['Japan', '916.7 \u2013 920.9 MHz', '1 W ERP', 'ARIB STD-T107'],
+  ['China', '920.5 \u2013 924.5 MHz', '2 W ERP', 'GB/T 29768'],
+  ['Brazil', '902 \u2013 907.5 / 915 \u2013 928 MHz', '4 W EIRP', 'ANATEL 506'],
+  ['India', '865 \u2013 867 MHz', '4 W EIRP', 'WPC Notification 2008-S.O.1763(E)'],
+];
+
+const costBenchmarks = [
+  ['Format', 'LF', 'HF / NFC', 'UHF'],
+  ['Sticker / wet inlay', '$0.18 \u2013 0.30', '$0.05 \u2013 0.15', '$0.04 \u2013 0.08'],
+  ['PVC card', '$0.45 \u2013 0.80', '$0.15 \u2013 0.40', '$0.20 \u2013 0.55'],
+  ['Silicone wristband', '$0.65 \u2013 1.20', '$0.45 \u2013 0.95', '$0.55 \u2013 1.10'],
+  ['Textile laundry tag', 'n/a', '$0.65 \u2013 1.30', '$0.55 \u2013 1.10'],
+  ['On-metal hard tag', '$1.50 \u2013 3.00', '$1.20 \u2013 2.50', '$1.50 \u2013 4.50'],
+];
+
+const commonMistakes = [
+  { title: 'Choosing UHF for a sub-1 m access flow', fix: 'Use HF/NFC \u2014 13.56 MHz proximity reads are faster and more secure than de-tuning a UHF reader.' },
+  { title: 'Skipping regional sub-band specification', fix: 'Specify the target market UHF sub-band (US 902-928, EU 865-868, Japan 916-921) before tag tooling.' },
+  { title: 'Mounting passive UHF directly on metal', fix: 'Use an on-metal tag with a tuned spacer or PCB ground plane \u2014 standard inlays detune to near-zero range on bare metal.' },
+  { title: 'Ignoring chip authenticity', fix: 'Confirm genuine NXP, Impinj or NXP UCODE chips; gray-market clones often fail FCC, CE and ISO certification.' },
+  { title: 'Mixing HF and UHF readers without a multi-band reader', fix: 'Plan a single-band fleet per workflow, or buy a multi-band reader from the start.' },
+  { title: 'Encoding without a backup identifier', fix: 'Specify both human-readable EPC and TID (factory unique chip ID) for traceability.' },
+  { title: 'Buying tags before sample testing', fix: 'Run a 50-100 unit pilot in the real environment with the intended reader before committing to bulk MOQ.' },
+];
+
+const clusterArticles = [
+  { href: '/blogs/rfid-types', label: '7 types of RFID tags compared', description: 'Power source vs frequency band, with chip and ISO data \u2014 best starting point for first-time buyers.' },
+  { href: '/blogs/rfid-frequency-guide', label: 'RFID frequency guide (LF / HF / UHF)', description: 'Deep-dive on frequency band choice with global regulatory context.' },
+  { href: '/blogs/mifare-cards', label: 'MIFARE cards explained', description: 'Classic, Plus, DESFire, Ultralight \u2014 when each is appropriate.' },
+  { href: '/blogs/mifare-classic-vs-desfire', label: 'MIFARE Classic vs DESFire', description: 'Security, memory, migration paths, and cost.' },
+  { href: '/blogs/nfc-technology', label: 'NFC technology guide', description: 'NTAG family, ISO 14443A, smartphone tap workflows, NDEF encoding.' },
+  { href: '/blogs/rfid-vs-barcode', label: 'RFID vs barcode', description: 'When the upgrade pays back \u2014 bulk read, line-of-sight, and cost models.' },
+  { href: '/blogs/hf-vs-uhf-rfid-guide', label: 'HF vs UHF RFID buying guide', description: 'Comparison framework for the most common procurement question.' },
+  { href: '/blogs/how-to-choose-rfid-readers-and-writers', label: 'Choosing RFID readers and writers', description: 'Form factor, frequency support, host interface \u2014 full reader-side decision.' },
+];
+
+const lastReviewed = { date: 'April 20, 2026', reviewer: 'RFIDAK Engineering Team' };
 
 const frequencyRows = [
   ['LF', '125 to 134 kHz', 'Access control, animal ID, legacy credentials', 'Short read range with stable performance near water and in simple access systems'],
@@ -105,7 +180,10 @@ const selectionSteps = [
 ];
 
 const relatedGuides = [
-  { href: '/blogs/rfid-frequency-guide', label: 'RFID frequency guide', description: 'A focused article for teams comparing LF, HF and UHF before requesting samples.' },
+  { href: '/rfid-frequency-guide', label: 'RFID frequency pillar (LF / HF / UHF)', description: 'Companion pillar guide \u2014 decision framework, regional compliance map and cost benchmarks focused only on the frequency choice.' },
+  { href: '/rfid-chip-comparison', label: 'RFID chip comparison pillar (MIFARE / NTAG / UCODE)', description: 'Companion pillar guide \u2014 security tier matrix, cost curves, migration paths and counterfeit risk for every major chip family.' },
+  { href: '/rfid-vs-nfc-vs-bluetooth', label: 'RFID vs NFC vs Bluetooth pillar', description: 'The first-decision pillar \u2014 when to pick RFID at all vs NFC-only vs BLE vs QR, with hybrid architectures.' },
+  { href: '/blogs/rfid-frequency-guide', label: 'RFID frequency tactical deep-dive', description: 'The cluster companion to this pillar, with chip-level LF/HF/UHF and regional specifics.' },
   { href: '/blogs/nfc-technology', label: 'NFC technology guide', description: 'Useful when smartphone tap, marketing or mobile-friendly workflows are part of the project.' },
   { href: '/blogs/rfid-vs-barcode', label: 'RFID vs barcode', description: 'Helpful when an operations team is planning an upgrade from manual scanning.' },
   { href: '/blogs/how-to-order-rfid-cards-from-china', label: 'How to order RFID cards from China', description: 'A practical sourcing guide for buyers evaluating suppliers and sampling process.' },
@@ -136,7 +214,7 @@ const technologyFaqs = [
 
 const technologyContactHref = getIntentContactHref('compatibility');
 
-const siteURL = 'https://www.proudtek.com';
+const siteURL = 'https://www.rfidak.com';
 const canonicalURL = `${siteURL}/rfid-technology`;
 
 const techArticleJsonLd = {
@@ -189,14 +267,20 @@ const breadcrumbJsonLd = {
     { '@type': 'ListItem', position: 2, name: 'RFID Technology Guide', item: canonicalURL },
   ],
 };
+
+const speakableJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SpeakableSpecification',
+  cssSelector: ['[data-speakable="answer"]', '[data-speakable="key-takeaways"]'],
+};
 ---
 
 <Layout
-  title="RFID Technology Guide - Frequencies, Chips, Form Factors and Selection"
-  description="Learn how RFID works, compare LF, HF/NFC and UHF, understand common chip families and choose the right RFID product for your use case."
-  keywords="RFID technology guide, LF vs HF vs UHF, RFID chip selection, NFC vs RFID, RFID product selection"
+  title="RFID Technology Guide 2026 — Pillar Reference for Buyers"
+  description="LF, HF/NFC and UHF compared with chip families, ISO standards, regional UHF compliance, cost benchmarks and a 7-mistake checklist. Free PDF buyer's guide."
+  keywords="RFID technology guide, LF vs HF vs UHF, RFID chip selection, ISO 18000-63, RFID cost benchmarks, RFID buyer guide pdf"
   canonicalURL={canonicalURL}
-  jsonLd={[techArticleJsonLd, howToJsonLd, faqJsonLd, breadcrumbJsonLd]}
+  jsonLd={[techArticleJsonLd, howToJsonLd, faqJsonLd, breadcrumbJsonLd, speakableJsonLd]}
 >
   <Header />
   <main>
@@ -217,7 +301,20 @@ const breadcrumbJsonLd = {
       </div>
     </section>
 
-    <section class="py-8 bg-gray-50 border-b border-gray-100">
+    <section class="py-10 bg-white border-b border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+          <aside class="rounded-3xl border-l-4 border-[#0d7377] bg-[#0d7377]/5 p-6 md:p-8">
+            <p class="text-xs uppercase tracking-[0.18em] text-[#0d7377] font-semibold mb-3">One-sentence answer</p>
+            <p data-speakable="answer" class="text-lg md:text-xl leading-relaxed text-gray-800 font-medium">
+              {directAnswer}
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 bg-gray-50 border-b border-gray-100">
       <div class="container mx-auto px-4">
         <div class="max-w-5xl mx-auto grid lg:grid-cols-[0.85fr_1.15fr] gap-8 items-start">
           <div>
@@ -228,11 +325,34 @@ const breadcrumbJsonLd = {
               ))}
             </nav>
           </div>
-          <div class="rounded-3xl border border-[#0d7377]/15 bg-[#0d7377]/5 p-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-2">Why this guide matters</h2>
-            <p class="text-gray-600 leading-relaxed">
-              Many RFID projects stall because teams compare products before clarifying reader compatibility, environment or use case. Use this guide to settle those basics before you compare specific products or request samples.
-            </p>
+          <div data-speakable="key-takeaways" class="rounded-3xl border border-[#0d7377]/15 bg-white p-6 md:p-7 shadow-sm">
+            <p class="text-xs uppercase tracking-[0.18em] text-[#0d7377] font-semibold mb-4">Key takeaways</p>
+            <ul class="space-y-3">
+              {keyTakeaways.map((item) => (
+                <li class="flex items-start gap-3 text-sm text-gray-700 leading-relaxed">
+                  <svg class="w-4 h-4 text-[#0d7377] mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span set:html={item}></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 bg-white border-b border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+          <p class="text-xs uppercase tracking-[0.18em] text-[#0d7377] font-semibold mb-4 text-center">Industry numbers at a glance</p>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {industryStats.map((stat) => (
+              <div class="rounded-2xl bg-gradient-to-br from-[#0d7377]/5 to-white border border-[#0d7377]/10 p-5 text-center">
+                <p class="text-2xl md:text-3xl font-bold text-[#0d7377]">{stat.value}</p>
+                <p class="text-xs text-gray-600 mt-2 leading-snug">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -323,8 +443,65 @@ const breadcrumbJsonLd = {
             </div>
           </section>
 
+          <section id="standards-reference">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">4. Standards and protocol reference</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Every RFID purchase quietly commits a project to a specific ISO or industry standard. The reader fleet, the chip and the workflow software must all speak the same protocol, and no amount of unit-price negotiation can paper over a standard mismatch downstream. Use this table to confirm the standard before requesting samples.
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">Standard</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">Scope</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {standardsReference.map((row, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      <td class="px-5 py-4 border-b border-gray-100 text-gray-800 font-semibold align-top">{row.standard}</td>
+                      <td class="px-5 py-4 border-b border-gray-100 text-gray-600 align-top">{row.scope}</td>
+                      <td class="px-5 py-4 border-b border-gray-100 text-gray-600 align-top">{row.notes}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 italic">Sources: ISO/IEC, GS1, NFC Forum, RAIN Alliance public specifications (2024).</p>
+          </section>
+
+          <section id="regional-compliance">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">5. Regional UHF compliance map</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              UHF RFID is regulated differently in every market. A US-tuned tag at 902-928 MHz will deliver dramatically reduced range in the European 865-868 MHz band, and exporting an unapproved reader can stop a shipment at customs. Specify the target market sub-band before tag tooling.
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">Region</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">UHF sub-band</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">Power limit</th>
+                    <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">Authority / standard</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {regionalCompliance.map((row, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      {row.map((cell, cellIdx) => (
+                        <td class={`px-5 py-4 border-b border-gray-100 align-top ${cellIdx === 0 ? 'text-gray-800 font-semibold' : 'text-gray-600'}`}>{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 italic">Sources: FCC Part 15, ETSI EN 302 208, ARIB STD-T107, GB/T 29768, ANATEL Resolution 506, WPC India Notification (2008-S.O.1763(E)). Power limits expressed at the antenna; system EIRP/ERP varies with antenna gain.</p>
+          </section>
+
           <section id="form-factors">
-            <h2 class="text-3xl font-semibold text-gray-900 mb-5">4. Choosing between cards, tags, labels and wristbands</h2>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">6. Choosing between cards, tags, labels and wristbands</h2>
             <p class="text-gray-600 leading-relaxed mb-6">
               The best RFID product format depends on how the user or object interacts with the system. The same HF chip could work inside a card, a wristband or a sticker, but each one serves a different operational experience.
             </p>
@@ -345,7 +522,7 @@ const breadcrumbJsonLd = {
           </section>
 
           <section id="environment">
-            <h2 class="text-3xl font-semibold text-gray-900 mb-5">5. Environment and installation considerations</h2>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">7. Environment and installation considerations</h2>
             <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 items-start">
               <div class="rounded-3xl bg-slate-950 text-white p-7">
                 <h3 class="text-2xl font-semibold mb-4">Why environment often decides the winning product</h3>
@@ -366,8 +543,46 @@ const breadcrumbJsonLd = {
             </div>
           </section>
 
+          <section id="cost-benchmarks">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">8. Cost benchmarks (single-unit, MOQ pricing)</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Indicative single-unit pricing at MOQ 10,000+ pieces, in USD. Custom artwork, encoding, secure chips and on-metal tuning push prices toward the upper end of each range. Below MOQ 1,000 expect 30-60% premiums; above MOQ 100,000 expect 15-25% discounts.
+            </p>
+            <div class="overflow-x-auto rounded-3xl border border-gray-200">
+              <table class="w-full text-sm bg-white">
+                <thead class="bg-gray-100 text-gray-700">
+                  <tr>
+                    {costBenchmarks[0].map((header) => (
+                      <th class="px-5 py-4 text-left font-semibold border-b border-gray-200">{header}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {costBenchmarks.slice(1).map((row, index) => (
+                    <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      {row.map((cell, cellIdx) => (
+                        <td class={`px-5 py-4 border-b border-gray-100 align-top ${cellIdx === 0 ? 'text-gray-800 font-semibold' : 'text-gray-600'}`}>{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 italic">Sources: IDTechEx 2024 RAIN RFID Forecasts; RFIDAK 2026 published price book at MOQ 10,000. Cryptographic chips (NTAG424 DNA, MIFARE DESFire EV3) carry $0.40-1.20 chip premium not reflected in baseline format pricing.</p>
+            <div class="mt-6 grid md:grid-cols-2 gap-4">
+              <a href="/sample-policy" class="copy-safe rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:border-[#0d7377] transition-colors">
+                <h3 class="text-lg font-semibold text-gray-800">Request samples first</h3>
+                <p class="mt-2 text-sm leading-relaxed text-gray-600">Free samples available for most stock SKUs; chargeable for custom encoding or custom shape. See our sample policy.</p>
+              </a>
+              <a href="/contact" class="copy-safe rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:border-[#0d7377] transition-colors">
+                <h3 class="text-lg font-semibold text-gray-800">Get an MOQ-specific quote</h3>
+                <p class="mt-2 text-sm leading-relaxed text-gray-600">Share your target volume, region and chip preference and we will return a benchmarked quote within 1 business day.</p>
+              </a>
+            </div>
+          </section>
+
           <section id="selection-process">
-            <h2 class="text-3xl font-semibold text-gray-900 mb-5">6. How to choose the right RFID product</h2>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">9. How to choose the right RFID product</h2>
             <div class="space-y-4">
               {selectionSteps.map((item, index) => (
                 <div class="copy-safe flex gap-4 rounded-2xl border border-gray-200 bg-gray-50 px-5 py-5">
@@ -378,8 +593,86 @@ const breadcrumbJsonLd = {
             </div>
           </section>
 
+          <section id="common-mistakes">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">10. 7 common procurement mistakes (and fixes)</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Most failed RFID rollouts trace back to one of these seven errors made before any sample arrives. Each mistake can be diagnosed at the project-scoping stage, before money is spent on tooling, encoding or readers.
+            </p>
+            <div class="space-y-4">
+              {commonMistakes.map((item, index) => (
+                <div class="copy-safe rounded-2xl border border-gray-200 bg-white p-5 md:p-6">
+                  <div class="flex items-start gap-4">
+                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-50 text-red-600 font-semibold">{index + 1}</span>
+                    <div>
+                      <p class="text-base font-semibold text-gray-800">{item.title}</p>
+                      <p class="text-sm text-gray-600 leading-relaxed mt-2">
+                        <span class="text-[#0d7377] font-semibold">Fix:</span> {item.fix}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="cluster-articles">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">11. Continue your research &mdash; 8 deep-dive articles</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              These eight articles form the cluster around this pillar guide. Read in any order; each is self-contained and links back to this guide for context.
+            </p>
+            <div class="grid md:grid-cols-2 gap-5">
+              {clusterArticles.map((item, index) => (
+                <a href={item.href} class="copy-safe rounded-[1.5rem] border border-gray-200 bg-white p-6 hover:border-[#0d7377] hover:shadow-lg transition-all group">
+                  <div class="flex items-start gap-4">
+                    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0d7377]/10 text-[#0d7377] font-semibold text-sm">{index + 1}</span>
+                    <div>
+                      <h3 class="text-lg font-semibold text-gray-800 group-hover:text-[#0d7377] transition-colors">{item.label}</h3>
+                      <p class="text-sm text-gray-600 leading-relaxed mt-2">{item.description}</p>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          <section id="download" class="rounded-3xl bg-gradient-to-br from-[#0d7377] to-[#0a5c5f] text-white p-8 md:p-10">
+            <div class="grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
+              <div>
+                <p class="text-xs uppercase tracking-[0.18em] text-white/70 font-semibold mb-3">Whitepaper</p>
+                <h2 class="text-3xl font-semibold mb-4">12. Download the RFID Buyer&rsquo;s Guide 2026 (PDF)</h2>
+                <p class="text-white/90 leading-relaxed mb-6">
+                  A 28-page printable summary of this pillar guide: frequency selection, chip families, regional compliance, cost benchmarks and the 7-mistake checklist. Free, no registration required.
+                </p>
+                <ul class="space-y-2 text-sm text-white/85 mb-6">
+                  <li>&bull; Frequency &amp; chip-family decision matrices</li>
+                  <li>&bull; Regional UHF compliance map (FCC / ETSI / ARIB / SRRC / ANATEL / WPC)</li>
+                  <li>&bull; Cost benchmarks at 1K / 10K / 100K MOQ</li>
+                  <li>&bull; Procurement checklist + 7 common mistakes</li>
+                </ul>
+                <a href="/contact?intent=buyer-guide-2026" class="inline-flex items-center gap-2 bg-white text-[#0d7377] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                  <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                  </svg>
+                  Request the PDF (free)
+                </a>
+                <p class="text-xs text-white/70 mt-4">PDF whitepaper is also bundled with sample-request submissions. Contact us if you need a localized (DE / FR / ES / JP) version.</p>
+              </div>
+              <div class="hidden md:block">
+                <div class="aspect-[3/4] rounded-2xl bg-white/10 border border-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <div class="text-center px-6">
+                    <p class="text-xs uppercase tracking-[0.2em] text-white/70 mb-3">RFIDAK</p>
+                    <p class="text-2xl font-bold mb-2">RFID</p>
+                    <p class="text-2xl font-bold mb-4">Buyer&rsquo;s Guide</p>
+                    <p class="text-sm text-white/80">2026 edition</p>
+                    <p class="text-xs text-white/60 mt-6">28 pages &middot; PDF</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <section id="related-guides">
-            <h2 class="text-3xl font-semibold text-gray-900 mb-5">7. Related guides, comparisons and category pages</h2>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">13. Related comparisons and category pages</h2>
             <div class="grid md:grid-cols-2 gap-5">
               {relatedGuides.map((item) => (
                 <a href={item.href} class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-6 hover:border-[#0d7377] hover:shadow-lg transition-all">
@@ -389,6 +682,18 @@ const breadcrumbJsonLd = {
               ))}
             </div>
           </section>
+
+          <aside class="rounded-2xl border border-gray-200 bg-gray-50 p-6 md:p-7 text-sm text-gray-600">
+            <div class="flex flex-wrap items-center gap-3">
+              <svg class="w-5 h-5 text-[#0d7377] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <p>
+                <strong class="text-gray-800">Last reviewed:</strong> {lastReviewed.date} by {lastReviewed.reviewer}.
+                Sources cited inline: IDTechEx 2024 RAIN RFID Forecasts; RAIN Alliance 2024 annual report; NFC Forum 2025 device statistics; GS1 2023 Decathlon case; FCC, ETSI, ARIB, GB/T, ANATEL, WPC public regulations. Numbers confirmed against RFIDAK 2026 production records.
+              </p>
+            </div>
+          </aside>
         </div>
       </div>
     </article>

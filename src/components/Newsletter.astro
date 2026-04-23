@@ -13,7 +13,8 @@
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a
-          href="/contact"
+          href="/contact?intent=samples&express=1&source=newsletter#contactForm"
+          data-analytics="newsletter_click_sample_express"
           class="px-8 py-3 bg-amber-500 text-white font-semibold rounded-lg hover:bg-amber-600 transition-colors inline-flex items-center justify-center gap-2 shadow-lg"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -25,6 +26,7 @@
           href="https://wa.me/8618665820632?text=Hi,%20I'd%20like%20to%20request%20free%20RFID%20samples"
           target="_blank"
           rel="noopener noreferrer"
+          data-analytics="newsletter_click_whatsapp"
           class="px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors inline-flex items-center justify-center gap-2"
         >
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -32,6 +34,47 @@
           </svg>
           WhatsApp Us
         </a>
+      </div>
+
+      <!-- W10: Email-only fallback — for visitors who want the catalog PDF but not a full inquiry -->
+      <div class="mt-10 pt-8 border-t border-white/20">
+        <p class="text-white/85 mb-4 text-sm">Not ready to chat? Just drop your email and we'll send the RFIDAK product catalog (PDF).</p>
+        <form
+          action="/api/inquiry"
+          method="post"
+          class="flex flex-col sm:flex-row gap-3 justify-center items-stretch max-w-xl mx-auto"
+          id="newsletterCatalogForm"
+        >
+          <input type="hidden" name="inquiryType" value="compatibility" />
+          <input type="hidden" name="subject" value="Catalog request from Newsletter" />
+          <input type="hidden" name="message" value="Hi, please send me the RFIDAK product catalog PDF. Submitted via Newsletter footer." />
+          <input type="hidden" name="preferredContact" value="email" />
+          <input type="hidden" name="product" value="" />
+          <input type="hidden" name="country" value="" />
+          <input type="hidden" name="quantityRange" value="" />
+          <input type="hidden" name="company" value="" />
+          <input type="hidden" name="contextType" value="newsletter" />
+          <input type="hidden" name="contextSlug" value="newsletter" />
+          <input type="hidden" name="contextName" value="Newsletter Catalog Request" />
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" value="" />
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="you@company.com"
+            autocomplete="email"
+            class="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-400 bg-white border border-transparent focus:outline-none focus:ring-2 focus:ring-amber-300"
+          />
+          <input type="hidden" name="name" value="Newsletter catalog subscriber" />
+          <button
+            type="submit"
+            data-analytics="newsletter_email_catalog_submit"
+            class="px-6 py-3 bg-white text-[#0d7377] font-semibold rounded-lg hover:bg-gray-100 transition-colors inline-flex items-center justify-center gap-2 shadow-sm"
+          >
+            Email me the catalog
+          </button>
+        </form>
+        <p class="text-white/60 text-xs mt-3">We'll only use your email to send the catalog and reply to your inquiry.</p>
       </div>
     </div>
   </div>
