@@ -46,19 +46,8 @@ const productBuyerIntro = getProductBuyerIntro(product);
 const productBuyerSummary = getProductBuyerSummary(product, 112);
 const productDirectAnswer = getProductDirectAnswer(product);
 
-// Deterministic aggregateRating per product (placeholder until real reviews are wired in).
-// Uses slug hash so the same product always shows the same rating across builds.
-function _hashSlug(slug: string): number {
-  let h = 0;
-  for (let i = 0; i < slug.length; i++) {
-    h = ((h << 5) - h + slug.charCodeAt(i)) | 0;
-  }
-  return Math.abs(h);
-}
-const _slugHash = _hashSlug(product.slug);
-const productRatingValue = (45 + (_slugHash % 5)) / 10;        // 4.5 .. 4.9
-const productRatingCount  = 12 + (_slugHash % 76);              // 12 .. 87
-const productReviewCount  = Math.max(3, Math.floor(productRatingCount / 4));
+// NOTE: aggregateRating removed 2026-04-23 — Google may flag unverified review markup.
+// Re-add only when real reviews are wired in from a third-party platform (Alibaba / Google Reviews).
 
 const productJsonLd = {
   "@context": "https://schema.org",
@@ -107,14 +96,6 @@ const productJsonLd = {
         "transitTime": { "@type": "QuantitativeValue", "minValue": 3, "maxValue": 10, "unitCode": "DAY" }
       }
     }
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": productRatingValue.toFixed(1),
-    "ratingCount": productRatingCount,
-    "reviewCount": productReviewCount,
-    "bestRating": "5",
-    "worstRating": "1"
   },
   "additionalProperty": specEntries.slice(0, 10).map(({ key, value }) => ({
     "@type": "PropertyValue",
@@ -1212,7 +1193,7 @@ const pageDescription = truncateText(
               <p class="text-sm text-gray-600">Quality-focused manufacturing and sample support for custom RFID projects.</p>
             </div>
             <div class="copy-safe text-center p-4">
-              <div class="text-3xl font-bold text-[#0d7377] mb-2">15+ Years</div>
+              <div class="text-3xl font-bold text-[#0d7377] mb-2">Since 2008</div>
               <p class="text-sm text-gray-600">RFID manufacturing experience across cards, tags, labels, wristbands and readers.</p>
             </div>
             <div class="copy-safe text-center p-4">

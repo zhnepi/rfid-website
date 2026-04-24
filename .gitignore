@@ -36,4 +36,31 @@ pnpm-debug.log*
 
 # temp work dirs
 tmp-*/
+tmp-*.png
 tmp-catalog/
+
+# large source assets (should NEVER be in Git — use cloud storage / Git LFS instead)
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.psd
+*.ai
+*.zip
+*.rar
+*.7z
+*.iso
+
+# product source material folders (keep originals off Git)
+RFID wristband/
+产品素材/
+素材/
+raw-assets/
+source-media/
+
+# backup / temp files
+*.bak
+.fuse_hidden*
+*.err.log
+astro-*.log
+dev-server.log

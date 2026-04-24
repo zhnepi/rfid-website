@@ -2301,7 +2301,7 @@ export const products: Product[] = [
       {
         title: "Color Options and Visual Categorization",
         image: "/images/products/rfid-abs-keyfob-colors.jpg",
-        content: "ABS keyfobs ship in 9 standard colors stocked for same-week order fulfillment: black, white, gray, blue, red, green, yellow, orange, and purple. Multi-color deployments help security staff visually distinguish credential tiers — for example, blue for standard employees, red for management, yellow for visitors and contractors — without having to scan each fob at a handheld reader.\n\nCustom Pantone color matching is available for corporate branding programs with minimum 3,000-piece orders and 2-week color development lead time. RFIDAK maintains a reference color library from 15+ years of production to match common corporate palettes on first run."
+        content: "ABS keyfobs ship in 9 standard colors stocked for same-week order fulfillment: black, white, gray, blue, red, green, yellow, orange, and purple. Multi-color deployments help security staff visually distinguish credential tiers — for example, blue for standard employees, red for management, yellow for visitors and contractors — without having to scan each fob at a handheld reader.\n\nCustom Pantone color matching is available for corporate branding programs with minimum 3,000-piece orders and 2-week color development lead time. RFIDAK maintains a reference color library built up since 2008 to match common corporate palettes on first run."
       },
       {
         title: "Silkscreen Printing vs Laser Engraving",

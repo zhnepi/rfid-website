@@ -1326,7 +1326,7 @@ const rawBlogPosts: BlogPost[] = [
       </div>
 
       <h2>Ready to Order?</h2>
-      <p>ProudTek simplifies the RFID card sourcing process with transparent pricing, free samples, dedicated project management, and reliable quality. With 15+ years of manufacturing experience and shipments to 50+ countries, we understand the needs of international buyers.</p>
+      <p>ProudTek simplifies the RFID card sourcing process with transparent pricing, free samples, dedicated project management, and reliable quality. Manufacturing RFID since 2008 with shipments to 50+ countries, we understand the needs of international buyers.</p>
       <p>Browse our <a href="/product/rfid-cards" style="color:#0e7490; font-weight:500;">RFID smart cards</a>, <a href="/product/rfid-paper-card" style="color:#0e7490; font-weight:500;">RFID paper cards</a>, or <a href="/product/nfc-epoxy-card" style="color:#0e7490; font-weight:500;">NFC epoxy cards</a>. <a href="/contact" style="color:#0e7490; font-weight:500;">Contact us</a> via WhatsApp or email to start your order today. You can also review our <a href="/sample-policy" style="color:#0e7490; font-weight:500;">sample policy</a> and <a href="/shipping-and-incoterms" style="color:#0e7490; font-weight:500;">shipping terms</a> before placing an order.</p>
     `,
   },
