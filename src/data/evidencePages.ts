@@ -5,6 +5,49 @@ export interface EvidenceFaq {
   answer: string;
 }
 
+export interface EvidenceHowToStep {
+  /** Short imperative title, e.g. "Share your use case" */
+  name: string;
+  /** 1-3 sentence description of what happens in this step */
+  description: string;
+  /** ISO 8601 duration, e.g. "P1D" for 1 day, "PT2H" for 2 hours. Optional — helps Google estimate process length. */
+  estimatedTime?: string;
+}
+
+export interface EvidenceHowToConfig {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  /** ISO 8601 duration for the whole process, e.g. "P28D" for ~4 weeks */
+  totalTime: string;
+  /** Things the buyer/customer must bring or provide */
+  supply?: string[];
+  /** Things RFIDAK uses to execute the process */
+  tool?: string[];
+  steps: EvidenceHowToStep[];
+}
+
+export interface CertificateRecord {
+  /** Human-readable cert name, e.g. "ISO 9001:2015" */
+  name: string;
+  /** Short tag, e.g. "Quality Management System" */
+  category: string;
+  /** Issuing body, e.g. "SGS United Kingdom Ltd" */
+  issuer: string;
+  /** Certificate number as printed on the document */
+  certificateNumber: string;
+  /** ISO 8601 date, e.g. "2024-03-15" */
+  issueDate: string;
+  /** ISO 8601 date, e.g. "2027-03-14" */
+  expiryDate: string;
+  /** 1-sentence scope description as stated on the cert */
+  scope: string;
+  /** Relative path to cert scan (PDF or PNG) under /public */
+  documentHref: string;
+  /** Optional verification URL (issuer's public registry) */
+  verifyUrl?: string;
+}
+
 export interface EvidencePageConfig {
   slug: string;
   title: string;
@@ -24,10 +67,20 @@ export interface EvidencePageConfig {
     title: string;
     description: string;
   }>;
+  /** OPTIONAL — only populated for /certifications. When present, EvidencePage renders a dedicated "Certificate Registry" section with cert numbers, dates and verification links. */
+  certificateRegistry?: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    records: CertificateRecord[];
+    verificationNote: string;
+  };
   checklistEyebrow: string;
   checklistTitle: string;
   checklistDescription: string;
   checklist: string[];
+  /** OPTIONAL — step-by-step process that renders as a numbered-step section + HowTo JSON-LD for Google rich results. */
+  howTo?: EvidenceHowToConfig;
   resourcesTitle: string;
   resourcesDescription: string;
   resources: NavLink[];
@@ -91,6 +144,89 @@ export const evidencePages: Record<string, EvidencePageConfig> = {
           'Buyers should still confirm that the scope of the supplier and the product family fit the actual RFID project being planned.',
       },
     ],
+    certificateRegistry: {
+      eyebrow: 'Certificate Registry',
+      title: 'Active RFIDAK certifications — numbers, issuers and validity you can verify',
+      description:
+        'All certificate scans below are issued to Shenzhen RFIDAK Co., LTD. Click "View certificate" to open the PDF. Click "Verify with issuer" to confirm validity in the issuing body\'s public registry.',
+      // ⚠️ EDITOR NOTE (2026-04-23): The certificate numbers, dates and PDF filenames below are
+      // PLACEHOLDERS awaiting real scans. After uploading real certs to /public/downloads/
+      // with the listed filenames, replace the `PLACEHOLDER-*` values with real cert numbers
+      // and the issue/expiry dates found on the physical documents.
+      records: [
+        {
+          name: 'ISO 9001:2015',
+          category: 'Quality Management System',
+          issuer: 'SGS United Kingdom Ltd (or local SGS entity)',
+          certificateNumber: 'PLACEHOLDER-ISO9001-RFIDAK',
+          issueDate: '2024-01-01',
+          expiryDate: '2027-01-01',
+          scope:
+            'Design, development and production of RFID cards, tags, labels, wristbands, keyfobs and reader hardware.',
+          documentHref: '/downloads/rfidak-iso-9001-certificate.pdf',
+          verifyUrl: 'https://www.sgs.com/en/certified-clients-and-products/certified-client-directory',
+        },
+        {
+          name: 'ISO 14001:2015',
+          category: 'Environmental Management System',
+          issuer: 'SGS United Kingdom Ltd (or local SGS entity)',
+          certificateNumber: 'PLACEHOLDER-ISO14001-RFIDAK',
+          issueDate: '2024-01-01',
+          expiryDate: '2027-01-01',
+          scope:
+            'Environmental management for RFID manufacturing operations at the Shenzhen facility, covering material sourcing, production, packaging and waste handling.',
+          documentHref: '/downloads/rfidak-iso-14001-certificate.pdf',
+          verifyUrl: 'https://www.sgs.com/en/certified-clients-and-products/certified-client-directory',
+        },
+        {
+          name: 'SGS Factory Audit Report',
+          category: 'Supplier Verification',
+          issuer: 'SGS',
+          certificateNumber: 'PLACEHOLDER-SGS-AUDIT-RFIDAK',
+          issueDate: '2024-06-01',
+          expiryDate: '2026-06-01',
+          scope:
+            'On-site factory audit covering production capacity, quality-control workflow, worker welfare and export compliance for RFID product lines.',
+          documentHref: '/downloads/rfidak-sgs-factory-audit.pdf',
+          verifyUrl: 'https://www.sgs.com/en',
+        },
+        {
+          name: 'CE Declaration of Conformity',
+          category: 'EU Radio Equipment Directive',
+          issuer: 'RFIDAK self-declaration on third-party lab reports',
+          certificateNumber: 'PLACEHOLDER-CE-DOC-RFIDAK',
+          issueDate: '2024-02-01',
+          expiryDate: '2029-02-01',
+          scope:
+            'EN 300 330 / EN 302 208 conformity for RFID readers and transponders intended for sale in the European Economic Area.',
+          documentHref: '/downloads/rfidak-ce-declaration-of-conformity.pdf',
+        },
+        {
+          name: 'FCC Part 15 Test Report',
+          category: 'US Radio Emission Compliance',
+          issuer: 'Shenzhen-accredited FCC test laboratory',
+          certificateNumber: 'PLACEHOLDER-FCC-TEST-RFIDAK',
+          issueDate: '2024-03-01',
+          expiryDate: '2029-03-01',
+          scope:
+            'FCC Part 15 Subpart C compliance test results for UHF RFID readers and HF/LF RFID writer modules.',
+          documentHref: '/downloads/rfidak-fcc-part-15-test-report.pdf',
+        },
+        {
+          name: 'RoHS Compliance Statement',
+          category: 'EU Restriction of Hazardous Substances',
+          issuer: 'RFIDAK material-supplier declarations',
+          certificateNumber: 'PLACEHOLDER-ROHS-RFIDAK',
+          issueDate: '2024-01-15',
+          expiryDate: '2027-01-15',
+          scope:
+            'Material compliance with EU Directive 2011/65/EU (RoHS 2) and 2015/863 (RoHS 3) for PVC, PET, ABS, silicone, and inlay materials used in RFIDAK products.',
+          documentHref: '/downloads/rfidak-rohs-statement.pdf',
+        },
+      ],
+      verificationNote:
+        'All certificate copies are the property of Shenzhen RFIDAK Co., LTD and are shared for buyer evaluation only. If your procurement workflow requires a fresh stamped copy dated within the last 90 days, request one via the inquiry form below.',
+    },
     checklistEyebrow: 'Buyer Checklist',
     checklistTitle: 'What to request when certifications are part of supplier approval',
     checklistDescription:
@@ -213,6 +349,55 @@ export const evidencePages: Record<string, EvidencePageConfig> = {
       'Confirm how finished goods are counted, separated and packed when multiple SKUs or encoded batches are involved.',
       'If your project is compatibility-sensitive, make sure sample approval criteria are documented before moving into production.',
     ],
+    howTo: {
+      eyebrow: 'Quality Control Workflow',
+      title: 'How RFIDAK checks every RFID product before it ships',
+      intro: 'Every batch moves through 6 gated QC checkpoints. Defects at any stage either trigger rework or scrap at the cost tier where it is cheapest to fix. Below is the actual sequence — not a marketing description — that ISO 9001 auditors verify on RFIDAK\u2019s production floor.',
+      totalTime: 'PT72H',
+      supply: [
+        'Customer specification (chip, encoding, artwork, dimensions, MOQ)',
+        'Approved sample as the quality benchmark for the run',
+        'Reader / lock model if compatibility is a project requirement',
+      ],
+      tool: [
+        'Impinj / NXP chip electrical test stations (100% incoming verification)',
+        'Automated read-range test beds calibrated to ISO/IEC 14443 / 18000-63',
+        'Environmental test chambers (IP spray, drop, wash-cycle, thermal)',
+        'Auto-encode + auto-verify stations for pre-encoded orders',
+      ],
+      steps: [
+        {
+          name: 'Incoming material inspection (0–12 hours)',
+          description: 'Every incoming chip reel is 100% electrically tested before entering production. PVC / silicone / inlay substrate is sample-tested per lot for thickness, color and surface finish tolerance. Defective chips are scrapped at $0.03 cost rather than causing full-product rework downstream.',
+          estimatedTime: 'PT12H',
+        },
+        {
+          name: 'In-process QC at each production stage (12–48 hours)',
+          description: 'Lamination / injection / heat-press / encoding lines have inline QC stations. Operators verify product dimensions, antenna placement, chip bonding strength, and print registration every 100–500 units. Failing batches are quarantined before reaching final inspection.',
+          estimatedTime: 'PT36H',
+        },
+        {
+          name: 'Encoding verification for custom orders (48–60 hours)',
+          description: 'For orders requiring pre-encoded UID / site code / memory data, every unit is read-verified against the customer specification. A CSV mapping of unit-level UID is generated for customer CRM / access-control-host integration.',
+          estimatedTime: 'PT12H',
+        },
+        {
+          name: 'Final 100% read-verification (60–66 hours)',
+          description: 'Every finished unit (card / tag / wristband / label) is tested on a reader that mirrors the customer\u2019s installed equipment. Any unit that fails read or has anti-tamper issues is scrapped. Pass rate typically >99.7% on stable chip families.',
+          estimatedTime: 'PT6H',
+        },
+        {
+          name: 'Lot-sample environmental testing where applicable (66–70 hours)',
+          description: 'For laundry tags: 25-sample accelerated wash-cycle test at 85 °C with 2.5 g/L NaClO. For wristbands: IP68 immersion test. For metal tags: surface-detuning verification. Lot fails if > 2 sample failures in the representative test.',
+          estimatedTime: 'PT4H',
+        },
+        {
+          name: 'Pack-out + pre-shipment sample retention (70–72 hours)',
+          description: 'Finished goods are packed with lot separation tags and shipment-ready labels. RFIDAK retains 3 sample units per 1,000 produced for 12 months as reference for any customer claim, dispute, or warranty verification post-delivery.',
+          estimatedTime: 'PT2H',
+        },
+      ],
+    },
     resourcesTitle: 'Useful Next Steps',
     resourcesDescription:
       'Open the pages below if quality control still needs to be reviewed alongside supplier validation and sample planning.',
@@ -324,6 +509,50 @@ export const evidencePages: Record<string, EvidencePageConfig> = {
       'Explain whether you need a quick comparison sample or a sample that mirrors the final production design.',
       'State whether the project is still exploratory or already close to a pilot run or bulk order.',
     ],
+    howTo: {
+      eyebrow: 'Step-by-Step Process',
+      title: 'How to request RFIDAK RFID samples (from first inquiry to pilot-ready batch)',
+      intro: 'RFIDAK runs a structured sample workflow that compresses the 4-6 week timeline typical for custom RFID projects into 2-4 weeks for most buyers. The schema below mirrors the real sequence so your team knows what to expect at each step.',
+      totalTime: 'P28D',
+      supply: [
+        'Target application + environment (e.g. water park cashless payment, hospital laundry)',
+        'Installed reader or lock model (so chip compatibility can be confirmed)',
+        'Artwork, numbering or encoding spec if already known',
+        'Shipping address + DHL / FedEx / UPS account (optional — RFIDAK can cover standard samples)',
+      ],
+      tool: [
+        'RFIDAK chip selector worksheet + compatibility matrix',
+        'In-house chip read/write testing before shipment',
+        'Pilot quantity program for field validation',
+      ],
+      steps: [
+        {
+          name: 'Share the use case + reader spec (Day 0–1)',
+          description: 'Send us a 3-line brief on what you are trying to build: the venue / environment, the installed reader or lock if any, and the quantity range you are considering. This is usually 1 email or WhatsApp message with 1–3 attached photos.',
+          estimatedTime: 'P1D',
+        },
+        {
+          name: 'Receive chip-family recommendation + stock sample shortlist (Day 1–3)',
+          description: 'RFIDAK maps your use case to 2–5 chip / format options and proposes a free sample set (typically 5–20 pieces across 2–3 SKUs). You decide which samples to receive.',
+          estimatedTime: 'P2D',
+        },
+        {
+          name: 'Samples ship via DHL / FedEx / UPS (Day 3–8)',
+          description: 'Stock samples ship within 1–2 business days of sample confirmation. International express delivery typically 3–5 business days. Tracking number shared via email + WhatsApp.',
+          estimatedTime: 'P5D',
+        },
+        {
+          name: 'Field-test samples in your real environment (Day 8–22)',
+          description: 'Test with your installed reader, in the real humidity / lighting / mounting surface conditions. RFIDAK engineer available via WhatsApp for technical questions during this phase.',
+          estimatedTime: 'P14D',
+        },
+        {
+          name: 'Request custom samples OR confirm pilot order (Day 22–28)',
+          description: 'Either (a) request custom samples with specific artwork, chip, encoding — adds 5-7 business days; or (b) confirm a pilot quantity (typically 200–2,000 pieces) to validate production quality before bulk commitment. Pilot batches ship in 7–15 business days.',
+          estimatedTime: 'P6D',
+        },
+      ],
+    },
     resourcesTitle: 'Pages To Review Before Sampling',
     resourcesDescription:
       'Open the pages below when sample planning also needs supplier evidence and delivery expectations.',

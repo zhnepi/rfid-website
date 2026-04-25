@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CategoryStickyNav from '../../components/CategoryStickyNav.astro';
 import CategoryDecisionCards from '../../components/CategoryDecisionCards.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import ScrollCTA from '../../components/cta/ScrollCTA.astro';
 import ExitIntent from '../../components/cta/ExitIntent.astro';
 import { products } from '../../data/products';
@@ -30,13 +31,13 @@ const categoryWhatsApp = getContextualWhatsAppAction(Astro.url.pathname);
   <!-- Hero Section -->
   <section class="bg-gradient-to-r from-[#0d7377] to-[#0a5c5f] text-white py-16">
     <div class="container mx-auto px-4">
-      <nav class="text-sm mb-4">
-        <a href="/" class="hover:underline">Home</a>
-        <span class="mx-2">/</span>
-        <a href="/rfid" class="hover:underline">RFID Products</a>
-        <span class="mx-2">/</span>
-        <span>{categoryName}</span>
-      </nav>
+      <div class="mb-4">
+        <Breadcrumb variant="dark" items={[
+          { name: 'Home', href: '/' },
+          { name: 'RFID Products', href: '/rfid' },
+          { name: categoryName },
+        ]} />
+      </div>
       <h1 class="text-4xl md:text-5xl font-bold mb-4">{categoryName}</h1>
       <p class="text-xl opacity-90 max-w-3xl">
         Cost-effective RFID labels and stickers for inventory tracking, library management, 

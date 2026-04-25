@@ -13,6 +13,7 @@ import { getContextualInquiryLabel, getProductContactHref, getProductInquiryInte
 import { getProductBuyerIntro, getProductBuyerQuestion, getProductBuyerSummary, getProductDirectAnswer, getProductFaqs } from '../../utils/productCopy';
 import ScrollCTA from '../../components/cta/ScrollCTA.astro';
 import ExitIntent from '../../components/cta/ExitIntent.astro';
+import VisualComparisonWidget from '../../components/VisualComparisonWidget.astro';
 import {
   getProductApplications,
   getProductDetailSections,
@@ -70,11 +71,11 @@ const productJsonLd = {
     "@type": "Offer",
     "url": `https://www.rfidak.com/product/${product.slug}`,
     "priceCurrency": "USD",
-    "price": "0",
+    // price intentionally omitted for B2B custom products — see priceSpecification below.
+    // The previous "price": "0" was misleading (Google read it as "free") so removed 2026-04-23.
     "priceSpecification": {
       "@type": "PriceSpecification",
       "priceCurrency": "USD",
-      "price": "0",
       "description": "Contact RFIDAK for project-based pricing. MOQ and unit cost depend on chip, customization, and order volume."
     },
     "availability": "https://schema.org/InStock",
@@ -1064,6 +1065,12 @@ const pageDescription = truncateText(
           </div>
         </div>
       </section>
+    )}
+
+    <!-- Visual Comparison Widget — renders only for products with `visualComparison` field.
+         Added 2026-04-23 to restore a decision-helper UX that the original rfidak.com had. -->
+    {product.visualComparison && (
+      <VisualComparisonWidget data={product.visualComparison} />
     )}
 
     <!-- Product Detail Sections (sub-types, variants, etc.) -->

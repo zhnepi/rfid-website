@@ -687,8 +687,148 @@ const speakableJsonLd = {
             </div>
           </section>
 
+          <section id="industry-frequency-match" class="scroll-mt-24">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">9. Industry playbook &mdash; which frequency wins where</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Frequency selection is a settled question in many verticals: decades of deployment have produced a de-facto default that changes slowly. Below is the industry-standard frequency match for 8 B2B verticals, with the operational reason the dominant band won out. Use this to align with industry practice rather than re-litigate frequency choice from scratch.
+            </p>
+            <div class="grid gap-5 md:grid-cols-2" data-speakable="industry-frequency">
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Hospitality (hotels, resorts, cruise)</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: HF 13.56 MHz</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Installed electronic lock base is overwhelmingly HF MIFARE (Saflok, VingCard, Onity, SALTO). Attempting to deploy UHF would require replacing every lock in the property — a $100K-500K CAPEX hit per 300-room property vs $2-5K for new HF cards. HF also delivers the ~3-5 cm read range that hotel security teams specifically want: no accidental unlock from a guest walking past a door. <strong>Only scenario for UHF in hospitality:</strong> cashless wristband payment at water parks / resorts, which is typically a parallel deployment alongside HF door locks.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Retail &amp; apparel (item-level)</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: UHF 860-960 MHz</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Walmart's 2022 mandate and the EU Digital Product Passport explicitly specify EPC Gen2v2 UHF. Retail workflow requires bulk-read of 50-500+ items simultaneously at 3-5 m range (shelf sweep, dock door, EAS gate). HF would require tap-by-tap scanning — operationally impossible at 1,000+ SKU store scale. <strong>HF plays a complementary role:</strong> NFC Forum chips for smartphone engagement at shelf, brand authentication, and DPP consumer verification — layered on the same garment as UHF for operational visibility.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Industrial laundry &amp; linen</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: UHF 860-960 MHz</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  UHF won this category 2015-2020 replacing HF legacy deployments. Key reason: sort-portal throughput. A modern UHF tunnel reader inventories 200-600 garments per minute, while HF at ISO 14443A proximity maxes around 15-25 units per minute. For Berendsen / Elis / Cintas scale (100K+ garments/day per facility), UHF is the only frequency that meets throughput requirements. Chip wash-cycle durability (200+ at 85°C / 2.5 g/L NaClO) is now standard across Impinj Monza R6-P and NXP UCODE 9.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Library &amp; media</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: HF 13.56 MHz (vicinity, ISO/IEC 15693)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  ICODE SLIX on ISO/IEC 15693 reads at 50-100 cm vicinity — the sweet spot for library self-checkout workflows (stack of 5-10 books in one read). UHF would add unnecessary read range (6+ m) that creates privacy concerns in public library settings where patrons don't want their book selections readable from across the room. LF would be too short-range for self-service. HF 15693 is the de-facto standard in Bibliotheca, 3M, mk Solutions integrations across North American and European public library systems.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Logistics &amp; supply chain</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: UHF 860-960 MHz (with on-metal tags)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Pallet-level and container-level tracking requires 5-10 m read range from fixed gate antennas — UHF's natural strength. Critical nuance: 80%+ of logistics tag applications involve metal substrates (containers, pallets, cages, returnable transport packaging), so anti-metal tag construction with ferrite spacer is mandatory. Standard UHF stickers on bare metal lose 90-99% range. HF is never used in logistics except for isolated pharmaceutical cold-chain use cases where sensor data is integrated.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Animal ID &amp; livestock</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: LF 134.2 kHz (ISO 11784/11785 FDX-B)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  The only vertical where LF remains dominant. ISO 11784/11785 is the universal livestock ear-tag standard recognized by USDA, EU, Australia, and 60+ national agricultural authorities. LF's ability to read through biological tissue (pet microchipping) and immunity to wet/muddy barn environments make it the stable default since 1996. HF and UHF have both attempted entries but failed against regulatory inertia — regulatory change at USDA / EFSA takes decades.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Enterprise access control</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: HF 13.56 MHz (MIFARE DESFire / Plus)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Fortune 500 enterprise access has consolidated on HF MIFARE family because of (1) installed reader base at scale, (2) AES-128 security via DESFire EV3 matching insurance cybersecurity requirements, (3) multi-application support (physical access + IT logon + cafeteria + secure print) on one card. LF Prox is still present in legacy installations but migrating out. UHF never gained traction in enterprise access because 5+ m range is actively undesirable — employees walking past sensitive doors would trigger unwanted events.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Consumer &amp; marketing (NFC)</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: HF 13.56 MHz NFC (NTAG424 DNA)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Every iPhone (7+) and Android phone ships with an HF 13.56 MHz NFC radio — and only HF. UHF consumer readers do not exist in the smartphone ecosystem. For brand engagement, anti-counterfeit, luxury Digital Product Passport, loyalty tap-to-redeem, smart packaging — HF NFC is the only frequency that works with 2.4 billion consumer phones globally (NFC Forum, 2025). NTAG424 DNA's AES-128 SUN messaging plus iOS Background Tag Reading make HF NFC the consumer-facing default for all brand-authentication programs launching in 2024-2026.
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section id="frequency-faq" class="scroll-mt-24">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">10. Extended frequency FAQ &mdash; 10 questions buyers ask</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Frequency-selection questions that come up most often during RFIDAK's sales engineering calls with buyers in 2024-2026. Each answer is written to stand alone for sharing with non-RFID stakeholders in procurement, IT security, operations, and finance teams who may not know the acronyms but need to approve the purchase decision.
+            </p>
+            <div class="space-y-4" data-speakable="frequency-faq">
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>1. Can I run UHF, HF, and LF on the same building's infrastructure?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Yes, but each frequency requires its own reader fleet — the hardware does not overlap. Buildings routinely deploy LF Prox for legacy door access + HF MIFARE for payment + UHF for inventory all in parallel. Multi-band readers exist (some desktop enrollment stations and handheld devices support 125 kHz + 13.56 MHz + 860-960 MHz in one unit) but cost 3-5x single-band reader prices. The only time buyers need to worry about RF interference between frequencies is when antennas are installed within 0.5 m of each other at dock doors — LF inductive fields can desensitize UHF receivers at very close range. Separate mounting by 1-2 m and no practical interference occurs.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>2. Does HF really work through water, and is that an advantage over UHF?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Yes — HF 13.56 MHz penetrates water and biological tissue far better than UHF, which is absorbed heavily. In practice, this matters for: (1) pet microchipping and veterinary implants — LF / HF only, never UHF; (2) livestock identification through skin, muscle and rumen fluid — LF primarily, HF secondarily; (3) medical devices implanted in tissue; (4) swimming pool / water park wristbands where the tag sits against wet skin; (5) industrial laundry where tags are tumbling in wash water (though this is engineered around with textile encapsulation rather than relying on HF itself). For non-biological wet environments, HF advantage is minor — waterproof UHF wristbands work fine for cruise ship all-inclusive programs where the tag doesn't need to read while submerged at depth.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>3. Why are some UHF readers 4 W EIRP in the US but only 2 W ERP in Europe?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Regulatory policy difference. FCC Part 15.247 allows unlicensed 4 W EIRP in the 902-928 MHz ISM band. ETSI EN 302 208 allows 2 W ERP (which converts to about 3.3 W EIRP) in the 865.6-867.6 MHz band. Practical impact on read range: US installations reach ~8-12 m at dock doors, EU installations ~6-9 m — a 20-30% range reduction due to lower transmit power plus narrower frequency band (only 2 MHz vs 26 MHz in US). EU installations compensate with tighter antenna focusing and higher-gain directional antennas. Tag-side: same chip works in both regions, only the reader TX power differs. When specifying a global rollout, design to the EU constraint — US deployments will then have generous headroom.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>4. Is 2.45 GHz microwave RFID still used anywhere?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Rare outside niche applications. Microwave RFID at 2.45 GHz historically served: electronic tolling (now mostly migrated to UHF or DSRC), active container tracking (Savi Technologies, largely BLE-replaced), and a handful of race timing systems. The 2.45 GHz band is heavily shared with WiFi, Bluetooth, and microwave ovens — interference makes it unattractive versus clean UHF. For new B2B deployments in 2024-2026, 2.45 GHz is effectively never the right answer. If a vendor is proposing 2.45 GHz for a new project, ask pointed questions about why — they may be trying to sell legacy stock rather than the best fit. Exception: military ISO 18000-4 deployments for high-mobility asset tracking in certain national defense networks remain at 2.45 GHz by regulation.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>5. What's the simplest way to pick frequency if I have no prior experience?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Answer four questions in order. (1) <strong>Do consumers need to tap with phones?</strong> If yes, HF 13.56 MHz NFC — nothing else works with smartphones. (2) <strong>Do you need to read many items at once from a few meters away?</strong> If yes, UHF 860-960 MHz. (3) <strong>Is this an upgrade of an existing LF Prox or HF MIFARE deployment?</strong> Match the installed base to avoid reader replacement cost. (4) <strong>Is this livestock / pet / implant application?</strong> LF 134.2 kHz. If none of these apply, the default for new industrial deployments is UHF 860-960 MHz because of cost-per-tag economics. When still uncertain, request samples of all three frequencies from RFIDAK and test against your actual reader before committing.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>6. Can one tag work globally, or do I need region-specific SKUs?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">One tag can work globally if you specify "worldwide antenna" design. UHF Gen2 chips are inherently broadband and work across all regional sub-bands (FCC 902-928, ETSI 865-868, Japan 916-921, China 920-925) — only the antenna needs optimization. A worldwide-tuned antenna trades 10-15% peak range per region for consistent performance across every region. For supply chain tags moving between regions (export cartons, global RTPs), always specify worldwide. For region-locked inventory (US-only retail, EU-only DPP), region-specific antenna delivers maximum range at minimum cost. HF and LF have no regional variation — 13.56 MHz and 125-134 kHz are globally unified under ISO standards.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>7. How does frequency affect cost at volume?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">At MOQ 100K, UHF sticker inlays are the cheapest at $0.04-0.08 per unit (benefit of massive manufacturing scale from retail mandates). HF NFC stickers run $0.05-0.15. LF stickers are oldest technology and counterintuitively most expensive at $0.18-0.30 because LF manufacturing volume is 1-2% of UHF volume, so scale economies don't apply. For PVC cards, the cost curve inverts — HF MIFARE Classic cards are $0.15-0.40, UHF cards $0.20-0.55 (fewer suppliers make UHF cards vs stickers). The cheapest option for a new deployment is usually UHF stickers unless a use case specifically demands another format. For LF, expect a 2-5x cost premium versus UHF for equivalent format and volume.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>8. Will 5G millimeter-wave replace current RFID bands?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">No — 5G mmWave operates at 24-71 GHz which is physically unsuitable for passive RFID. The wavelengths are millimeter-scale (matching the name), so tag antennas would need to be micrometer-scale to resonate — currently impractical. 5G does interact with RFID ecosystems via reader backhaul connectivity (fixed readers uploading inventory counts over 5G networks) but not at the tag layer. Emerging research on 5G-powered passive sensors shows promise at 5-10 year horizons but won't disrupt UHF Gen2's 860-960 MHz ecosystem in the current procurement cycle. For any project with a 2024-2028 decision window, UHF 860-960 MHz is the safe bet — it has 42 billion tags deployed in 2024 alone (RAIN Alliance) and global chip supply at scale.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>9. How do I future-proof my frequency choice for 10-year deployments?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Three practical moves. (1) Pick established ISO standards, not proprietary protocols — ISO/IEC 14443 (HF), 15693 (HF vicinity), 18000-63 (UHF Gen2v2), 11784/11785 (LF). All have 20+ year commitment from international standards bodies. (2) Avoid vendor-locked proprietary chips — if your chip supplier goes out of business, a standards-compliant chip has 5+ alternative sources. (3) Document your RFP in generic terms allowing drop-in chip substitution at repeat-order time — e.g., "any EPC Gen2v2 compliant chip with 128-bit EPC" rather than "Impinj Monza R6 specifically". Over 10 years, your current chip will go end-of-life; standards-based spec keeps you supplied. Frequencies themselves have stable 20+ year horizons; the risk is at the chip level, not the frequency level.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>10. When should I pick dual-frequency or multi-standard tags?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Rare but real cases. (1) <strong>Retail with consumer engagement:</strong> UHF for warehouse + NFC for shopper tap, as discussed in luxury DPP. (2) <strong>Access control migration:</strong> LF + HF dual-frequency card during transition years when you need both old LF readers and new HF readers to recognize the same card. (3) <strong>Global asset tracking with mobile field scanning:</strong> UHF for fixed portals + NFC for technician smartphone spot-check. Dual-frequency tags cost 40-80% more than single-frequency and add complexity — avoid unless there's a specific operational driver. Most "maybe we need dual frequency" thinking resolves to "run two parallel single-frequency deployments" once the actual workflow is mapped. Sample-test both before committing to the dual-frequency format because antenna coupling between the two frequencies can reduce range.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>11. How does temperature affect frequency choice?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">All three frequencies have similar operating range when chip and housing are properly engineered — typical range is &minus;25°C to +70°C for standard inlays, extendable to &minus;40°C to +110°C for industrial-grade construction. Differences emerge at extreme conditions: LF and HF tolerate higher humidity better (water is more transparent at lower frequencies), while UHF is more sensitive to water damage if the chip substrate cracks. For applications requiring autoclave sterilization (134°C), PPS-encapsulated chips handle all three frequencies but cost 3-5x baseline PVC. For cold-chain cryogenic applications (&minus;40°C or below), active BLE or cellular trackers are typically more reliable than passive RFID regardless of frequency. Always specify operating temperature range in RFP to get the right substrate.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>12. Can I use the same reader for encoding and reading?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Yes for most applications. Desktop reader-writer units (uFR Nano, ACR122U for NFC / HF; Impinj Speedway or desktop UHF writers for EPC Gen2) both encode and read within one device. For high-throughput encoding lines (encoding 10K+ cards/day), dedicated auto-encoding stations with conveyor feeding are more efficient and include final read-verification. For field-operations reader fleets (warehouse gates, point-of-sale), reading is usually read-only — encoding happens at the manufacturing facility or during initial provisioning. Clarify encoding needs upfront: if encoding is daily (hotel key programming), buy encoding-capable readers. If encoding is one-time at manufacture, buy read-only readers which are 30-50% cheaper.</p>
+              </details>
+            </div>
+          </section>
+
           <section id="cluster-articles">
-            <h2 class="text-3xl font-semibold text-gray-900 mb-5">9. Continue your research \u2014 8 deep-dive articles</h2>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">11. Continue your research \u2014 8 deep-dive articles</h2>
             <p class="text-gray-600 leading-relaxed mb-6">
               These eight articles form the cluster around this pillar. Read in any order; each is self-contained and links back here for context.
             </p>

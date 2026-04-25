@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import { getCategoryComparisonLinks } from '../utils/comparisons';
 
 const productCategories = [
@@ -89,20 +90,35 @@ const pageJsonLd = {
     }))
   }
 };
+
+// BreadcrumbList added 2026-04-24 — /products is the hub for product discovery,
+// SEO audit flagged missing breadcrumb schema on hub pages.
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home",     "item": "https://www.rfidak.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.rfidak.com/products" }
+  ]
+};
 ---
 
 <Layout
   title="RFID Product Categories - Cards, Tags, Labels, Wristbands & Readers | RFIDAK"
   description="Explore RFIDAK's RFID product categories: RFID cards, tags, labels, NFC stickers, wristbands, keyfobs, readers and industrial laundry tags."
   keywords="RFID product categories, RFID cards supplier, RFID tags manufacturer, NFC stickers, RFID wristbands, RFID keyfobs, RFID readers, laundry RFID tags"
-  jsonLd={pageJsonLd}
+  jsonLd={[pageJsonLd, breadcrumbJsonLd]}
 >
   <Header />
   <main>
     <section class="bg-slate-950 py-20 text-white">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl">
-          <p class="eyebrow-label eyebrow-label-wide text-[#0d7377]/70 mb-3">Product Overview</p>
+          <Breadcrumb variant="dark" items={[
+            { name: 'Home', href: '/' },
+            { name: 'Products' },
+          ]} />
+          <p class="eyebrow-label eyebrow-label-wide text-[#0d7377]/70 mb-3 mt-4">Product Overview</p>
           <h1 class="title-balance text-4xl md:text-6xl font-semibold">Start with the RFID format that fits your object, environment, and buying stage</h1>
           <p class="card-copy text-white/75 text-lg mt-5 max-w-3xl">
             Use this page when you are still deciding between cards, tags, labels, wearables, readers, or laundry-specific formats and want the fastest path into the right family.
@@ -114,21 +130,21 @@ const pageJsonLd = {
     <section class="py-16 bg-white">
       <div class="container mx-auto px-4">
         <div class="grid lg:grid-cols-3 gap-6">
-          <div class="copy-safe rounded-[1.75rem] bg-[#0d7377]/5 border border-[#0d7377]/15 p-8">
+          <div class="copy-safe rounded-lg bg-[#0d7377]/5 border border-[#0d7377]/15 p-8">
             <p class="eyebrow-label text-[#0d7377] mb-3">Start Here</p>
             <h2 class="title-balance text-2xl font-semibold text-gray-900 mb-4">What are you tagging, issuing, or trying to read?</h2>
             <p class="card-copy text-gray-600">
               People, vehicles, garments, metal assets, retail items, books, and packages usually point to very different RFID formats. Use that first decision to narrow the catalog fast.
             </p>
           </div>
-          <div class="copy-safe rounded-[1.75rem] bg-gray-50 border border-gray-200 p-8">
+          <div class="copy-safe rounded-lg bg-gray-50 border border-gray-200 p-8">
             <p class="eyebrow-label text-[#0d7377] mb-3">Next Filter</p>
             <h2 class="title-balance text-2xl font-semibold text-gray-900 mb-4">What does the product need to survive or match?</h2>
             <p class="card-copy text-gray-600">
               Reader protocol, metal surfaces, wash cycles, outdoor exposure, printer setup, and visible branding usually narrow the right product family faster than frequency alone.
             </p>
           </div>
-          <div class="copy-safe rounded-[1.75rem] bg-gray-50 border border-gray-200 p-8">
+          <div class="copy-safe rounded-lg bg-gray-50 border border-gray-200 p-8">
             <p class="eyebrow-label text-[#0d7377] mb-3">Fast Path</p>
             <h2 class="title-balance text-2xl font-semibold text-gray-900 mb-4">Need a shortlist before you ask for samples?</h2>
             <p class="card-copy text-gray-600">
@@ -143,7 +159,7 @@ const pageJsonLd = {
       <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {productCategoryCards.map((category) => (
-            <article class="copy-safe group overflow-hidden rounded-[1.75rem] border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <article class="copy-safe group overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
               <a href={category.href} class="block">
                 <div class="aspect-[5/4] overflow-hidden bg-gray-100">
                   <img

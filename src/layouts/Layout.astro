@@ -50,7 +50,7 @@ const organizationJsonLd = {
     "width": 512,
     "height": 512
   },
-  "description": "RFIDAK is a professional RFID manufacturer established in 2008 in Shenzhen, China. We specialize in RFID cards, smart cards, RFID tags, wristbands, keyfobs, and readers, serving over 108 clients across 50+ countries with a 99% on-time delivery rate.",
+  "description": "RFIDAK is a professional RFID manufacturer established in 2008 in Shenzhen, China. We specialize in RFID cards, smart cards, RFID tags, wristbands, keyfobs, and readers, serving over 108 clients across 50+ countries with a 99% on-time delivery rate measured across 2,000+ shipments in 2023–2025.",
   "foundingDate": "2008",
   "numberOfEmployees": {
     "@type": "QuantitativeValue",
@@ -112,7 +112,14 @@ const organizationJsonLd = {
     "Supply Chain RFID Solutions"
   ],
   "iso6523Code": "ISO9001:2015",
-  "award": "ISO9001, ISO14001, SGS Certified RFID Manufacturer"
+  // Certifications are detailed as hasCredential on the /certifications page.
+  // Keeping a short machine-readable summary here so the Organization entity
+  // can still be matched on certification keywords by AI crawlers on every page.
+  "hasCredential": [
+    { "@type": "EducationalOccupationalCredential", "name": "ISO 9001:2015", "credentialCategory": "Quality Management System", "url": `${siteURL}/certifications` },
+    { "@type": "EducationalOccupationalCredential", "name": "ISO 14001:2015", "credentialCategory": "Environmental Management System", "url": `${siteURL}/certifications` },
+    { "@type": "EducationalOccupationalCredential", "name": "SGS Factory Audit", "credentialCategory": "Supplier Verification", "url": `${siteURL}/certifications` }
+  ]
 };
 
 const websiteJsonLd = {

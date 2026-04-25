@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import { blogPosts } from '../data/blogs';
 import { categoryPages } from '../data/categoryPages';
 import { comparisonPages } from '../data/comparisons';
@@ -41,6 +42,18 @@ const contactInfo = [
     </svg>`,
     title: 'WhatsApp',
     content: '0086-18665820632',
+  },
+  // WeChat added 2026-04-23 — strong contact channel for China-side buyers
+  // (especially procurement managers at MNC suppliers in Shenzhen / Dongguan).
+  // QR code image placeholder — replace /images/contact/rfidak-wechat-qr.png
+  // with a real scanned QR when available.
+  {
+    icon: `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178A1.17 1.17 0 014.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178 1.17 1.17 0 01-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.434-2.687 5.633 0 3.576 3.47 6.506 7.706 6.506.835 0 1.68-.105 2.41-.315.172-.05.36-.04.512.046l1.608.946a.305.305 0 00.132.046c.134 0 .249-.11.249-.252 0-.062-.02-.123-.03-.184-.002-.013-.18-.712-.302-1.236a.52.52 0 01.186-.571c1.535-1.123 2.557-2.815 2.557-4.716 0-3.305-3.044-6.006-6.946-6.204h-.115zm-2.53 2.58c.42 0 .76.342.76.76 0 .42-.34.76-.76.76a.76.76 0 010-1.52zm4.573 0c.42 0 .76.342.76.76 0 .42-.34.76-.76.76a.76.76 0 010-1.52z"/>
+    </svg>`,
+    title: 'WeChat',
+    content: 'Scan QR for 24h response — RFIDAK Sales',
+    qrImage: '/images/contact/rfidak-wechat-qr.png',
   },
 ];
 
@@ -146,6 +159,12 @@ const breadcrumbJsonLd = {
       </div>
       <div class="container mx-auto px-4 relative z-10">
         <div class="mx-auto max-w-4xl">
+          <div class="mb-3">
+            <Breadcrumb variant="dark" items={[
+              { name: 'Home', href: '/' },
+              { name: 'Contact' },
+            ]} />
+          </div>
           <p id="contactHeroEyebrow" class="inline-flex items-center gap-1.5 mb-2 rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/85">
             {defaultContactTheme.heroEyebrow}
           </p>
@@ -525,12 +544,26 @@ const breadcrumbJsonLd = {
             </p>
 
             <div class="space-y-3">
-              {contactInfo.map((info) => (
+              {contactInfo.map((info: any) => (
                 <div class="copy-safe flex items-start gap-3">
                   <div class="text-[#0d7377] flex-shrink-0 mt-0.5 bg-[#0d7377]/5 p-1.5 rounded-md" set:html={info.icon}></div>
-                  <div>
+                  <div class="flex-1 min-w-0">
                     <h3 class="text-[11px] font-semibold text-gray-500 uppercase tracking-wide">{info.title}</h3>
                     <p class="text-sm text-gray-700 mt-0.5 leading-snug">{info.content}</p>
+                    {info.qrImage && (
+                      <div class="mt-2">
+                        <img
+                          src={info.qrImage}
+                          alt={`${info.title} QR code — scan with ${info.title} mobile app to start chat with RFIDAK`}
+                          class="w-28 h-28 rounded-md border border-gray-200 bg-white p-1"
+                          width="112"
+                          height="112"
+                          loading="lazy"
+                          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+                        />
+                        <p class="text-xs text-gray-400 mt-1 italic" style="display:none">QR code image pending — contact us via WhatsApp to receive the WeChat QR.</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}

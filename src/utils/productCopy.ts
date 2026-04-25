@@ -146,12 +146,62 @@ function getProductCopyProfile(product: Product): ProductCopyProfile {
     };
   }
 
-  if (inCategory('RFID Cards') || matches('card', 'inlay', 'clamshell', 'prelam')) {
+  // Sub-type branches for card family — each card subtype has a distinct buyer decision.
+  // These branches run BEFORE the generic card fallback (below) so the buyer sees copy that
+  // matches the actual material / format they are looking at, not a one-size-fits-all line.
+  // (Product card differentiation fix 2026-04-23 per brand review.)
+
+  if (matches('wood-card', 'wood card', 'bamboo card', 'walnut card')) {
+    return {
+      question: 'Need a premium, eco-friendly credential that feels different in the hand?',
+      summary: 'A fit for boutique hotels, luxury brand programs, and sustainability-minded corporate gift cards that still need full RFID function.',
+      intro:
+        'Use this wood card when the project wants a tactile premium finish — bamboo, walnut, cherry or custom — without sacrificing chip compatibility. Confirm wood grain tolerance, protective lacquer finish, and RFID-embedded location before sample approval.',
+    };
+  }
+
+  if (matches('paper-card', 'paper card', 'disposable card')) {
+    return {
+      question: 'Need a disposable credential where the per-unit cost matters more than lifetime?',
+      summary: 'A fit for event passes, transit day-tickets, festival wristband alternatives, and time-limited visitor badges at $0.10–0.30 per unit.',
+      intro:
+        'Use this paper card when each credential has a short useful life (hours to weeks) and cost per unit drives the project. Confirm printed artwork path, HF/UHF chip option, and recycling disposal fit before rollout.',
+    };
+  }
+
+  if (matches('clamshell')) {
+    return {
+      question: 'Need a rugged 1.8mm credential for outdoor or construction-site access?',
+      summary: 'A fit for construction site badges, warehouse access, outdoor parking, and wet-environment credentials where thin PVC cards crack or delaminate.',
+      intro:
+        'Use this clamshell card when daily-carry durability, rain exposure, or keychain abrasion have broken thinner cards in the past. Confirm chip family, riveted chip placement, belt-clip accessory and color-tier visibility before piloting.',
+    };
+  }
+
+  if (matches('epoxy-card', 'epoxy card', 'nfc coin', 'nfc-coin')) {
+    return {
+      question: 'Need a waterproof, domed NFC credential for pool, gym, or tech promo?',
+      summary: 'A fit for waterpark season passes, fitness NFC chips, tap-to-launch product campaigns, and cases where a visible-chip look is the design goal.',
+      intro:
+        'Use this epoxy-dome card or NFC coin when the credential will see water, sweat, or heavy fingerprint contact. Confirm dome diameter, UV-stability of the epoxy, and printed artwork under the dome before approving samples.',
+    };
+  }
+
+  if (matches('inlay', 'prelam')) {
+    return {
+      question: 'Are you laminating, converting, or embedding RFID into your own final product?',
+      summary: 'A fit for card manufacturers, book converters, luxury-goods brands, and OEM integrators who bring their own lamination, printing, or packaging workflow.',
+      intro:
+        'Use this inlay or prelam when your team handles the lamination, die-cutting, or embedding step in-house. Confirm antenna geometry, chip family, pitch / roll format, and release-liner compatibility with your laminator before ordering sample rolls.',
+    };
+  }
+
+  if (inCategory('RFID Cards') || matches('card')) {
     return {
       question: 'Need a credential that must match an installed reader or hotel lock?',
-      summary: 'A fit for access control, hotel keys, ticketing, and projects that start from reader matching or card production.',
+      summary: 'A fit for access control, hotel keys, transit cards, and cashless events where chip family and reader compatibility matter more than material.',
       intro:
-        'Use this card or inlay when the project starts from installed reader compatibility, hotel lock matching, or card production requirements. Confirm protocol, chip path, print finish, and encoding needs before samples are approved.',
+        'Use this standard PVC card when the project starts from installed reader compatibility, hotel lock matching, or card production requirements. Confirm chip family (MIFARE Classic vs Plus vs DESFire), print finish, and encoding needs before samples are approved.',
     };
   }
 

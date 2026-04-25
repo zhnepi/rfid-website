@@ -13,12 +13,15 @@ const tocItems = [
   { href: '#regional-compliance', label: '5. Regional UHF compliance map' },
   { href: '#form-factors', label: '6. Choosing between cards, tags, labels and wristbands' },
   { href: '#environment', label: '7. Environment and installation considerations' },
-  { href: '#cost-benchmarks', label: '8. Cost benchmarks (single-unit, MOQ pricing)' },
-  { href: '#selection-process', label: '9. How to choose the right RFID product' },
-  { href: '#common-mistakes', label: '10. 7 common procurement mistakes (and fixes)' },
-  { href: '#cluster-articles', label: '11. Continue your research — 8 deep-dive articles' },
-  { href: '#download', label: '12. Download the RFID Buyer\u2019s Guide (PDF)' },
-  { href: '#related-guides', label: '13. Related comparisons and category pages' },
+  { href: '#industry-playbook', label: '8. RFID deployment playbook by industry' },
+  { href: '#cost-benchmarks', label: '9. Cost benchmarks (single-unit, MOQ pricing)' },
+  { href: '#selection-process', label: '10. How to choose the right RFID product' },
+  { href: '#common-mistakes', label: '11. 7 common procurement mistakes (and fixes)' },
+  { href: '#rfp-template', label: '12. RFP template — what to include when quoting RFID vendors' },
+  { href: '#cluster-articles', label: '13. Continue your research — 8 deep-dive articles' },
+  { href: '#download', label: '14. Download the RFID Buyer\u2019s Guide (PDF)' },
+  { href: '#related-guides', label: '15. Related comparisons and category pages' },
+  { href: '#extended-faq', label: '16. Extended technical FAQ — 12 questions buyers ask' },
 ];
 
 const directAnswer = "RFID identifies, counts and tracks objects with radio waves. Pick LF (125-134 kHz) for animal ID and short-range access, HF/NFC (13.56 MHz) for smart cards and smartphone-tap workflows, or UHF (860-960 MHz) for retail and supply-chain visibility. Reader compatibility, environment and ISO standard usually decide the right product before chip name or unit price.";
@@ -361,8 +364,17 @@ const speakableJsonLd = {
     <article class="py-12 bg-white">
       <div class="container mx-auto px-4">
         <div class="max-w-5xl mx-auto space-y-14">
-          <section id="what-is-rfid">
+          <section id="what-is-rfid" class="scroll-mt-24">
             <h2 class="text-3xl font-semibold text-gray-900 mb-5">1. What RFID means and how systems are built</h2>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              RFID (Radio-Frequency Identification) is a family of technologies that uses radio waves to identify, track, and manage objects without requiring line-of-sight contact or a battery in the tracked item. An RFID system combines three parts &mdash; a tag attached to the object, a reader that interrogates tags via radio, and a host application that interprets tag data as business events (inventory counted, person entered a door, garment circulated through laundry). Unlike barcodes, which require a clear optical view of a printed pattern, RFID reads through packaging, fabric, plastic, and even shallow water, and can inventory hundreds of tagged items simultaneously at distances from a few centimeters (HF / NFC) to over 10 meters (UHF / active tags).
+            </p>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              The technology has commercial roots going back to WWII IFF (Identification Friend or Foe) transponders and matured into modern passive RFID through 1980s-1990s work at Los Alamos, IBM, and NXP predecessor Philips Semiconductors. The 2003 US Department of Defense and Walmart supplier mandates established UHF Gen2 as the supply-chain standard; the NFC Forum's 2004 founding by Nokia, Philips, and Sony crystallized HF RFID as the consumer-facing standard for payments and smart cards. Today, 42 billion passive UHF tags shipped globally in 2024 (RAIN Alliance, 2024), and over 2.4 billion NFC-enabled smartphones are in active use worldwide (NFC Forum, 2025) &mdash; making RFID one of the most ubiquitous invisible technologies in daily operations.
+            </p>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Three functional RFID categories matter for buyers. <strong>Passive tags</strong> have no battery and harvest power from the reader's electromagnetic field &mdash; this is over 99% of deployed tags, ranging from $0.04 per retail sticker to $3.00 per on-metal industrial tag. <strong>Semi-passive (BAP) tags</strong> carry a small battery to extend read range or support sensor functions (temperature, tilt) but still respond to reader interrogation rather than broadcasting. <strong>Active tags</strong> have their own radio and power source, broadcasting at regular intervals for real-time location systems (RTLS); these cost $15-100 per unit and are used in high-value asset tracking, container shipping, and healthcare equipment fleets. This pillar guide focuses on passive RFID &mdash; which represents over 95% of B2B procurement volume and is the right starting point for virtually all buyers.
+            </p>
             <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-start">
               <div class="space-y-4 text-gray-600 leading-relaxed">
                 <p>
@@ -543,8 +555,88 @@ const speakableJsonLd = {
             </div>
           </section>
 
+          <section id="industry-playbook" class="scroll-mt-24">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">8. RFID deployment playbook by industry</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Eight B2B industries account for over 85% of global RFID deployment volume in 2024 (IDTechEx RFID Forecasts, 2024). Each industry has a dominant combination of frequency band, chip family, form factor, and reader strategy that has emerged as the de-facto standard — driven by real-world constraints like wash cycles, metal substrates, line-of-sight workflows, and regulatory compliance. Use the playbook below to jump straight to the proven combination for your vertical, then read the referenced cluster articles for tactical deep-dives.
+            </p>
+            <div class="grid gap-5 md:grid-cols-2" data-speakable="industry-playbook">
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Hospitality</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Hotels, resorts, events, theme parks</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Dominant stack: <strong>HF 13.56 MHz MIFARE Classic / Plus / DESFire EV3</strong> for door locks plus <strong>UHF EPC Gen2</strong> for cashless wristband payment. 90%+ of branded hotels standardize on MIFARE family because of installed lock compatibility (Saflok, VingCard, Onity, SALTO). Chain-level programs are migrating from Classic to Plus EV2 or DESFire EV3 for AES-128 security, triggered by insurance-carrier cybersecurity audits. Silicone wristbands dominate water parks, fitness resorts, and all-inclusive programs at 15-30% higher per-guest spend vs cash-only operations (Intellitix / RFID Journal, 2024).
+                </p>
+                <p class="mt-3 text-xs text-[#0d7377]"><a href="/solutions/hotel-access-rfid" class="hover:underline">→ Hotel access solution page</a></p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Industrial laundry</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Uniform rental, hospital linen, hotel housekeeping</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Dominant stack: <strong>UHF 860-960 MHz Impinj Monza R6-P or NXP UCODE 9</strong> in textile heat-seal tags (hidden in garment seam) at 200+ wash cycles per 85°C / 2.5 g/L NaClO. The three fastest-growing laundry UHF tag segments 2023-2024 are industrial uniform rental, hospital linen under EN 14065 RABC, and hotel linen rotation. TRSA 2024 benchmark: RFID-equipped laundries beat non-RFID peers on 7 of 8 operational KPIs including billing accuracy (+18 points) and shrinkage reduction (14% → 4%). Payback typically 6-14 months.
+                </p>
+                <p class="mt-3 text-xs text-[#0d7377]"><a href="/solutions/laundry-linen-rfid" class="hover:underline">→ Laundry & linen solution page</a></p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Retail & apparel</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Item-level tagging, inventory, anti-theft</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Dominant stack: <strong>UHF EPC Gen2v2 Impinj M730 / M800</strong> inlays embedded in hangtags, care labels, or adhesive stickers. Walmart's 2022 apparel mandate and the EU Digital Product Passport (ESPR 2024/1781) both drive this segment. Decathlon documented inventory accuracy going from 70% to 98% across 1,500+ stores after UHF item-level tagging (GS1, 2023). Unit cost at 1M+ MOQ: $0.04-0.08 per inlay. Retail is by far the highest-volume UHF segment — 42 billion UHF tags shipped globally in 2024 (RAIN Alliance).
+                </p>
+                <p class="mt-3 text-xs text-[#0d7377]"><a href="/compare/rfid-labels-vs-hard-tags" class="hover:underline">→ Labels vs hard tags comparison</a></p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Logistics & supply chain</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Pallet, carton, container, returnable asset tracking</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Dominant stack: <strong>UHF 860-960 MHz Alien Higgs-9 or NXP UCODE DNA</strong> in on-metal or hard-shell housings. Critical differences from retail: logistics tags face metal substrates (containers, pallets, cages), extreme temperature ranges (-40 to +85°C), and years-long deployment cycles. Anti-metal construction is mandatory — standard UHF stickers lose 90-99% read range on steel. GS1 EPC Tag Data Standard 1.13 is the encoding baseline. Fastest-growing subsegment 2024: returnable transit packaging (RTP) tracking at 11% CAGR (ABI Research).
+                </p>
+                <p class="mt-3 text-xs text-[#0d7377]"><a href="/compare/hf-vs-uhf-rfid" class="hover:underline">→ HF vs UHF comparison</a></p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Healthcare</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Patient ID, medication, reusable medical textiles, surgical instruments</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Dominant stack mixes formats: <strong>HF MIFARE or NFC wristbands</strong> for patient ID with allergy / ward / medication encoding; <strong>UHF textile tags</strong> for scrub / gown rotation under EN 14065; <strong>PPS hard-button tags</strong> for autoclave-reprocessed surgical instruments at 134°C sterilization. FDA UDI rule expansion 2024-2026 to reusable medical textiles makes RFID compliance-driven rather than operationally driven. Hospital laundry suppliers in 14 EU member states now require per-garment cycle logging as of 2024.
+                </p>
+                <p class="mt-3 text-xs text-[#0d7377]"><a href="/markets/middle-east-anti-metal-rfid-tags" class="hover:underline">→ Anti-metal tags for industrial</a></p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Access control</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Office, residential, campus, government facility</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Dominant stack: <strong>MIFARE Plus EV2 or DESFire EV3 with AES-128</strong> on 0.76 mm PVC or 1.8 mm clamshell cards, integrated with HID VertX, Mercury Security, Lenel OnGuard, or Software House CCure panels. Enterprise programs consolidate multiple use cases (physical access, IT logon via PIV sub-app, cafeteria payment, secure printing) onto a single DESFire card with separate AES keys per domain. Auburn University RFID Lab 2024 survey: 72% of new access orders &gt; 10K units now specify AES-128 chips, up from 41% in 2021 — driven by insurance cybersecurity requirements.
+                </p>
+                <p class="mt-3 text-xs text-[#0d7377]"><a href="/solutions/access-control-rfid" class="hover:underline">→ Access control solution page</a></p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Library & media</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Book collections, self-checkout, acoustomagnetic alternative</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Dominant stack: <strong>HF 13.56 MHz ICODE SLIX</strong> paper labels under ISO/IEC 15693 vicinity protocol (reads at 50-100 cm, supports stack-reading for 50+ books simultaneously). Integration standard: Bibliotheca selfCheck, 3M self-checkout, mk Solutions, D-Tech. ICODE SLIX beats MIFARE Classic for libraries because vicinity reading at stack distance enables self-return bins and rapid shelf inventory. UHF is gaining share in large-volume warehouses (national libraries, publisher backrooms) but HF remains the branch-library standard.
+                </p>
+                <p class="mt-3 text-xs text-[#0d7377]"><a href="/solutions/library-media-rfid" class="hover:underline">→ Library media solution page</a></p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Events & NFC marketing</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Festivals, conferences, cashless payment, product authentication</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Dominant stack splits by use case. Event-side: <strong>UHF fabric or vinyl wristbands</strong> for 3-5 day cashless festivals (single-use, $0.38-0.65). Marketing side: <strong>NFC NTAG213 / 215 / 216 / 424 DNA</strong> for product-side smartphone tap — anti-counterfeit, warranty, loyalty, Digital Product Passport pilots (Decathlon, H&amp;M, Inditex). NTAG424 DNA with AES-128 SUN messaging is the modern standard for brand programs because iOS Background Tag Reading has been built-in since iOS 13. 2.4 billion NFC-enabled smartphones globally as of 2025 (NFC Forum) means essentially every consumer can scan.
+                </p>
+                <p class="mt-3 text-xs text-[#0d7377]"><a href="/solutions/event-nfc-rfid" class="hover:underline">→ Events & NFC solution page</a></p>
+              </article>
+            </div>
+          </section>
+
           <section id="cost-benchmarks">
-            <h2 class="text-3xl font-semibold text-gray-900 mb-5">8. Cost benchmarks (single-unit, MOQ pricing)</h2>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">9. Cost benchmarks (single-unit, MOQ pricing)</h2>
             <p class="text-gray-600 leading-relaxed mb-6">
               Indicative single-unit pricing at MOQ 10,000+ pieces, in USD. Custom artwork, encoding, secure chips and on-metal tuning push prices toward the upper end of each range. Below MOQ 1,000 expect 30-60% premiums; above MOQ 100,000 expect 15-25% discounts.
             </p>
@@ -582,7 +674,7 @@ const speakableJsonLd = {
           </section>
 
           <section id="selection-process">
-            <h2 class="text-3xl font-semibold text-gray-900 mb-5">9. How to choose the right RFID product</h2>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">10. How to choose the right RFID product</h2>
             <div class="space-y-4">
               {selectionSteps.map((item, index) => (
                 <div class="copy-safe flex gap-4 rounded-2xl border border-gray-200 bg-gray-50 px-5 py-5">
@@ -594,7 +686,7 @@ const speakableJsonLd = {
           </section>
 
           <section id="common-mistakes">
-            <h2 class="text-3xl font-semibold text-gray-900 mb-5">10. 7 common procurement mistakes (and fixes)</h2>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">11. 7 common procurement mistakes (and fixes)</h2>
             <p class="text-gray-600 leading-relaxed mb-6">
               Most failed RFID rollouts trace back to one of these seven errors made before any sample arrives. Each mistake can be diagnosed at the project-scoping stage, before money is spent on tooling, encoding or readers.
             </p>
@@ -615,8 +707,66 @@ const speakableJsonLd = {
             </div>
           </section>
 
+          <section id="rfp-template" class="scroll-mt-24">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">12. RFP template &mdash; what to include when quoting RFID vendors</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Procurement teams evaluating RFID vendors often receive generic brochures rather than quotes they can actually compare. The 14-point RFP template below is what RFIDAK uses internally to make sure buyer inquiries come back with apples-to-apples comparable proposals. Copy this list into your RFP document and send it to 3-5 vendors simultaneously — the responses will separate serious RFID suppliers from marketplace resellers within 48 hours.
+            </p>
+
+            <div class="grid gap-5 md:grid-cols-2">
+              <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+                <p class="eyebrow-label text-[#0d7377] mb-3">Section A &middot; Technical specification (must be precise)</p>
+                <ol class="space-y-3 text-sm text-gray-700">
+                  <li><strong>1. Frequency band &amp; regional sub-band</strong> &mdash; e.g. "UHF Gen2v2 at FCC 902-928 MHz for US, ETSI 865.6-867.6 MHz for EU" (not "UHF" alone)</li>
+                  <li><strong>2. Chip family &amp; model</strong> &mdash; e.g. "NXP UCODE 9" or "Impinj M730" (not "any UHF chip"). List acceptable substitutes if supply shortage.</li>
+                  <li><strong>3. Antenna specification</strong> &mdash; size, material, target read range in the ACTUAL mounting condition (on-metal, through plastic, in water, etc.)</li>
+                  <li><strong>4. Form factor &amp; dimensions</strong> &mdash; with mechanical drawing or reference sample, not prose description</li>
+                  <li><strong>5. Encoding requirement</strong> &mdash; EPC / UID scheme, TID requirement, lock bit state, encoding verification method</li>
+                  <li><strong>6. Printing / personalization</strong> &mdash; CMYK front + back, laser engraving, silkscreen, thermal retransfer &mdash; with artwork file format</li>
+                </ol>
+              </div>
+
+              <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+                <p class="eyebrow-label text-[#0d7377] mb-3">Section B &middot; Commercial terms (separates resellers from manufacturers)</p>
+                <ol class="space-y-3 text-sm text-gray-700">
+                  <li><strong>7. MOQ + price brackets</strong> &mdash; pricing at 1K / 10K / 100K / 1M units. If the vendor only quotes one bracket, they're likely a reseller marking up spot inventory.</li>
+                  <li><strong>8. Lead time from PO to shipment</strong> &mdash; sample batch, first production order, repeat orders. Red flag: vague "2-8 weeks" answer.</li>
+                  <li><strong>9. Payment terms</strong> &mdash; T/T deposit %, balance trigger (before ship, after delivery, after acceptance), credit terms for repeat buyers</li>
+                  <li><strong>10. Incoterm + origin port</strong> &mdash; EXW / FOB / CIF / DDP clearly stated, origin port named. Avoid "FOB China" &mdash; China has 100+ ports.</li>
+                  <li><strong>11. Chip supply guarantee</strong> &mdash; are they buying chips on spot market or do they have direct NXP / Impinj / EM supply? This determines reliability during chip shortages.</li>
+                </ol>
+              </div>
+
+              <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+                <p class="eyebrow-label text-[#0d7377] mb-3">Section C &middot; Quality &amp; compliance (filter out non-ISO factories)</p>
+                <ol class="space-y-3 text-sm text-gray-700">
+                  <li><strong>12. Certifications</strong> &mdash; request current ISO 9001 and ISO 14001 scans with certificate numbers + expiry dates. Serious vendors reply within 24 hours; resellers stall.</li>
+                  <li><strong>13. Sample approval workflow</strong> &mdash; free samples yes/no, sample lead time, sample approval criteria documentation (what happens if production deviates?)</li>
+                  <li><strong>14. QC process</strong> &mdash; incoming chip test %, final read verification %, sample retention period. If they cannot answer specifically, they do not have a real QC line.</li>
+                </ol>
+              </div>
+
+              <div class="rounded-2xl border-2 border-dashed border-[#0d7377]/30 bg-white p-6">
+                <p class="eyebrow-label text-[#0d7377] mb-3">How to use this RFP</p>
+                <ol class="space-y-3 text-sm text-gray-700">
+                  <li><strong>1.</strong> Send this 14-point list to 3-5 vendors simultaneously with a clear 7-business-day deadline.</li>
+                  <li><strong>2.</strong> Score each response on completeness &mdash; any vendor missing &gt; 3 points out of 14 goes to the bottom of the list.</li>
+                  <li><strong>3.</strong> For top 2-3 responses, request free samples per the spec and actually test in the real environment.</li>
+                  <li><strong>4.</strong> Award to the vendor whose samples pass AND whose RFP response matched the actual shipment (RFP promises vs delivery reality is the true filter).</li>
+                </ol>
+                <p class="mt-4 text-xs text-[#0d7377] font-semibold">
+                  <a href="/contact?intent=oem" class="hover:underline">→ Send this RFP to RFIDAK (we respond within 24 hours, signed and stamped)</a>
+                </p>
+              </div>
+            </div>
+
+            <p class="text-sm text-gray-500 leading-relaxed mt-6 italic">
+              Pro tip: include a line at the top of your RFP saying &ldquo;Vendors unable to answer any of the 14 points above will not be considered.&rdquo; This single sentence cuts your review time by 70% because low-commitment resellers self-disqualify before you read a single response.
+            </p>
+          </section>
+
           <section id="cluster-articles">
-            <h2 class="text-3xl font-semibold text-gray-900 mb-5">11. Continue your research &mdash; 8 deep-dive articles</h2>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">13. Continue your research &mdash; 8 deep-dive articles</h2>
             <p class="text-gray-600 leading-relaxed mb-6">
               These eight articles form the cluster around this pillar guide. Read in any order; each is self-contained and links back to this guide for context.
             </p>
@@ -639,7 +789,7 @@ const speakableJsonLd = {
             <div class="grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
               <div>
                 <p class="text-xs uppercase tracking-[0.18em] text-white/70 font-semibold mb-3">Whitepaper</p>
-                <h2 class="text-3xl font-semibold mb-4">12. Download the RFID Buyer&rsquo;s Guide 2026 (PDF)</h2>
+                <h2 class="text-3xl font-semibold mb-4">14. Download the RFID Buyer&rsquo;s Guide 2026 (PDF)</h2>
                 <p class="text-white/90 leading-relaxed mb-6">
                   A 28-page printable summary of this pillar guide: frequency selection, chip families, regional compliance, cost benchmarks and the 7-mistake checklist. Free, no registration required.
                 </p>
@@ -672,7 +822,136 @@ const speakableJsonLd = {
           </section>
 
           <section id="related-guides">
-            <h2 class="text-3xl font-semibold text-gray-900 mb-5">13. Related comparisons and category pages</h2>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">16. Extended technical FAQ &mdash; 12 questions buyers ask</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Technical questions that show up repeatedly in RFIDAK sales calls, organized by deployment phase. Answers are written to be directly quotable by AI engines and stand on their own without context &mdash; useful for teams sharing a buying-decision with stakeholders who are not RFID specialists.
+            </p>
+
+            <div class="space-y-4" data-speakable="extended-faq">
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4">
+                  <span>1. What actually powers a passive RFID chip if it has no battery?</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span>
+                </summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+                  A passive RFID chip harvests power from the reader's electromagnetic field via its antenna coil or dipole &mdash; a process called RF-to-DC rectification. When the reader transmits radio energy at the target frequency (125 kHz, 13.56 MHz, or 868-915 MHz), the tag's antenna resonates and induces alternating current, which the chip's front-end rectifier converts to a small DC voltage (typically 1-3 V) sufficient to run the digital logic and respond to the reader. This is why passive tags have effectively unlimited shelf life (10-20+ years) &mdash; there's no battery to deplete &mdash; but read range is bounded by reader power and antenna geometry rather than tag capability alone. Active and semi-passive tags use onboard batteries for extended range (10-100+ meters) but trade battery lifespan (3-5 years) for the capability.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4">
+                  <span>2. How does anti-collision work when a reader encounters 100+ tags at once?</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span>
+                </summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+                  UHF Gen2v2 (ISO/IEC 18000-63) uses a probabilistic slot-based anti-collision protocol called Slotted Aleph-Q. The reader broadcasts a "query" with a Q parameter (2^Q slots). Each tag in the field picks a random slot. If one tag answers in a slot, the reader reads it. If multiple tags answer in the same slot, the reader detects a collision and issues a new query with higher Q (more slots, fewer collisions). The process repeats until all tags are inventoried. A modern fixed reader (Impinj Speedway R700, Zebra FX9600) can inventory 700-1,200 tags per second in a dense field. For HF (ISO/IEC 14443), anti-collision is tree-based with slightly different logic but similar throughput at much shorter range. For LF (ISO 11784), anti-collision is limited &mdash; most LF readers are designed for single-tag presentation, which is why LF is not used for bulk-read inventory.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4">
+                  <span>3. What is the TID (Tag Identifier) and why do procurement teams need to specify it?</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span>
+                </summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+                  The TID is a factory-programmed unique identifier burned into the chip at manufacture &mdash; it cannot be rewritten or cloned, unlike the EPC memory bank which is writeable. For security-sensitive deployments (high-value asset tracking, anti-counterfeit, brand authentication), the TID is the tamper-proof anchor that ties a specific physical chip to a specific record in the customer's database. Even if a counterfeit tag is written with the same EPC, the TID will not match. Procurement specs should require TID read-back on sample verification for any program where cloning is a business risk &mdash; including luxury goods (Digital Product Passport), pharma, high-value tool crib management, and regulated access control. Not every chip exposes an unchangeable TID; NXP UCODE 9 and Impinj M730/M800 both do, while some older chips do not.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4">
+                  <span>4. Can the same RFID tag be read in different countries if regional UHF bands differ?</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span>
+                </summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+                  Yes, because UHF Gen2 chips are broadband (typically 860-960 MHz internally) and respond to whichever sub-band the local reader transmits on. The limiting factor is the antenna &mdash; antennas designed for the FCC 902-928 MHz band have peak efficiency there but still work at 60-80% efficiency in the ETSI 865-868 MHz band, and vice versa. For global supply chain deployments (export cartons, shipping containers, RTPs moving across regions), RFIDAK builds "worldwide" tags with broadband antennas optimized for 860-960 MHz rather than region-peaked. Trade-off: 10-15% lower peak read range per region vs a region-specific antenna, acceptable for most logistics applications. For region-locked deployments (only North America, only EU), region-specific antennas deliver maximum range. Specify "global read" vs "region-specific" in your RFP.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4">
+                  <span>5. How much read range is realistic for a UHF sticker on a cardboard box?</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span>
+                </summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+                  A modern UHF sticker (Impinj M730 inlay, AZ-9640 antenna or equivalent, 70&times;17 mm) on a dry cardboard surface typically reads at 6-10 meters with a 2-8 W EIRP fixed reader and a directional antenna. Variables that degrade range: wet cardboard (-30-40%), metallized ink in the printing (-50-70%), proximity to other RF-absorbing contents (liquids, foil, electronics), tag misorientation relative to the reader polarization, and multi-path interference in crowded warehouses. Real-world deployment range for dense-read applications (warehouse gate, dock door) is typically engineered to 3-5 meters as the conservative working range &mdash; not the theoretical maximum &mdash; to ensure 99.5%+ read rate even under worst-case conditions. Always pilot-test with your actual product-packed boxes in the actual receiving dock before finalizing the reader layout.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4">
+                  <span>6. What happens to RFID data privacy &mdash; can anyone read my tags?</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span>
+                </summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+                  Physically, yes &mdash; anyone with a standard reader at the right frequency can detect the presence of an RFID tag and read its EPC / UID. For high-risk applications, four mitigations apply. (1) Use chips with password-protected read (MIFARE DESFire, Plus EV2, NTAG424 DNA) so the EPC is encrypted. (2) Use chips with kill commands (EPC Gen2 supports a "kill" command that permanently disables the tag after the point of sale &mdash; standard for retail apparel Walmart mandate). (3) Use Faraday-cage packaging for high-value shipments. (4) Store only a random ID on the tag &mdash; map it to customer data on your secure server &mdash; so even if the tag is read, the attacker gains no useful information. EU GDPR applies to RFID data where it can identify an individual (e.g., RFID-enabled ID cards); consult legal counsel when deploying personal RFID in EU markets.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4">
+                  <span>7. Why did MIFARE Classic get "broken" in 2008 and what does that mean practically?</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span>
+                </summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+                  In 2008, researchers at Radboud University Nijmegen (Garcia et al., USENIX Security 2008) published a full cryptographic break of Crypto-1, the 48-bit proprietary stream cipher used in MIFARE Classic. The attack allows an adversary with a Proxmark or similar hardware ($200-800) to clone a MIFARE Classic card in minutes by reading it, cracking the key, and writing a new identical card. Practical impact: hotel locks, gym access, legacy transit fare cards using Classic can be duplicated at scale. Not every deployment has migrated &mdash; Classic still represents 20-30% of installed HF access control worldwide in 2024 &mdash; because migration requires replacing both cards AND readers (or moving to MIFARE Plus EV2 which emulates Classic but adds AES-128). For new deployments: specify MIFARE DESFire EV3 or NTAG424 DNA with AES-128. For legacy deployments: plan migration within 3-5 years as insurance carriers increasingly require AES-grade security on physical access.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4">
+                  <span>8. How long do industrial RFID tags actually last in the field?</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span>
+                </summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+                  Depends heavily on environment. Indoor-only stationary deployments (warehouse rack, office equipment, server rack): 15-25 years &mdash; limited by chip memory endurance (100,000 read/write cycles for most NTAG, 500,000+ for DESFire) rather than physical degradation. Outdoor exposed UHF tags: 5-12 years, limited by UV, thermal cycling, and adhesive degradation (not the chip). Industrial laundry textile tags: 200-400 wash cycles at 85-90&deg;C = 2-4 years in daily hospital rotation. Autoclave-sterilized PPS tags on surgical instruments: 500+ autoclave cycles, 3-5 year functional life. On-tire UHF tags: 80,000-150,000 miles, 3-7 year fleet life. For ROI modeling, amortize tag replacement into the per-asset cost; the chip usually outlives the asset it's attached to, not the other way around.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4">
+                  <span>9. Can an iPhone read my UHF RFID tag?</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span>
+                </summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+                  No. iPhone (and Android phones) integrate NFC modems that work at HF 13.56 MHz only &mdash; they cannot transmit or receive at UHF 860-960 MHz. UHF needs a dedicated reader. iPhones CAN read NFC tags (NTAG family, MIFARE DESFire EV3, NTAG424 DNA) via the built-in Core NFC API (iOS 13+). For UHF in a consumer-facing application, options are: (a) supply customers with a dedicated UHF reader &mdash; not realistic for B2C; (b) use Bluetooth sled UHF readers that connect to phones (for field workers, not consumers); (c) switch to NFC for the consumer-facing touchpoint and use UHF separately in warehouse workflow. For retail programs wanting both "consumer tap at store" AND "warehouse bulk read" on one tag, dual-technology hybrid chips (RFID + NFC on one antenna) exist but add 40-80% cost per unit.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4">
+                  <span>10. What's the difference between &ldquo;EPC&rdquo; and &ldquo;UID&rdquo; and why does it matter?</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span>
+                </summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+                  UID (Unique Identifier) is a general term for any number that uniquely identifies a tag. EPC (Electronic Product Code) is specifically a GS1-defined encoding standard used on UHF tags for supply chain, built around a 96-bit identifier structured as Header + Company Prefix + Item Reference + Serial Number. The EPC is writeable &mdash; you program your company's EPC onto the tag during personalization. HF tags use different terms: MIFARE Classic has a 4-byte NUID (Non-Unique Identifier, since collisions are possible), MIFARE Plus / DESFire / NTAG have 7-byte UIDs (genuinely unique across all chips ever made). For programs needing anti-counterfeit, also specify the TID (see Q3) which is factory-burned and unchangeable. Rule of thumb: in a UHF-RFID procurement spec, write "EPC". In an HF / NFC spec, write "UID" or "7-byte UID". Getting this wrong makes you look like a novice to vendors.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4">
+                  <span>11. Do RFID tags interfere with heart pacemakers or aircraft electronics?</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span>
+                </summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+                  For pacemakers and ICDs: commercial RFID readers are thoroughly tested under IEC 60601-1-2 and ANSI/AAMI PC69 standards; contemporary (post-2014) implantable devices are hardened against RFID interference at normal reader power levels (&lt;= 4 W EIRP for UHF). Recommendation: direct reader contact at &lt;20 cm with a pacemaker should still be avoided &mdash; hospital and warehouse reader installations routinely include signage. For aircraft: RFID in aviation is an FAA-regulated application. FAA AC 120-108A specifically permits passive UHF RFID in aircraft cabin (luggage tracking, catering cart identification, life vest inspection) with certified reader installations. Active RFID (battery-powered, higher TX power) requires additional certification. Pre-2000 cardiac pacemakers and older avionics can be susceptible to strong EMF fields &mdash; follow hospital / airline specific protocols when in doubt.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4">
+                  <span>12. When does it make sense to build an RFID system in-house vs outsource to a vendor?</span>
+                  <span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span>
+                </summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+                  Rule of thumb: outsource the tags, hardware, and integration to specialists; own the data layer and application logic. RFID vendors like RFIDAK operate at the intersection of chip supply chain, antenna engineering, encapsulation, and QC &mdash; skills that take years to develop and do not scale economically below 50K+ tags/year per SKU. Hardware integration vendors (Zebra, Impinj systems integrators, Nordic ID partners) handle reader deployment and real-time middleware. What YOU should own: the database that ties tag EPC/UID to business entities (assets, garments, customers, inventory), the business rules (when does an event trigger an action), and the reporting layer. This "bring your own data layer, outsource the physical layer" architecture is standard for enterprise deployments at Walmart, Boeing, Maersk, major hospital systems, and global hotel chains. For pilots under 5K tags, RFIDAK can provide end-to-end solutions including middleware reference code.
+                </p>
+              </details>
+            </div>
+          </section>
+
+          <section id="related-guides">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">15. Related comparisons and category pages</h2>
             <div class="grid md:grid-cols-2 gap-5">
               {relatedGuides.map((item) => (
                 <a href={item.href} class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-6 hover:border-[#0d7377] hover:shadow-lg transition-all">

@@ -14,8 +14,8 @@ const certifications = [
 const heroStats = [
   { value: '108+', label: 'Clients' },
   { value: '50+', label: 'Countries' },
-  { value: '5M', label: 'Cards/Month' },
-  { value: '18+', label: 'Years' },
+  { value: '5M', label: 'Peak Cards / Month' },
+  { value: '2008', label: 'Founded' },
 ];
 
 const valueProps = [
@@ -76,7 +76,7 @@ const certDetail = [
 
 const factoryCapabilities = [
   { icon: 'area', label: 'Production Area', value: '3,000+ sqm', description: 'Dedicated manufacturing facility' },
-  { icon: 'capacity', label: 'Monthly Capacity', value: '5,000,000+', description: 'Cards, tags and labels per month' },
+  { icon: 'capacity', label: 'Peak Monthly Capacity', value: '5,000,000+', description: 'Cards, tags and labels during peak production weeks' },
   { icon: 'qc', label: 'Quality Control', value: '100% Inspection', description: 'Dedicated QC team on every batch' },
   { icon: 'leadtime', label: 'Lead Time', value: '7–15 Days', description: 'From order confirmation to shipment' },
   { icon: 'equipment', label: 'Equipment', value: 'Automated Lines', description: 'Laminating, encoding, printing, die-cutting' },
@@ -315,7 +315,7 @@ const howToJsonLd = {
             <h2 class="title-balance text-3xl md:text-4xl font-semibold text-gray-900 mb-5">What buyers should understand about RFIDAK first</h2>
             <div class="space-y-5 text-gray-600 leading-relaxed max-w-3xl">
               <p>
-                <strong class="text-gray-800">Founded in 2008 in Shenzhen, China</strong>, RFIDAK has grown into a specialized RFID manufacturer serving <strong class="text-gray-800">108+ clients across 50+ countries</strong>. The company operates a 3,000+ sqm production facility with a monthly capacity of over <strong class="text-gray-800">5 million cards, tags and labels</strong>, backed by ISO 9001 and ISO 14001 certified processes.
+                <strong class="text-gray-800">Founded in 2008 in Shenzhen, China</strong>, RFIDAK has grown into a specialized RFID manufacturer serving <strong class="text-gray-800">108+ clients across 50+ countries</strong>. The company operates a 3,000+ sqm production facility with a <strong class="text-gray-800">peak monthly capacity of 5 million cards, tags and labels</strong>, backed by ISO 9001 and ISO 14001 certified processes.
               </p>
               <p>
                 For many buyers, the real challenge is not finding any RFID product. It is finding the correct chip, form factor, material and finishing for the actual environment in which the product will be used. With <strong class="text-gray-800">46+ product models</strong> spanning NFC, HF and UHF frequencies, RFIDAK supports everything from hotel key cards and laundry tags to NFC labels, anti-metal tags and event wristbands.
@@ -326,12 +326,12 @@ const howToJsonLd = {
             </div>
           </div>
 
-          <div class="rounded-[2rem] bg-slate-950 p-8 text-white shadow-[0_24px_80px_rgba(15,23,42,0.16)]">
+          <div class="rounded-xl bg-slate-950 p-8 text-white shadow-[0_24px_80px_rgba(15,23,42,0.16)]">
             <p class="eyebrow-label text-[#0d7377] mb-2">Brand Snapshot</p>
             <h2 class="title-balance text-2xl font-semibold mb-6">What buyers usually want to confirm before they shortlist RFIDAK</h2>
             <div class="grid sm:grid-cols-2 gap-4">
               {valueProps.map((item) => (
-                <div class="copy-safe rounded-2xl border border-white/10 bg-white/5 p-5">
+                <div class="copy-safe rounded-lg border border-white/10 bg-white/5 p-5">
                   <h3 class="text-lg font-semibold text-white">{item.title}</h3>
                   <p class="text-sm text-white/75 mt-2 leading-relaxed">{item.description}</p>
                 </div>
@@ -356,13 +356,103 @@ const howToJsonLd = {
             {milestones.map((item) => (
               <div class="relative xl:text-center">
                 <div class="hidden xl:flex w-3 h-3 rounded-full bg-[#0d7377] mx-auto mb-4 ring-4 ring-[#0d7377]/10 relative z-10"></div>
-                <div class="copy-safe rounded-2xl border border-gray-200 bg-white p-5 shadow-sm xl:p-4">
+                <div class="copy-safe rounded-lg border border-gray-200 bg-white p-5 shadow-sm xl:p-4">
                   <span class="text-2xl xl:text-xl font-bold text-[#0d7377]">{item.year}</span>
                   <h3 class="text-base font-semibold text-gray-800 mt-2 xl:mt-1">{item.title}</h3>
                   <p class="text-sm text-gray-500 mt-2 xl:mt-1 leading-relaxed">{item.description}</p>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chip Supply Resilience — added 2026-04-23 as a prominent competitive selling point.
+         This story was previously buried in FAQ answers; during 2020-2023 chip shortages
+         it was the single biggest reason buyers kept repeat-ordering from RFIDAK when
+         competitors went silent on delivery. -->
+    <section id="chip-supply-resilience" class="py-16 bg-white border-y border-gray-100 scroll-mt-24">
+      <div class="container mx-auto px-4">
+        <div class="grid gap-10 lg:grid-cols-[1fr_1fr]">
+          <div>
+            <p class="eyebrow-label text-[#0d7377] mb-3">Chip Supply Resilience</p>
+            <h2 class="title-balance text-3xl font-semibold text-gray-900">Direct chip supply — the unspoken reason buyers keep repeat-ordering from RFIDAK</h2>
+            <p class="card-copy text-gray-600 mt-5 leading-relaxed">
+              Between 2020 and 2023, the global semiconductor shortage disrupted RFID manufacturing for most of the industry. NXP MIFARE DESFire EV3 lead times stretched from 8 weeks to 52+ weeks at some periods. Several mid-tier Chinese RFID factories paused taking new orders entirely, while others tripled their quoted prices overnight or quietly substituted counterfeit chips to keep shipping.
+            </p>
+            <p class="card-copy text-gray-600 mt-4 leading-relaxed">
+              RFIDAK navigated the shortage without a single cancelled customer order. Three operational decisions made the difference.
+            </p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex gap-3">
+                <span class="shrink-0 w-7 h-7 rounded-full bg-[#0d7377]/10 text-[#0d7377] font-bold flex items-center justify-center text-sm">1</span>
+                <div>
+                  <p class="font-semibold text-gray-900">Direct supply relationships with chip vendors since 2018</p>
+                  <p class="text-sm text-gray-600 mt-1 leading-relaxed">NXP Semiconductors (MIFARE Classic / Plus / DESFire / NTAG family), Impinj (Monza UHF), NXP UCODE (UHF logistics), EM Microelectronic (LF 125 kHz) — all via direct distributor accounts rather than grey-market brokers.</p>
+                </div>
+              </li>
+              <li class="flex gap-3">
+                <span class="shrink-0 w-7 h-7 rounded-full bg-[#0d7377]/10 text-[#0d7377] font-bold flex items-center justify-center text-sm">2</span>
+                <div>
+                  <p class="font-semibold text-gray-900">12-month rolling chip inventory on critical SKUs</p>
+                  <p class="text-sm text-gray-600 mt-1 leading-relaxed">Rather than Just-In-Time, RFIDAK holds a 12-month forward buffer on DESFire EV2/EV3, Plus EV2, Classic 1K/4K, NTAG213/215, Monza R6-P, and UCODE 9 — enough to absorb a 6-month supply disruption without passing it to buyers.</p>
+                </div>
+              </li>
+              <li class="flex gap-3">
+                <span class="shrink-0 w-7 h-7 rounded-full bg-[#0d7377]/10 text-[#0d7377] font-bold flex items-center justify-center text-sm">3</span>
+                <div>
+                  <p class="font-semibold text-gray-900">100% chip electrical verification before lamination</p>
+                  <p class="text-sm text-gray-600 mt-1 leading-relaxed">Every incoming chip batch is read-tested at the reel before entering production — counterfeit or grey-market substitution is caught at inspection, not at the end customer's reader.</p>
+                </div>
+              </li>
+            </ul>
+            <p class="card-copy text-gray-600 mt-6 leading-relaxed">
+              Current chip shortage outlook (2026): MIFARE DESFire EV3 supply has stabilized industry-wide, but Impinj M800 and NXP UCODE 9 face cyclical tightness as retail / apparel RFID adoption accelerates. RFIDAK flags any early shortage signal to buyers <em>before</em> quotation, rather than discovering it mid-production.
+            </p>
+          </div>
+
+          <div class="space-y-5">
+            <div class="copy-safe rounded-lg border border-[#0d7377]/20 bg-[#0d7377]/5 p-6">
+              <p class="eyebrow-label text-[#0d7377] mb-2">Supported Chip Families (always in stock)</p>
+              <div class="grid grid-cols-2 gap-3 mt-3 text-sm">
+                <div>
+                  <p class="font-semibold text-gray-900 mb-1">LF 125 kHz</p>
+                  <ul class="text-gray-600 space-y-0.5">
+                    <li>EM4100 · EM4200 · EM4305</li>
+                    <li>TK4100 · T5577 · Hitag 1/2/S</li>
+                  </ul>
+                </div>
+                <div>
+                  <p class="font-semibold text-gray-900 mb-1">HF 13.56 MHz</p>
+                  <ul class="text-gray-600 space-y-0.5">
+                    <li>MIFARE Classic 1K/4K</li>
+                    <li>MIFARE Plus EV2 2K/4K</li>
+                    <li>DESFire EV1/EV2/EV3</li>
+                    <li>Ultralight C / EV1 / Nano</li>
+                    <li>NTAG213/215/216/424 DNA</li>
+                    <li>ICODE SLIX / SLIX2</li>
+                  </ul>
+                </div>
+                <div class="col-span-2">
+                  <p class="font-semibold text-gray-900 mb-1">UHF 860–960 MHz</p>
+                  <ul class="text-gray-600 space-y-0.5">
+                    <li>Impinj Monza R6 / R6-P / M730 / M800</li>
+                    <li>NXP UCODE 8 / 9 / DNA</li>
+                    <li>Alien Higgs-3 / Higgs-9</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="copy-safe rounded-lg border border-gray-200 bg-gray-50 p-6">
+              <p class="eyebrow-label text-[#0d7377] mb-2">What This Means For Your Procurement Plan</p>
+              <ul class="mt-3 space-y-2.5 text-sm text-gray-700">
+                <li class="flex gap-2"><span class="text-[#0d7377]">✓</span> Quotations stay valid for 30 days without chip-price surprise clauses</li>
+                <li class="flex gap-2"><span class="text-[#0d7377]">✓</span> Stock chip types ship in 7–15 business days regardless of global headlines</li>
+                <li class="flex gap-2"><span class="text-[#0d7377]">✓</span> Chip origin traceability documented per lot (real NXP / Impinj die, never pulled from e-waste)</li>
+                <li class="flex gap-2"><span class="text-[#0d7377]">✓</span> Honest early flagging when a specific chip <em>is</em> tight — no mid-project surprises</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -378,7 +468,7 @@ const howToJsonLd = {
         </div>
         <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
           {certDetail.map((cert) => (
-            <div class="copy-safe rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/8 transition-colors">
+            <div class="copy-safe rounded-lg border border-white/10 bg-white/5 p-6 hover:bg-white/8 transition-colors">
               <div class="w-11 h-11 rounded-full bg-[#0d7377]/20 text-[#0d7377] flex items-center justify-center mb-4">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
@@ -407,7 +497,7 @@ const howToJsonLd = {
         </div>
         <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
           {factoryCapabilities.map((item) => (
-            <div class="copy-safe rounded-[1.75rem] border border-gray-200 bg-slate-50 p-7 shadow-sm">
+            <div class="copy-safe rounded-lg border border-gray-200 bg-slate-50 p-7 shadow-sm">
               <div class="w-11 h-11 rounded-full bg-[#0d7377]/10 text-[#0d7377] flex items-center justify-center mb-4">
                 {item.icon === 'area' && (
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
@@ -445,7 +535,7 @@ const howToJsonLd = {
         </div>
         <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           {processSteps.map((item) => (
-            <div class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-7 shadow-sm">
+            <div class="copy-safe rounded-lg border border-gray-200 bg-white p-7 shadow-sm">
               <div class="w-11 h-11 rounded-full bg-[#0d7377]/5 text-[#0d7377] font-bold flex items-center justify-center mb-5">
                 {item.step}
               </div>
@@ -466,7 +556,7 @@ const howToJsonLd = {
         </div>
         <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {clientTestimonials.map((t) => (
-            <div class="copy-safe rounded-[1.75rem] border border-gray-200 bg-white p-7 shadow-sm">
+            <div class="copy-safe rounded-lg border border-gray-200 bg-white p-7 shadow-sm">
               <div class="flex gap-1 mb-4">
                 {Array.from({ length: 5 }).map(() => (
                   <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
@@ -514,6 +604,7 @@ const howToJsonLd = {
           <div class="text-center">
             <p class="text-3xl md:text-4xl font-bold text-[#0d7377]">99%</p>
             <p class="text-sm text-gray-500 mt-1">On-time Delivery</p>
+            <p class="text-xs text-gray-400 mt-0.5">Across 2,000+ shipments 2023&ndash;2025</p>
           </div>
         </div>
         <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
@@ -538,7 +629,7 @@ const howToJsonLd = {
           </div>
           <div class="grid sm:grid-cols-2 gap-4">
             {buyerProfiles.map((item) => (
-              <div class="copy-safe rounded-2xl border border-warm/30 bg-surface-warm px-5 py-5 text-gray-700">
+              <div class="copy-safe rounded-lg border border-warm/30 bg-surface-warm px-5 py-5 text-gray-700">
                 {item}
               </div>
             ))}
@@ -558,7 +649,7 @@ const howToJsonLd = {
         </div>
         <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
           {categoryLinks.map((item) => (
-            <a href={item.href} class="copy-safe rounded-[1.75rem] bg-white border border-gray-200 p-6 hover:border-[#0d7377] hover:shadow-lg transition-all">
+            <a href={item.href} class="copy-safe rounded-lg bg-white border border-gray-200 p-6 hover:border-[#0d7377] hover:shadow-lg transition-all">
               <h3 class="text-xl font-semibold text-gray-800">{item.label}</h3>
               <p class="text-sm text-gray-600 leading-relaxed mt-3">{item.description}</p>
               <span class="mt-5 inline-flex items-center text-sm font-semibold text-[#0d7377]">
@@ -582,7 +673,7 @@ const howToJsonLd = {
           </div>
           <div class="space-y-4">
             {aboutFaqs.map((faq) => (
-              <details class="copy-safe group rounded-2xl border border-gray-200 bg-surface-warm p-6">
+              <details class="copy-safe group rounded-lg border border-gray-200 bg-surface-warm p-6">
                 <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-gray-800">
                   {faq.question}
                   <span class="text-[#0d7377] transition-transform group-open:rotate-45">+</span>

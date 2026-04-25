@@ -58,8 +58,20 @@ function getContextualFallbackSlugs(productSlug: string) {
     fallbackSlugs.add('textile-vs-silicone-laundry-tags');
   }
 
-  if (slug.includes('paper-card') || slug.includes('ticket')) {
+  // Material-focused card comparisons — what the BUYER is actually choosing between when
+  // picking wood / paper / epoxy / clamshell is the CARD FORMAT, not the chip cipher.
+  // Before this branch existed, Wood Card and Paper Card both defaulted to the Mifare
+  // Classic vs DESFire chip comparison, which has nothing to do with the material decision
+  // the buyer is making on those product pages. (Fixed 2026-04-23 per brand review.)
+  if (slug.includes('paper-card') || slug.includes('ticket') || slug.includes('wood-card')) {
     fallbackSlugs.add('pvc-rfid-cards-vs-paper-cards');
+  }
+
+  // Rugged / shaped credential formats: the most useful secondary comparison is
+  // "card vs keyfob" since both are designed for deployments where standard thin PVC
+  // cards would break or fall out of pocket.
+  if (slug.includes('clamshell') || slug.includes('epoxy-card') || slug.includes('nfc-coin')) {
+    fallbackSlugs.add('rfid-cards-vs-keyfobs');
   }
 
   if (slug.includes('keyfob') || slug.includes('glass-tag')) {

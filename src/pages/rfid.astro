@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import { products } from '../data/products';
 import { getProductComparisonLinks } from '../utils/comparisons';
 import { getProductBuyerQuestion, getProductBuyerSummary } from '../utils/productCopy';
@@ -79,20 +80,34 @@ const catalogJsonLd = {
     }))
   }
 };
+
+// BreadcrumbList JSON-LD added 2026-04-24 — was missing despite page being 2 levels deep.
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home",          "item": "https://www.rfidak.com/" },
+    { "@type": "ListItem", "position": 2, "name": "RFID Catalog",  "item": "https://www.rfidak.com/rfid" }
+  ]
+};
 ---
 
 <Layout
   title="RFID Product Catalog - Cards, Tags, Labels, Wristbands & Readers | RFIDAK"
   description="Browse RFIDAK's complete RFID catalog with product images and application-focused descriptions: RFID cards, RFID tags, NFC stickers, laundry tags, wristbands, keyfobs, and readers."
   keywords="RFID catalog, RFID products, RFID cards, RFID tags, NFC stickers, laundry tags, RFID keyfobs, RFID readers, RFIDAK"
-  jsonLd={catalogJsonLd}
+  jsonLd={[catalogJsonLd, breadcrumbJsonLd]}
 >
   <Header />
   <main>
     <section class="bg-gradient-to-br from-slate-950 via-slate-900 to-[#1e293b] py-20">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl text-white">
-          <p class="eyebrow-label eyebrow-label-wide text-[#0d7377]/70 mb-3">Complete RFID Catalog</p>
+          <Breadcrumb variant="dark" items={[
+            { name: 'Home', href: '/' },
+            { name: 'RFID Catalog' },
+          ]} />
+          <p class="eyebrow-label eyebrow-label-wide text-[#0d7377]/70 mb-3 mt-4">Complete RFID Catalog</p>
           <h1 class="title-balance text-4xl md:text-6xl font-semibold">Shortlist products by what you need to tag, carry, mount, or read</h1>
           <p class="card-copy text-white/75 text-lg mt-5 max-w-3xl">
             Use this image-first catalog when you are still comparing form factors and want to move from broad browsing into the right product, category, or inquiry path fast.

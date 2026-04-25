@@ -1,0 +1,290 @@
+/* ==========================================================================
+   RFIDAK / ProudTek — Design Tokens v1.0
+   --------------------------------------------------------------------------
+   Single source of truth for the visual system. Every page must reference
+   these variables (or the `.cta-*`, `.brand-panel-*`, `.field-control`,
+   `.brand-chip*`, `.eyebrow-label`, `.section-title`, `.section-subtitle`
+   utility classes in global.css) rather than ad-hoc hex codes, pixel values,
+   or easing strings.
+
+   Scope:
+     1. Color       — brand / neutral / semantic / surface
+     2. Typography  — font families, type scale, weight, line-height, tracking
+     3. Spacing     — 4px-based scale + section rhythm
+     4. Radius      — corner radius scale
+     5. Borders     — widths + common border colors
+     6. Shadows     — elevation scale (light + brand-tinted)
+     7. Motion      — durations + easings
+     8. Z-index     — layering scale
+     9. Breakpoints — (docs only; Tailwind defaults are the runtime source)
+    10. Layout      — containers + content widths
+    11. States      — hover / focus / active / disabled / invalid tokens
+
+   Rule of thumb: if you find yourself writing a new hex, px, ms, or cubic-
+   bezier value in a component, add it here first, then reference the token.
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------ */
+  /* 1. COLOR                                                            */
+  /* ------------------------------------------------------------------ */
+
+  /* --- Brand (mirrors @theme in global.css; re-declared here so tokens
+         remain usable outside Tailwind / in plain CSS and .astro <style>) */
+  --color-primary:            #0d7377;   /* teal-700  — primary CTA, links */
+  --color-primary-dark:       #0a5c5f;   /* teal-800  — hover */
+  --color-primary-darker:     #074a4d;   /* teal-900  — active / pressed */
+  --color-primary-light:      #e0f2f1;   /* teal-50   — soft bg, chips */
+  --color-primary-ring:       rgba(13, 115, 119, 0.18); /* focus ring */
+
+  --color-secondary:          #d97706;   /* amber-600 — accent, highlight */
+  --color-secondary-dark:     #b45309;   /* amber-700 — hover */
+
+  --color-accent:             #0d7377;   /* alias of primary (legacy) */
+
+  /* --- Neutrals (Slate-aligned. Use for text, borders, surfaces.) */
+  --color-ink:                #0f172a;   /* slate-900 — strongest text */
+  --color-ink-strong:         #1a2332;   /* near-black, branded dark */
+  --color-ink-mid:            #334155;   /* slate-700 — body copy */
+  --color-ink-muted:          #475569;   /* slate-600 — secondary copy */
+  --color-ink-subtle:         #64748b;   /* slate-500 — meta, captions */
+  --color-ink-faint:          #94a3b8;   /* slate-400 — placeholder / disabled text */
+
+  --color-border-strong:      #cbd5e1;   /* slate-300 — emphasized borders */
+  --color-border:             #e2e8f0;   /* slate-200 — default borders */
+  --color-border-subtle:      #e5e7eb;   /* gray-200  — panel borders */
+  --color-divider:            #f1f5f9;   /* slate-100 — hairline dividers */
+
+  --color-surface:            #ffffff;   /* base card surface */
+  --color-surface-alt:        #f8fafc;   /* slate-50  — gray-light bg */
+  --color-surface-sunken:     #f1f5f9;   /* slate-100 — section bg */
+  --color-surface-inverted:   #0f172a;   /* slate-900 — dark panels */
+
+  /* --- Dark band / hero gradient stops (used by .brand-hero-band) */
+  --color-dark-band-a:        #0f172a;
+  --color-dark-band-b:        #0a5c5f;
+  --color-dark-band-c:        #134e4a;
+
+  /* --- Semantic (status) */
+  --color-success:            #15803d;   /* green-700 */
+  --color-success-bg:         #dcfce7;   /* green-100 */
+  --color-warning:            #b45309;   /* amber-700 */
+  --color-warning-bg:         #fef3c7;   /* amber-100 */
+  --color-danger:             #dc2626;   /* red-600 */
+  --color-danger-bg:          #fee2e2;   /* red-100 */
+  --color-danger-ring:        rgba(220, 38, 38, 0.15);
+  --color-info:               #0369a1;   /* sky-700 */
+  --color-info-bg:            #e0f2fe;   /* sky-100 */
+
+  /* --- Channel-specific (3rd-party brand) */
+  --color-whatsapp:           #25D366;
+  --color-whatsapp-dark:      #20ba5a;
+  --color-whatsapp-ring:      rgba(37, 211, 102, 0.4);
+
+  /* ------------------------------------------------------------------ */
+  /* 2. TYPOGRAPHY                                                       */
+  /* ------------------------------------------------------------------ */
+
+  --font-sans:        'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-display:     'Inter',   system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-mono:        ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Type scale — matches existing section-title (2.25rem) and scales up/down.
+     Use rem everywhere. Base = 16px. */
+  --font-size-xs:     0.75rem;    /* 12 */
+  --font-size-sm:     0.8125rem;  /* 13 — eyebrow, meta */
+  --font-size-base:   0.9375rem;  /* 15 — form fields, dense copy */
+  --font-size-body:   1rem;       /* 16 — default body */
+  --font-size-lg:     1.125rem;   /* 18 — large body, testimonial quote */
+  --font-size-xl:     1.25rem;    /* 20 — card titles */
+  --font-size-2xl:    1.5rem;     /* 24 — subsection headings */
+  --font-size-3xl:    1.875rem;   /* 30 — H2 on smaller viewports */
+  --font-size-4xl:    2.25rem;    /* 36 — section-title */
+  --font-size-5xl:    3rem;       /* 48 — hero H1 (mobile) */
+  --font-size-6xl:    3.75rem;    /* 60 — hero H1 (desktop) */
+
+  --font-weight-regular: 400;
+  --font-weight-medium:  500;
+  --font-weight-semibold:600;
+  --font-weight-bold:    700;
+  --font-weight-black:   800;
+
+  --line-height-tight:   1.15;
+  --line-height-snug:    1.3;
+  --line-height-normal:  1.5;
+  --line-height-relaxed: 1.65;
+  --line-height-loose:   1.8;   /* used by .testimonial-quote */
+
+  --letter-spacing-tight:  -0.025em;  /* display headings */
+  --letter-spacing-snug:   -0.015em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide:   0.05em;
+  --letter-spacing-wider:  0.18em;    /* eyebrow-label */
+  --letter-spacing-widest: 0.25em;    /* section-subtitle uses 3px ≈ 0.1875em-0.25em */
+
+  /* ------------------------------------------------------------------ */
+  /* 3. SPACING — 4px base grid                                          */
+  /* ------------------------------------------------------------------ */
+  --space-0:    0;
+  --space-1:    0.25rem;  /*  4 */
+  --space-2:    0.5rem;   /*  8 */
+  --space-3:    0.75rem;  /* 12 */
+  --space-4:    1rem;     /* 16 — default gap */
+  --space-5:    1.25rem;  /* 20 */
+  --space-6:    1.5rem;   /* 24 — card padding */
+  --space-7:    1.75rem;
+  --space-8:    2rem;     /* 32 */
+  --space-10:   2.5rem;   /* 40 */
+  --space-12:   3rem;     /* 48 — between cards */
+  --space-16:   4rem;     /* 64 — sub-section spacing */
+  --space-20:   5rem;     /* 80 — section padding (mobile) */
+  --space-24:   6rem;     /* 96 — section padding (desktop) */
+  --space-32:   8rem;     /* 128 — hero spacing */
+
+  /* Section rhythm — use these on top-level <section> padding. */
+  --section-padding-y:        var(--space-20);
+  --section-padding-y-lg:     var(--space-24);
+  --section-gap:              var(--space-12);  /* gap between cards */
+  --stack-gap:                var(--space-4);   /* default vertical stack */
+
+  /* ------------------------------------------------------------------ */
+  /* 4. RADIUS                                                           */
+  /* ------------------------------------------------------------------ */
+  --radius-none:   0;
+  --radius-sm:     0.25rem;   /* 4  — chips inside dense UI */
+  --radius-md:     0.5rem;    /* 8  — inputs, small buttons */
+  --radius-lg:     0.625rem;  /* 10 — default buttons/fields (matches .field-control, .cta-primary) */
+  --radius-xl:     0.75rem;   /* 12 — mid-size cards */
+  --radius-2xl:    1rem;      /* 16 — default brand-panel */
+  --radius-3xl:    1.25rem;   /* 20 — brand-panel-dark / hero cards */
+  --radius-pill:   9999px;    /* chips, pills, WhatsApp FAB */
+
+  /* ------------------------------------------------------------------ */
+  /* 5. BORDERS                                                          */
+  /* ------------------------------------------------------------------ */
+  --border-width-0:   0;
+  --border-width-1:   1px;    /* default */
+  --border-width-2:   2px;    /* emphasized */
+  --border-width-4:   4px;    /* decorative accents */
+
+  /* ------------------------------------------------------------------ */
+  /* 6. SHADOW / ELEVATION                                               */
+  /* ------------------------------------------------------------------ */
+  --shadow-xs:      0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm:      0 1px 2px rgba(15, 23, 42, 0.04),
+                    0 2px 4px -2px rgba(15, 23, 42, 0.06);
+  --shadow-md:      0 1px 2px rgba(15, 23, 42, 0.04),
+                    0 8px 24px -12px rgba(15, 23, 42, 0.08);   /* brand-panel default */
+  --shadow-lg:      0 12px 24px rgba(0, 0, 0, 0.12);           /* .product-card hover */
+  --shadow-xl:      0 12px 28px -12px rgba(13, 115, 119, 0.25);/* brand-panel-link hover */
+  --shadow-cta:     0 4px 12px rgba(13, 115, 119, 0.30);       /* btn-primary hover */
+  --shadow-cta-lg:  0 8px 18px -8px rgba(13, 115, 119, 0.55);  /* cta-primary hover */
+  --shadow-whatsapp:0 8px 18px -8px rgba(37, 211, 102, 0.50);
+  --shadow-focus-primary: 0 0 0 3px rgba(13, 115, 119, 0.30);
+  --shadow-focus-danger:  0 0 0 3px rgba(220, 38, 38, 0.15);
+
+  /* ------------------------------------------------------------------ */
+  /* 7. MOTION                                                           */
+  /* ------------------------------------------------------------------ */
+  --duration-instant:  75ms;
+  --duration-fast:     150ms;   /* micro — color / border transitions */
+  --duration-base:     200ms;   /* default — buttons, links */
+  --duration-slow:     300ms;   /* card hover, panel lift */
+  --duration-slower:   500ms;   /* content-visibility reveal, fadeIn */
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);   /* ease — default UI */
+  --ease-out:      cubic-bezier(0, 0, 0.2, 1);     /* enter */
+  --ease-in:       cubic-bezier(0.4, 0, 1, 1);     /* exit */
+  --ease-smooth:   ease-in-out;                    /* generic symmetric */
+
+  /* Pre-composed transition strings — use on components directly. */
+  --transition-color:     color var(--duration-fast) var(--ease-standard),
+                          background-color var(--duration-fast) var(--ease-standard),
+                          border-color var(--duration-fast) var(--ease-standard);
+  --transition-transform: transform var(--duration-slow) var(--ease-standard);
+  --transition-lift:      transform var(--duration-slow) var(--ease-standard),
+                          box-shadow var(--duration-slow) var(--ease-standard),
+                          border-color var(--duration-slow) var(--ease-standard);
+
+  /* ------------------------------------------------------------------ */
+  /* 8. Z-INDEX                                                          */
+  /* ------------------------------------------------------------------ */
+  --z-base:       0;
+  --z-raised:     10;   /* sticky card shadows */
+  --z-sticky:     100;  /* sticky nav */
+  --z-dropdown:   200;  /* nav submenus */
+  --z-overlay:    300;  /* scrim behind modal */
+  --z-modal:      400;
+  --z-popover:    500;
+  --z-toast:      600;
+  --z-fab:        700;  /* WhatsApp floating action button */
+  --z-max:        9999;
+
+  /* ------------------------------------------------------------------ */
+  /* 9. BREAKPOINTS (docs / JS only — Tailwind owns the CSS queries)    */
+  /* ------------------------------------------------------------------ */
+  --bp-sm:   40rem;   /* 640  */
+  --bp-md:   48rem;   /* 768  */
+  --bp-lg:   64rem;   /* 1024 */
+  --bp-xl:   80rem;   /* 1280 */
+  --bp-2xl:  96rem;   /* 1536 */
+
+  /* ------------------------------------------------------------------ */
+  /* 10. LAYOUT                                                          */
+  /* ------------------------------------------------------------------ */
+  --container-max:     80rem;   /* 1280 — matches Tailwind container at xl */
+  --content-max:       44rem;   /* 704  — prose / article reading width */
+  --content-max-wide:  56rem;   /* 896  — wide prose */
+
+  /* ------------------------------------------------------------------ */
+  /* 11. COMPONENT STATE TOKENS                                          */
+  /* ------------------------------------------------------------------ */
+  /* Focus ring — apply to every interactive element. */
+  --focus-ring:             var(--shadow-focus-primary);
+  --focus-ring-offset:      2px;
+
+  /* Disabled — use for buttons, inputs, links. */
+  --disabled-bg:            #94a3b8;
+  --disabled-fg:            #cbd5e1;
+  --disabled-opacity:       0.55;
+
+  /* Overlay scrims (modals, image hovers). */
+  --overlay-scrim:          rgba(15, 23, 42, 0.55);
+  --overlay-scrim-light:    rgba(15, 23, 42, 0.25);
+}
+
+/* ==========================================================================
+   Accessibility: motion preferences
+   Reduce every movement token to near-zero for users who opt out. The token
+   names stay the same so no component code needs to change.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 0.01ms;
+    --duration-fast:    0.01ms;
+    --duration-base:    0.01ms;
+    --duration-slow:    0.01ms;
+    --duration-slower:  0.01ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Standard focus-visible ring — opt-in via `.focus-ring` or inherited
+   automatically by .cta-primary / .field-control defined in global.css.
+   Apply this class to any interactive element that doesn't already use a
+   component class (e.g. anchor tags in body copy).
+   ========================================================================== */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-md);
+}

@@ -647,8 +647,152 @@ RFID chip universe (2026)
             </div>
           </section>
 
+          <section id="chip-selection-by-industry" class="scroll-mt-24">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">11. Chip selection playbook by industry</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              The same chip family can deliver very different ROI depending on industry context. Below is the default chip recommendation RFIDAK gives for 8 common B2B verticals &mdash; based on installed-base compatibility with existing reader fleets, security tier required by the industry's insurance / compliance landscape, volume economics at the typical program scale, and the practical migration cost from whatever legacy credential is currently deployed. These recommendations reflect what actually ships at scale in 2024-2026 rather than what's theoretically optimal — both matter, but for procurement planning the installed-base reality usually dominates.
+            </p>
+
+            <div class="grid gap-5 md:grid-cols-2">
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Hotels &amp; hospitality</p>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                  Default chip: <strong>MIFARE Plus EV2 2K</strong> in classic-emulation mode (compatible with Classic-era readers, AES-128 secure channel when reader firmware is upgraded to SL3 mode). Migration pattern 2023-2025: MIFARE Classic 1K migrating to Plus EV2 driven by insurance cybersecurity audits across Marriott, Hilton, IHG, Accor. New properties launching in 2024-2026 standardize on <strong>MIFARE DESFire EV3</strong> for multi-application cards (door key + cashless payment + loyalty + spa booking on one credential). Typical volume: 1,500-3,000 cards per 300-room property with 6-8 month refresh cycle driven by magnetic-stripe wear or encoded-key lifecycle expiry.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Industrial laundry</p>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                  Default chip: <strong>Impinj Monza R6-P</strong> or <strong>NXP UCODE 9</strong> for 200+ wash-cycle survival. UCODE 9 adds extended memory for garment-history logging. Volume: 500K-5M tags/year per tier-1 processor (Cintas, Elis, Berendsen). Premium subset uses <strong>NXP UCODE DNA</strong> for anti-clone on high-value rental garments. Unit price $0.18-0.35 for textile format.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Retail &amp; apparel</p>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                  Default chip: <strong>Impinj M730 or M800</strong> on 70x17 mm hangtag inlay. Walmart 2022 mandate and EU Digital Product Passport (ESPR 2024/1781) both require EPC Gen2v2. For luxury and anti-counterfeit: add <strong>NTAG424 DNA</strong> for smartphone tap. High-volume programs (100M+ tags/year) use Alien Higgs-9 as alternative for price optimization. Unit price $0.04-0.08 at 1M+ MOQ.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Logistics &amp; supply chain</p>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                  Default chip: <strong>NXP UCODE 9</strong> for hardened industrial tags and on-metal deployments where ferrite spacer construction preserves read range despite steel substrate detuning. Extended EPC memory supports multi-stage supply chain events where tag data is updated at each handling checkpoint. Alternative: <strong>Alien Higgs-9</strong> for very high-volume cost-optimized programs where memory needs are minimal. Active tags (not chip-based, battery-powered): for high-value containers and cross-border logistics needing real-time GPS or sensor data, use Wiliot or Quuppa BLE-AoA rather than RFID. Typical pallet tag: $0.48-1.45 anti-metal format with 5-10 year field life.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Healthcare &amp; hospital</p>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                  Default chip mixes format: <strong>DESFire EV3 4K</strong> for staff access and patient wristbands (AES-128 security for PHI), <strong>Impinj Monza R6-P</strong> for reusable medical textile tracking under EN 14065, <strong>NTAG424 DNA</strong> for pharma anti-counterfeit tap-to-verify. FDA UDI rule 2024-2026 expansion drives compliance upgrades. Hospital programs average 20K-200K tags/year per facility.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Access control (enterprise)</p>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                  Default chip: <strong>MIFARE DESFire EV3 4K or 8K</strong> with AES-128 and multi-application architecture. Separate keys per service domain (physical access, IT logon PIV sub-app, cafeteria, secure print). Integrated with HID VertX, Mercury Security, Lenel OnGuard, Software House CCure. Auburn University RFID Lab 2024: 72% of &gt; 10K unit orders now specify DESFire EV3 or equivalent AES-128. Migration from Classic 1K is active across Fortune 500.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Library &amp; media</p>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                  Default chip: <strong>ICODE SLIX</strong> (ISO/IEC 15693) paper label for book tagging. Vicinity reading at 50-100 cm supports stack-reading multiple books simultaneously at self-checkout kiosks and shelf-inventory drones. SLIX2 variant adds password-protected block for high-security archives. Branch library typical: 50K-500K tags per program. Integrated with Bibliotheca selfCheck, 3M, mk Solutions, D-Tech.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Events &amp; NFC marketing</p>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                  Default chip split by use case. Festivals (cashless 3-5 day events): <strong>Impinj Monza R6</strong> on fabric or vinyl single-use wristbands. NFC marketing programs (luxury anti-counterfeit, loyalty, DPP): <strong>NTAG424 DNA</strong> for AES-128 SUN messaging compatible with iOS Background Tag Reading (iOS 13+). For open consumer NFC (no security needed): <strong>NTAG213/215/216</strong> based on memory requirement (144/504/888 bytes).
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section id="chip-faq" class="scroll-mt-24">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">12. Chip selection FAQ &mdash; 10 questions procurement teams ask</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              The most frequently asked technical questions RFIDAK sales engineers hear during B2B chip selection conversations, with precise answers suitable for sharing internally across non-RFID stakeholders in your organization — procurement, IT security, compliance, operations, and finance teams who need to understand the technology tradeoffs without becoming RFID specialists themselves. Each answer is written to stand alone as a briefing document, with enough context that a reader coming in cold can follow the logic and make an informed decision or ask the right follow-up question during vendor conversations. Use them as starting points for internal education or copy-paste into your RFP evaluation framework.
+            </p>
+
+            <div class="space-y-4" data-speakable="chip-faq">
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>1. What's the real cost difference between MIFARE Classic and DESFire EV3 at 10K cards?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">At MOQ 10,000 blank PVC cards: MIFARE Classic 1K $0.38-0.52, MIFARE Plus EV2 2K $0.65-0.85, DESFire EV3 2K $1.10-1.35, DESFire EV3 8K $1.60-2.20. Including encoding: add $0.15-0.30 per card for pre-encoded delivery. Including printing: add $0.15-0.25 for CMYK front+back. So a fully printed and encoded DESFire EV3 2K card lands at approximately $1.55-1.95 per unit &mdash; roughly 3x the cost of a printed Classic 1K at $0.68-1.05. Over a 3-year card lifecycle, the security upgrade translates to about $0.25-0.35 per card-year, which is usually trivial compared to the cost of a single cloning-attack incident at a hotel or corporate property.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>2. Can I mix DESFire EV2 and EV3 cards in the same reader fleet?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Yes. EV3 is fully backward compatible with EV2 at the ISO/IEC 14443A protocol layer. Readers that enumerate EV2 cards will enumerate EV3 identically. The differences are on the card side: EV3 adds Secure Dynamic Messaging (SUN) for smartphone tap integrity, faster AES-128 operations, improved proximity check hardening, and longer key derivation chains. For buyer decisions: if your installed reader fleet is EV2-capable, new EV3 cards drop in without reader firmware updates. If your current fleet is Classic-only, you need both new cards AND reader replacement or firmware upgrade to access AES-128 protections.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>3. Which NTAG variant should a luxury brand use for Digital Product Passport?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">NTAG424 DNA is the default choice for luxury DPP (EU ESPR 2024/1781 compliance). The chip adds AES-128 Secure Unique Number (SUN) messaging that generates a unique cryptographic tap URL every time a consumer taps the tag with an iPhone or Android &mdash; making counterfeits trivially detectable because each tap produces a unique signature the brand server validates. NTAG213 is too weak for anti-counterfeit (no cryptographic authentication), NTAG215/216 add more memory but not cryptography. For budget-constrained mid-market programs where anti-counterfeit is less critical: NTAG215 with server-side tap tracking delivers 60-70% of the value at 30-40% of the cost.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>4. Why would I pick Impinj M800 over M730?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">M800 (released 2024) improves on M730 (released 2021) on three axes: (1) 20-30% faster write speed, useful for encoding lines running at 4K+ cards/hour; (2) extended EPC memory (432 bits vs 128 bits) for programs needing longer serial numbers or multi-field encoding; (3) slightly better read sensitivity in dense-tag fields (warehouse gate reading 200+ tags simultaneously). M730 remains the cost-optimal default for retail apparel at $0.04-0.07 per inlay. M800 adds 20-40% premium for the capabilities above &mdash; worth paying if you're encoding large EPC or running fast-encode production; not worth paying if you're pure read-only inventory.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>5. Is there any real difference between EM4100 and TK4100?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Functionally near-identical: both are LF 125 kHz read-only chips with 64-bit unique ID, compatible with the vast majority of LF access control readers. Differences: EM4100 is the original chip from EM Microelectronic (Swiss supplier), TK4100 is a second-source compatible chip from multiple Asian foundries. TK4100 typically costs 10-20% less than genuine EM4100. For most buyers, the choice is a supply-availability and cost decision rather than a technical one. Specify &ldquo;EM4100 OR TK4100 equivalent&rdquo; in RFP to get the best available pricing without losing compatibility. Avoid EM4100 unless you have a specific reader that's documented to reject second-source chips.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>6. Do I need a different chip for each country I sell into?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Chip itself: no. All modern UHF Gen2 chips are broadband and work across all regional UHF sub-bands (FCC 902-928 / ETSI 865-868 / Japan 916-921 / China 920-925). What changes region to region is the antenna optimization. For export products shipping globally, request &ldquo;worldwide&rdquo; antenna design &mdash; trades 10-15% peak read range per region for consistent performance across all regulatory regions. For region-locked programs (e.g., EU-only Digital Product Passport, US-only retail mandate), request region-optimized antenna for maximum range. HF chips have no regional variation &mdash; 13.56 MHz is globally unified under ISO/IEC 14443. LF chips similarly unified at 125-134 kHz globally.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>7. How do I verify a chip is genuine NXP, Impinj, or EM &mdash; not a clone?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Three layers of verification. (1) TID check: every genuine NXP / Impinj / EM chip has a factory-programmed TID (Tag Identifier) in a specific memory bank with a known manufacturer prefix &mdash; NXP MIFARE / NTAG starts with 04:xx, Impinj Monza starts with E280:11, etc. Read the TID and verify the prefix. (2) Response timing and behavior patterns: genuine chips respond to standard commands with signature timing; clones often have subtle protocol deviations detectable by specialized test readers. (3) Manufacturer direct procurement: RFIDAK buys chips directly through NXP / Impinj / EM authorized distribution channels, not gray market; request the distributor invoice trail if your procurement policy requires. Clones can pass basic reads but often fail under formal ISO certification testing.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>8. What's the fastest path to migrate 50,000 MIFARE Classic cards to AES security?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Three-stage approach with no downtime. Stage 1 (Month 1): order MIFARE Plus EV2 2K cards pre-encoded with Classic-compatible UIDs. Plus EV2 operates in Classic-compatible mode out of the box &mdash; existing readers see them as Classic. Stage 2 (Month 2-3): issue the new Plus EV2 cards to users as natural replacement cycle (lost / damaged / new hire). Stage 3 (Month 6-12): once &gt; 80% of cards are Plus EV2, schedule a single reader firmware push to enable AES-128 SL3 mode &mdash; Classic cards stop working on that day, remaining users get emergency replacements. This approach avoids the &ldquo;big bang&rdquo; replacement risk while migrating entirely within one fiscal year.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>9. Can I get a chip with both UHF and HF interfaces on one tag?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Yes &mdash; two architectures exist. (1) Dual-chip tag: two separate chips (one UHF, one HF / NFC) share one tag body with two antennas. Cost premium 40-80% vs single-chip. Best for retail programs needing both consumer tap (HF / NFC for smartphone) and warehouse bulk read (UHF for sweep). (2) Dual-interface chip: a single chip with both UHF and HF antennas / logic, like NXP UCODE DNA or Impinj M830. Cost premium 50-120% but simpler BOM. Dual-chip architecture dominates in retail; dual-interface chip is emerging for luxury and pharma where anti-counterfeit plus supply chain visibility both matter on one unit. For most programs, pick one frequency and use a separate channel for the other use case.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>10. What chip does Walmart's 2022 apparel RFID mandate actually require?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Walmart's mandate (in force since Q1 2022, expanded in 2023-2024 to additional categories) specifies EPC Gen2v2-compliant UHF passive tags readable at 3-6 meters by standard warehouse readers, with proper EPC encoding under GS1 Tag Data Standard 1.13. The mandate does NOT name a specific chip &mdash; suppliers can use any certified Gen2v2 chip. In practice, over 90% of apparel brands comply with Impinj M730 for cost reasons or NXP UCODE 8 / 9 for brands wanting more advanced features. Key compliance requirements: valid GS1 Company Prefix in the EPC, tag readable at certified distance on Walmart's standard test rig, and lot-level serialization per garment.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>11. How do I evaluate chip lifetime before committing to a 10-year program?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Four practical checks. (1) Vendor product roadmap: ask NXP / Impinj / EM for the chip's public end-of-life declaration or long-term availability commitment. Major manufacturers typically commit 10-15 years for mainstream chips. (2) Compatible second-source chips: specify "chip X or compatible" in RFP so you have alternatives when production shifts. (3) ISO standard compliance: standards-compliant chips (ISO 14443, 15693, 18000-63) are interchangeable across manufacturers, proprietary chips are not. (4) Re-encoding capability: specify chips that support re-flashing of EPC data, so cards/tags can be repurposed rather than scrapped if business model changes. Program lifetime risk is almost always at the chip level, not the frequency level.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>12. Are counterfeit chips really a problem in gray-market purchases?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Yes, and the problem grew in 2020-2023 chip shortage. Common failures from gray-market chips: (1) Fail ISO compliance testing silently — pass basic read but misbehave under specific commands, breaking at the integration stage when the customer is already in production. (2) Truncated or missing TID — so anti-counterfeit protection doesn't work. (3) Thermal variance failures &mdash; chips fail at boundary temperatures (&minus;20°C or +65°C) that genuine NXP / Impinj parts handle. RFIDAK buys exclusively from authorized NXP / Impinj / EM distribution channels and can provide distributor invoice trails on request. For any high-value program (anti-counterfeit, access control, medical), require this paperwork.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>13. How should I handle chip EOL notices in a multi-year program?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Chip end-of-life (EOL) is a real risk over 5+ year programs. NXP, Impinj, EM and other major vendors publish 12-36 month EOL notices for mainstream chips — typically signaling a production wind-down with a last-buy-opportunity window. Three mitigation moves. (1) Subscribe to vendor EOL notification services (NXP / Impinj both offer email alerts for registered distributor customers). (2) Design your RFP around standards-compliance rather than vendor-locked specs — "any EPC Gen2v2 chip with 128-bit EPC and TID" accepts substitute chips without re-engineering. (3) Hold a 6-12 month safety stock of discontinued chips during transition windows, especially for closed-loop deployments where a single-vendor shortage would halt customer operations. Chip EOL transitions are manageable — just don't let them become surprises. Most B2B programs that got caught off-guard in the 2020-2023 shortage had over-specified a single chip SKU in their procurement contracts.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>14. What's the future of RFID chip technology in the next 5 years?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Four trends visible in 2024-2026 chip roadmaps. (1) <strong>Sensor integration</strong> &mdash; passive chips with integrated temperature, humidity, tilt, or light sensors (EM4325, AMS SL900A, Farsens). Enables cold-chain and condition monitoring without batteries. (2) <strong>Battery-assisted passive (BAP)</strong> &mdash; tiny paper-thin batteries extending UHF range to 20+ m while preserving passive-like cost. (3) <strong>Cryptographic UHF</strong> &mdash; NXP UCODE DNA and NTAG424 DNA ecosystem extending AES-128 security to UHF use cases. (4) <strong>Sub-$0.02 per inlay</strong> &mdash; as Walmart, Zara, H&amp;M drive apparel volumes above 100B tags/year by 2027, the manufacturing cost floor keeps dropping. Procurement note: all trends are chip-family evolutions within existing standards, not new frequency bands, so technology choices made in 2024 remain valid through 2030.</p>
+              </details>
+            </div>
+          </section>
+
           <section id="cluster-articles">
-            <h2 class="text-3xl font-semibold text-gray-900 mb-5">11. Continue your research \u2014 8 deep-dive articles</h2>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">13. Continue your research \u2014 8 deep-dive articles</h2>
             <p class="text-gray-600 leading-relaxed mb-6">
               These eight articles form the cluster around this pillar. Read in any order; each is self-contained and links back here for context.
             </p>
@@ -671,7 +815,7 @@ RFID chip universe (2026)
             <div class="grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
               <div>
                 <p class="text-xs uppercase tracking-[0.18em] text-white/70 font-semibold mb-3">Whitepaper</p>
-                <h2 class="text-3xl font-semibold mb-4">12. Download the RFID Buyer&rsquo;s Guide 2026 (PDF)</h2>
+                <h2 class="text-3xl font-semibold mb-4">14. Download the RFID Buyer&rsquo;s Guide 2026 (PDF)</h2>
                 <p class="text-white/90 leading-relaxed mb-6">
                   28-page PDF companion to all three RFIDAK pillars (Technology + Frequency + Chip Comparison). Includes chip-family tables, security tier matrix, cost curves and procurement checklist.
                 </p>

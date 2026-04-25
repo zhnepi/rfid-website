@@ -6,13 +6,20 @@ const certifications = [
   { label: 'ISO 9001', detail: 'Quality Management', href: '/certifications#iso-9001' },
   { label: 'ISO 14001', detail: 'Environmental', href: '/certifications#iso-14001' },
   { label: 'SGS Verified', detail: 'Factory Audit', href: '/certifications#sgs-or-third-party-verification' },
+  // Added 2026-04-23: direct chip supply was RFIDAK's unspoken competitive edge during
+  // the 2020-2023 global chip shortage. Now a trust-bar badge so buyers see it in ≤ 3 seconds.
+  { label: 'Direct Chip Supply', detail: 'NXP · Impinj · EM', href: '/about#chip-supply-resilience' },
 ];
 
+// Stats are intentionally qualified to avoid unverifiable superlatives.
+// "Peak" for capacity = the ceiling the factory has hit, not a sustained rate.
+// "2008" with "Founded" label tells a concrete, non-drifting fact instead of a years-in-business number
+// that has to be updated every year and creates the 15+/17/18 inconsistency flagged in brand review.
 const stats = [
   { value: '108+', label: 'Clients' },
   { value: '50+', label: 'Countries' },
-  { value: '5M', label: 'Cards/Month' },
-  { value: '18+', label: 'Years' },
+  { value: '5M', label: 'Peak Cards / Month' },
+  { value: '2008', label: 'Founded' },
 ];
 ---
 

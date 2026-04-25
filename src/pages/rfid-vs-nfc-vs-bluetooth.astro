@@ -574,8 +574,158 @@ const speakableJsonLd = {
             <p class="text-sm text-gray-500 mt-4 italic">Sources: IDTechEx 2024 RAIN RFID Forecasts; Bluetooth SIG 2024 Annual Market Update; NFC Forum 2025 Annual Report; RFIDAK 2026 published price book.</p>
           </section>
 
+          <section id="use-case-playbook" class="scroll-mt-24">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">11. Use-case playbook &mdash; which technology wins where</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Choosing between RFID, NFC and BLE gets clearer when you anchor on the actual use case rather than the technology marketing. Below are 8 real-world workflows showing which technology wins in practice and the operational reason why — read range constraints, cost economics, security requirements, and smartphone accessibility all play different roles in different verticals. Use this as a benchmark for your project against the current market default before custom-engineering around the norm.
+            </p>
+            <div class="grid gap-5 md:grid-cols-2" data-speakable="use-case-playbook">
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Retail item-level inventory</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: <strong>UHF RFID</strong></h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Operational requirement: inventory 50,000-500,000 items per store, scan-to-count time under 60 minutes for full store, accuracy &gt;95%. UHF Gen2 at 3-5 m range delivers this with handheld or fixed reader sweep. BLE beacons at $3-15 per unit would cost 30-100x more per item. NFC would require physical tap per item &mdash; operationally impossible. Decathlon, Zara, H&amp;M, Inditex all standardize on UHF. Tag cost $0.04-0.08 at 1M MOQ makes this the cost-per-value winner.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Luxury anti-counterfeit tap</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: <strong>NFC</strong> (NTAG424 DNA)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Operational requirement: consumer walks into store or opens packaging, taps smartphone to verify authenticity. Only NFC works with 2.4 billion consumer smartphones globally &mdash; UHF and BLE are both inaccessible to the iPhone / Android user. NTAG424 DNA with AES-128 SUN messaging generates unique cryptographic URL per tap, making counterfeits trivially detectable. Deployed by Louis Vuitton (serial authentication), Moët Hennessy (bottle verification), Rolex (warranty registration).
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Real-time employee / visitor location</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: <strong>BLE AoA</strong> (Angle of Arrival)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Operational requirement: know where a person is inside a building with 1-3 m accuracy, continuously updated. BLE beacons with AoA infrastructure deliver this at $15-40 per beacon + $200-500 per ceiling-mounted receiver. UHF works only at fixed choke points (doors, stairs). Passive RFID doesn't have continuous real-time tracking. Deployed at airports (passenger flow analytics), hospitals (staff location for emergency response), manufacturing (technician dispatch).
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Door lock &amp; access control</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: <strong>HF RFID</strong> (MIFARE, DESFire)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Operational requirement: 3-5 cm read range (no accidental unlock from person walking past), AES-128 security, reliable under millions of operations per year, no battery at credential. HF MIFARE DESFire EV3 at $1.10-1.85 per card delivers this for 10-20 years. BLE mobile-key solutions are gaining traction in boutique hotels but battery dependency (phone dying) and Bluetooth pairing reliability issues keep HF RFID as the enterprise default. UHF entirely inappropriate (range too long &mdash; security risk).
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Industrial laundry garment tracking</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: <strong>UHF RFID</strong> (textile tag)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Operational requirement: 200+ wash cycles at 85°C, tag hidden in garment seam, throughput 200-600 garments per minute at sort portal. UHF EPC Gen2 with Impinj Monza R6-P or NXP UCODE 9 delivers all three. BLE would require battery (impossible in wash cycles). NFC range too short for portal throughput. Passive LF would work but at 1/10th the throughput. TRSA 2024 benchmark: 85%+ of tier-1 industrial laundries have standardized on UHF textile tags.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Smart packaging consumer engagement</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: <strong>NFC</strong> (NTAG213/215)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Operational requirement: consumer taps packaging with smartphone, launches campaign content, gathers marketing data. Only NFC works at the consumer touchpoint. $0.06-0.15 per NFC sticker at 10K+ volume enables high-volume campaigns. BLE beacons cost too much per unit ($3-15) for disposable packaging. UHF is invisible to consumer phones. Deployed by coffee brands, wine & spirits, cosmetics, and pharmaceutical consumer education.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Global supply chain container tracking</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: <strong>UHF RFID</strong> (+ cellular / satellite for high-value)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Operational requirement: identify containers at port and warehouse gates, 5-10 m read range, no battery for 10+ year asset life. UHF Gen2 on-metal tags dominate at $0.50-1.50 per tag. For high-value containers needing real-time GPS + temperature, cellular IoT trackers ($30-100 with 5-year battery) supplement UHF rather than replace it. BLE has no role in global shipping &mdash; range too short, battery too weak.
+                </p>
+              </article>
+
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="eyebrow-label text-[#0d7377] mb-2">Event cashless payment wristband</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Winner: <strong>UHF RFID</strong> (fabric, disposable)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Operational requirement: 30K-100K attendees, cashless payment at 50+ food / drink stations, single-use 3-5 day wristband at under $1 per unit. UHF fabric wristbands at $0.38-0.65 hit this economic constraint. NFC wristbands work for smaller events but cost $0.85-2.10. BLE is too expensive per band and battery-limited for multi-day wear. Intellitix / RFID Journal 2024 data: venues with UHF cashless wristbands see 15-30% higher per-guest spend vs cash operations.
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section id="tech-faq" class="scroll-mt-24">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">12. Technology comparison FAQ &mdash; 10 decision questions</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Practical questions asked by procurement teams, product managers, and IT directors during RFID vs NFC vs BLE technology selection. Concise answers designed for sharing with executives evaluating technology investments, operations leaders validating workflow fit, and finance teams modeling total cost of ownership across multi-year deployments.
+            </p>
+            <div class="space-y-4" data-speakable="tech-faq">
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>1. When is NFC actually better than UHF RFID?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Three clear cases. (1) Consumer phone tap &mdash; only NFC works with iPhone and Android NFC modems; UHF is invisible to consumer devices. (2) Short-range security &mdash; door locks, payment cards, transit fares where 3-5 cm read range is a feature (prevents accidental activation from passing people). (3) Smart packaging marketing &mdash; tap-to-launch campaigns on bottles, boxes, labels. Outside these three, UHF almost always wins on cost per unit, read range, and bulk-read throughput.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>2. Is BLE replacing RFID in logistics?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">No. BLE and RFID serve different use cases within logistics. RFID handles identification at choke points (warehouse gates, dock doors, sort portals) at low cost per tag ($0.04-0.50). BLE handles real-time location tracking in continuous motion zones (yard management, live inventory, technician tools) at higher cost per beacon ($3-50) but continuous updates. Modern logistics stacks run both &mdash; RFID at gates for identification, BLE beacons on high-value items for real-time visibility between gates. They're complementary, not competing.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>3. What's the break-even volume for BLE vs UHF in asset tracking?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">At 100 or fewer items being tracked, BLE beacons at $3-15 per unit make economic sense plus the fact that you can reuse a small office-grade BLE infrastructure. At 1,000+ items, UHF Gen2 tags at $0.08-0.50 become compelling — pure tag cost is 6-100x cheaper. Break-even typically falls in the 200-500 item range depending on how much BLE infrastructure already exists in the building and whether you need real-time tracking (BLE) or just periodic inventory (UHF). For 10,000+ items, UHF dominates on total cost of ownership by an order of magnitude.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>4. Can I use my existing BLE beacons for asset tracking instead of buying RFID?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Only if your asset count is modest (&lt; 500 items) and you already have BLE infrastructure. BLE beacons are per-item devices with batteries (3-5 year life, then replacement cost); they make sense when real-time location visibility outweighs per-item cost. For bulk inventory of thousands of items, UHF RFID's $0.08-0.50 per tag without batteries is an order of magnitude more economical. Hybrid deployments exist: BLE for high-value moving assets (tools, medical equipment), UHF for inventory-heavy items (apparel, parts). Don't force one technology into the wrong use case just because infrastructure is available.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>5. Which technology has the best long-term supply reliability?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">RFID has the strongest standards-based multi-vendor supply. Multiple chip manufacturers (NXP, Impinj, EM, Alien, others) all make ISO/IEC 18000-63 compliant chips. If one goes off market, 5+ alternatives are interchangeable. NFC has similar standards diversity (NFC Forum certified chips from NXP, Infineon, Sony). BLE is dominated by a handful of Bluetooth SIG member chip vendors (Nordic, TI, Silicon Labs, Cypress / Infineon) — still 5+ competitive options. All three technologies have 15+ year commitment from standards bodies. Proprietary solutions (Wiliot, UWB-specific platforms) carry higher lock-in risk.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>6. How much does it cost to switch from one technology to another mid-deployment?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Significant, but depends on what changes. Swapping chip vendors within the same technology (Impinj to NXP UCODE, both UHF) &mdash; minor, often done without user impact. Swapping technology family (HF to UHF, or UHF to BLE) &mdash; expensive: all tags replace, all readers replace, all software middleware reconfigures. Budget $5-15 per asset for complete tech family swap plus 3-6 month deployment schedule. This is why getting the initial technology choice right is so important &mdash; mid-deployment pivots are rarely recovered in ROI terms. Pilot 500-2000 items first before committing to 100K+ rollout.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>7. Do I need a different middleware stack for each technology?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Somewhat. Each technology has its own reader SDK, data formats, and identification schemas. RFID middleware (TagMatiks, Zebra Savanna, Impinj ItemSense) speaks EPC Gen2 protocol. NFC middleware (Flomio, Smartrac developer tools) handles NDEF records and AES key management. BLE middleware (Estimote, Kontakt.io, Quuppa) handles beacon protocols and RSSI data. Modern enterprise platforms (SAP, Oracle, Manhattan Associates) have plug-ins for all three. For unified visibility across multiple technologies, IoT platforms like ThingWorx, AWS IoT, or Azure IoT Hub provide the abstraction layer. Budget 15-25% of total project cost for middleware development or integration.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>8. What's the security tier difference between RFID, NFC, and BLE?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Baseline UHF RFID is insecure (EPC is readable by anyone, no encryption at chip level). Secure UHF chips (NXP UCODE DNA) add cryptographic features but are not mainstream. HF NFC has native AES-128 in DESFire EV3 and NTAG424 DNA &mdash; strongest option for per-tag security. BLE has protocol-level encryption (AES-128 since BT 4.2) and pairing / bonding. For security-sensitive applications, the ranking is: NFC DESFire EV3 / NTAG424 DNA &gt; BLE (BT 5.2+ with Secure Connections) &gt; UHF (needs application-layer encryption added). If security is table stakes, start with HF NFC and add UHF only for operational bulk-read layers separately.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>9. How do these technologies compare for sustainability / end-of-life?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">RFID passive (no battery) has the smallest lifecycle footprint &mdash; silicon die, antenna, substrate. 20-year functional life typical. NFC same as RFID passive. BLE has battery disposal environmental impact &mdash; each beacon has a lithium coin cell requiring separated-waste treatment at end-of-life. Over 10 years on 10K-asset deployment, BLE requires 2-3 battery-replacement cycles (2-4x the e-waste of RFID/NFC). For programs with sustainability scorecards (EU Green Deal, B-Corp requirements, corporate ESG reporting), RFID has a meaningful advantage that should factor into technology selection alongside cost and performance.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>10. Will ultra-wideband (UWB) replace BLE for indoor positioning?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Partially yes, in premium use cases. UWB (IEEE 802.15.4z) delivers 10-30 cm positioning accuracy vs BLE's 1-3 m AoA accuracy. Apple's AirTag, BMW's digital key, and some premium enterprise RTLS deployments use UWB. Trade-offs: higher per-beacon cost ($30-80 vs BLE's $3-15), shallower ecosystem, smartphone support limited to newer iPhones and flagship Androids. For factory floor precision tracking where 10 cm matters (robotic pick, automated forklifts), UWB wins. For general asset visibility where 1-3 m is fine, BLE's lower cost and broader compatibility dominate. Neither competes with RFID on cost per identified item at bulk volume.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>11. How do I integrate RFID + NFC + BLE in one platform?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Three-layer architecture. (1) <strong>Physical layer</strong>: each technology has its own reader hardware; don't fight this — use the right reader for each. (2) <strong>Gateway layer</strong>: aggregate raw reads from all technologies into a unified event stream (Zebra Savanna, Impinj ItemSense, AWS IoT Core, Azure IoT Hub can all play this role). (3) <strong>Application layer</strong>: your business logic (inventory, access control, analytics) consumes the unified event stream without caring about underlying technology. Separate layers let you add or remove technologies without disrupting business logic. Common pattern at mature enterprises: RFID for identification events, NFC for consumer-initiated events, BLE for continuous motion, all flowing to one event bus.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>12. What's the minimum pilot size to validate technology choice?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Rule of thumb: pilot on 5-10% of target deployment size, minimum 500 tagged items. Below 500 items, statistical noise overwhelms real performance signals. For 100K target deployment, pilot with 5K-10K tags across 1-2 representative locations and 4-8 weeks. Measure: read rate (target &gt; 99%), false-positive rate, operator workflow impact, integration complexity with existing systems, and actual cost per event (not just tag unit cost). Pilots that skip the &ldquo;operator workflow&rdquo; dimension usually fail at scale because the technology works but the humans using it don't adapt. Pilot learnings should explicitly drive which technology / chip / form factor makes it to production.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>13. When does it make sense to combine all three technologies in one deployment?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Three common combined-deployment patterns. (1) <strong>Luxury retail with DPP compliance</strong>: UHF inlay for warehouse inventory + NFC NTAG424 DNA in the care label for consumer smartphone authentication + BLE tags on display items for store-layout analytics. (2) <strong>Hospital linen and asset tracking</strong>: UHF textile tags for laundry circulation + NFC on patient wristbands for bedside identification + BLE on mobile medical equipment (IV pumps, wheelchairs) for real-time location. (3) <strong>Enterprise access + smart building</strong>: HF MIFARE DESFire cards for door entry + NFC on meeting rooms for check-in tap + BLE beacons for occupancy analytics. In each case, each technology handles the workflow it's best at — no single technology would cover all use cases efficiently. Plan the data integration layer carefully so events from all three feed one business-logic system.</p>
+              </details>
+
+              <details class="rounded-2xl border border-gray-200 bg-white p-6 group">
+                <summary class="cursor-pointer font-semibold text-gray-900 flex items-start justify-between gap-4"><span>14. How should I budget for annual maintenance of each technology?</span><span class="text-[#0d7377] transition-transform group-open:rotate-45 shrink-0">+</span></summary>
+                <p class="mt-4 text-sm text-gray-700 leading-relaxed">Different cost profiles. <strong>Passive RFID</strong>: 3-8% annual tag replacement (damaged/lost/retired), near-zero reader maintenance except every 3-5 years reader refresh ($500-5,000 per reader). <strong>NFC</strong>: similar to RFID passive — tag replacement dominant, readers long-lived. <strong>BLE</strong>: 20-33% annual beacon battery replacement (at $3-15 replacement cost per beacon), so 10K beacons = $30K-150K annual battery budget alone. BLE also has gateway infrastructure running 24/7 (~100W per gateway, routine firmware updates). For 10-year TCO modeling, BLE runs 2-5x the maintenance cost of equivalent-scale RFID / NFC. This doesn't make BLE wrong — it's the right choice for real-time location — just know it going in.</p>
+              </details>
+            </div>
+          </section>
+
           <section id="cluster-articles">
-            <h2 class="text-3xl font-semibold text-gray-900 mb-5">11. Continue your research \u2014 8 deep-dive articles</h2>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-5">13. Continue your research \u2014 8 deep-dive articles</h2>
             <p class="text-gray-600 leading-relaxed mb-6">
               These eight articles form the cluster around this pillar. Read in any order; each is self-contained and links back here for context.
             </p>

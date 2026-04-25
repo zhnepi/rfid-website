@@ -19,6 +19,29 @@ export interface ProductDocument {
   fileSize?: string;
 }
 
+/**
+ * Visual side-by-side comparison of two product format variants on the product page.
+ * Designed for cases where the buyer is choosing between two physical formats of
+ * the same product family (e.g. closed-loop vs adjustable silicone wristband, or
+ * thin PVC card vs thick clamshell card) and a visual helper is the quickest way
+ * to decide. Rendered by src/components/VisualComparisonWidget.astro if present.
+ */
+export interface ProductVisualComparisonOption {
+  label: string;
+  image: string;
+  alt: string;
+  tagline: string;
+  specs: Array<{ label: string; value: string }>;
+  bestFor: string[];
+}
+export interface ProductVisualComparison {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  options: [ProductVisualComparisonOption, ProductVisualComparisonOption];
+  decisionTip: string;
+}
+
 export interface Product {
   name: string;
   description: string;
@@ -27,6 +50,12 @@ export interface Product {
   detailSections?: ProductDetailSection[];
   moldCatalog?: ProductMoldEntry[];
   documents?: ProductDocument[];
+  /**
+   * OPTIONAL — when two variants of this product family compete for the same buyer,
+   * a visual comparison widget helps the buyer decide in ≤ 30 seconds. Populated per
+   * product rather than per category so sibling products get different comparisons.
+   */
+  visualComparison?: ProductVisualComparison;
   specifications: Record<string, any>;
   images: string[];
   category: string;
@@ -66,6 +95,54 @@ export const products: Product[] = [
       "Dual-interface banking cards — CPU card inlays supporting both ISO/IEC 14443 contactless and ISO/IEC 7816 contact communication",
       "Campus and hospital ID cards — multi-application inlays for identification, library access, and cashless payment in a single card"
     ],
+    visualComparison: {
+      eyebrow: "Raw Inlay vs Finished Card — How To Choose",
+      title: "Are you laminating and printing cards in-house, or buying finished cards?",
+      intro: "An RFID card inlay is the raw antenna + chip subassembly BEFORE lamination, die-cut, and printing. A finished RFID card has all those steps done for you. Buyers who own card-printing equipment (ID card issuers, university campus services, card converters) buy inlays to feed into their own production line. Buyers who just need ready-to-use cards buy finished cards. They are complementary products, not alternatives for the same buyer.",
+      options: [
+        {
+          label: "RFID Card Inlay (this product — raw B2B material)",
+          image: "/images/products/rfid-prelam-2x5.webp",
+          alt: "RFIDAK RFID card inlay — 2×5 prelam sheet with embedded antennas and chips, ready for PVC-PVC lamination and die-cut by the buyer's own card production line",
+          tagline: "Raw input for card converters and OEM lamination",
+          specs: [
+            { label: "Format", value: "2×5 or 3×8 prelam sheets; roll option" },
+            { label: "Chips available", value: "All LF / HF / UHF families in stock" },
+            { label: "Buyer's workflow", value: "Laminate + die-cut + print in-house" },
+            { label: "MOQ", value: "10,000 pieces (custom chip + antenna)" },
+            { label: "Equipment required", value: "Lamination press + die-cut tool" },
+            { label: "Unit price (MOQ 100K)", value: "$0.08 – 0.22" },
+          ],
+          bestFor: [
+            "University card services with in-house ID printing (thousands of cards / semester)",
+            "Government ID card issuers with secure personalization facility",
+            "Card convertors / trade printers expanding into RFID",
+            "Luxury-goods brands embedding inlays into their own product (books, packaging)",
+          ],
+        },
+        {
+          label: "Standard Finished RFID Card (0.76 mm PVC)",
+          image: "/images/products/ticket-smart-card.webp",
+          alt: "RFIDAK finished RFID smart card — fully laminated, die-cut, and CMYK-printed at the factory, ready for immediate use with no downstream processing needed",
+          tagline: "Ready-to-use, no downstream processing needed",
+          specs: [
+            { label: "Format", value: "Finished ISO 7810 CR80 cards" },
+            { label: "Chips available", value: "Customer specifies; pre-encoded optional" },
+            { label: "Buyer's workflow", value: "Issue directly to end users" },
+            { label: "MOQ", value: "500 pieces" },
+            { label: "Equipment required", value: "None (plug-and-play)" },
+            { label: "Unit price (MOQ 5K)", value: "$0.28 – 0.48" },
+          ],
+          bestFor: [
+            "Hotel chains, offices, and gyms that just need working cards delivered",
+            "Transit authorities with small personalization staff",
+            "Event organizers with 2-week lead time to ship cards pre-printed + encoded",
+            "Any buyer without in-house card lamination or printing capability",
+          ],
+        },
+      ],
+      decisionTip: "If you have (or are building) your own card lamination + printing line, buy inlays — they unlock 3-5× better per-card economics at volume and let you control personalization in-house. If you don't have that equipment (or the volume doesn't justify it), buy finished cards — you save 6-12 weeks of setup and the CAPEX for press / die-cut tooling. Crossover breakeven is usually around 50,000+ cards / year on one chip family.",
+    },
     detailSections: [
       {
         title: "Should I choose RFIDAK card inlays for my card factory?",
@@ -151,6 +228,48 @@ export const products: Product[] = [
       "Casino and gaming chip authentication — embedded RFID prevents counterfeiting with per-chip unique ID verification",
       "Furniture and fixture inventory — insert into wooden or plastic assets for facility management across multi-site operations"
     ],
+    visualComparison: {
+      eyebrow: "Mini Bullet vs Key Transponder — How To Choose",
+      title: "Embedded bullet or glass capsule? Pick by insertion method",
+      intro: "Both formats serve space-constrained asset tagging at 7-18 mm scale. The bullet shape with ABS housing suits press-fit insertion into drilled holes. Glass capsule suits implant-style insertion into biological or liquid environments. Non-interchangeable — pick by the actual insertion context.",
+      options: [
+        {
+          label: "Mini Bullet Tag (this product — ABS)",
+          image: "/images/products/plastic-rfid-tag-500x500.webp",
+          alt: "RFIDAK mini RFID bullet tag — 7mm diameter ABS cylinder with copper ferrite core, designed for press-fit insertion into drilled holes in tools, instruments, and assets",
+          tagline: "7mm ABS cylinder, press-fit drilled hole",
+          specs: [
+            { label: "Dimensions", value: "Ø7 × 18 mm" },
+            { label: "Insertion", value: "Press-fit into drilled hole" },
+            { label: "Environment", value: "Dry + industrial" },
+            { label: "Unit price (MOQ 1K)", value: "$0.58 – 1.20" },
+          ],
+          bestFor: [
+            "Drill bits, surgical tools, injection molds",
+            "Fixed asset tagging (desks, cabinets)",
+            "Reusable molds and fixtures",
+          ],
+        },
+        {
+          label: "Key Transponder (sibling — glass capsule)",
+          image: "/images/products/key-transponder.webp",
+          alt: "RFIDAK key transponder — biocompatible glass capsule with embedded LF or HF inlay, designed for implant-style insertion or fluid-immersion environments",
+          tagline: "Glass capsule, biocompatible, fluid-safe",
+          specs: [
+            { label: "Dimensions", value: "Ø2-4 × 8-18 mm" },
+            { label: "Insertion", value: "Implant / immersion" },
+            { label: "Environment", value: "Liquid / biological" },
+            { label: "Unit price (MOQ 1K)", value: "$0.85 – 2.40" },
+          ],
+          bestFor: [
+            "Pet microchipping (veterinary)",
+            "Keyring transponders for automotive / machinery",
+            "Fluid-immersed sensors and samples",
+          ],
+        },
+      ],
+      decisionTip: "If inserting into a drilled hole in a tool or fixture, bullet (Option A) is the rugged, economical default. If the tag lives inside a living organism or chemical fluid, glass capsule (Option B) is biocompatible and chemical-inert. Never substitute one for the other — bullet ABS does not handle implantation; glass capsule cannot withstand industrial press-fit forces.",
+    },
     specifications: {"Product Name": "RFID Bullet Tag (Mini Cylindrical Transponder)", "Model No.": "TBL1807", "Housing Material": "ABS outer shell, epoxy encapsulation", "Dimensions": "Ø7 x 18 mm", "Weight": "0.5 g", "Operating Frequency": "125 kHz (ISO 11784/11785), 13.56 MHz (ISO/IEC 14443A)", "Chip Options": "TK4100, EM4200, EM4305, NXP MIFARE Classic 1K/4K, FM11RF08, ICODE SLIX, Hitag2, T5577", "Read Range": "3-10 cm (reader dependent)", "Operating Temperature": "-20°C to +70°C", "Available Colors": "Black, red, blue, white, custom", "Installation Method": "Press-fit into drilled hole or adhesive embedding"},
     images: ["/images/products/plastic-rfid-tag-500x500.webp"],
     category: "RFID Tags",
@@ -175,6 +294,48 @@ export const products: Product[] = [
       "Gas cylinder tracking — identify and trace industrial gas cylinders through fill, delivery, and return cycles",
       "Wine and spirits authentication — tamper-evident closure seals prevent refilling fraud on premium bottles"
     ],
+    visualComparison: {
+      eyebrow: "Cable Tie Tag vs Pallet Tag — How To Choose",
+      title: "Zip-tie wrap or screw-mount? Attachment method decides",
+      intro: "Both are industrial UHF logistics tags but attach to fundamentally different asset geometries. Cable tie wraps around anything with 3-5 mm clearance. Pallet tag screws / rivets into flat pallet slats. Asset shape dictates the format.",
+      options: [
+        {
+          label: "Cable Tie Tag (this product — wrap-around)",
+          image: "/images/products/rfid-cable-tie-1.webp",
+          alt: "RFIDAK cable tie RFID tag — UHF with integrated cable-tie loop for zip-tie wrap on gas cylinders, IBC totes, cages, and irregular industrial assets",
+          tagline: "Cable-tie loop, universal wrap",
+          specs: [
+            { label: "Attachment", value: "Zip-tie through integrated loop" },
+            { label: "Target", value: "Cylinders, cages, pipes, totes" },
+            { label: "Install time", value: "15-30 sec per tag" },
+            { label: "Unit price (MOQ 10K)", value: "$0.75 – 1.85" },
+          ],
+          bestFor: [
+            "Gas cylinder / fire extinguisher tracking",
+            "Wine / spirits anti-fraud closure seal",
+            "Irregular-shape asset retrofit programs",
+          ],
+        },
+        {
+          label: "Pallet Tag (sibling — flat-mount)",
+          image: "/images/products/Pallet-RFID-tag.webp",
+          alt: "RFIDAK pallet RFID tag — flat UHF with screw / rivet mounting for wooden or plastic pallet slats in warehouse and distribution",
+          tagline: "Screw-mount, flat pallet slats",
+          specs: [
+            { label: "Attachment", value: "Screw / rivet / adhesive" },
+            { label: "Target", value: "Wooden / plastic pallet slats" },
+            { label: "Install time", value: "30-60 sec per tag" },
+            { label: "Unit price (MOQ 10K)", value: "$0.85 – 2.25" },
+          ],
+          bestFor: [
+            "Returnable pallet / crate programs",
+            "Warehouse dock-door inventory",
+            "Reusable shipping container management",
+          ],
+        },
+      ],
+      decisionTip: "Cable tie (Option A) for anything round / irregular / already in service without drilling. Pallet tag (Option B) for flat slats where screw mounting provides permanent hold. Both use identical UHF chips — differ only in physical attachment format.",
+    },
     specifications: {"Product Name": "RFID Cable Tie Tag", "Housing Material": "PP (Polypropylene), Nylon", "Available Colors": "Red, green, yellow, blue, black, custom", "Compliance": "ISO/IEC 14443A, ISO/IEC 18000-6C (EPC Class 1 Gen2)", "Operating Frequency": "13.56 MHz (HF), 860-960 MHz (UHF)", "Chip Options": "HF: NXP MIFARE Classic 1K/4K, Ultralight EV1/C, ICODE SLIX, NTAG213/215/216; UHF: NXP UCODE 8, UCODE 9", "Read Range": "HF: 0.3-5 cm; UHF: up to 5 m (reader dependent)", "Weight": "5 g", "Pull Strength": "160-170 N", "Lock Strength": "160-170 N", "Operating Temperature": "-30°C to +85°C", "Installation Method": "Self-locking mechanism (tool-free)"},
     images: ["/images/products/rfid-cable-tie-1.webp"],
     category: "RFID Tags",
@@ -199,6 +360,48 @@ export const products: Product[] = [
       "Commercial dumpster management — track containers across restaurant chains and retail locations for scheduled service verification",
       "Smart city waste analytics — feed bin-level collection data into IoT platforms for route optimization and capacity forecasting"
     ],
+    visualComparison: {
+      eyebrow: "Waste Bin Tag vs Pallet Tag — How To Choose",
+      title: "Chip-in-pocket bin tag or screw-mount pallet? Pick by container type",
+      intro: "Both industrial-grade UHF tags identify large containers throughout collection or logistics lifecycles. Waste bin tags clip into molded pockets on plastic wheelie bins — matched to bin manufacturer standards. Pallet tags screw or rivet into pallet slats — flat mount surface. Container type defines the tag geometry.",
+      options: [
+        {
+          label: "Waste Bin Tag (this product — pocket-mount)",
+          image: "/images/products/rfid-bin-tag-500x500.webp",
+          alt: "RFIDAK RFID waste bin tag — UHF tag shaped to fit molded pocket on 240L/1100L wheelie bins for municipal waste collection identification",
+          tagline: "Matches wheelie bin molded pocket",
+          specs: [
+            { label: "Attachment", value: "Press-fit into bin pocket" },
+            { label: "Shape", value: "Matches bin-manufacturer standard" },
+            { label: "Environment", value: "Outdoor weather, UV, thermal cycle" },
+            { label: "Unit price (MOQ 10K)", value: "$0.95 – 2.40" },
+          ],
+          bestFor: [
+            "Municipal waste collection (Pay-As-You-Throw)",
+            "Commercial dumpster / IBC container ID",
+            "Smart city waste route optimization",
+          ],
+        },
+        {
+          label: "Pallet Tag (sibling — flat-mount)",
+          image: "/images/products/Pallet-RFID-tag.webp",
+          alt: "RFIDAK pallet RFID tag — flat UHF tag with screw holes for mounting on wooden or plastic pallet slats in warehouse and distribution",
+          tagline: "Screw-mount, flat pallet slats",
+          specs: [
+            { label: "Attachment", value: "Screw / rivet / adhesive" },
+            { label: "Shape", value: "Flat rectangle or round" },
+            { label: "Environment", value: "Indoor warehouse primarily" },
+            { label: "Unit price (MOQ 10K)", value: "$0.85 – 2.25" },
+          ],
+          bestFor: [
+            "Returnable pallet / crate / tote",
+            "Distribution center inventory at dock doors",
+            "Reusable shipping container management",
+          ],
+        },
+      ],
+      decisionTip: "If the container has a molded bin-pocket (wheelie bins, municipal carts, IBC totes with integrated RFID slot), waste bin tag (Option A) snap-fits into the manufacturer's designed location. If the container has flat slats or mounting surfaces (pallet, crate, shipping case), pallet tag (Option B) with screw / rivet / adhesive gives flat-surface flexibility.",
+    },
     specifications: {"Product Name": "RFID Waste Bin Tag", "Model No.": "TWT3015", "Housing Material": "ABS", "Dimensions": "Ø30 x 15 mm", "Available Colors": "Black, red, orange, green, custom", "Operating Frequency": "LF: 125 kHz; UHF: 860-960 MHz", "LF Chip Options": "EM4100, EM4102, EM4200, TK4100, GK4001, EM4305, EM4550, EM4069, T5577, Hitag1, Hitag2, Hitag S256", "UHF Chip Options": "Alien Higgs-3 (ISO/IEC 18000-6C, EPC Gen2)", "Personalization": "Laser engraving, painting", "Mounting Method": "Screw-mount, rivets, cable tie", "Operating Temperature": "-20°C to +85°C"},
     images: ["/images/products/rfid-bin-tag-500x500.webp"],
     category: "RFID Tags",
@@ -223,6 +426,48 @@ export const products: Product[] = [
       "Wooden pallet identification — nail into reusable pallets for automated warehouse check-in and supply chain visibility",
       "Construction timber management — track lumber, beams, and structural members from sawmill through on-site assembly"
     ],
+    visualComparison: {
+      eyebrow: "Nail Tag vs Cable Tie Tag — How To Choose",
+      title: "Hammer-in nail or wrap-around cable tie? Pick by target material",
+      intro: "Both are attachment-style UHF tags for irregular outdoor assets, but install fundamentally differently. Nail tags drive straight into soft materials — timber, wood, soft plastic, rubber. Cable tie tags loop around anything with clearance — cylinders, cages, pipes. Material type decides.",
+      options: [
+        {
+          label: "Nail Tag (this product — hammer-in)",
+          image: "/images/products/RFID-Nail-Tag-3608.webp",
+          alt: "RFIDAK RFID nail tag — UHF tag with integrated nail for hammer-install into timber, wooden pallets, and soft-material assets in forestry and construction",
+          tagline: "Hammer into timber / wood / rubber",
+          specs: [
+            { label: "Attachment", value: "Hammer-in (integrated nail)" },
+            { label: "Target material", value: "Timber, wood, soft rubber" },
+            { label: "Install time", value: "5-10 seconds per tag" },
+            { label: "Unit price (MOQ 10K)", value: "$0.85 – 1.85" },
+          ],
+          bestFor: [
+            "Forestry and timber supply chain",
+            "Wooden pallet / crate permanent identification",
+            "Playground equipment / park bench asset tagging",
+          ],
+        },
+        {
+          label: "Cable Tie Tag (sibling — wrap-around)",
+          image: "/images/products/rfid-cable-tie-1.webp",
+          alt: "RFIDAK RFID cable tie tag — UHF tag with integrated cable-tie loop for wrap-around attachment on gas cylinders, IBC totes, and irregular industrial assets",
+          tagline: "Cable-tie loop, wrap-around industrial",
+          specs: [
+            { label: "Attachment", value: "Zip-tie through integrated loop" },
+            { label: "Target material", value: "Any — cylinder, cage, pipe" },
+            { label: "Install time", value: "15-30 seconds per tag" },
+            { label: "Unit price (MOQ 10K)", value: "$0.75 – 1.85" },
+          ],
+          bestFor: [
+            "Gas cylinder / fire extinguisher / IBC tote tracking",
+            "Metal cage / wire rack / pipe inventory",
+            "Quick retrofit on existing asset fleets",
+          ],
+        },
+      ],
+      decisionTip: "If the target is a soft material (timber, wood, rubber) that accepts a nail without cracking or splitting, nail tag (Option A) delivers the fastest install (5-10 seconds). If the target is metal, hard plastic, or any surface where nailing would damage, cable tie tag (Option B) wraps around with zip-tie through the integrated loop. Forestry and wooden-asset programs overwhelmingly use nail; industrial metal-asset programs use cable-tie.",
+    },
     specifications: {"Product Name": "RFID Nail Tag", "Housing Material": "ABS", "Available Colors": "Black, white", "Dimensions": "Ø8 x 36 mm, Ø12 x 40 mm, Ø22/25/28 x 41 mm", "Weight": "2-5 g (size dependent)", "Operating Frequency": "125 kHz (LF), 13.56 MHz (HF), 860-960 MHz (UHF)", "LF Chip Options": "TK4100, EM4200, EM4305, Hitag1", "HF Chip Options": "NXP MIFARE Classic 1K/4K, Ultralight EV1/C, NTAG213/215/216", "UHF Chip Options": "NXP UCODE 8, UCODE 9", "Operating Temperature": "-40°C to +85°C", "Installation Method": "Rubber hammer (softwood); drill + hammer (hardwood/concrete)"},
     images: ["/images/products/RFID-Nail-Tag-3608.webp"],
     category: "RFID Tags",
@@ -247,7 +492,49 @@ export const products: Product[] = [
       "Manufacturing WIP tracking — monitor work-in-progress pallets across production stations for throughput visibility",
       "Cross-docking operations — UHF bulk-read enables rapid sorting and routing of 500+ palletized shipments per hour"
     ],
-    specifications: {"Product Name": "Pallet UHF RFID Tag", "Model No.": "TTP8654", "Housing Material": "ABS", "Dimensions": "85.6 x 54 x 4 mm", "Weight": "Approx. 15 g", "Operating Frequency": "860-960 MHz (UHF)", "Compliance": "ISO/IEC 18000-6C (EPC Class 1 Gen2)", "Chip": "Alien Higgs-4 (128-bit EPC, 512-bit user memory)", "Breaking Strength": "> 800 N", "Available Colors": "White, custom", "Personalization": "Silkscreen printing, laser engraving, painting", "Mounting Method": "Screw-fix through 4 corner holes", "Packaging": "100 pcs/box, 2,000 pcs/carton"},
+    visualComparison: {
+      eyebrow: "Pallet Tag vs Cable Tie Tag — How To Choose",
+      title: "Screw-mount pallet or zip-tie asset? Pick by attachment method",
+      intro: "Both are industrial UHF logistics tags but attach fundamentally differently. Pallet tags screw / rivet into wooden or plastic pallet slats — permanent for the pallet's 5-10 year service life. Cable tie tags loop through zip-ties or lanyards around irregular assets (cylinders, crates, cages). Attachment surface dictates the format.",
+      options: [
+        {
+          label: "Pallet Tag (this product — screw-mount)",
+          image: "/images/products/Pallet-RFID-tag.webp",
+          alt: "RFIDAK pallet RFID tag — rugged UHF tag with integrated screw holes for wooden or plastic pallet mounting, 5-10 year service life in logistics",
+          tagline: "Screw-mount, pallet-lifecycle permanence",
+          specs: [
+            { label: "Attachment", value: "Screw / rivet / adhesive" },
+            { label: "Target surface", value: "Wooden or plastic pallet slats" },
+            { label: "Service life", value: "5-10 years (pallet lifecycle)" },
+            { label: "Unit price (MOQ 10K)", value: "$0.85 – 2.25" },
+          ],
+          bestFor: [
+            "Returnable pallet / tote / crate programs",
+            "Warehouse & distribution center inventory",
+            "Cross-dock operations with 500+ pallet/hour throughput",
+          ],
+        },
+        {
+          label: "Cable Tie Tag (sibling — zip-tie loop)",
+          image: "/images/products/rfid-cable-tie-1.webp",
+          alt: "RFIDAK cable tie RFID tag — UHF tag with integrated cable-tie loop for zip-tie attachment to cylinders, crates, cages, and irregular-shape assets",
+          tagline: "Cable-tie loop, universal attachment",
+          specs: [
+            { label: "Attachment", value: "Zip-tie / cable-tie through loop" },
+            { label: "Target surface", value: "Cylinders, cages, irregular assets" },
+            { label: "Service life", value: "3-5 years outdoor exposure" },
+            { label: "Unit price (MOQ 10K)", value: "$0.75 – 1.85" },
+          ],
+          bestFor: [
+            "Gas cylinder / fire extinguisher / IBC tote tracking",
+            "Steel cage / wire rack / lay-down yard management",
+            "Quick-install retrofit on existing asset fleets",
+          ],
+        },
+      ],
+      decisionTip: "If the target is a flat surface (pallet slat, crate wall) permitting screw or rivet mounting, pallet tag (Option A) gives 5-10 year service life at $0.85-2.25. If the target is a round, irregular, or moving-component asset requiring no drilling, cable tie tag (Option B) wraps around anything with 3-5 mm clearance. Some programs use both: pallet tags on the pallet itself, cable-tie tags on the irregular products the pallet carries.",
+    },
+    specifications: {"Product Name":"Pallet UHF RFID Tag", "Model No.": "TTP8654", "Housing Material": "ABS", "Dimensions": "85.6 x 54 x 4 mm", "Weight": "Approx. 15 g", "Operating Frequency": "860-960 MHz (UHF)", "Compliance": "ISO/IEC 18000-6C (EPC Class 1 Gen2)", "Chip": "Alien Higgs-4 (128-bit EPC, 512-bit user memory)", "Breaking Strength": "> 800 N", "Available Colors": "White, custom", "Personalization": "Silkscreen printing, laser engraving, painting", "Mounting Method": "Screw-fix through 4 corner holes", "Packaging": "100 pcs/box, 2,000 pcs/carton"},
     images: ["/images/products/Pallet-RFID-tag.webp"],
     category: "RFID Tags",
     slug: "pallet-rfid-tag"
@@ -271,7 +558,49 @@ export const products: Product[] = [
       "Rental fleet tire inspection — automate per-vehicle tire condition logging at return check-in points",
       "Government tire regulation — support mandatory tire identification programs for roadworthiness and recall compliance"
     ],
-    specifications: {"Product Name": "Patching Type RFID Tire Tag", "Model No.": "TLT9535", "Housing Material": "Rubber and spring steel", "Dimensions": "95 x 35 x 4 mm", "Weight": "6.4 g", "Available Colors": "Black, blue", "Operating Frequency": "865-868 MHz (EU) or 902-928 MHz (US)", "Compliance": "ISO/IEC 18000-6C (EPC Gen2)", "Chip Options": "Impinj Monza R6, Impinj Monza 4QT", "Read Range": "Fixed reader (8 dBi): 6 m; Handheld (R2000/3 dBi): 0.8 m", "Operating Temperature": "-20°C to +90°C", "Storage Temperature": "-25°C to +100°C", "Mounting Method": "Rubber-compatible chemical adhesive"},
+    visualComparison: {
+      eyebrow: "Patch-Type Tyre Tag vs Spring Tire Tag — How To Choose",
+      title: "Embedded patch or spring-insert? Pick by tire manufacturing stage",
+      intro: "Both formats identify tires throughout lifecycle, but fundamentally differ in when they're installed. Patch-type tags are vulcanized into the rubber at tire manufacturing — permanent for the tire's life. Spring tags are inserted post-manufacture into the inner chamber, removable or retrofittable. Different install points = different buyer segments.",
+      options: [
+        {
+          label: "Patch-Type Tyre Tag (this product — manufacturer-embedded)",
+          image: "/images/products/rfid-tyre-tag02.webp",
+          alt: "RFIDAK patch-type RFID tyre tag — embedded into tire rubber during vulcanization for permanent tire identification across manufacturing lifecycle",
+          tagline: "Vulcanized-in, permanent tire identity",
+          specs: [
+            { label: "Install point", value: "Tire manufacturing (pre-cure)" },
+            { label: "Permanence", value: "Permanent (vulcanized)" },
+            { label: "Survival", value: "Tire lifetime (80K-100K miles)" },
+            { label: "Unit price (MOQ 100K)", value: "$0.35 – 0.95" },
+          ],
+          bestFor: [
+            "Tire manufacturer OEM programs",
+            "Tier-1 tire brand logistics",
+            "Government-mandated tire identification compliance",
+          ],
+        },
+        {
+          label: "Spring Tire Tag (sibling — retrofittable)",
+          image: "/images/products/rfid-tire-tag-500x443.webp",
+          alt: "RFIDAK spring RFID tire tag — spring-mounted UHF tag inserted post-manufacture into tire inner chamber for fleet management and retrofit programs",
+          tagline: "Spring-mount, retrofittable, post-manufacture",
+          specs: [
+            { label: "Install point", value: "Post-manufacture / field retrofit" },
+            { label: "Permanence", value: "Removable if needed" },
+            { label: "Survival", value: "Tire lifetime if inserted correctly" },
+            { label: "Unit price (MOQ 10K)", value: "$0.85 – 1.85" },
+          ],
+          bestFor: [
+            "Fleet management retrofit programs",
+            "Rental car / trucking / logistics tire tracking",
+            "Aftermarket tire tracking without OEM participation",
+          ],
+        },
+      ],
+      decisionTip: "If you're a tire manufacturer installing at the factory, patch (Option A) is the permanent standard delivering tire-lifecycle identity. If you're a fleet operator retrofitting existing tire inventory (rental cars, trucking fleets, taxi companies), spring (Option B) lets you tag tires you didn't manufacture. Both formats use the same UHF chips and are compatible with the same reader infrastructure downstream.",
+    },
+    specifications: {"Product Name":"Patching Type RFID Tire Tag", "Model No.": "TLT9535", "Housing Material": "Rubber and spring steel", "Dimensions": "95 x 35 x 4 mm", "Weight": "6.4 g", "Available Colors": "Black, blue", "Operating Frequency": "865-868 MHz (EU) or 902-928 MHz (US)", "Compliance": "ISO/IEC 18000-6C (EPC Gen2)", "Chip Options": "Impinj Monza R6, Impinj Monza 4QT", "Read Range": "Fixed reader (8 dBi): 6 m; Handheld (R2000/3 dBi): 0.8 m", "Operating Temperature": "-20°C to +90°C", "Storage Temperature": "-25°C to +100°C", "Mounting Method": "Rubber-compatible chemical adhesive"},
     images: ["/images/products/rfid-tyre-tag02.webp"],
     category: "RFID Tags",
     slug: "rfid-tyre-tag"
@@ -295,6 +624,48 @@ export const products: Product[] = [
       "Used tire market authentication — verify tire age, origin, and service history to prevent fraud and safety violations",
       "Automotive OEM telematics integration — link tire ID to vehicle TPMS and maintenance systems for real-time lifecycle data"
     ],
+    visualComparison: {
+      eyebrow: "Spring Tire Tag vs Patch Tyre Tag — How To Choose",
+      title: "Retrofit insert or factory-vulcanized? Pick by who installs",
+      intro: "Both identify tires through the full lifecycle but differ on install point. Spring tag inserts post-manufacture into the tire inner chamber — fleet operators retrofit their existing tire inventory. Patch tag is vulcanized into the tire during factory cure — permanent for tire manufacturer's lifecycle program.",
+      options: [
+        {
+          label: "Spring Tire Tag (this product — retrofit)",
+          image: "/images/products/rfid-tire-tag-500x443.webp",
+          alt: "RFIDAK spring RFID tire tag — spring-mounted UHF tag inserted post-manufacture into tire inner chamber for fleet retrofit programs",
+          tagline: "Spring-mount, field retrofit, removable",
+          specs: [
+            { label: "Install point", value: "Post-manufacture (field / fleet)" },
+            { label: "Permanence", value: "Removable if needed" },
+            { label: "Buyer", value: "Fleet / rental / aftermarket" },
+            { label: "Unit price (MOQ 10K)", value: "$0.85 – 1.85" },
+          ],
+          bestFor: [
+            "Trucking / rental car fleet retrofit",
+            "Automotive OEM telematics integration",
+            "Tire wear tracking for existing fleets",
+          ],
+        },
+        {
+          label: "Patch Tyre Tag (sibling — factory vulcanized)",
+          image: "/images/products/rfid-tyre-tag02.webp",
+          alt: "RFIDAK patch-type RFID tyre tag — vulcanized into tire rubber at manufacturing for permanent lifecycle identification",
+          tagline: "Vulcanized-in, permanent, manufacturer",
+          specs: [
+            { label: "Install point", value: "Tire manufacturing (pre-cure)" },
+            { label: "Permanence", value: "Permanent (vulcanized)" },
+            { label: "Buyer", value: "Tire manufacturer OEM" },
+            { label: "Unit price (MOQ 100K)", value: "$0.35 – 0.95" },
+          ],
+          bestFor: [
+            "Tier-1 tire manufacturer programs",
+            "Government regulation compliance",
+            "Warranty + recall traceability",
+          ],
+        },
+      ],
+      decisionTip: "If you're a fleet / rental / aftermarket operator retrofitting existing tire inventory, spring (Option A) installs without manufacturer participation. If you're a tire manufacturer installing at the factory, patch (Option B) at half the unit cost delivers permanent identification through 80K-100K mile lifecycle.",
+    },
     specifications: {"Product Name": "Spring RFID Tire Tag (Embed Type)", "Model No.": "TLT8401", "Substrate Material": "Spring steel wire", "Dimensions": "84 x 1 mm / 50 x 1 mm", "Weight": "0.2 g", "Operating Temperature": "-40°C to +85°C", "Storage Temperature": "-40°C to +200°C (survives vulcanization)", "Compliance": "ISO/IEC 18000-6C (EPC Gen2)", "Read Range": "Approx. 2 m (handheld UHF reader)", "Mounting Method": "Embedded during tire vulcanization", "Packaging": "100 pcs/bag"},
     images: ["/images/products/rfid-tire-tag-500x443.webp"],
     category: "RFID Tags",
@@ -319,6 +690,48 @@ export const products: Product[] = [
       "Steel and foundry operations — track billets, ingots, and castings at elevated temperatures where barcode labels fail within minutes",
       "Reusable metal container management — tag racks, bins, and totes for automated receiving and inventory across multi-facility operations"
     ],
+    visualComparison: {
+      eyebrow: "On-Metal High-Temp vs Ceramic Tag — How To Choose",
+      title: "Industrial PCB or premium ceramic? Pick by asset scale",
+      intro: "Both are on-metal industrial UHF tags for high-temperature environments. Ceramic tag is compact (12-25 mm) for small / precision / medical-grade assets. High-temp PCB tag is larger (35-75 mm) for industrial containers, racks, and large metal assets at 1/2 the ceramic unit cost.",
+      options: [
+        {
+          label: "On-Metal High-Temp Tag (this product — industrial)",
+          image: "/images/products/high-temperature-rfid-tag-500x500.webp",
+          alt: "RFIDAK on-metal high-temperature RFID tag — PCB FR4 substrate with foam spacer and PPS housing for industrial oven, foundry, and steam environments",
+          tagline: "PCB + foam, 35-75 mm, industrial scale",
+          specs: [
+            { label: "Size", value: "35-75 mm industrial" },
+            { label: "Temperature", value: "-40 to +230 °C sustained" },
+            { label: "Body", value: "PCB FR4 + PPS housing" },
+            { label: "Unit price (MOQ 1K)", value: "$1.20 – 2.80" },
+          ],
+          bestFor: [
+            "Industrial oven / foundry / paint-line",
+            "Large metal container / cage / rack",
+            "Power plant / refinery steam zones",
+          ],
+        },
+        {
+          label: "Ceramic Tag (sibling — compact precision)",
+          image: "/images/products/UHF-Ceramic-Tag.jpg",
+          alt: "RFIDAK UHF ceramic RFID tag — zirconia ceramic body 12-25mm for surgical instruments, medical devices, and high-value compact metal assets",
+          tagline: "Zirconia, 12-25 mm, premium compact",
+          specs: [
+            { label: "Size", value: "12-25 mm compact" },
+            { label: "Temperature", value: "-40 to +250 °C (autoclave OK)" },
+            { label: "Body", value: "Zirconia ceramic" },
+            { label: "Unit price (MOQ 1K)", value: "$1.80 – 4.50" },
+          ],
+          bestFor: [
+            "Surgical instrument autoclave cycles",
+            "Medical device lifecycle tracking",
+            "Compact precision asset tagging",
+          ],
+        },
+      ],
+      decisionTip: "For items under 100 g needing autoclave-safe compact tagging, ceramic (Option B) is the premium choice. For large industrial items over 1 kg in foundry / oven / refinery environments, high-temp PCB (Option A) at half the cost delivers industrial-scale durability.",
+    },
     specifications: {"Product Name": "UHF High-Temperature On-Metal Tag", "Model No.": "TGW4631", "Housing Material": "Engineering plastics (high-temperature grade)", "Dimensions": "48 x 36 x 7.5 mm", "Weight": "23.5 g", "Operating Temperature": "-40°C to +225°C", "Storage Temperature": "-40°C to +150°C", "IP Rating": "IP68 (IEC 60529)", "Compliance": "ISO/IEC 18000-6C (EPC Class 1 Gen2)", "Read Range": "10-16 m (on metal, fixed UHF reader)", "Mounting Methods": "Screw, rivet, cable tie, industrial adhesive", "Packaging": "50 pcs/box"},
     images: ["/images/products/high-temperature-rfid-tag-500x500.webp"],
     category: "RFID Tags",
@@ -343,6 +756,48 @@ export const products: Product[] = [
       "Electronic safe and lock systems — transponder-based key authentication for high-security cabinet and vault access",
       "Vending machine operator keys — identify authorized service personnel and log maintenance access events"
     ],
+    visualComparison: {
+      eyebrow: "Key Transponder vs Mini Bullet Tag — How To Choose",
+      title: "Biocompatible glass capsule or ABS bullet? Pick by target environment",
+      intro: "Both are the smallest RFID form factors in the catalog (7-18 mm). Key transponder uses biocompatible glass for implantation in living tissue or immersion in chemicals / fluids. Mini bullet uses ABS plastic for press-fit into drilled holes in dry industrial assets. Non-interchangeable — biocompatibility is the key decision axis.",
+      options: [
+        {
+          label: "Key Transponder (this product — glass capsule)",
+          image: "/images/products/key-transponder.webp",
+          alt: "RFIDAK key transponder — biocompatible borosilicate glass capsule for pet microchipping, livestock, automotive immobilizer, fluid immersion",
+          tagline: "Glass capsule, biocompatible, fluid-safe",
+          specs: [
+            { label: "Material", value: "Biocompatible borosilicate glass" },
+            { label: "Dimensions", value: "Ø2-4 × 8-18 mm" },
+            { label: "Environment", value: "Living tissue, fluids, chemicals" },
+            { label: "Unit price (MOQ 1K)", value: "$0.85 – 2.40" },
+          ],
+          bestFor: [
+            "Pet microchipping (ISO 11784/11785)",
+            "Automotive immobilizer car key embedding",
+            "Vending machine operator key access",
+          ],
+        },
+        {
+          label: "Mini Bullet Tag (sibling — ABS press-fit)",
+          image: "/images/products/plastic-rfid-tag-500x500.webp",
+          alt: "RFIDAK mini RFID bullet tag — 7mm diameter ABS cylinder with copper ferrite core for press-fit insertion into drilled holes in industrial assets",
+          tagline: "ABS cylinder, press-fit drilled hole",
+          specs: [
+            { label: "Material", value: "ABS plastic + ferrite core" },
+            { label: "Dimensions", value: "Ø7 × 18 mm" },
+            { label: "Environment", value: "Dry industrial (no fluid / tissue)" },
+            { label: "Unit price (MOQ 1K)", value: "$0.58 – 1.20" },
+          ],
+          bestFor: [
+            "Drill bits, injection molds, surgical tools",
+            "Fixed asset tagging (desks, cabinets)",
+            "Reusable fixtures in manufacturing",
+          ],
+        },
+      ],
+      decisionTip: "If the tag goes inside a living organism (pet, livestock, medical implant) or is immersed in chemicals / fluids, glass transponder (Option A) is the only biocompatible + chemical-inert option. If the tag presses into a drilled hole in industrial dry materials (metal, wood, plastic), ABS bullet (Option B) at similar price is rugged for industrial wear. Wrong choice destroys functionality — never substitute glass for bullet or vice versa.",
+    },
     specifications: {"Product Name": "Key Transponder (Wedge / Brick Tag)", "Housing Material": "Epoxy (high-temperature molded)", "Dimensions": "12 x 6 x 2.2 mm, 8 x 5 x 3 mm, 11 x 3 x 2.2 mm, 8 x 4 x 3 mm, 11 x 5 x 3 mm", "Operating Frequency": "125 kHz, 134.2 kHz (ISO 11784/11785), 13.56 MHz (ISO/IEC 14443A)", "Chip Options": "LF: TK4100, EM4200, EM4305, T5577, Hitag1, Hitag2, Hitag S256; HF: FM11RF08, MIFARE Classic 1K/4K, Ultralight, DESFire EV1/EV2/EV3 (2K/4K/8K)", "Read Range": "2-10 cm (reader dependent)", "Operating Temperature": "-40°C to +85°C", "Storage Temperature": "-40°C to +170°C", "IP Rating": "IP68 (IEC 60529)"},
     images: ["/images/products/key-transponder.webp"],
     category: "RFID Tags",
@@ -367,7 +822,49 @@ export const products: Product[] = [
       "Keyfob and token production — core RFID component for silicone and epoxy keyfob injection molding",
       "PCB-level product authentication — solder directly onto circuit boards for anti-counterfeiting in electronics manufacturing"
     ],
-    specifications: {"Product Name": "RFID FPC Tag (Flexible Printed Circuit)", "Substrate Material": "Polyimide (PI)", "Thickness": "0.13 mm (typical)", "Dimensions": "Circular: Ø6/8/10 mm; Rectangular: 5x5, 6x6, 7x7, 4.7x11.5, 6x15, 8x13 mm", "Operating Frequency": "13.56 MHz (ISO/IEC 14443A, ISO/IEC 15693), 860-960 MHz (UHF)", "Chip Options": "NXP MIFARE Classic 1K/4K EV1, Ultralight EV1/C, NTAG213/215/216, ICODE SLIX, DESFire EV1 (2K/4K/8K)", "Antenna Type": "Precision-printed copper", "Power Supply": "Passive", "Operating Temperature": "-40°C to +200°C"},
+    visualComparison: {
+      eyebrow: "FPC Tag vs PCB Tag — How To Choose",
+      title: "Flexible polyimide or rigid PCB? Pick by embedding method",
+      intro: "FPC (Flexible Printed Circuit) and PCB (rigid) both use copper-trace antennas but differ fundamentally in substrate flexibility. FPC bends into curved product shapes (silicone molding, wearable injection). PCB holds flat for PCB integration and rigid enclosures. Non-interchangeable — the embedding method decides.",
+      options: [
+        {
+          label: "FPC Tag (this product — flexible polyimide)",
+          image: "/images/products/13.56MHz-FPC-tag.webp",
+          alt: "RFIDAK 13.56MHz FPC RFID tag — ultra-thin flexible polyimide substrate 0.13mm for silicone injection molding, wearables, and curved embedding",
+          tagline: "Flexible PI substrate, 0.13 mm thin",
+          specs: [
+            { label: "Substrate", value: "Polyimide (PI), flexible" },
+            { label: "Thickness", value: "0.13 – 0.3 mm" },
+            { label: "Bend radius", value: "≤ 5 mm (flex-tolerant)" },
+            { label: "Unit price (MOQ 10K)", value: "$0.25 – 0.65" },
+          ],
+          bestFor: [
+            "Silicone wristband / keyfob injection molding",
+            "Curved or rounded product embedding",
+            "Medical wearables with skin contact",
+          ],
+        },
+        {
+          label: "RFID PCB Tag (sibling — rigid)",
+          image: "/images/products/RFID-PCB-Tag-HF.webp",
+          alt: "RFIDAK RFID PCB tag — rigid FR4 circuit board substrate with embedded chip and antenna for PCB-level integration and rigid enclosures",
+          tagline: "Rigid FR4, PCB-integratable",
+          specs: [
+            { label: "Substrate", value: "FR4 glassfiber PCB" },
+            { label: "Thickness", value: "0.8 – 1.6 mm" },
+            { label: "Flexibility", value: "Rigid (breaks at &gt; 15° bend)" },
+            { label: "Unit price (MOQ 10K)", value: "$0.35 – 0.85" },
+          ],
+          bestFor: [
+            "PCB-level electronics manufacturing integration",
+            "Rigid plastic / metal enclosure embedding",
+            "Industrial tokens, gaming chips, hard keyfobs",
+          ],
+        },
+      ],
+      decisionTip: "If the tag will be molded inside flexible silicone, bent around a curved product, or embedded in a wearable — FPC (Option A) is the only option that survives the mechanical stress. If the tag integrates into rigid electronics (product PCB, hard enclosure, token) or needs mechanical stiffness, PCB (Option B) is the industrial standard. Bend tolerance is the single determining factor.",
+    },
+    specifications: {"Product Name":"RFID FPC Tag (Flexible Printed Circuit)", "Substrate Material": "Polyimide (PI)", "Thickness": "0.13 mm (typical)", "Dimensions": "Circular: Ø6/8/10 mm; Rectangular: 5x5, 6x6, 7x7, 4.7x11.5, 6x15, 8x13 mm", "Operating Frequency": "13.56 MHz (ISO/IEC 14443A, ISO/IEC 15693), 860-960 MHz (UHF)", "Chip Options": "NXP MIFARE Classic 1K/4K EV1, Ultralight EV1/C, NTAG213/215/216, ICODE SLIX, DESFire EV1 (2K/4K/8K)", "Antenna Type": "Precision-printed copper", "Power Supply": "Passive", "Operating Temperature": "-40°C to +200°C"},
     images: ["/images/products/13.56MHz-FPC-tag.webp"],
     category: "RFID Tags",
     slug: "rfid-fpc-tag"
@@ -391,7 +888,49 @@ export const products: Product[] = [
       "Outdoor infrastructure tracking — tag metal utility cabinets, telecom towers, and signage posts in weathered environments",
       "Military and defense logistics — identify vehicles, weapons caches, and metal equipment with extended standoff read distance"
     ],
-    specifications: {"Product Name": "UHF Ceramic On-Metal Tag", "Antenna Material": "Ceramic dielectric element", "Housing Color": "Black", "Compliance": "ISO/IEC 18000-6C (EPC Class 1 Gen2)", "Chip": "Impinj Monza 4QT (128-bit EPC, 512-bit user memory)", "Operating Frequency": "EU: 865-868 MHz; US: 902-928 MHz", "Read Range": "Up to 22 m on metal (matched reader/antenna)", "IP Rating": "IP68 (IEC 60529)", "Operating Temperature": "-40°C to +85°C", "Storage Temperature": "-40°C to +150°C", "Mounting Method": "Industrial self-adhesive", "Target Surface": "Metal assets (IT racks, containers, vehicles, machinery)"},
+    visualComparison: {
+      eyebrow: "Ceramic Tag vs On-Metal High-Temp Tag — How To Choose",
+      title: "Ceramic body or PCB anti-metal? Pick by surface + temperature",
+      intro: "Both tags are industrial UHF designed for metal asset tracking, but they solve the problem differently. Ceramic tags have a zirconia body with integrated antenna and ferrite layer — compact, premium, autoclave-tolerant. On-metal high-temperature tags use a PCB substrate with foam spacer and heat-resistant encapsulation — rugged, less expensive, handles higher temperatures.",
+      options: [
+        {
+          label: "Ceramic Tag (this product — premium compact)",
+          image: "/images/products/UHF-Ceramic-Tag.jpg",
+          alt: "RFIDAK UHF ceramic RFID tag — zirconia ceramic body with integrated antenna for industrial metal asset tracking, small size, autoclave-tolerant",
+          tagline: "Zirconia ceramic, compact, autoclave-safe",
+          specs: [
+            { label: "Body material", value: "Zirconia ceramic" },
+            { label: "Size", value: "12-25 mm compact" },
+            { label: "Temperature", value: "-40 to +250 °C (autoclave OK)" },
+            { label: "Unit price (MOQ 1K)", value: "$1.80 – 4.50" },
+          ],
+          bestFor: [
+            "Surgical instrument / medical device tracking",
+            "High-value metal asset with premium look",
+            "Autoclave-reprocessed tool crib inventory",
+          ],
+        },
+        {
+          label: "On-Metal High-Temp Tag (sibling — rugged PCB)",
+          image: "/images/products/high-temperature-rfid-tag-500x500.webp",
+          alt: "RFIDAK on-metal high-temperature RFID tag — PCB substrate with foam spacer and heat-resistant housing for industrial oven, steam, and foundry environments",
+          tagline: "PCB + foam, heat-resistant, industrial",
+          specs: [
+            { label: "Body material", value: "PCB FR4 + PPS housing" },
+            { label: "Size", value: "35-75 mm industrial" },
+            { label: "Temperature", value: "-40 to +230 °C sustained" },
+            { label: "Unit price (MOQ 1K)", value: "$1.20 – 2.80" },
+          ],
+          bestFor: [
+            "Industrial oven / foundry / paint-line processes",
+            "Large metal container / cage / rack tracking",
+            "Power plant / refinery steam environments",
+          ],
+        },
+      ],
+      decisionTip: "For high-value instruments needing compact autoclave-safe tagging (surgical tools, medical devices, precision instruments), ceramic (Option A) is the premium choice. For industrial-scale metal asset tagging (containers, racks, foundry items), high-temp on-metal (Option B) at 2-3× lower cost handles rugged manufacturing environments. Size also matters — ceramic for items &lt; 100 g, on-metal for items &gt; 1 kg.",
+    },
+    specifications: {"Product Name":"UHF Ceramic On-Metal Tag", "Antenna Material": "Ceramic dielectric element", "Housing Color": "Black", "Compliance": "ISO/IEC 18000-6C (EPC Class 1 Gen2)", "Chip": "Impinj Monza 4QT (128-bit EPC, 512-bit user memory)", "Operating Frequency": "EU: 865-868 MHz; US: 902-928 MHz", "Read Range": "Up to 22 m on metal (matched reader/antenna)", "IP Rating": "IP68 (IEC 60529)", "Operating Temperature": "-40°C to +85°C", "Storage Temperature": "-40°C to +150°C", "Mounting Method": "Industrial self-adhesive", "Target Surface": "Metal assets (IT racks, containers, vehicles, machinery)"},
     images: ["/images/products/UHF-Ceramic-Tag.jpg"],
     category: "RFID Tags",
     slug: "rfid-ceramic-tag"
@@ -415,6 +954,48 @@ export const products: Product[] = [
       "Event and theme park ticketing — high-volume wristband production for multi-day festival access and VIP management",
       "Industrial token production — embed into custom-shaped NFC tokens for gaming, laundromat, and vending applications"
     ],
+    visualComparison: {
+      eyebrow: "HF PCB Tag (13.56 MHz) vs FPC Tag — How To Choose",
+      title: "Rigid PCB or flexible polyimide? Pick by embedding surface",
+      intro: "Both are HF 13.56 MHz NFC tags on printed-circuit substrates. The 13.56 MHz PCB tag (this product) uses rigid FR4 for integration into electronics and hard enclosures. FPC tag uses flexible polyimide for curved product embedding, silicone molding, and wearable integration. Substrate flexibility decides.",
+      options: [
+        {
+          label: "13.56 MHz PCB Tag (this product — rigid FR4)",
+          image: "/images/products/RFID-PCB-Tag-HF.webp",
+          alt: "RFIDAK 13.56MHz RFID PCB tag — rigid FR4 substrate with HF NFC antenna for electronics integration and gaming token production",
+          tagline: "Rigid FR4, electronics-ready",
+          specs: [
+            { label: "Substrate", value: "FR4 glassfiber (rigid)" },
+            { label: "Frequency", value: "13.56 MHz HF" },
+            { label: "Bend tolerance", value: "None (breaks at bend)" },
+            { label: "Unit price (MOQ 10K)", value: "$0.35 – 0.85" },
+          ],
+          bestFor: [
+            "Gaming token / vending / laundromat chips",
+            "Electronics product PCB integration",
+            "Hard enclosure / industrial token embedding",
+          ],
+        },
+        {
+          label: "FPC Tag (sibling — flexible PI)",
+          image: "/images/products/13.56MHz-FPC-tag.webp",
+          alt: "RFIDAK 13.56MHz FPC RFID tag — ultra-thin flexible polyimide substrate for silicone injection molding and curved wearable embedding",
+          tagline: "Flexible polyimide, 0.13 mm",
+          specs: [
+            { label: "Substrate", value: "Polyimide PI (flexible)" },
+            { label: "Frequency", value: "13.56 MHz HF" },
+            { label: "Bend tolerance", value: "5 mm bend radius" },
+            { label: "Unit price (MOQ 10K)", value: "$0.25 – 0.65" },
+          ],
+          bestFor: [
+            "Silicone wristband / keyfob injection molding",
+            "Curved wearable product embedding",
+            "Medical wearables with skin contact",
+          ],
+        },
+      ],
+      decisionTip: "Same chip, same frequency, same reader behavior — flexibility is the only axis. PCB (Option A) for rigid electronics and hard enclosures. FPC (Option B) for anything that bends, molds, or wraps around a curved surface.",
+    },
     specifications: {"Product Name": "13.56 MHz RFID PCB Tag", "Substrate Material": "FR4 glass fiber", "Dimensions": "Round: Ø8/10/15/18 x 0.3-0.4 mm; Rectangular: 15x10x0.3, 13x8x0.3, 11.5x4.7x0.17 mm", "Operating Frequency": "13.56 MHz (ISO/IEC 14443A)", "Chip Options": "NXP MIFARE Classic 1K/4K, FM11RF08, Ultralight EV1/C, DESFire EV1/EV2/EV3 (2K/4K/8K), NTAG213/215/216", "Read Range": "2-5 cm (reader dependent)", "Operating Temperature": "-20°C to +80°C", "Storage Temperature": "-40°C to +150°C", "Mounting Method": "Embedding, adhesive", "Packaging": "100 pcs/bag"},
     images: ["/images/products/RFID-PCB-Tag-HF.webp"],
     category: "RFID Tags",
@@ -439,6 +1020,48 @@ export const products: Product[] = [
       "Industrial equipment management — tag CNC machines, pumps, compressors, and generators for maintenance scheduling and location tracking",
       "Metal shelving and racking — label warehouse racking systems for zone mapping and inventory slot assignment"
     ],
+    visualComparison: {
+      eyebrow: "RFID PCB vs RFID FPC Tag — How To Choose",
+      title: "Rigid FR4 or flexible polyimide? Pick by embedding method",
+      intro: "Both are circuit-board form factor RFID tags but substrate flexibility differs fundamentally. RFID PCB (this product) is rigid FR4 — best for integration into electronics products, hard enclosures, and mounted asset labels. RFID FPC is flexible polyimide — bends into curved shapes for silicone molding, wearable products, and embedded curved surfaces.",
+      options: [
+        {
+          label: "RFID PCB (this product — rigid FR4)",
+          image: "/images/products/PCB-RFID-Tag-1.webp",
+          alt: "RFIDAK RFID PCB — rigid FR4 circuit board substrate with embedded chip and antenna for electronics integration and mounted asset labels",
+          tagline: "Rigid FR4, electronics-integratable",
+          specs: [
+            { label: "Substrate", value: "FR4 glassfiber PCB (rigid)" },
+            { label: "Thickness", value: "0.8 – 1.6 mm" },
+            { label: "Flexibility", value: "Rigid (breaks at bend)" },
+            { label: "Unit price (MOQ 10K)", value: "$0.35 – 0.85" },
+          ],
+          bestFor: [
+            "PCB-level electronics manufacturing integration",
+            "Metal shelving / racking / fixed asset labels",
+            "Industrial token / gaming chip production",
+          ],
+        },
+        {
+          label: "RFID FPC Tag (sibling — flexible polyimide)",
+          image: "/images/products/13.56MHz-FPC-tag.webp",
+          alt: "RFIDAK 13.56MHz FPC RFID tag — ultra-thin flexible polyimide substrate 0.13mm for silicone injection molding and curved product embedding",
+          tagline: "Flexible PI, 0.13 mm, silicone-moldable",
+          specs: [
+            { label: "Substrate", value: "Polyimide (PI), flexible" },
+            { label: "Thickness", value: "0.13 – 0.3 mm" },
+            { label: "Flexibility", value: "Bends at ≤ 5 mm radius" },
+            { label: "Unit price (MOQ 10K)", value: "$0.25 – 0.65" },
+          ],
+          bestFor: [
+            "Silicone wristband / keyfob injection molding",
+            "Curved or rounded product embedding",
+            "Medical wearables with skin contact",
+          ],
+        },
+      ],
+      decisionTip: "If the tag embeds into rigid electronics (product PCB, hard enclosure) or mounts on flat metal / wood surfaces, PCB (Option A) rigid construction is stable and easier to handle during assembly. If the tag will be molded inside silicone, wrapped around a curved surface, or embedded in a wearable, FPC (Option B) is the only substrate that bends without breaking. Bend radius requirement is the single decision axis.",
+    },
     specifications: {"Product Name": "RFID PCB On-Metal Tag", "Housing Color": "Black", "Substrate Material": "FR4 glass fiber; Antenna: copper + gold", "Operating Frequency": "865-868 MHz (EU), 902-928 MHz (US)", "Compliance": "ISO/IEC 18000-6C (EPC Class 1 Gen2)", "Chip Options": "Impinj Monza 4QT, Alien Higgs-4", "EPC Memory": "96-bit (expandable to 480-bit)", "User Memory": "512-bit", "Read/Write Cycles": "100,000", "Read Range": "Size and reader dependent (multi-meter on metal)", "Operating Temperature": "-40°C to +100°C", "Storage Temperature": "-40°C to +150°C", "Environmental Compliance": "RoHS (EU 2011/65/EU)", "Mounting Methods": "Adhesive, rivet, cable tie", "Personalization": "Silkscreen printing, laser engraving"},
     images: ["/images/products/PCB-RFID-Tag-1.webp"],
     category: "RFID Tags",
@@ -463,6 +1086,48 @@ export const products: Product[] = [
       "Hospitality spa and pool linens — track robes, slippers, and pool towels through high-volume resort laundering operations",
       "Military uniform management — automate individual uniform tracking across base laundry facilities serving thousands of personnel"
     ],
+    visualComparison: {
+      eyebrow: "Silicone Button vs PPS Hard Button — How To Choose",
+      title: "Standard chemistry or autoclave-grade? Pick by sterilization requirement",
+      intro: "Silicone and PPS laundry buttons share the same UHF chip family and portal reader compatibility. The difference is material durability under extreme sterilization — silicone handles 85-90 °C wash, PPS handles 134 °C autoclave. Match the button to your most-severe wash environment.",
+      options: [
+        {
+          label: "Silicone Button (this product — food-grade LSR)",
+          image: "/images/products/Silicone-laundry-tag.webp",
+          alt: "RFIDAK silicone RFID laundry button — food-grade LSR, rivet or sew attachment, 200+ wash cycles at 90°C NaClO environment",
+          tagline: "Food-grade LSR, 200+ cycles at 90°C",
+          specs: [
+            { label: "Wash cycles", value: "200+ at 90 °C" },
+            { label: "Chemistry", value: "NaClO 2.5 g/L tolerant" },
+            { label: "Autoclave 134 °C", value: "Not suitable" },
+            { label: "Unit price (MOQ 10K)", value: "$0.58 – 1.15" },
+          ],
+          bestFor: [
+            "Hotel linen, hospitality uniforms",
+            "Food-processing uniforms with bleach spray",
+            "General industrial workwear",
+          ],
+        },
+        {
+          label: "PPS Hard Button (sibling product — autoclave)",
+          image: "/images/products/laundry-tag-rfid.webp",
+          alt: "RFIDAK PPS RFID laundry button — rigid thermoplastic survives autoclave 134°C sterilization for surgical and clean-room garments",
+          tagline: "Rigid PPS, autoclave + chemical solvent",
+          specs: [
+            { label: "Wash cycles", value: "500+ (autoclave cycles)" },
+            { label: "Chemistry", value: "Solvent + acid + base tolerant" },
+            { label: "Autoclave 134 °C", value: "Yes — 500+ cycles" },
+            { label: "Unit price (MOQ 10K)", value: "$1.45 – 2.75" },
+          ],
+          bestFor: [
+            "Hospital operating-room scrubs & gowns",
+            "Clean-room cleanroom garments",
+            "Chemical-plant / mining / abattoir uniforms",
+          ],
+        },
+      ],
+      decisionTip: "If your wash cycle tops out at standard 85-90 °C, silicone (Option A) is the right choice at half the cost. For any garment that goes through autoclave sterilization at 134 °C — surgical, clean-room, pharmaceutical — PPS (Option B) is the only option that survives. For standard hidden in-seam tag placement, see the <a href=\"/product/textile-rfid-laundry-tag\">textile heat-seal</a> product which is cheaper again but less chemically tolerant.",
+    },
     specifications: {"Product Name": "Silicone RFID Laundry Tag", "Model No.": "LTD201", "Housing Material": "Medical-grade silicone", "Dimensions": "55 x 12 x 2.5 mm", "Weight": "2.1 g", "Color": "White", "Operating Frequency": "860-960 MHz (UHF, global)", "Compliance": "ISO/IEC 18000-6C (EPC Gen2)", "Chip": "Impinj Monza 4QT (128-bit EPC, 512-bit user memory)", "Read Range": "3-5 m (handheld UHF reader)", "IP Rating": "IP68 (IEC 60529)", "Chemical Resistance": "Common laundry detergents, bleach, softeners", "Operating Temperature": "-50°C to +220°C", "Pressure Resistance": "60 bar", "Wash Cycle Life": "200+ industrial cycles", "Attachment Method": "Sew into seams/hems or insert into fabric pouch", "Packaging": "100 pcs/bag"},
     images: ["/images/products/Silicone-laundry-tag.webp"],
     category: "RFID Tags",
@@ -487,6 +1152,48 @@ export const products: Product[] = [
       "Restaurant and food service — track chef coats, aprons, and tablecloths through commercial kitchen laundering operations",
       "Uniform rental fleet management — automate check-in/check-out counting and per-garment invoicing for rental companies"
     ],
+    visualComparison: {
+      eyebrow: "PPS Hard Button vs Textile Heat-Seal — How To Choose",
+      title: "Autoclave rigid or hidden-seam textile? Pick by garment class and reprocessing",
+      intro: "Both tags identify garments through repeat laundry cycles but target different reprocessing severity. PPS hard button survives autoclave 134 °C sterilization — required for hospital surgical gowns and clean-room garments. Textile heat-seal is hidden in the garment seam for standard 85 °C wash — ideal for hotel, industrial uniforms, and everyday workwear where autoclave is not in scope.",
+      options: [
+        {
+          label: "PPS Hard Button (this product — autoclave)",
+          image: "/images/products/laundry-tag-rfid.webp",
+          alt: "RFIDAK PPS RFID laundry button — rigid thermoplastic survives autoclave 134°C sterilization for surgical gowns, clean-room garments, and hospital operating-room workflows",
+          tagline: "Rigid PPS, autoclave 134 °C, 500+ cycles",
+          specs: [
+            { label: "Wash survival", value: "500+ autoclave cycles at 134 °C" },
+            { label: "Chemistry", value: "Acid / base / solvent tolerant" },
+            { label: "Attachment", value: "Riveted to exterior garment" },
+            { label: "Unit price (MOQ 10K)", value: "$1.45 – 2.75" },
+          ],
+          bestFor: [
+            "Hospital surgical gowns and scrubs",
+            "Clean-room garments with autoclave reprocessing",
+            "Chemical plant / pharma extreme environments",
+          ],
+        },
+        {
+          label: "Textile Heat-Seal (sibling — hidden in seam)",
+          image: "/images/products/textile-RFID-laundry-tag-heat-seal.webp",
+          alt: "RFIDAK textile UHF laundry tag — woven polyester patch hidden in garment seam via heat-press, 200+ wash cycles at 85°C for hotel and industrial laundry",
+          tagline: "Hidden in seam, 200+ cycles at 85 °C",
+          specs: [
+            { label: "Wash survival", value: "200+ cycles at 85 °C" },
+            { label: "Chemistry", value: "Standard NaClO 2.5 g/L" },
+            { label: "Attachment", value: "Heat-press into garment seam" },
+            { label: "Unit price (MOQ 10K)", value: "$0.38 – 0.78" },
+          ],
+          bestFor: [
+            "Hotel linen rotation (guest-facing garments)",
+            "Industrial uniform rental (Cintas / Elis scale)",
+            "Workwear with privacy / aesthetics requirement",
+          ],
+        },
+      ],
+      decisionTip: "If the garment goes through autoclave sterilization at 134 °C (operating room, clean room, pharmaceutical production), PPS (Option A) is the only option that survives at 3-7× the cost of textile. For hotel linen, industrial uniforms, and most commercial laundry programs capped at 85-90 °C, textile heat-seal (Option B) at fraction of the cost is operationally correct.",
+    },
     specifications: {"Product Name": "PPS RFID Laundry Tag (Button Type)", "Housing Material": "PPS (Polyphenylene Sulfide)", "Dimensions": "LF/HF: D13/14/15/18/20/22/24/25.5/26/28/30 mm; UHF: D18 mm (2 holes), D20/30 mm (no holes)", "Operating Frequency": "125 kHz (LF), 13.56 MHz (HF), 865-868/902-928 MHz (UHF)", "LF Chip Options": "TK4100, EM4200, EM4305, T5577, Hitag2/S256", "HF Chip Options": "NXP MIFARE Classic 1K/4K, Ultralight/EV1/C, NTAG213/215/216, ICODE SLIX", "UHF Chip Options": "NXP UCODE 7m", "Read Range": "LF/HF: 2-5 cm; UHF: 10-40 cm", "Wash Cycle Life": "200 industrial cycles", "IP Rating": "IP68 (IEC 60529)", "Chemical Resistance": "Standard laundry detergents, bleach, softeners", "Operating Temperature": "-25°C to +110°C", "Storage Temperature": "-40°C to +120°C", "Attachment Method": "Sew-in or insert"},
     images: ["/images/products/laundry-tag-rfid.webp"],
     category: "RFID Tags",
@@ -511,6 +1218,48 @@ export const products: Product[] = [
       "Vehicle registration verification — digital proof of registration or inspection status readable by enforcement handhelds",
       "Fleet checkpoint identification — identify company vehicles at depot gates, fuel stations, and maintenance bays"
     ],
+    visualComparison: {
+      eyebrow: "Windshield Tag vs Tyre Tag — How To Choose",
+      title: "Windshield-stickable or tire-embedded? Pick by install point and transferability",
+      intro: "Both identify vehicles at toll plazas, parking gates, and fleet checkpoints. Windshield tags stick to glass with adhesive — quick install, removable at vehicle transfer. Tyre tags embed into the tire rubber — permanent through tire life. Different personae: windshield for fleet operator flexibility, tyre for tire manufacturer / regulatory identification.",
+      options: [
+        {
+          label: "Windshield Tag (this product — adhesive stick-on)",
+          image: "/images/products/RFID-Windshield-Tag.webp",
+          alt: "RFIDAK RFID windshield tag — UHF tag with automotive adhesive for windshield mounting, long-range reads at toll plazas and fleet gates, transferable with vehicle",
+          tagline: "Adhesive glass mount, vehicle-transferable",
+          specs: [
+            { label: "Attachment", value: "3M adhesive on glass" },
+            { label: "Permanence", value: "Removable if needed" },
+            { label: "Read range", value: "5-10 m at toll plaza" },
+            { label: "Unit price (MOQ 10K)", value: "$0.65 – 1.45" },
+          ],
+          bestFor: [
+            "Toll plaza + highway pass systems",
+            "Parking facility monthly / annual passes",
+            "Fleet vehicle identification at depot gates",
+          ],
+        },
+        {
+          label: "Tyre Tag (sibling — rubber-embedded)",
+          image: "/images/products/rfid-tyre-tag02.webp",
+          alt: "RFIDAK RFID patch-type tyre tag — vulcanized into tire rubber during manufacturing for permanent tire lifecycle identification",
+          tagline: "Vulcanized into tire, permanent",
+          specs: [
+            { label: "Attachment", value: "Vulcanized into tire rubber" },
+            { label: "Permanence", value: "Permanent (tire lifetime)" },
+            { label: "Read range", value: "50-100 cm (from chassis)" },
+            { label: "Unit price (MOQ 100K)", value: "$0.35 – 0.95" },
+          ],
+          bestFor: [
+            "Tire manufacturer lifecycle identification",
+            "Government regulatory tire compliance",
+            "Fleet tire wear / rotation tracking",
+          ],
+        },
+      ],
+      decisionTip: "If the identity is tied to the vehicle (toll payment, parking pass, fleet ops) and must transfer when the vehicle is reassigned, windshield tag (Option A) with removable adhesive is the right format. If the identity is tied to the individual tire (tire recall, retread tracking, TPMS telematics), tyre tag (Option B) vulcanized into the rubber lives with the tire for 80K-100K miles.",
+    },
     specifications: {"Product Name": "RFID Windshield Tag (Tamper-Evident)", "Substrate Material": "PET, paper", "Dimensions": "110 x 45 mm, 98 x 27 mm, or customized", "Compliance": "ISO/IEC 18000-6C (EPC Global Class 1 Gen2)", "Operating Frequency": "860-960 MHz (UHF)", "Power Mode": "Passive", "Tamper Feature": "Pre-cut antenna self-destruct on removal", "Personalization": "Single/double-sided printing, barcode, serial numbers", "Operating Temperature": "0°C to +60°C"},
     images: ["/images/products/RFID-Windshield-Tag.webp"],
     category: "RFID Tags",
@@ -535,6 +1284,48 @@ export const products: Product[] = [
       "Jewelry box verification — confirm retail packaging has not been opened or contents swapped during distribution",
       "Document and evidence sealing — tamper-evident closure on confidential envelopes and legal document packages"
     ],
+    visualComparison: {
+      eyebrow: "Tamper-Proof Tag vs Standard UHF Sticker — How To Choose",
+      title: "Fragmentation-on-removal or reusable sticker? Pick by security requirement",
+      intro: "Both tags stick to flat surfaces using adhesive, but respond very differently to removal attempts. Tamper-proof tags are designed to fragment, destroy the chip, or leave visible evidence when lifted — once sealed, can't be moved without detection. Standard UHF stickers come off cleanly and can be reapplied. Security context decides.",
+      options: [
+        {
+          label: "Tamper-Proof Tag (this product — self-destructing)",
+          image: "/images/products/tamper-proof-rfid-tag-500x500.webp",
+          alt: "RFIDAK tamper-proof RFID tag — fragmentation-on-removal design, permanent adhesive destroys chip or leaves visible tamper evidence on lift",
+          tagline: "Fragments on removal, evidence-preserving",
+          specs: [
+            { label: "Tamper response", value: "Chip fragments or antenna breaks" },
+            { label: "Adhesive", value: "Permanent (destructive lift)" },
+            { label: "Detection", value: "Irreversible - reader flags broken tag" },
+            { label: "Unit price (MOQ 10K)", value: "$0.48 – 1.25" },
+          ],
+          bestFor: [
+            "Pharma / medical device seal integrity",
+            "Legal document / evidence chain-of-custody",
+            "High-value shipment anti-tampering",
+          ],
+        },
+        {
+          label: "Standard UHF Sticker (sibling — reusable)",
+          image: "/images/products/UHF-sticker-500x500.webp",
+          alt: "RFIDAK standard UHF RFID sticker — reusable adhesive label for retail, inventory, and logistics where sticker relocation is expected",
+          tagline: "Reusable adhesive, relocatable",
+          specs: [
+            { label: "Tamper response", value: "None (removable clean)" },
+            { label: "Adhesive", value: "Standard (3M 467 / 468)" },
+            { label: "Detection", value: "No tamper sensing" },
+            { label: "Unit price (MOQ 10K)", value: "$0.08 – 0.22" },
+          ],
+          bestFor: [
+            "Retail item-level inventory",
+            "Reusable tote / crate / pallet tags",
+            "Logistics labels with sticker transfer workflow",
+          ],
+        },
+      ],
+      decisionTip: "If the program requires audit trail integrity — medical seals, legal evidence, pharma closures, high-value shipment security — tamper-proof (Option A) at 3-10× standard sticker cost is the compliance-grade requirement. For all other inventory / logistics / retail workflows where the sticker may reasonably be moved or reused, standard UHF (Option B) is operationally correct and economically sensible.",
+    },
     specifications: {"Product Name": "Tamper-Proof RFID Tag (Security Label)", "Substrate Material": "Breakable paper, PET (tamper-evident)", "Dimensions": "Round: Ø18/20/22/25/30 mm; Rectangular: 40 x 25 mm; custom", "Compliance": "ISO/IEC 14443A (HF), ISO/IEC 18000-6C (UHF)", "Operating Frequency": "13.56 MHz (HF), 860-960 MHz (UHF)", "HF Chip Options": "NXP MIFARE Classic 1K/4K, FM11RF08, ICODE SLIX, NTAG 424 DNA, NTAG213/215/216", "UHF Chip Options": "Alien Higgs-3, NXP UCODE 8", "Personalization": "Logo printing, serial numbers, barcode, QR code", "Packaging": "In roll (automated applicator compatible)"},
     images: ["/images/products/tamper-proof-rfid-tag-500x500.webp"],
     category: "RFID Tags",
@@ -559,6 +1350,48 @@ export const products: Product[] = [
       "University and academic collections — manage textbooks, journals, theses, and interlibrary loan items across campus branches",
       "Archive and museum document tracking — tag rare documents, manuscripts, and artifacts for custody chain and access logging"
     ],
+    visualComparison: {
+      eyebrow: "HF Library Tag vs UHF Library Label — How To Choose",
+      title: "ICODE SLIX vicinity or UHF long-range? Pick by library scale and workflow",
+      intro: "Both tag books and media, but fundamentally differ in read range and workflow optimization. HF ISO 15693 (this product) reads 5-10 books in a stack at 50-100 cm vicinity — the sweet spot for self-checkout. UHF reads entire shelves at 3-5 m for rapid inventory — useful in large academic libraries. Same book, very different operational model.",
+      options: [
+        {
+          label: "HF Library Tag (this product — ICODE SLIX)",
+          image: "/images/products/library-rfid-tags.webp",
+          alt: "RFIDAK HF library RFID tag — ISO/IEC 15693 ICODE SLIX paper label for self-checkout, vicinity reads of 50+ books simultaneously, privacy-friendly",
+          tagline: "ISO 15693 vicinity, 50 books/stack",
+          specs: [
+            { label: "Standard", value: "ISO/IEC 15693 (ICODE SLIX)" },
+            { label: "Read range", value: "50-100 cm vicinity" },
+            { label: "Stack read", value: "50+ books simultaneously" },
+            { label: "Unit price (MOQ 10K)", value: "$0.15 – 0.32" },
+          ],
+          bestFor: [
+            "Public library self-checkout (3M, Bibliotheca)",
+            "Privacy-sensitive collections (no far-field read)",
+            "Patron-facing workflow (tap-to-checkout)",
+          ],
+        },
+        {
+          label: "UHF Library Label (sibling — Gen2 long-range)",
+          image: "/images/products/uhf-library-500x500.webp",
+          alt: "RFIDAK UHF library RFID label — EPC Gen2 label for shelf-level inventory reads at 3-5 meters, rapid stock-take in academic and corporate libraries",
+          tagline: "UHF Gen2, shelf sweep 3-5 m",
+          specs: [
+            { label: "Standard", value: "ISO/IEC 18000-63 (EPC Gen2)" },
+            { label: "Read range", value: "3-5 meters" },
+            { label: "Stack read", value: "Entire shelf in seconds" },
+            { label: "Unit price (MOQ 10K)", value: "$0.08 – 0.22" },
+          ],
+          bestFor: [
+            "Academic / research libraries (scale inventory)",
+            "Corporate records / archive back-room storage",
+            "National library / publisher warehouse operations",
+          ],
+        },
+      ],
+      decisionTip: "For branch public libraries with self-checkout, HF ICODE SLIX (Option A) is the industry standard — integrates with Bibliotheca / 3M / mk Solutions terminals and avoids the privacy concerns of UHF far-field reading. For large academic / corporate libraries with 100K+ items where rapid shelf inventory matters more than self-checkout, UHF (Option B) at lower unit cost delivers 10-20x faster stock-take.",
+    },
     specifications: {"Product Name": "Library RFID Tag (HF Book Label)", "Substrate Material": "Coated paper, PET", "Dimensions": "50x50, 45x45, 50x80, 75x45 mm (custom available)", "Operating Frequency": "13.56 MHz (HF)", "Compliance": "ISO/IEC 14443A, ISO/IEC 15693, ISO 28560 (RFID in libraries)", "Chip Options": "NXP ICODE SLIX, MIFARE Classic 1K/4K, FM11RF08, NTAG213/215/216", "Read/Write Cycles": "100,000", "EAS Support": "Yes (AFI/DSFID configurable)", "Personalization": "Library logo, barcode, item number, QR code", "Packaging": "Roll or single piece"},
     images: ["/images/products/library-rfid-tags.webp"],
     category: "RFID Labels",
@@ -583,6 +1416,48 @@ export const products: Product[] = [
       "Insurance claims processing — track claim folders through review, approval, and archival workflows for SLA compliance",
       "Corporate records management — automate file room inventory counts and reduce misfiling rates from 5% to under 0.5%"
     ],
+    visualComparison: {
+      eyebrow: "UHF Library Label vs HF Library Tag — How To Choose",
+      title: "UHF long-range inventory or HF vicinity self-checkout? Pick by library scale",
+      intro: "Both tag library materials but serve different operational priorities. UHF Gen2 (this product) reads entire shelves at 3-5 meters for rapid inventory and stock-take — essential for large academic and corporate libraries. HF ISO 15693 reads 50+ book stacks at 50-100 cm vicinity — the industry standard for branch public library self-checkout.",
+      options: [
+        {
+          label: "UHF Library Label (this product — shelf sweep)",
+          image: "/images/products/uhf-library-500x500.webp",
+          alt: "RFIDAK UHF library RFID label — EPC Gen2 label for shelf-level inventory reads at 3-5 meters in academic and corporate library back-room operations",
+          tagline: "EPC Gen2, shelf 3-5 m",
+          specs: [
+            { label: "Standard", value: "ISO/IEC 18000-63 (EPC Gen2)" },
+            { label: "Read range", value: "3-5 m shelf sweep" },
+            { label: "Stock-take speed", value: "Entire shelf in seconds" },
+            { label: "Unit price (MOQ 10K)", value: "$0.08 – 0.22" },
+          ],
+          bestFor: [
+            "Academic / research libraries (100K+ items)",
+            "Corporate records / archive back-room",
+            "National library / publisher warehouse",
+          ],
+        },
+        {
+          label: "HF Library Tag (sibling — self-checkout)",
+          image: "/images/products/library-rfid-tags.webp",
+          alt: "RFIDAK HF library RFID tag — ICODE SLIX paper label for self-checkout vicinity reads with privacy-friendly short range",
+          tagline: "ICODE SLIX, 50 books/stack tap",
+          specs: [
+            { label: "Standard", value: "ISO/IEC 15693 (ICODE SLIX)" },
+            { label: "Read range", value: "50-100 cm vicinity" },
+            { label: "Stock-take speed", value: "Stack of 50 books in 1 tap" },
+            { label: "Unit price (MOQ 10K)", value: "$0.15 – 0.32" },
+          ],
+          bestFor: [
+            "Public library branch self-checkout",
+            "Bibliotheca / 3M / mk Solutions integration",
+            "Privacy-sensitive patron-facing workflows",
+          ],
+        },
+      ],
+      decisionTip: "For large academic libraries where rapid shelf inventory drives value, UHF (Option A) at half the cost delivers 10-20× faster stock-take. For branch public libraries with patron-facing self-checkout and privacy considerations, HF (Option B) remains the industry standard integrated with major library vendor platforms.",
+    },
     specifications: {"Product Name": "UHF Library Label (Document File Tag)", "Antenna Material": "Etched aluminum (95 x 3 mm)", "Substrate Material": "Coated paper, double-layer self-adhesive", "Tag Dimensions": "125 x 7 mm, 104 x 5.5 mm (custom available)", "Operating Frequency": "860-960 MHz (UHF)", "Compliance": "ISO/IEC 18000-6C (EPC Gen2)", "Chip Options": "NXP UCODE 8/9, Impinj Monza R6-P", "Read Range": "6 m (handheld UHF reader)", "Operating Temperature": "-20°C to +50°C", "Storage Temperature": "-20°C to +85°C", "Shelf Life": "1 year (23 +/- 5°C, 50 +/- 10% RH, vacuum sealed)", "Packaging": "10,000 pcs/roll (roll ID: 76 mm, OD < 300 mm), 10 rolls/carton"},
     images: ["/images/products/uhf-library-500x500.webp"],
     category: "RFID Labels",
@@ -607,6 +1482,48 @@ export const products: Product[] = [
       "Watch and luxury accessory tracking — item-level authentication and inventory for timepieces valued at $1,000+",
       "Fashion retail price tags — dual-use as price label and RFID inventory tag for apparel and accessories"
     ],
+    visualComparison: {
+      eyebrow: "Jewelry Tag vs NFC Coin — How To Choose",
+      title: "Hangtag format or standalone token? Pick by where the tag attaches",
+      intro: "Both formats serve jewelry and luxury brand authentication / inventory. Jewelry tags are small hangtags that loop through rings, bracelets, chains with a delicate cord. NFC coins are standalone round tokens that live in the product packaging or on a display base. Different physical relationships to the jewelry item itself.",
+      options: [
+        {
+          label: "Jewelry Hangtag (this product — cord-attached)",
+          image: "/images/products/rfid-jewellery-tags.webp",
+          alt: "RFIDAK RFID jewelry tag — small hangtag with cord loop for attachment to rings, chains, and luxury accessories, doubles as price tag and RFID inventory",
+          tagline: "Cord hangtag, dual-use price + RFID",
+          specs: [
+            { label: "Format", value: "Small hangtag 15 × 30 mm" },
+            { label: "Attachment", value: "Cord loop through jewelry" },
+            { label: "Dual use", value: "Price label + RFID ID" },
+            { label: "Unit price (MOQ 10K)", value: "$0.15 – 0.45" },
+          ],
+          bestFor: [
+            "Fashion retail jewelry inventory",
+            "Jewelry store anti-theft + stock counts",
+            "Luxury accessories with cord / loop fit",
+          ],
+        },
+        {
+          label: "NFC Coin (sibling — standalone token)",
+          image: "/images/products/NFC-coin.webp",
+          alt: "RFIDAK NFC coin token — round epoxy dome with adhesive back, embeds in jewelry packaging or display base for luxury product authentication campaigns",
+          tagline: "Round dome, packaging or display mount",
+          specs: [
+            { label: "Format", value: "Round token Ø25-30 mm" },
+            { label: "Attachment", value: "Adhesive to packaging / base" },
+            { label: "Dual use", value: "RFID ID only (no price face)" },
+            { label: "Unit price (MOQ 1K)", value: "$0.75 – 1.45" },
+          ],
+          bestFor: [
+            "Luxury brand anti-counterfeit (bottle / box coin)",
+            "High-end watch / ring box authentication",
+            "Jewelry certificate / COA tap-to-verify",
+          ],
+        },
+      ],
+      decisionTip: "If the tag must physically attach to the jewelry item (retail inventory that travels with the item, price display at store), jewelry hangtag (Option A) with cord-loop format is the operational standard at $0.15-0.45. If the tag lives with the packaging / certificate / display base (luxury authentication, anti-counterfeit campaign), NFC coin (Option B) with higher brand-experience value is worth the 3-5× premium.",
+    },
     specifications: {"Product Name": "RFID Jewelry Tag (Hanging Label)", "Tag Dimensions": "68 x 26 mm", "Surface Material": "PVC, PET, PP synthetic paper, thermal paper", "Antenna Substrate": "PET with etched aluminum", "Compliance": "ISO/IEC 14443A, ISO/IEC 15693, ISO/IEC 18000-6C (EPC Gen2)", "Operating Frequency": "13.56 MHz (HF), 860-960 MHz (UHF)", "Chip Options": "HF: NXP MIFARE Classic 1K, ICODE SLIX; UHF: Impinj Monza R6/R6-P, NXP UCODE 8", "Personalization": "Logo, pricing, SKU, QR code, barcode printing", "Operating Temperature": "-10°C to +60°C, 20-60% RH", "Shelf Life": "1 year (20-30°C, 20-60% RH)", "Packaging": "Roll format"},
     images: ["/images/products/rfid-jewellery-tags.webp"],
     category: "RFID Tags",
@@ -631,6 +1548,54 @@ export const products: Product[] = [
       "Healthcare supply chain — track medical devices, implants, and pharmaceuticals per FDA UDI and DSCSA serialization requirements",
       "Logistics package sorting — automated conveyor reads enable 3,000+ package sorts per hour at distribution hubs"
     ],
+    visualComparison: {
+      eyebrow: "UHF Sticker vs NFC Sticker — How To Choose",
+      title: "Long-range warehouse scan or smartphone tap? Frequency decides everything",
+      intro: "UHF stickers (860-960 MHz) and NFC stickers (13.56 MHz) look similar and cost similar but serve completely different use cases. UHF reads at 3-10 meters on a gate / portal / forklift antenna and scans hundreds of tags per second. NFC reads at 2-5 cm on a specific smartphone tap and handles one tag at a time. Picking the wrong frequency means the sticker will not work in the buyer's environment.",
+      options: [
+        {
+          label: "UHF Sticker (this product — long-range warehouse)",
+          image: "/images/products/UHF-sticker-500x500.webp",
+          alt: "RFIDAK UHF RFID sticker — 860-960 MHz EPC Gen2 passive sticker for pallet, carton, and asset tracking at 3-10 meter read range through warehouse gates and forklift antennas",
+          tagline: "3-10 m range, bulk scan, warehouse / supply chain",
+          specs: [
+            { label: "Frequency", value: "860 – 960 MHz (UHF EPC Gen2)" },
+            { label: "Read range", value: "3 – 10 m (with gate antenna)" },
+            { label: "Tags / second", value: "200 – 600 in bulk read" },
+            { label: "Smartphone read", value: "No (needs UHF reader)" },
+            { label: "Chip options", value: "Impinj Monza / NXP UCODE / Alien H3" },
+            { label: "Unit price (MOQ 10K)", value: "$0.08 – 0.18" },
+          ],
+          bestFor: [
+            "Warehouse pallet / carton / tote tracking through RFID gates",
+            "Retail item-level inventory — thousand-item floor sweeps in minutes",
+            "Laundry / linen portal reads — garment-level lot identification",
+            "Vehicle / fleet identification at toll booths and parking entries",
+          ],
+        },
+        {
+          label: "NFC Sticker (sibling product — smartphone tap)",
+          image: "/images/products/nfc-sticker.webp",
+          alt: "RFIDAK NFC sticker — 13.56 MHz NTAG213/215/216 passive sticker for smartphone tap actions, product authentication, business cards, and smart home automation triggers",
+          tagline: "2-5 cm tap, smartphone read, consumer-facing",
+          specs: [
+            { label: "Frequency", value: "13.56 MHz (NFC Forum)" },
+            { label: "Read range", value: "2 – 5 cm (smartphone tap)" },
+            { label: "Tags / second", value: "1 (tap one, then next)" },
+            { label: "Smartphone read", value: "Yes — all iPhone 7+ and Android NFC" },
+            { label: "Chip options", value: "NTAG213 / 215 / 216 / 424 DNA" },
+            { label: "Unit price (MOQ 10K)", value: "$0.06 – 0.22" },
+          ],
+          bestFor: [
+            "Consumer-facing product authentication (luxury, wine, pharma)",
+            "Smart business cards — tap to share contact or social profiles",
+            "Smart home triggers — tap sticker to run iOS Shortcut or Android Tasker",
+            "Museum / retail interactive campaigns — tap to get product info / AR",
+          ],
+        },
+      ],
+      decisionTip: "If you need to scan many items from a distance (warehouse gate, forklift antenna, conveyor, retail sweep), go UHF (Option A). If the tag interacts with a consumer's smartphone (product tap, smart card, home automation), go NFC (Option B). They are not interchangeable — a UHF sticker will not respond to a smartphone tap, and an NFC sticker will not read at 3 meters. When in doubt, state your reader type first and pick the sticker family that matches.",
+    },
     detailSections: [
       {
         title: "Should I choose the UHF RFID sticker for my inventory program?",
@@ -697,6 +1662,48 @@ export const products: Product[] = [
       "Asset and equipment labeling — attach to laptops, monitors, and tools for NFC-based inventory check-in and maintenance logging",
       "Smart home automation — trigger iOS Shortcuts or Android Tasker routines by tapping NFC stickers placed at home entry points"
     ],
+    visualComparison: {
+      eyebrow: "NFC Sticker vs NFC Coin — How To Choose",
+      title: "Thin adhesive label or domed token? Pick by what you're sticking it to",
+      intro: "Both formats use NFC Forum Type 2 chips (NTAG213 / 215 / 216) and read identically with any smartphone. The physical difference is thickness: 0.2 mm sticker for flat surfaces vs 3-5 mm dome coin for curved or thick-attachment contexts. Different surfaces, different format.",
+      options: [
+        {
+          label: "NFC Sticker (this product — ultra-thin)",
+          image: "/images/products/nfc-sticker.webp",
+          alt: "RFIDAK NFC sticker — 0.2mm adhesive label for business cards, packaging, smart home triggers, brand marketing",
+          tagline: "0.2 mm thin, adhesive back, print-friendly",
+          specs: [
+            { label: "Thickness", value: "0.2 – 0.35 mm" },
+            { label: "Adhesive", value: "3M 467 / 468" },
+            { label: "Surface", value: "Flat — paper, plastic, glass" },
+            { label: "Unit price (MOQ 10K)", value: "$0.06 – 0.22" },
+          ],
+          bestFor: [
+            "Product packaging, hangtags, labels",
+            "Smart business cards, loyalty program cards",
+            "Home automation surfaces (walls, counters)",
+          ],
+        },
+        {
+          label: "NFC Coin (sibling — domed token)",
+          image: "/images/products/NFC-coin.webp",
+          alt: "RFIDAK NFC coin — round epoxy domed token Ø25-30mm with adhesive back or keyring hole, for brand campaigns, bottle-cap marketing, keychain NFC",
+          tagline: "3-5 mm dome, keyring-mountable",
+          specs: [
+            { label: "Thickness", value: "3 – 5 mm" },
+            { label: "Attachment", value: "Adhesive + keyring hole" },
+            { label: "Surface", value: "Curved + thick mounts" },
+            { label: "Unit price (MOQ 1K)", value: "$0.75 – 1.45" },
+          ],
+          bestFor: [
+            "Bottles, wine, luxury product caps",
+            "Keychain NFC tags, brand merchandise",
+            "Conference welcome bags, gift tokens",
+          ],
+        },
+      ],
+      decisionTip: "If the target surface is flat and the tag can be invisible (packaging, labels, cards), stickers (Option A) at $0.06-0.22 win on cost and discretion. If the tag needs to hang from a keychain, stick to a curved bottle, or serve as a physical keepsake, coins (Option B) are the right format despite 5-10× higher per-unit cost.",
+    },
     detailSections: [
       {
         title: "Should I choose the NFC sticker for my smart packaging / marketing program?",
@@ -763,6 +1770,54 @@ export const products: Product[] = [
       "Gift card programs — creative shapes increase perceived gift value and redemption rates versus rectangular plastic cards",
       "Brand marketing campaigns — NFC-enabled promotional tokens that link to digital experiences via smartphone tap"
     ],
+    visualComparison: {
+      eyebrow: "NFC Epoxy Card vs NFC Coin — How To Choose",
+      title: "Card-shape or coin-shape? Same chip, different mounting story",
+      intro: "Both formats use epoxy dome encapsulation over an NFC inlay, both work with any iPhone or Android NFC reader, both survive water / sweat / UV. The physical difference is form factor — flat card that fits a wallet vs small coin that attaches to keys, bottles, or products. Pick form factor based on where the buyer will physically put the tag.",
+      options: [
+        {
+          label: "NFC Epoxy Card (this product — flat, card-shape)",
+          image: "/images/products/NFC-epoxy-card.webp",
+          alt: "RFIDAK NFC epoxy card with domed clear resin encapsulation over full-color printed artwork — IP66 waterproof, CR80 credit-card size for wallet carry, premium tactile finish for brand loyalty programs",
+          tagline: "Flat, wallet-carryable, print on full face",
+          specs: [
+            { label: "Form factor", value: "CR80 flat card (85 × 54 mm)" },
+            { label: "Thickness", value: "1.5 – 2.0 mm (with dome)" },
+            { label: "Print area", value: "Full card face (under dome)" },
+            { label: "Attachment", value: "Wallet / lanyard hole optional" },
+            { label: "Weight", value: "8 – 12 g" },
+            { label: "Unit price (MOQ 1K)", value: "$0.95 – 1.85" },
+          ],
+          bestFor: [
+            "Premium loyalty cards where the epoxy dome signals 'premium tier' to holder",
+            "Hotel resort all-inclusive credentials where card fits in guest wallet",
+            "Tech campaigns and conference badges worn on lanyards",
+            "Waterproof gym / pool credentials where flat-carry is preferred over keychain",
+          ],
+        },
+        {
+          label: "NFC Coin (sibling product — round token)",
+          image: "/images/products/NFC-coin.webp",
+          alt: "RFIDAK NFC coin — round epoxy token 25-30 mm diameter with 3M adhesive backing or keyring hole, designed for product-attachment marketing campaigns and bottle-cap NFC triggers",
+          tagline: "Round, small, stickable or keyring-mounted",
+          specs: [
+            { label: "Form factor", value: "Round token (Ø 25 / 30 / 38 mm)" },
+            { label: "Thickness", value: "3 – 5 mm" },
+            { label: "Print area", value: "Circular face (full dome)" },
+            { label: "Attachment", value: "3M adhesive back + keyring hole" },
+            { label: "Weight", value: "3 – 6 g" },
+            { label: "Unit price (MOQ 1K)", value: "$0.75 – 1.45" },
+          ],
+          bestFor: [
+            "Product-side marketing — stick to bottles, packaging, retail displays",
+            "Home automation triggers on desks, door frames, key hooks",
+            "Small brand tokens in gift boxes, conference welcome bags",
+            "Keychain NFC tags where flat card wouldn't hang comfortably",
+          ],
+        },
+      ],
+      decisionTip: "If the tag lives in the customer's wallet or on a lanyard, go epoxy card (Option A) — card-shape is what wallets are designed to hold. If the tag sticks on a product, a door frame, a bottle, or hangs from a keychain, go NFC coin (Option B) — round tokens mount more versatile surfaces. Many brand campaigns actually ship both, with the card as the 'permanent keepsake' and the coin as the 'stickable action trigger'.",
+    },
     detailSections: [
       {
         title: "Should I choose the NFC epoxy card for my brand program?",
@@ -829,6 +1884,48 @@ export const products: Product[] = [
       "Laundromat machine identification — tag washers and dryers for maintenance scheduling and customer machine-status apps",
       "Wine and beverage inventory — attach to bottle bottoms for cellar management and restaurant stock tracking"
     ],
+    visualComparison: {
+      eyebrow: "NFC Coin vs NFC Sticker — How To Choose",
+      title: "Dome token or thin label? Pick by surface thickness requirement",
+      intro: "Both work with every iPhone / Android NFC tap and use the same NTAG chips. The physical difference is standout vs invisible: the domed coin is a physical object users notice and grab, the sticker blends into packaging / products. For consumer-facing 'tap here' moments, coins create the visual cue; for invisible product embedding, stickers disappear.",
+      options: [
+        {
+          label: "NFC Coin (this product — physical dome)",
+          image: "/images/products/NFC-coin.webp",
+          alt: "RFIDAK NFC coin — round 25-30mm epoxy dome with adhesive back or keyring hole, physical presence for brand campaigns, anti-counterfeit tokens, tap moments",
+          tagline: "3-5 mm dome, visual presence, keepsake",
+          specs: [
+            { label: "Thickness", value: "3 – 5 mm" },
+            { label: "Visual presence", value: "Physical standout object" },
+            { label: "Attachment", value: "Adhesive + keyring hole" },
+            { label: "Unit price (MOQ 1K)", value: "$0.75 – 1.45" },
+          ],
+          bestFor: [
+            "Brand marketing tokens (luxury, wine, spirits)",
+            "Product-side anti-counterfeit with 'tap to verify' moment",
+            "Keychain / branded merchandise NFC",
+          ],
+        },
+        {
+          label: "NFC Sticker (sibling — invisible thin)",
+          image: "/images/products/nfc-sticker.webp",
+          alt: "RFIDAK NFC sticker — 0.2mm flat adhesive label for hidden embedding in packaging, smart home surfaces, and business cards",
+          tagline: "0.2 mm thin, invisible embedding",
+          specs: [
+            { label: "Thickness", value: "0.2 – 0.35 mm" },
+            { label: "Visual presence", value: "Invisible (under label)" },
+            { label: "Attachment", value: "3M 467/468 adhesive" },
+            { label: "Unit price (MOQ 10K)", value: "$0.06 – 0.22" },
+          ],
+          bestFor: [
+            "Smart packaging embedded under print",
+            "Business cards, loyalty cards flat format",
+            "Home automation surfaces (walls, counters)",
+          ],
+        },
+      ],
+      decisionTip: "If the tap is supposed to be a consumer moment — visible object users notice, pick up, feel — coin (Option A) creates the 'tap here' visual cue worth paying 5-10× unit cost for. If the NFC is a functional embedded chip where the user follows a printed arrow or knows where to tap without any physical cue, sticker (Option B) disappears into the product at fraction of the cost.",
+    },
     detailSections: [
       {
         title: "Should I choose the NFC coin for my embedded / disc application?",
@@ -895,6 +1992,48 @@ export const products: Product[] = [
       "Art and collectible authentication — hidden tagging behind glass or inside frames that does not alter visible appearance",
       "Translucent product embedding — insert into clear consumer products for NFC-based authentication and warranty registration"
     ],
+    visualComparison: {
+      eyebrow: "Clear Tag vs Standard PVC Card — How To Choose",
+      title: "Invisible transparent or standard opaque white? Pick by visibility requirement",
+      intro: "Both are flat PVC-family tags at CR80 or custom sizes — same chip, same reader behavior. The difference is transparency: clear tags disappear into glass / clear plastic / translucent products, white PVC provides full printable face. Pick by whether you want the tag visible or invisible in the final product.",
+      options: [
+        {
+          label: "Clear Tag (this product — transparent)",
+          image: "/images/products/RFID-Clear-tag.webp",
+          alt: "RFIDAK RFID clear tag — transparent PVC or PET disc for embedding into clear consumer products, glass panels, and luxury translucent packaging",
+          tagline: "Transparent PVC / PET, invisible embed",
+          specs: [
+            { label: "Material", value: "Transparent PVC or PET" },
+            { label: "Visibility", value: "Near-invisible when embedded" },
+            { label: "Print surface", value: "Rim only (frosted laser mark)" },
+            { label: "Unit price (MOQ 1K)", value: "$0.28 – 0.85" },
+          ],
+          bestFor: [
+            "Smart dining tableware (embedded in glass)",
+            "Translucent luxury packaging authentication",
+            "Product design with visible-chip aesthetic aversion",
+          ],
+        },
+        {
+          label: "Standard RFID Card (sibling — white printable)",
+          image: "/images/products/ticket-smart-card.webp",
+          alt: "RFIDAK standard white PVC RFID card — ISO 7810 CR80 with full CMYK print front and back for visible branding and photo ID",
+          tagline: "White PVC, full CMYK print face",
+          specs: [
+            { label: "Material", value: "White PVC (opaque)" },
+            { label: "Visibility", value: "Visible — branded / photo" },
+            { label: "Print surface", value: "Full CMYK front + back" },
+            { label: "Unit price (MOQ 5K)", value: "$0.28 – 0.48" },
+          ],
+          bestFor: [
+            "Hotel key cards with property branding",
+            "Office access with employee photo ID",
+            "Loyalty / membership with visual identity",
+          ],
+        },
+      ],
+      decisionTip: "If the tag must disappear into the product (glass tableware, clear plastic housings, luxury translucent packaging), clear tag (Option A) is the only option — white PVC would stand out. For 95%+ of deployments where the tag is the credential (hotel, office, transit, loyalty), standard white card (Option B) at lower cost delivers full printed brand surface.",
+    },
     detailSections: [
       {
         title: "Should I choose the transparent RFID clear tag for my application?",
@@ -961,6 +2100,54 @@ export const products: Product[] = [
       "Visitor management — low-cost temporary badges for guests and contractors, collected and reissued at reception",
       "Government and military facilities — secure area access credentials meeting institutional durability and longevity requirements"
     ],
+    visualComparison: {
+      eyebrow: "Clamshell Card vs Standard PVC — How To Choose",
+      title: "1.8 mm thick clamshell or 0.76 mm standard PVC? Decide in 30 seconds",
+      intro: "Both card formats share the same ISO 7810 CR80 outer dimensions (85.6 × 54 mm), same chip options, and same reader compatibility. The single meaningful difference is body thickness and what that thickness protects against. Pick thickness = pick your deployment environment.",
+      options: [
+        {
+          label: "Clamshell Card (this product, 1.8 mm ABS)",
+          image: "/images/products/clamshel-card-500x500.webp",
+          alt: "RFIDAK 1.8 mm ABS clamshell proximity card with riveted chip and slot punch — designed for outdoor access control, construction sites, and industrial environments where standard 0.76 mm PVC cards crack or delaminate",
+          tagline: "Thick body, large antenna, long read range",
+          specs: [
+            { label: "Thickness", value: "1.8 mm ABS" },
+            { label: "Read range", value: "5 – 120 cm" },
+            { label: "Drop survival", value: "2 m onto concrete" },
+            { label: "Print surface", value: "Limited (silkscreen or adhesive label)" },
+            { label: "Typical life", value: "5 – 8 years field use" },
+            { label: "Unit price (MOQ 5K)", value: "$0.55 – 0.95" },
+          ],
+          bestFor: [
+            "Outdoor parking barriers — hands-free read at 60-120 cm from inside the car",
+            "Construction sites and industrial facilities with heavy wear and weather exposure",
+            "Security badging in institutions where card replacement creates audit friction",
+            "Long-range turnstile or gate access where guest walks through without tapping",
+          ],
+        },
+        {
+          label: "Standard RFID Card (0.76 mm PVC)",
+          image: "/images/products/ticket-smart-card.webp",
+          alt: "RFIDAK standard 0.76 mm PVC RFID smart card in ISO 7810 CR80 format — suitable for hotel key cards, office access, transit ticketing, and full-color CMYK photo ID printing",
+          tagline: "Thin body, full-color print, mass-market",
+          specs: [
+            { label: "Thickness", value: "0.76 mm PVC" },
+            { label: "Read range", value: "2 – 10 cm" },
+            { label: "Drop survival", value: "0.5 m (cracks on concrete)" },
+            { label: "Print surface", value: "Full CMYK offset front + back" },
+            { label: "Typical life", value: "1 – 3 years daily carry" },
+            { label: "Unit price (MOQ 5K)", value: "$0.28 – 0.48" },
+          ],
+          bestFor: [
+            "Hotel key cards with full-color property branding and amenity info",
+            "Office access in indoor, climate-controlled environments",
+            "Transit and event tickets where photo ID printing is required",
+            "High-volume budget-sensitive programs where each card costs under $0.50",
+          ],
+        },
+      ],
+      decisionTip: "If the card will be in an outdoor / rugged environment OR must read from > 30 cm away, clamshell (Option A) is worth the 40-60% unit cost premium — you save 3-5× on replacement over the card's lifetime. If the card lives in a wallet, hotel keycard sleeve, or indoor office badge holder, standard PVC (Option B) is the mainstream default.",
+    },
     detailSections: [
       {
         title: "Should I choose the clamshell card for my access program?",
@@ -1027,6 +2214,54 @@ export const products: Product[] = [
       "Corporate gift and marketing — branded NFC wood cards as memorable promotional items with 95%+ recipient retention rate",
       "Premium event badges — wooden NFC conference badges for keynote speakers and VIP attendees"
     ],
+    visualComparison: {
+      eyebrow: "Wood Card vs Standard PVC — How To Choose",
+      title: "When the brand deserves a wood card and when standard PVC wins",
+      intro: "Wood cards cost 2-4× the price of standard PVC cards but deliver a tactile premium finish that reinforces brand positioning in hospitality, luxury retail, and sustainability-focused corporate programs. The choice is less about function (both work with the same chips) and more about what the credential says about the brand handing it over.",
+      options: [
+        {
+          label: "Wood Card (this product — bamboo / walnut / cherry / maple)",
+          image: "/images/products/RFID-wood-card.webp",
+          alt: "RFIDAK RFID wood card in bamboo finish — laser-engraved logo with natural grain visible, FSC-certified sustainable wood, designed for boutique hotels, luxury brand loyalty programs, and corporate gift credentials",
+          tagline: "Premium tactile finish, eco story, brand statement",
+          specs: [
+            { label: "Material", value: "Bamboo / walnut / cherry / maple" },
+            { label: "Thickness", value: "1.2 – 1.8 mm" },
+            { label: "Personalization", value: "Laser engraving (burned grain)" },
+            { label: "Sustainability", value: "FSC-certified options; compostable at end of life" },
+            { label: "MOQ", value: "500 pieces (mixed woods)" },
+            { label: "Unit price (MOQ 2K)", value: "$1.85 – 4.20" },
+          ],
+          bestFor: [
+            "Boutique hotel key cards — guest unboxing moment differentiates the property",
+            "Luxury retail loyalty programs (jewelry, fashion, hospitality rewards)",
+            "Corporate executive gift cards and board-level access credentials",
+            "Sustainability-forward brand programs (FSC, B-Corp, carbon-neutral campaigns)",
+          ],
+        },
+        {
+          label: "Standard RFID Card (0.76 mm PVC)",
+          image: "/images/products/ticket-smart-card.webp",
+          alt: "RFIDAK standard PVC RFID smart card — full-color CMYK printing, ISO 7810 CR80 format, cost-effective for high-volume access control, transit, and event programs",
+          tagline: "Full-color print, high volume, cost-effective",
+          specs: [
+            { label: "Material", value: "PVC (standard); PET for eco variants" },
+            { label: "Thickness", value: "0.76 mm (standard)" },
+            { label: "Personalization", value: "CMYK offset / digital / thermal retransfer" },
+            { label: "Sustainability", value: "Recyclable PVC; PET alternative available" },
+            { label: "MOQ", value: "500 pieces" },
+            { label: "Unit price (MOQ 5K)", value: "$0.28 – 0.48" },
+          ],
+          bestFor: [
+            "Mass hospitality programs where per-card cost matters at 100K+ volumes",
+            "Full-color photo ID credentials requiring CMYK offset print",
+            "Event / conference badges where lifespan ≤ 1 week and disposability is expected",
+            "Most B2B access control and transit ticketing baseline deployments",
+          ],
+        },
+      ],
+      decisionTip: "If the card is part of a premium unboxing moment — luxury hotel check-in, VIP loyalty tier welcome, executive gift — wood (Option A) is the brand investment that pays back through perceived value and social media share-ability. If the card circulates in volume and functional utility matters more than brand feel, standard PVC (Option B) delivers the economics. Many programs use both: wood for the top 5% tier, PVC for the rest.",
+    },
     detailSections: [
       {
         title: "Should I choose the RFID wood card for my brand program?",
@@ -1093,6 +2328,54 @@ export const products: Product[] = [
       "Museum and exhibition passes — visitor flow tracking and capacity management via RFID gate counting",
       "Short-term parking tokens — disposable RFID cards for hourly parking systems with automated entry and payment"
     ],
+    visualComparison: {
+      eyebrow: "Paper Card vs Standard PVC — How To Choose",
+      title: "Disposable or durable? Pick by credential lifespan, not by price",
+      intro: "Paper cards are not a cheaper alternative to PVC — they are a fundamentally different product designed for short-lifespan use cases where the credential is expected to be discarded after hours or weeks. PVC cards are built to last 1-3 years. Match the card type to the credential's intended lifespan, not to the unit price.",
+      options: [
+        {
+          label: "Paper Card (this product — disposable, recyclable)",
+          image: "/images/products/RFID-Paper-Card-500x500.webp",
+          alt: "RFIDAK RFID paper card — disposable contactless ticket made from FSC-certified paper with embedded HF inlay, biodegradable, designed for single-use transit, events, and visitor badges",
+          tagline: "Single-use / short-life, lowest unit cost, compostable",
+          specs: [
+            { label: "Material", value: "FSC paper with embedded HF inlay" },
+            { label: "Thickness", value: "0.35 – 0.45 mm" },
+            { label: "Typical lifespan", value: "Hours to weeks (single-trip or event)" },
+            { label: "Recyclability", value: "Paper-stream compostable" },
+            { label: "Chip support", value: "MIFARE Classic / Ultralight C / NTAG213" },
+            { label: "Unit price (MOQ 10K)", value: "$0.10 – 0.28" },
+          ],
+          bestFor: [
+            "Public transit single-ride and 24-hour tickets",
+            "Music festival and concert day passes — attendee discards after event",
+            "Hospital visitor badges, time-limited access with daily reissue",
+            "Trade show attendee credentials for 3-5 day events with check-in / check-out",
+          ],
+        },
+        {
+          label: "Standard RFID Card (0.76 mm PVC)",
+          image: "/images/products/ticket-smart-card.webp",
+          alt: "RFIDAK standard PVC RFID smart card — ISO 7810 CR80 durable plastic credential for reloadable transit, hotel keys, office access, designed for 1-3 year daily-carry lifespans",
+          tagline: "Reusable, durable, full-color branded",
+          specs: [
+            { label: "Material", value: "PVC / PET / ABS composite" },
+            { label: "Thickness", value: "0.76 mm (ISO 7810)" },
+            { label: "Typical lifespan", value: "1 – 3 years daily carry" },
+            { label: "Recyclability", value: "Specialty PVC recycling stream" },
+            { label: "Chip support", value: "Full range LF / HF / UHF" },
+            { label: "Unit price (MOQ 5K)", value: "$0.28 – 0.48" },
+          ],
+          bestFor: [
+            "Reloadable transit season passes and multi-trip fare cards",
+            "Hotel key cards where card is returned at checkout and reused",
+            "Office / campus access credentials issued on a 1-4 year refresh cycle",
+            "Any deployment where total cost of ownership matters more than unit price",
+          ],
+        },
+      ],
+      decisionTip: "If the card's expected life is < 1 month and the venue wants to avoid return logistics — paper (Option A) is the right choice even though it looks more expensive per gram. If the card will be carried daily for 6+ months, PVC (Option B) works out cheaper per use despite higher unit cost. Hybrid programs exist: paper for day-pass visitors, PVC for season members.",
+    },
     detailSections: [
       {
         title: "Should I choose the RFID paper card for my ticketing program?",
@@ -1159,6 +2442,48 @@ export const products: Product[] = [
       "Aquaculture and fish tagging — implant high-value broodstock for genetic tracking and health record management",
       "Automotive immobilizer chips — embed in car key housings for ignition authentication and anti-theft systems"
     ],
+    visualComparison: {
+      eyebrow: "Glass Tag vs Clear PVC Tag — How To Choose",
+      title: "Biocompatible glass capsule or transparent PVC disc? Pick by embedding environment",
+      intro: "Both formats keep the RFID invisible or subtle in the final product. Glass tags are biocompatible capsules for implantation (pets, livestock, human-adjacent) or fluid immersion. Clear PVC tags are flat transparent discs for embedding into clear plastics, glass panels, or decorative displays where the chip should stay subtle.",
+      options: [
+        {
+          label: "Glass Tag (this product — biocompatible capsule)",
+          image: "/images/products/RFID-glass-tag-500x500.webp",
+          alt: "RFIDAK RFID glass tag — biocompatible cylindrical glass capsule 2-4mm diameter for pet microchipping, livestock identification, and fluid-environment embedding",
+          tagline: "Biocompatible glass, 2-4 mm capsule",
+          specs: [
+            { label: "Material", value: "Biocompatible borosilicate glass" },
+            { label: "Shape", value: "Cylindrical capsule Ø2-4 × 8-18 mm" },
+            { label: "Environment", value: "Living tissue, fluids, chemicals" },
+            { label: "Unit price (MOQ 1K)", value: "$0.95 – 2.20" },
+          ],
+          bestFor: [
+            "Pet microchipping (veterinary ISO 11784)",
+            "Livestock identification (cattle, sheep, poultry)",
+            "Automotive immobilizer embedding (car keys)",
+          ],
+        },
+        {
+          label: "Clear PVC Tag (sibling — transparent disc)",
+          image: "/images/products/RFID-Clear-tag.webp",
+          alt: "RFIDAK RFID clear transparent PVC tag — flat disc for embedding into clear plastics, glass displays, and products where chip visibility should stay subtle",
+          tagline: "Transparent flat disc, PVC / PET",
+          specs: [
+            { label: "Material", value: "Transparent PVC or PET" },
+            { label: "Shape", value: "Flat disc or square Ø15-50 mm" },
+            { label: "Environment", value: "Dry or splash, flat embedding" },
+            { label: "Unit price (MOQ 1K)", value: "$0.28 – 0.85" },
+          ],
+          bestFor: [
+            "Embedding into clear consumer products",
+            "Smart dining / restaurant chip on glass cutlery",
+            "Translucent packaging brand authentication",
+          ],
+        },
+      ],
+      decisionTip: "If the tag needs to go inside a living organism or be immersed in fluids, glass (Option A) is the only biocompatible option — veterinary and livestock regulation worldwide requires ISO 11784/11785 glass capsules. If the tag embeds into a transparent flat surface (glass, clear plastic, display) and biocompatibility is not a factor, clear PVC (Option B) at 1/3 the cost is more cost-effective and accepts printing on the rim.",
+    },
     detailSections: [
       {
         title: "Should I choose the RFID glass tag for my animal / immobilizer program?",
@@ -1225,6 +2550,54 @@ export const products: Product[] = [
       "Metal drum and container tracking — manage chemical drums, IBCs, and reusable metal totes across logistics networks",
       "Metal furniture and cabinet management — track office desks, filing cabinets, and lockers across multi-floor corporate facilities"
     ],
+    visualComparison: {
+      eyebrow: "On-Metal Tag vs Standard UHF Sticker — How To Choose",
+      title: "Will the tag be stuck to metal? The frequency survives. The antenna doesn't.",
+      intro: "A standard UHF sticker applied to a metal surface typically loses 90-99% of its read range — the metal detunes the antenna and absorbs RF energy. On-metal tags solve this by adding a ferrite or foam spacer between the antenna and the metal. Same UHF frequency, same chips, same reader — but only the on-metal variant actually works when the substrate is steel, aluminum, or copper.",
+      options: [
+        {
+          label: "On-Metal Tag (this product — metal-compatible)",
+          image: "/images/products/Printable-RFID-metal-tag.webp",
+          alt: "RFIDAK printable RFID metal tag — UHF anti-metal construction with ferrite spacer layer, survives outdoor exposure, reads at 2-7 meters from metal surfaces where standard UHF stickers fail completely",
+          tagline: "Ferrite spacer, reads on steel / aluminum / copper",
+          specs: [
+            { label: "Mount surface", value: "Metal (steel, aluminum, copper)" },
+            { label: "Read range on metal", value: "2 – 7 m (design dependent)" },
+            { label: "Antenna design", value: "With ferrite / foam spacer" },
+            { label: "IP rating", value: "IP65 – IP68 options" },
+            { label: "Typical thickness", value: "3 – 6 mm (with spacer)" },
+            { label: "Unit price (MOQ 5K)", value: "$0.48 – 1.45" },
+          ],
+          bestFor: [
+            "IT asset tracking — laptops, servers, racks, network equipment",
+            "Tool crib management in workshops, factories, aerospace MRO",
+            "Steel pallet / cage / container tracking in logistics",
+            "Metal-bodied vehicle / heavy equipment identification",
+          ],
+        },
+        {
+          label: "Standard UHF Sticker (non-metal surfaces)",
+          image: "/images/products/UHF-sticker-500x500.webp",
+          alt: "RFIDAK standard UHF RFID sticker — inlay-only label for plastic, cardboard, glass, wood surfaces; read range collapses to < 30 cm when applied directly to metal without an on-metal redesign",
+          tagline: "Thin label for plastic / cardboard / glass only",
+          specs: [
+            { label: "Mount surface", value: "Plastic, cardboard, glass, wood" },
+            { label: "Read range on non-metal", value: "3 – 10 m" },
+            { label: "Read range on METAL", value: "< 0.3 m (severely detuned)" },
+            { label: "IP rating", value: "IPX4 (typical)" },
+            { label: "Typical thickness", value: "0.15 – 0.35 mm" },
+            { label: "Unit price (MOQ 10K)", value: "$0.08 – 0.18" },
+          ],
+          bestFor: [
+            "Retail item-level tagging on apparel, cartons, packaging",
+            "Book and library collection tagging (paper / cardboard)",
+            "Plastic tote / bin / crate tagging in supply chain",
+            "Any non-metal substrate where cost per tag is critical",
+          ],
+        },
+      ],
+      decisionTip: "Simple rule: if the object contains any substantial metal within 3 mm of where the tag sticks, use the on-metal tag (Option A) — even though it costs 4-8× more per unit. If the object is plastic, cardboard, wood, glass, or fabric, use the standard UHF sticker (Option B) — same read range at a fraction of the cost. Common buyer mistake: applying cheap standard stickers directly to steel shelving and then wondering why the warehouse read rate collapsed from 99% to 12%. Verify substrate before ordering.",
+    },
     detailSections: [
       {
         title: "Should I choose the printable UHF metal tag for my asset program?",
@@ -1291,6 +2664,48 @@ export const products: Product[] = [
       "Industrial workstation authentication — operator login and data logging via card tap at manufacturing terminals",
       "OEM hardware integration — embed reader modules into custom-designed terminals, gates, and vending machines"
     ],
+    visualComparison: {
+      eyebrow: "Desktop RFID Reader vs USB NFC Dongle — How To Choose",
+      title: "Multi-frequency industrial reader or consumer NFC stick? Pick by frequency + use case",
+      intro: "These serve different buyers entirely. Desktop RFID reader-writers support multi-frequency (LF 125 kHz + HF 13.56 MHz + UHF) for industrial card encoding workflows. USB NFC dongles (like µFR Nano) are HF-only compact units for consumer-grade NFC tap development, smartphone pairing, and basic enrollment. Pick by whether you need UHF range or just HF tap.",
+      options: [
+        {
+          label: "Desktop RFID Reader-Writer (this product — multi-band)",
+          image: "/images/products/RFID_reader_writer.webp",
+          alt: "RFIDAK RFID reader-writer — multi-frequency desktop unit supporting LF 125 kHz, HF 13.56 MHz, and UHF with USB + Ethernet for card encoding and industrial enrollment",
+          tagline: "Multi-frequency, USB + Ethernet, industrial",
+          specs: [
+            { label: "Frequencies", value: "LF / HF / UHF (model-dependent)" },
+            { label: "Host interface", value: "USB + Ethernet + RS232" },
+            { label: "Read range", value: "2-5 cm (HF) / 10-30 cm (UHF)" },
+            { label: "Price point", value: "$185 – 680" },
+          ],
+          bestFor: [
+            "Card issuance lines (hotel PMS, access control enrollment)",
+            "Industrial encoding workstations",
+            "Multi-protocol test labs",
+          ],
+        },
+        {
+          label: "µFR Nano USB NFC Reader (sibling — HF only)",
+          image: "/images/products/ufr-nano-enclosure.jpg",
+          alt: "RFIDAK µFR Nano USB NFC reader — compact desktop HF 13.56 MHz reader-writer for MIFARE, NTAG, DESFire development and enrollment",
+          tagline: "Compact USB NFC, developer-friendly",
+          specs: [
+            { label: "Frequencies", value: "HF 13.56 MHz (NFC only)" },
+            { label: "Host interface", value: "USB" },
+            { label: "Read range", value: "2-5 cm" },
+            { label: "Price point", value: "$45 – 120" },
+          ],
+          bestFor: [
+            "NFC app development and testing",
+            "Small-office HF card enrollment",
+            "Smartphone / MIFARE pair-up development",
+          ],
+        },
+      ],
+      decisionTip: "If your workflow requires UHF (long-range inventory, encoding UHF tags) or multi-band (LF Prox + HF MIFARE + UHF in one device), desktop reader-writer (Option A) is the industrial-grade choice at $185-680. If you only need HF / NFC for MIFARE / NTAG / DESFire reading and writing in an office setup, µFR Nano (Option B) is the compact USB tool at 1/4 the cost.",
+    },
     detailSections: [
       {
         title: "Should I choose the RFIDAK Reader/Writer for my project?",
@@ -1359,6 +2774,54 @@ export const products: Product[] = [
       "Airline and cruise ship linens — track blankets, headrest covers, and cabin textiles through high-volume onboard laundry operations",
       "Textile rental industry — manage mats, linens, and costumes with per-item lifecycle data for replacement planning and customer invoicing"
     ],
+    visualComparison: {
+      eyebrow: "Textile Heat-Seal vs Silicone Button — How To Choose",
+      title: "Hidden textile tag or visible silicone button? Pick by wash chemistry and workflow",
+      intro: "Both formats survive 200+ industrial wash cycles, both use the same UHF chip families, both integrate with the same reader fleet. The meaningful differences are visibility (hidden in seam vs visible on garment exterior), attachment method (heat-press equipment you own vs rivet / sew), and resistance to aggressive chemistry (standard laundry vs food-processing bleach-spray environments).",
+      options: [
+        {
+          label: "Textile Heat-Seal (this product — hidden in seam)",
+          image: "/images/products/textile-RFID-laundry-tag-heat-seal.webp",
+          alt: "RFIDAK textile UHF laundry tag — woven polyester patch with encapsulated UHF inlay, heat-pressed into garment interior seam, invisible to end user, 200+ wash cycles at 85°C, designed for hospital and industrial laundry programs",
+          tagline: "Hidden, flexible, heat-pressed in 15 seconds",
+          specs: [
+            { label: "Attachment", value: "Heat-press 160 °C × 15 sec" },
+            { label: "Position", value: "Hidden in garment interior seam" },
+            { label: "Wash cycles", value: "200+ at 85 °C" },
+            { label: "Chemistry", value: "Standard sodium hypochlorite 2.5 g/L" },
+            { label: "Visibility", value: "Invisible to end user" },
+            { label: "Unit price (MOQ 10K)", value: "$0.38 – 0.78" },
+          ],
+          bestFor: [
+            "Hospital gowns and scrubs where patient-facing surface must remain plain",
+            "Hotel sheets, towels, bathrobes — tag hidden so guest experience is unchanged",
+            "Workwear uniforms where employee sees no tag (privacy / aesthetics)",
+            "High-volume programs with existing heat-press equipment (no new CAPEX)",
+          ],
+        },
+        {
+          label: "Silicone Button (sibling product — visible exterior)",
+          image: "/images/products/Silicone-laundry-tag.webp",
+          alt: "RFIDAK silicone laundry button — visible external tag attached via rivet or sew to garment exterior, enhanced chemical resistance for food processing and autoclave-adjacent environments",
+          tagline: "Visible, chemical-resistant, rivet or sew",
+          specs: [
+            { label: "Attachment", value: "Rivet / sew to garment exterior" },
+            { label: "Position", value: "Visible on exterior surface" },
+            { label: "Wash cycles", value: "250+ at 90 °C" },
+            { label: "Chemistry", value: "Tolerates food-processing bleach spray" },
+            { label: "Visibility", value: "Visible for lot verification" },
+            { label: "Unit price (MOQ 10K)", value: "$0.58 – 1.15" },
+          ],
+          bestFor: [
+            "Food-processing uniforms with daily bleach-spray surface sanitization",
+            "Chef whites and kitchen uniforms where tags need to survive grease and high-temp wash",
+            "Industrial workwear where supervisors do visible tag scan at shift start",
+            "Chemical-plant or cleanroom garments where aggressive solvents defeat woven formats",
+          ],
+        },
+      ],
+      decisionTip: "If garments go through standard laundry chemistry at 85 °C and the end user should not see the tag (hotel, hospital, corporate workwear), heat-seal textile (Option A) is the default and cheapest choice. If garments face aggressive chemistry (food processing, bleach spray, 90 °C+) or supervisors need to visually verify tag presence, silicone button (Option B) is worth the 40-60% premium. For hospital reprocessed linen where autoclave 134 °C is in scope, request the sibling PPS hard button (/product/pps-laundry-tag-rfid-button) instead — silicone does not survive autoclave.",
+    },
     detailSections: [
       {
         title: "Should I choose the textile UHF laundry tag for my linen program?",
@@ -1383,6 +2846,30 @@ export const products: Product[] = [
       {
         title: "Market context — industrial laundry at $80B and growing",
         content: "<p>The global commercial laundry services market exceeded $80 billion in 2023, with industrial linen rental alone valued at $15.8 billion and projected at 5.7% CAGR through 2030 (Allied Market Research, 2024). Operators without per-item RFID tracking experience 3-5% monthly textile loss rates and spend 40-60% of labor hours on manual counting and sorting — the pain RFID directly removes.</p><p>Per IDTechEx 2024 RAIN RFID Forecasts, laundry / linen was one of the three fastest-growing UHF tag segments in 2023-2024 (alongside retail apparel and logistics), driven by dual pressure from labor costs and customer-contract SLAs on sterilization and rental-item tracking. The TRSA (Textile Rental Services Association) 2024 industry benchmark report found that RFID-equipped laundries beat non-RFID peers on 7 of 8 key operational KPIs including billing accuracy (+18 pts), labor efficiency (+42%), and customer retention (+11 pts).</p><p>EU infection-control standards EN 14065 RABC (Risk Analysis and Biocontamination Control) create a regulatory tailwind for RFID in hospital and healthcare laundry specifically — per-garment sterilization cycle logging is now an audit requirement for hospital linen suppliers in 14 EU member states. See the <a href=\"/blogs/laundry-rfid-tags-buying-guide\">Laundry RFID tags buyer guide</a> cluster article for the tactical purchase checklist.</p>"
+      },
+      {
+        title: "Attachment method family — when to pick textile vs silicone vs PPS",
+        content: "<p>RFIDAK manufactures four distinct laundry tag formats, each optimized for a specific attachment method and environment. Pick the format that matches your existing garment-line workflow and wash-cycle severity.</p><ul><li><strong>Textile heat-seal (this product)</strong> — UHF woven patch applied via 160 °C heat-press at 15 seconds. Best for garment manufacturers with existing heat-transfer label equipment. 200+ wash cycles at 85 °C. $0.38-0.78 per unit at 10K MOQ.</li><li><strong>Textile sew-on</strong> — same chip core but reinforced polyester border for needle-sewn attachment. Specified when garment substrate cannot tolerate heat-press (Gore-Tex, technical membranes, heat-sensitive finishes) or when the laundry line is sew-based. Slightly higher cost, same wash survival.</li><li><strong>Silicone button</strong> — see the sibling <a href=\"/product/silicone-laundry-tag\">RFID Silicone Laundry Tag</a>. Visible external attachment via rivet or sew, better chemical resistance, tolerates direct bleach spray at food-processing facilities.</li><li><strong>PPS hard button</strong> — see the sibling <a href=\"/product/pps-laundry-tag-rfid-button\">PPS Laundry Tag RFID Button</a>. Rigid thermoplastic for extreme environments (abattoirs, cement plants, mining uniforms, firefighter turnout gear). Survives autoclave 134 °C and chemical solvent exposure. 3-5× unit cost of textile heat-seal.</li></ul><p>The decision is driven by (1) attachment workflow equipment the laundry or garment maker already owns, (2) wash-cycle chemistry and temperature, and (3) visible-versus-hidden tag placement preferences for infection-control or visual verification workflows.</p>"
+      },
+      {
+        title: "Industrial laundry processor deployment (Berendsen / Elis / Cintas scale)",
+        content: "<p>European and North American industrial laundry processors (Berendsen, Elis, Alsco, Cintas, Unifirst, G&K Services) process 200,000 to 2,000,000 garments per week per facility across uniform rental, linen rental, mats & mops, and specialty cleanroom programs. RFID tagging at the garment level enables automated sorting (sort accuracy improves from 78-82% manual to 96-99% at RFID portals), loss tracking (shrinkage reduces from 14-20% annual to 4-6% post-deployment), and per-garment service-life visibility that makes end-of-life retirement a data-driven rather than visual decision.</p><p>Procurement pattern: 500,000 to 5,000,000 tags per year per facility at $0.18-0.35 per tag for textile heat-seal formats. Equipment side: fixed overhead portals from Nedap, Impinj xArray, Zebra FX9600, or custom tunnel readers at $12K-40K per portal, with typical deployments using 3-8 portals per facility (incoming, outgoing, sort, return, and quality-hold zones). Payback period 6-14 months on labor savings + shrinkage reduction alone.</p><p>Operational KPI improvements documented in the TRSA 2024 benchmark: billing accuracy +18 percentage points (from 82% to 99.7%), labor efficiency +42% on counting / sorting tasks, customer retention +11 points, and disputed-garment rate down 76% because RFID scan logs settle most billing disputes within seconds rather than days.</p>"
+      },
+      {
+        title: "Hotel housekeeping & linen rotation deployment",
+        content: "<p>Hotel linen programs — bed sheets, pillow cases, bath towels, hand towels, bathrobes, restaurant table linen — use RFID to track per-item wash cycle count (retire at 75-90 cycles depending on item type and thread count), prevent inventory shrinkage (national average 12-18% annual unaccountable linen loss), and automate vendor reconciliation with third-party commercial laundry service providers where the hotel's linen circulates off-site.</p><p>Per-property tag inventory scales with room count: a 300-room branded hotel typically carries 12,000-18,000 linen items in active rotation (including spare inventory in laundry circulation and storage) — all of which can be tagged during initial linen onboarding. Annual tag replacement runs 10-15% against wash-cycle retirement (tags retire with the linen) and damage.</p><p>Chain-level programs: Marriott's sustainability 2030 targets include per-item linen retirement tracking across 8,000+ properties, driving a chain-wide push toward RFID-tagged linen procurement. Hilton, IHG, and Accor run similar programs in pilot or rollout phase as of 2024. Direct integration with PMS (Opera, SynXis, OnQ) and third-party laundry billing systems allows the property operator to audit per-linen-cycle billing accuracy and resolve disputes with laundry vendors within hours rather than weeks.</p>"
+      },
+      {
+        title: "Hospital & healthcare linen deployment (EN 14065 RABC)",
+        content: "<p>Hospital-grade uniforms (scrubs, lab coats, isolation gowns) and hospital linens (sheets, pillowcases, bath towels, patient gowns) under the EN 14065 RABC (Risk Analysis and Biocontamination Control) standard require per-garment sterilization-cycle logging for infection-control audit purposes. RFID tags enable automated cycle counting — average clinical use: 3-4 wash cycles per day × 150 clinical days per year = 450-600 cycles per year per garment — and deliver a permanent biocontamination audit trail that meets the documentation requirements now mandated for hospital linen suppliers in 14 EU member states as of 2024.</p><p>Hospital programs typically specify textile heat-seal (LT-01) at 200-cycle survival minimum for scrub and patient-gown turnover, textile sew-on (LT-02) for high-cost lab coats and isolation gowns where garment replacement cost exceeds $40, and PPS hard button (sibling product) for critical-environment garments in operating rooms and ICU wards where autoclave 134 °C sterilization is part of the routine reprocessing cycle.</p><p>Regulatory tailwind: the FDA's UDI (Unique Device Identifier) rule progressively expanded to cover reusable medical textiles in 2024-2026 phases, making per-item tracking a compliance requirement rather than operational nice-to-have. Hospital laundry contracts now increasingly require vendor-side RFID tagging as a contract condition.</p>"
+      },
+      {
+        title: "Workwear rental & uniform rotation deployment",
+        content: "<p>Workwear rental programs — industrial uniforms, flame-resistant coveralls, food-processing aprons, clean-room garments, healthcare scrubs — are the fastest-growing segment of the commercial laundry industry through 2030, driven by employer liability, compliance, and cost-transparency trends. Programs typically run 5-15 garments per employee × 500-20,000 employees per customer contract, creating tag volumes of 25,000 to 500,000 per end-customer deployment at the industrial laundry processor.</p><p>RFID in workwear rental delivers three distinct value layers. (1) Employee-level allocation: each garment is tied to a specific employee ID, so wash-cycle wear, replacement cost, and lost-item charge-back all roll up to HR and payroll reporting. (2) Customer-level billing transparency: the industrial laundry can show the corporate buyer exactly how many garments from their contract moved through the processing line each week, settling the perennial \"you're charging me for garments I didn't send\" dispute. (3) Regulatory traceability: flame-resistant coverall wash-cycle count drives the replacement trigger under OSHA / ASTM F1506 / NFPA 2112 compliance — garments that exceed 100 wash cycles must be retired, and RFID is the only economical way to enforce this at fleet scale.</p><p>Market share note: Cintas (US), Elis (EU), and Alsco (global) together operate over 500 processing facilities globally, each processing 100K-2M garments per week. RFID penetration in this segment reached 58% of tier-1 processors in 2024, up from 31% in 2021.</p>"
+      },
+      {
+        title: "Inside the RFIDAK laundry tag production process",
+        content: "<p>Every RFIDAK textile laundry tag begins with pre-tested UHF inlay selection (Impinj Monza R6-P for 180-200 cycle durability spec, or NXP UCODE 9 for 220+ cycle spec with extended EPC memory). Each inlay is read-verified before encapsulation — defective inlays are scrapped at $0.03 cost rather than causing full-tag rework at $0.45+ cost downstream. The verified inlay is encapsulated between two layers of high-temperature polyester mesh via ultrasonic welding at 20 kHz for 0.8 seconds, creating a seamless bond that cannot delaminate under industrial wash impact.</p><p>Quality assurance protocol: each production lot of 10,000 tags is sample-tested for wash-cycle survival — 25 tags are subjected to accelerated wash-cycle simulation (ISO 6330 conditions: 85 °C water, 2.5 g/L sodium hypochlorite NaClO, 60-minute cycle × 200 iterations) before the lot is released. Lots that show &gt;2 tag failures across the 25-tag sample are scrapped. Lots with 0-1 failures are released with full wash-cycle certification.</p><p>Full lot traceability from inlay batch to finished tag is maintained through the production run, so any quality issue observed in customer deployment can be traced back to the specific inlay lot, lamination shift, and QC checker. ISO 9001:2015 certified line; customer-side sample retention available on request. Typical production throughput: 120,000-180,000 tags per 8-hour shift per line, with two textile lines running at the RFIDAK facility.</p>"
       }
     ],
     documents: [
@@ -1425,6 +2912,54 @@ export const products: Product[] = [
       "Music festival multi-day entry — 3-5 day festival access with cashless payment, photo sharing, and social media integration",
       "Hospital patient identification — waterproof wristbands with patient ID, allergy alerts, and ward access linked to EHR systems"
     ],
+    visualComparison: {
+      eyebrow: "Closed-Loop vs Adjustable — How To Choose",
+      title: "Pick the right silicone wristband closure for your venue in 30 seconds",
+      intro: "RFIDAK silicone wristbands ship in two closure styles. The closure you pick determines resizing flexibility, theft resistance, per-guest issuance time, and stock inventory complexity. Over 90% of venues fit clearly into one camp — use the table below to decide.",
+      options: [
+        {
+          label: "Closed-Loop Classic (WB001 / WB002 / WB003)",
+          image: "/images/products/rfid-silicone-wristband-wb001.jpg",
+          alt: "RFIDAK WB001 closed-loop silicone wristband — seamless molded ring with no joints to peel, IP68 rated for pool immersion and water park deployment",
+          tagline: "Seamless molded ring, no joints, one-way wear",
+          specs: [
+            { label: "Inner diameter", value: "Ø45 – 72 mm (fixed)" },
+            { label: "Resize after issue", value: "No — cut to remove" },
+            { label: "Stock SKUs needed", value: "4-6 sizes per venue" },
+            { label: "Theft resistance", value: "High (cut-to-remove)" },
+            { label: "Issuance speed", value: "40-60 guests / hour / kiosk" },
+            { label: "Unit price (MOQ 5K)", value: "$0.55 – 1.10" },
+          ],
+          bestFor: [
+            "Water parks and beach resorts — IP68 survives pool immersion, sunscreen, and ocean swimming",
+            "Multi-day festivals with fixed guest wristband assignments — 3-5 day continuous wear",
+            "Theme parks running ride-count tracking — one band per guest per day, cut at exit",
+            "Hospital patient ID where wristband must not be transferable between patients",
+          ],
+        },
+        {
+          label: "Adjustable Open-Loop Strap (WB010 / WB011 / WB012)",
+          image: "/images/products/rfid-silicone-wristband-wb010-open-loop.jpg",
+          alt: "RFIDAK WB010 adjustable open-loop silicone wristband — single-size strap with snap closure fits child, teen and adult wrists, reusable across multi-member households",
+          tagline: "One-size-fits-all strap with snap closure, reusable",
+          specs: [
+            { label: "Wrist range", value: "135 – 220 mm (adjustable)" },
+            { label: "Resize after issue", value: "Yes — snap to new hole" },
+            { label: "Stock SKUs needed", value: "1 SKU covers all sizes" },
+            { label: "Theft resistance", value: "Medium (snap off)" },
+            { label: "Issuance speed", value: "90-120 guests / hour / kiosk" },
+            { label: "Unit price (MOQ 5K)", value: "$0.65 – 1.20" },
+          ],
+          bestFor: [
+            "Hotels and resorts mixing child + adult + senior guests across all room types",
+            "Fitness clubs issuing permanent member bands for 2-3 year membership terms",
+            "Gym check-in workflows where band is worn only during the workout, then stored",
+            "Employee badging programs where band is issued on hire and reclaimed on exit",
+          ],
+        },
+      ],
+      decisionTip: "If guests wear the band through a pool, water slide, or ocean — closed-loop (Option A) wins on waterproofing and theft resistance. If the venue mixes child and adult guests with fluid membership (hotels, fitness), adjustable strap (Option B) cuts inventory complexity from 6 SKUs to 1. Still unsure? Request 10 samples of each (5 closed-loop + 5 adjustable) and stage them across a 1-day visitor trial.",
+    },
     detailSections: [
       {
         title: "Should I choose an RFID silicone wristband for my venue?",
@@ -1588,6 +3123,48 @@ export const products: Product[] = [
       "School and university ID — student credentials combining library access, meal plan payment, and building entry on one card",
       "Membership and loyalty programs — gym, club, and retail loyalty cards with stored-value and visit-tracking functionality"
     ],
+    visualComparison: {
+      eyebrow: "RFID Card vs RFID Keyfob — How To Choose",
+      title: "Credit-card format or keyring fob? The #1 B2B access credential decision",
+      intro: "Both use identical chip families and reader compatibility — the physical form factor alone decides. Card slots into wallets / badge holders and has full print surface for photo ID. Keyfob attaches to keychains for daily-carry durability without a holder. Pick by how the user will carry the credential on a typical workday.",
+      options: [
+        {
+          label: "RFID Card (this product — wallet-format)",
+          image: "/images/products/ticket-smart-card.webp",
+          alt: "RFIDAK RFID smart card — ISO 7810 CR80 PVC card format for wallet carry, badge holders, lanyards with full CMYK photo ID printing",
+          tagline: "CR80 wallet format, full-print photo ID",
+          specs: [
+            { label: "Format", value: "ISO 7810 CR80 (85.6 × 54 mm)" },
+            { label: "Carry", value: "Wallet / badge holder / lanyard" },
+            { label: "Print surface", value: "Full CMYK front + back" },
+            { label: "Unit price (MOQ 5K)", value: "$0.28 – 0.48" },
+          ],
+          bestFor: [
+            "Photo ID access credentials",
+            "Hotel key cards (standard format)",
+            "Loyalty cards / membership visual identity",
+          ],
+        },
+        {
+          label: "RFID Keyfob (sibling — keychain format)",
+          image: "/images/products/RFIDAK-RFID-KEYFOB.webp",
+          alt: "RFIDAK RFID keyfob — compact ABS / silicone / leather keyfob with keyring hole for daily carry on keychain, gym bag, or belt clip",
+          tagline: "Keyring-attached, daily-carry rugged",
+          specs: [
+            { label: "Format", value: "Small (30-50 × 20-30 mm)" },
+            { label: "Carry", value: "Keyring / belt clip / gym bag" },
+            { label: "Print surface", value: "Limited (silkscreen or laser)" },
+            { label: "Unit price (MOQ 5K)", value: "$0.45 – 1.45" },
+          ],
+          bestFor: [
+            "Apartment / gym / parking access",
+            "Fleet operator credentials (keychain)",
+            "Outdoor-carry-heavy workflows",
+          ],
+        },
+      ],
+      decisionTip: "If the credential needs photo ID, loyalty program branding, or hotel-style full-print visual presence, RFID Card (Option A) is the de-facto format that 90%+ of hospitality, enterprise, and loyalty programs specify. If the credential is daily-carry-abused (keychain, gym bag, fleet truck), keyfob (Option B) at slightly higher cost survives 3-5× longer under physical wear.",
+    },
     detailSections: [
       {
         title: "Should I choose an RFID smart card for my project?",
@@ -1612,6 +3189,26 @@ export const products: Product[] = [
       {
         title: "Market context — the $16.9B smart card market",
         content: "<p>The global smart card market reached $16.9 billion in 2023 with contactless RFID cards accounting for over 60% of new card shipments as organizations migrated from magnetic stripe and barcode systems (ABI Research Smart Card Report, 2024). Within contactless, MIFARE DESFire EV3 has become the modern default for new secure-access deployments as Crypto-1 (MIFARE Classic) compliance audits push Classic into managed legacy — per the Auburn University RFID Lab 2024 enterprise survey, 72% of new access control card orders at &gt; 10,000 units specified DESFire EV3 or equivalent AES-128 chip, up from 41% in 2021.</p><p>NTAG424 DNA has emerged as the dominant cryptographic NFC chip for brand-side consumer applications — EU Digital Product Passport pilot programs (Decathlon, H&amp;M, Inditex), luxury anti-counterfeit, warranty registration, and loyalty — because of AES-128 SUN message support combined with iOS Background Tag Reading since iOS 13 (NXP NTAG 424 DNA Product Brief, 2024).</p><p>For the full chip-level decision framework, see the <a href=\"/rfid-chip-comparison\">RFID Chip Comparison pillar</a>; for MIFARE family specifics see the <a href=\"/blogs/mifare-cards\">MIFARE cards deep-dive</a>, <a href=\"/compare/mifare-classic-vs-desfire\">Classic vs DESFire comparison</a>, and <a href=\"/compare/mifare-plus-vs-desfire\">Plus EV2 vs DESFire migration guide</a>.</p>"
+      },
+      {
+        title: "Card format family — when to pick standard PVC vs alternatives",
+        content: "<p>The standard RFIDAK RFID smart card (0.76 mm PVC, ISO/IEC 7810 ID-1, 85.6 × 54 mm) is the default choice for 90% of B2B card deployments. Pick a sibling format instead when one of these five conditions applies:</p><ul><li><strong>Rugged environment</strong> (construction site, warehouse, outdoor parking) — choose the <a href=\"/product/rfid-clamshell-card\">Clamshell Card</a> (1.8 mm ABS with riveted chip, survives 2 m drop, IP65).</li><li><strong>Premium tactile feel</strong> (boutique hotel key, luxury brand card, corporate gift) — choose the <a href=\"/product/rfid-wood-card-2\">Wood Card</a> in bamboo, walnut, or custom wood with visible-grain finish.</li><li><strong>Single-use or short-life credential</strong> (event pass, transit day ticket, hospital visitor badge) — choose the <a href=\"/product/rfid-paper-card\">Paper Card</a> at $0.10-0.30 per unit.</li><li><strong>Waterproof / pool exposure</strong> (water park, spa, fitness center) — choose the <a href=\"/product/nfc-epoxy-card\">NFC Epoxy Card</a> with dome encapsulation and IP66 rating.</li><li><strong>In-house lamination workflow</strong> (card converter, luxury-goods integrator, OEM) — choose the <a href=\"/product/rfid-card-inlay\">RFID Card Inlay</a> as raw input into your existing lamination line.</li></ul><p>When none of these apply, the standard PVC smart card is the safe default — same ISO 7810 CR80 geometry installed in 95%+ of the world's readers, broadest chip availability, and largest price-volume discount curve.</p>"
+      },
+      {
+        title: "Hotel & hospitality key card deployment",
+        content: "<p>RFID cards are the default credential format in 90%+ of branded hotels worldwide because the format integrates cleanly with installed electronic door locks from Assa Abloy Saflok, VingCard, Onity (Dormakaba), SALTO, TESA, Kaba, and Mul-T-Lock. A 300-room property typically stocks 4-6 active cards per occupied room for turnover buffer — about 1,500 cards in circulation with a 6-8 month refresh cycle driven by magnetic-stripe wear (legacy lock upgrades) or encoded key lifecycle expiry.</p><p>Hotel chains consolidating multi-property rollouts specify pre-encoded cards with per-property site codes (HID Prox) or writeable MIFARE Classic / Plus sectors per property's PMS configuration. Printing typically includes the property logo front, WiFi password, emergency contact, local attraction map, or loyalty program details on the back. Typical per-card landed cost $0.55-1.20 including CMYK print + encoding + shipping to a single destination country.</p><p>Migration trend: hotels running MIFARE Classic on Saflok / VingCard hardware are upgrading to MIFARE Plus EV2 (Classic-compatible encoding with AES-128 secure channel) as part of property-wide cybersecurity audits triggered by insurance carrier requirements — 2023-2024 saw a 35% year-over-year increase in this migration pattern across Marriott, Hilton, IHG, and Accor-branded properties.</p>"
+      },
+      {
+        title: "Enterprise access control deployment",
+        content: "<p>Enterprise building and campus access programs standardize on MIFARE Plus EV2 or DESFire EV3 cards as the credential backbone, paired with HID VertX, Mercury Security, Lenel OnGuard, Software House CCure, Genetec Synergis, or Gallagher access control panels. Card volumes scale with badged employee count — a Fortune 500 headquarters typically issues 8,000-25,000 cards annually across new hires, contractors, visitors, and replacement-for-loss.</p><p>Enterprise buyers consolidating multi-site credential programs specify dual-application DESFire EV3 cards with separate AES-128 keys per service domain — physical access, IT logon (PIV-compatible sub-application), cafeteria payment, secure printing, and visitor badging — all running on a single card. This eliminates the multi-credential clutter of earlier stacks where employees carried 3-5 separate cards for different systems.</p><p>Replacement-rate driver: lost card fee of $15-25 per incident covers the operational overhead (card stock + encoding labor + lock-event audit) and discourages casual sharing. Typical loss rate runs 2-4% annual across office-worker populations, climbing to 8-12% for field-service workers or multi-site roles where cards live in vehicle glove boxes or tool bags.</p>"
+      },
+      {
+        title: "Transit & public ticketing deployment",
+        content: "<p>Public transit fare cards span three commercial tiers. Entry tier: low-cost paper-inlay single-ride cards ($0.10-0.22 per unit at 1M MOQ) using MIFARE Ultralight C or ICODE SLIX — disposable after the ride or 24-hour window. Middle tier: reloadable PVC season-pass cards ($0.45-0.85) using MIFARE Plus EV2 or DESFire EV2 — typically with CPI (closed-loop pre-paid) balance and 2-year refresh cycle. Premium tier: stored-value multi-application DESFire EV3 cards ($1.50-3.50) — integrated metro + bus + commuter rail + bike-share across regional transit authority networks.</p><p>Typical transit authority procurement cycle: annual card order 100,000 to 10,000,000 units per authority, with pre-encoded initial balance, date-limited expiry encoding, and anti-fraud serialization embedded at production. RFIDAK supports printed-shrink-wrapped batch delivery ready for fare gate terminal loading, with customer-side encoding key injection via secure hardware security module (HSM) when the authority prefers to handle final personalization in-house.</p><p>Regional examples: London Oyster (MIFARE Classic legacy + Plus EV2 migration), Singapore EZ-Link (CEPAS / CIPURSE), Hong Kong Octopus (FeliCa legacy), Washington SmarTrip (MIFARE DESFire), Paris Navigo (Calypso). RFIDAK supplies contactless cards for mid-tier regional systems at 500K to 5M units per contract.</p>"
+      },
+      {
+        title: "Inside the RFIDAK RFID card production process",
+        content: "<p>Every RFIDAK RFID smart card moves through six production stages with QC checkpoints at each. (1) Chip-inlay pre-testing: 100% of incoming inlays are read-verified before lamination — defective inlays are scrapped at $0.01 cost rather than causing a full card rework at $0.75+ downstream cost. (2) PVC-PVC lamination: the inlay is sandwiched between two white-core PVC sheets with protective clear over-laminate, cured at 130 °C and 18 MPa pressure for 25 minutes. (3) Precision die-cut: ISO/IEC 7810 CR80 tolerance ±0.1 mm with polished edge finishing. (4) Personalization: CMYK offset print (front + back), thermal retransfer for photo ID, silkscreen for high-coverage branding, laser engraving for tamper-resistant serial numbers, magnetic stripe encoding ISO 7811 if specified. (5) Chip encoding: site-code, facility-code, UID, memory sector data per customer specification — with secure key custody for AES-encoded chips. (6) Final QC: 100% read-verification with printed-vs-encoded cross-check before pack-out.</p><p>Production throughput: 40,000-60,000 cards per 8-hour shift per line, with three lines running at the RFIDAK facility. ISO 9001:2015 certified, defect rates &lt; 0.3%, and pre-shipment sample retention (3 cards per 1,000) for buyer-side spot verification before full-lot release.</p>"
       }
     ],
     documents: [
@@ -1654,6 +3251,48 @@ export const products: Product[] = [
       "Swimming pool and resort access — IP68-rated fobs for wet environments where cards would degrade within weeks",
       "Industrial facility security — PPS and fiberglass fobs for chemical plant and manufacturing floor access at extreme temperatures"
     ],
+    visualComparison: {
+      eyebrow: "RFID Keyfob Family Navigator — How To Choose",
+      title: "Pick your keyfob material in 30 seconds across 6 options",
+      intro: "This umbrella keyfob product covers the full RFIDAK material family. Each material serves a different buyer persona — use this navigator to jump straight to the right sibling product for your environment. All materials share the same chip compatibility and reader behavior; material decides durability + aesthetics + price point.",
+      options: [
+        {
+          label: "Everyday Default: ABS Keyfob",
+          image: "/images/products/rfid-abs-keyfob-main.jpg",
+          alt: "RFIDAK ABS keyfob — cost-optimized default for apartment, fitness, office, and parking access at 70%+ of B2B keyfob market share",
+          tagline: "Cost-optimized, 9 colors, 15+ molds",
+          specs: [
+            { label: "Best for", value: "Apartment, gym, office access" },
+            { label: "IP rating", value: "IP65 (splash, no submerge)" },
+            { label: "Price", value: "$0.45 – 0.85" },
+            { label: "Market share", value: "~70% of B2B keyfobs" },
+          ],
+          bestFor: [
+            "Majority of B2B apartment / office / gym programs",
+            "High-volume access control issuance",
+            "Budget-first programs (see /product/rfid-abs-keyfob)",
+          ],
+        },
+        {
+          label: "Specialty Materials: Silicone / Leather / Epoxy / PPS / FR4",
+          image: "/images/products/rfid-silicone-keyfob-main.jpg",
+          alt: "RFIDAK specialty keyfob materials — silicone for water, leather for luxury, epoxy for tech, PPS for chemical, FR4 for flame retardance",
+          tagline: "Specialty environments (water / luxury / chemical)",
+          specs: [
+            { label: "Silicone", value: "IP68 waterproof — <a href=\"/product/rfid-silicone-keyfob\">/product/rfid-silicone-keyfob</a>" },
+            { label: "Leather", value: "Luxury hospitality — <a href=\"/product/rfid-leather-keyfob\">/product/rfid-leather-keyfob</a>" },
+            { label: "Epoxy", value: "Tech / SaaS — <a href=\"/product/rfid-epoxy-keyfob\">/product/rfid-epoxy-keyfob</a>" },
+            { label: "PPS / FR4", value: "Chemical / flame-retardant industrial" },
+          ],
+          bestFor: [
+            "Waterproof: silicone (water park / hospital autoclave)",
+            "Premium hospitality: leather (luxury hotel / dealership)",
+            "Industrial hazard: PPS (chemical) / FR4 (data center flame code)",
+          ],
+        },
+      ],
+      decisionTip: "For 70%+ of B2B keyfob programs the answer is ABS (Option A) — lowest cost, 9 stock colors, immediate availability. Go to a specialty material (Option B) only when there's a specific environmental or brand-tier requirement that justifies the 2-5× cost premium. Never over-specify — paying for silicone or PPS capability that never comes into play is waste.",
+    },
     detailSections: [
       {
         title: "Should I choose an RFID keyfob for my access program?",
@@ -1762,6 +3401,48 @@ export const products: Product[] = [
       "Industrial workstation authentication — UART module integrates into PLC and HMI panels for operator login at manufacturing terminals",
       "Software development and prototyping — desktop reader for NFC application testing during pre-production evaluation phases"
     ],
+    visualComparison: {
+      eyebrow: "µFR Nano vs JustID USB Dongle — How To Choose",
+      title: "Full-featured NFC reader or minimal compact dongle? Pick by feature needs",
+      intro: "Both are compact USB NFC readers under $100. µFR Nano supports read + write + encode across MIFARE / NTAG / DESFire with full API + developer SDK. JustID Dongle is minimal — UID read only, no write, no advanced cipher support. Pick by whether you need full NFC development or just tag presence detection.",
+      options: [
+        {
+          label: "µFR Nano NFC Reader (this product — full-featured)",
+          image: "/images/products/ufr-nano-enclosure.jpg",
+          alt: "RFIDAK µFR Nano USB NFC reader with full-featured SDK, supports MIFARE Classic / Plus / DESFire / NTAG read-write-encode, developer-grade",
+          tagline: "Full API + SDK, read + write + encode",
+          specs: [
+            { label: "Functions", value: "Read + write + encode + AES" },
+            { label: "Chip support", value: "All MIFARE / NTAG / DESFire" },
+            { label: "API / SDK", value: "Full documented (C, Python, C#, Java)" },
+            { label: "Unit price", value: "$45 – 95" },
+          ],
+          bestFor: [
+            "NFC app development and encoding stations",
+            "Card issuance + personalization workflows",
+            "Hospitality / access control enrollment",
+          ],
+        },
+        {
+          label: "JustID NFC USB Dongle (sibling — minimal)",
+          image: "/images/products/justid-dongle-main.jpg",
+          alt: "RFIDAK JustID NFC USB dongle — compact UID-reader only, presents NFC tag UID as keyboard input for ultra-simple integration with any software",
+          tagline: "UID read-only, keyboard emulation",
+          specs: [
+            { label: "Functions", value: "UID read only (no write)" },
+            { label: "Chip support", value: "Any ISO 14443A UID" },
+            { label: "API / SDK", value: "None (keyboard emulation)" },
+            { label: "Unit price", value: "$18 – 35" },
+          ],
+          bestFor: [
+            "Quick UID-only login / check-in / attendance",
+            "Point-of-sale UID lookup (no encoding)",
+            "Simple visitor management, patient check-in",
+          ],
+        },
+      ],
+      decisionTip: "If you need to write data to tags, program access credentials, or integrate via SDK (C / Python / Java), µFR Nano (Option A) is the developer-grade tool. If you only need to read a UID and feed it to existing software that expects keyboard input, JustID Dongle (Option B) works out of the box at 1/3 the cost with zero development.",
+    },
     specifications: {"Product Name": "µFR Nano NFC Reader/Writer", "Operating Frequency": "13.56 MHz (HF)", "Compliance": "ISO/IEC 14443 Type A/B, ISO 18092 (NFC)", "Communication Speed": "106, 212, 424 Kbit/s", "Read Range": "0-60 mm (0-2.36 in)", "Supported Cards": "NXP MIFARE Classic 1K/4K, Plus, Ultralight, DESFire EV1/EV2/EV3, NTAG 21x (210/213/215/216), NTAG 4xx DNA, JCOP Java Card, SmartMX", "Connectivity": "USB, UART (TTL), RS232", "Supply Voltage": "5V DC", "Supply Current": "150 mA (operating)", "Dimensions": "Standard: 86 x 27 x 8 mm; OEM: 86 x 27 x 5 mm; UART: 87 x 27 x 5 mm", "Weight": "Standard: 26 g; OEM: 10 g; UART: 11 g", "SDK": "Free — Java, JavaScript, Node.js, PHP, Python, C/C++, Arduino IDE, Lazarus, Borland Delphi, C++ WxWidgets, MS .NET (C#, VB.NET, C++.NET)", "Supported OS": "Windows, Linux, macOS, Android, iOS", "Firmware Updates": "Free regular updates available for download", "Certifications": "CE — EMC (2004/108/EC), R&TTE (1999/5/EC), LVD (2006/95/EC), EMF (2013/35/EU), RoHS2 (2011/65/EU)", "Warranty": "2-year standard (3 or 5-year options)"},
     detailSections: [
       {
@@ -1848,6 +3529,48 @@ export const products: Product[] = [
       "Remote site access logging — Wi-Fi readers at unmanned facilities push timestamped access records to central monitoring dashboards",
       "Cloud-based attendance systems — MQTT-connected readers feed real-time tap events to SaaS workforce management platforms"
     ],
+    visualComparison: {
+      eyebrow: "µFR Nano Online vs µFR Classic CS — How To Choose",
+      title: "Cloud-connected or offline desktop? Pick by IT architecture",
+      intro: "Both are µFR-family NFC readers but differ fundamentally in connectivity. µFR Nano Online connects directly to cloud via WiFi / Ethernet with MQTT — remote readers feeding SaaS platforms. µFR Classic CS is a traditional desktop reader connecting to a local PC via USB — offline-capable, IT-department-friendly. Different IT strategy, different reader.",
+      options: [
+        {
+          label: "µFR Nano Online (this product — cloud MQTT)",
+          image: "/images/products/ufr-nano-online-main.webp",
+          alt: "RFIDAK µFR Nano Online NFC reader — WiFi / Ethernet connected, MQTT to cloud SaaS platforms, deploy standalone at remote sites",
+          tagline: "WiFi / Ethernet, MQTT cloud-native",
+          specs: [
+            { label: "Connectivity", value: "WiFi + Ethernet + MQTT" },
+            { label: "Host PC", value: "None needed (cloud direct)" },
+            { label: "Deployment", value: "Remote / distributed sites" },
+            { label: "Unit price", value: "$135 – 225" },
+          ],
+          bestFor: [
+            "Multi-site attendance / check-in across branches",
+            "SaaS workforce management integration",
+            "IoT analytics platforms feeding dashboards",
+          ],
+        },
+        {
+          label: "µFR Classic CS (sibling — USB desktop)",
+          image: "/images/products/ufr-classic-cs-main.webp",
+          alt: "RFIDAK µFR Classic CS NFC reader — traditional USB-connected desktop reader for local PC applications, offline-capable",
+          tagline: "USB desktop, offline-capable",
+          specs: [
+            { label: "Connectivity", value: "USB (to local PC)" },
+            { label: "Host PC", value: "Required (Windows / Linux)" },
+            { label: "Deployment", value: "Local-network workflows" },
+            { label: "Unit price", value: "$65 – 125" },
+          ],
+          bestFor: [
+            "Hotel PMS card issuance stations",
+            "Access control enrollment on local server",
+            "Offline / air-gapped IT environments",
+          ],
+        },
+      ],
+      decisionTip: "If the reader feeds a cloud / SaaS platform directly without a local PC (workforce SaaS, IoT dashboards, multi-site distribution), Nano Online (Option A) at 2x cost eliminates local PC dependency. If the reader integrates with existing on-premise software (hotel PMS, access control server, in-office enrollment), Classic CS (Option B) via USB is the lower-cost traditional choice that IT teams are comfortable deploying.",
+    },
     specifications: {"Product Name": "µFR Nano Online NFC Reader/Writer", "Operating Frequency": "13.56 MHz (HF)", "Compliance": "ISO/IEC 14443 Type A/B, ISO 18092 (NFC)", "Communication Speed": "Up to 424 Kbit/s", "Read Range": "0-60 mm (0-2.36 in)", "Supported Cards": "NXP MIFARE Classic/Plus/Ultralight/DESFire EV1-EV3, NTAG 21x, NTAG 4xx DNA, JCOP Java Card, SmartMX", "Connectivity": "USB, Wi-Fi (802.11 b/g/n), BLE 4.2, Ethernet (variant), UART, RS232, external NFC reader port", "Network Protocols": "UDP, TCP, HTTP, HTTPS, WebSocket (WS/WSS), MQTT", "Operating Modes": "Slave Mode, Master Mode (HTTP POST), BLE HID Mode, Log and Access Control Mode (optional)", "Hardware Variations": "Wi-Fi (USB+Wi-Fi+BLE), GPIO (USB+Wi-Fi+BLE+GPIO), Ethernet (USB+Wi-Fi+BLE+Ethernet+GPIO)", "GPIO": "4-pin (GPIO variant and Ethernet variant)", "Supply Voltage": "5V DC", "Supply Current": "200-500 mA (operating)", "Dimensions": "86 x 27 x 9 mm", "Weight": "28 g (device), 119 g (commercial set)", "Built-in Features": "RTC (Real Time Clock), external EEPROM, RGB LEDs, piezo beeper, external NFC reader port", "SDK": "Free — Java, JavaScript, Node.js, PHP, Python, Arduino IDE, Lazarus, Borland Delphi, C++ WxWidgets, MS .NET (C#, VB.NET, C++.NET)", "Firmware Updates": "Free regular updates available for download", "Certification": "CE", "Warranty": "2-year standard (3 or 5-year options)"},
     detailSections: [
       {
@@ -1894,6 +3617,48 @@ export const products: Product[] = [
       "Wallet-pass reading — read NFC credentials while cards remain inside wallets or badge holders at 100-150 mm standoff",
       "Custom kiosk and furniture integration — OEM board embeds into self-service terminals, reception desks, and conference room tables"
     ],
+    visualComparison: {
+      eyebrow: "µFR XL OEM vs NFC Integrino N512 — How To Choose",
+      title: "Long-range OEM board or developer-friendly Arduino module? Pick by integration",
+      intro: "Both are NFC reader modules for embedding into custom hardware, but serve different integration workflows. µFR XL OEM is a complete OEM board with extended antenna reach for built-in kiosk and furniture integration. NFC Integrino N512 is a smaller module with Arduino-style headers for prototyping and IoT integration via ESP32 / MCU.",
+      options: [
+        {
+          label: "µFR XL OEM Long-Range Reader (this product — kiosk OEM)",
+          image: "/images/products/ufr-xl-oem-front.webp",
+          alt: "RFIDAK µFR XL OEM NFC reader — long-range OEM board for embedding into kiosks, self-service terminals, reception desks, and conference room furniture",
+          tagline: "Long-range antenna, kiosk-ready OEM board",
+          specs: [
+            { label: "Form factor", value: "Full OEM board (60 x 100 mm)" },
+            { label: "Read range", value: "10-15 cm (extended)" },
+            { label: "Integration", value: "USB + UART + host software" },
+            { label: "Unit price (MOQ 100)", value: "$85 – 185" },
+          ],
+          bestFor: [
+            "Self-service terminal / vending machine integration",
+            "Reception desk / concierge kiosks",
+            "Conference room check-in furniture",
+          ],
+        },
+        {
+          label: "NFC Integrino N512 (sibling — Arduino module)",
+          image: "/images/products/nfc-integrino-n512-web.webp",
+          alt: "RFIDAK NFC Integrino N512 module — Arduino-compatible header pins for ESP32 / STM32 integration in IoT prototyping and custom MCU projects",
+          tagline: "Arduino-compatible, ESP32 / MCU integration",
+          specs: [
+            { label: "Form factor", value: "Module (22 x 42 mm)" },
+            { label: "Read range", value: "2-5 cm (standard NFC)" },
+            { label: "Integration", value: "SPI / I2C / UART for MCU" },
+            { label: "Unit price (MOQ 100)", value: "$22 – 48" },
+          ],
+          bestFor: [
+            "IoT prototyping with ESP32 / STM32 / Arduino",
+            "Smart-home device NFC tap features",
+            "Small-batch custom product development",
+          ],
+        },
+      ],
+      decisionTip: "If you're building a production kiosk / terminal / furniture piece with 10-15 cm antenna reach requirement, µFR XL OEM (Option A) is the complete OEM-ready board. If you're prototyping an IoT product with ESP32 / STM32 / Arduino and need a small NFC module at 2-5 cm range, Integrino N512 (Option B) at 1/4 the cost drops directly onto your breadboard.",
+    },
     specifications: {"Product Name": "µFR XL OEM Long-Range NFC Reader/Writer", "Operating Frequency": "13.56 MHz (HF)", "Compliance": "ISO/IEC 14443 Type A/B, ISO 18092 (NFC)", "Communication Speed": "Up to 424 Kbit/s", "Read Range": "0-200 mm (0-7.87 in)", "Supported Cards": "NXP MIFARE Classic/Plus/Ultralight/DESFire EV1-EV3, NTAG 21x, NTAG 4xx DNA, JCOP Java Card, SmartMX", "Security Features": "Advanced security algorithms and secure memory storage", "Connectivity": "USB, RS232, Ethernet", "Supply Voltage": "5V DC", "Supply Current": "150-300 mA (operating)", "Dimensions": "178 x 178 x 5 mm", "Weight": "100 g (device), 125 g (commercial set)", "SDK": "Free — Java, JavaScript, Node.js, PHP, Python, C/C++, Arduino IDE, Lazarus, Borland Delphi, C++ WxWidgets, MS .NET (C#, VB.NET, C++.NET)", "Supported OS": "Windows, Linux, macOS, Android, iOS", "Firmware Updates": "Free regular updates available for download", "Warranty": "2-year standard (3 or 5-year options)"},
     detailSections: [
       {
@@ -1930,6 +3695,48 @@ export const products: Product[] = [
       "Customer loyalty and membership — read/write stored-value and visit-count data on NFC loyalty cards at retail POS counters",
       "Inventory and asset check-in — desktop reader for scanning RFID-tagged items during receiving, issuing, and return workflows"
     ],
+    visualComparison: {
+      eyebrow: "µFR Classic CS vs µFR Nano Online — How To Choose",
+      title: "Traditional USB desktop or cloud-connected reader? IT strategy decides",
+      intro: "Both are µFR-family NFC readers for MIFARE / NTAG / DESFire workflows. Classic CS is USB-connected — integrates with local PC software, IT-department-familiar, offline-capable. Nano Online is cloud-native via WiFi / Ethernet / MQTT — deploy standalone at remote sites without local PC. Different IT philosophies, different price points.",
+      options: [
+        {
+          label: "µFR Classic CS (this product — USB desktop)",
+          image: "/images/products/ufr-classic-cs-main.webp",
+          alt: "RFIDAK µFR Classic CS NFC reader — USB-connected desktop reader for MIFARE Classic / Plus / DESFire / NTAG encoding and access control enrollment with local PC software",
+          tagline: "USB to PC, offline-capable",
+          specs: [
+            { label: "Connectivity", value: "USB to local Windows/Linux PC" },
+            { label: "Online requirement", value: "None — runs offline" },
+            { label: "IT complexity", value: "Low — standard USB device" },
+            { label: "Unit price", value: "$65 – 125" },
+          ],
+          bestFor: [
+            "Hotel PMS card issuance workstations",
+            "Access control enrollment on local server",
+            "Offline / air-gapped corporate IT",
+          ],
+        },
+        {
+          label: "µFR Nano Online (sibling — cloud WiFi / MQTT)",
+          image: "/images/products/ufr-nano-online-main.webp",
+          alt: "RFIDAK µFR Nano Online NFC reader — WiFi / Ethernet cloud-native MQTT reader for SaaS workforce management and multi-site distributed deployments",
+          tagline: "WiFi + MQTT cloud, no PC needed",
+          specs: [
+            { label: "Connectivity", value: "WiFi + Ethernet + MQTT" },
+            { label: "Online requirement", value: "Required (cloud-direct)" },
+            { label: "IT complexity", value: "Higher — needs cloud infrastructure" },
+            { label: "Unit price", value: "$135 – 225" },
+          ],
+          bestFor: [
+            "Multi-site attendance / check-in across branches",
+            "SaaS workforce platforms (Rippling, Deputy, etc.)",
+            "IoT analytics dashboards feeding real-time events",
+          ],
+        },
+      ],
+      decisionTip: "If the reader integrates with existing on-premise software (hotel PMS, access control server, in-office enrollment), Classic CS (Option A) via USB is the lower-cost traditional choice that IT teams deploy in minutes. If the reader feeds a cloud / SaaS platform directly (multi-site workforce, IoT dashboards), Nano Online (Option B) eliminates PC dependency at 2× cost.",
+    },
     specifications: {"Product Name": "µFR Classic CS NFC Reader/Writer", "Operating Frequency": "13.56 MHz (HF)", "Compliance": "ISO/IEC 14443 Type A/B, ISO 18092 (NFC)", "Integrated Interface": "NXP IC for efficient and reliable RF communication", "Communication Speed": "Up to 424 Kbit/s", "Read Range": "0-80 mm standard; 0-120 mm with RF Booster", "Supported Cards": "NXP MIFARE Classic/Plus/Ultralight/DESFire EV1-EV3, NTAG 21x, NTAG 4xx DNA, JCOP Java Card, SmartMX", "Security Features": "Advanced security algorithms and secure memory storage", "Connectivity": "USB, RS232", "Optional Modules": "RF Booster antenna, SAM slot", "Supply Voltage": "5V DC", "Supply Current": "300 mA (operating)", "Dimensions": "Standard: 86 x 54 x 9 mm; OEM: 84 x 50 x 5 mm", "Weight": "Standard: 40 g; Commercial set: 126 g", "SDK": "Free — Java, JavaScript, Node.js, PHP, Python, C/C++, Arduino IDE, Lazarus, Borland Delphi, C++ WxWidgets, MS .NET (C#, VB.NET, C++.NET)", "Supported OS": "Windows, Linux, macOS, Android, iOS", "Firmware Updates": "Free regular updates available for download", "Certifications": "CE — EMC (2004/108/EC, EN 55022, EN 55024, EN 301 489), RF (EN 300 330), LVD (2006/95/EC, EN 60950-1), EMF (2013/35/EU, EN 50364), R&TTE (1999/5/EC), RoHS2 (2011/65/EU)", "Warranty": "2-year standard (3 or 5-year options)"},
     detailSections: [
       {
@@ -1976,6 +3783,48 @@ export const products: Product[] = [
       "Library patron identification — card tap enters patron barcode-equivalent into legacy library management systems via keyboard buffer",
       "Healthcare patient check-in — NFC wristband or card tap types patient ID into EMR/EHR admission forms at reception terminals"
     ],
+    visualComparison: {
+      eyebrow: "JustID Dongle vs µFR Nano — How To Choose",
+      title: "Keyboard-emulator UID reader or full-featured SDK? Pick by deployment complexity",
+      intro: "Both are compact USB NFC readers. JustID Dongle is a minimal UID-only reader — presents tag UID as keyboard input, zero configuration, works with any software. µFR Nano is full-featured — supports MIFARE / NTAG / DESFire read + write + encode with developer SDK. Pick by whether you need encoding or just UID detection.",
+      options: [
+        {
+          label: "JustID NFC Dongle (this product — keyboard emulation)",
+          image: "/images/products/justid-dongle-main.jpg",
+          alt: "RFIDAK JustID NFC USB dongle — compact UID-only reader presenting NFC tag ID as keyboard input for ultra-simple integration with any software",
+          tagline: "UID only, keyboard input, zero-config",
+          specs: [
+            { label: "Functions", value: "UID read only (no write)" },
+            { label: "Integration", value: "Keyboard emulation (plug-and-play)" },
+            { label: "Software changes", value: "None required" },
+            { label: "Unit price", value: "$18 – 35" },
+          ],
+          bestFor: [
+            "Quick check-in / attendance (existing forms)",
+            "Healthcare patient admission ID lookup",
+            "Point-of-sale UID → customer record lookup",
+          ],
+        },
+        {
+          label: "µFR Nano (sibling — full-featured SDK)",
+          image: "/images/products/ufr-nano-enclosure.jpg",
+          alt: "RFIDAK µFR Nano USB NFC reader — full-featured desktop reader with C / Python / Java SDK for MIFARE / NTAG / DESFire encoding and development",
+          tagline: "SDK, read + write + encode",
+          specs: [
+            { label: "Functions", value: "Read + write + encode + AES" },
+            { label: "Integration", value: "C / Python / Java SDK" },
+            { label: "Software changes", value: "Custom integration required" },
+            { label: "Unit price", value: "$45 – 95" },
+          ],
+          bestFor: [
+            "Card issuance + personalization workflows",
+            "Hotel / access control enrollment stations",
+            "NFC app development + testing",
+          ],
+        },
+      ],
+      decisionTip: "If you only need UID detection and your existing software accepts keyboard input (forms, spreadsheets, POS), JustID (Option A) at 1/3 the price drops into place with zero development. For encoding, card issuance, or any workflow that writes data to tags, µFR Nano (Option B) delivers the full SDK.",
+    },
     specifications: {"Product Name": "JustID NFC USB Dongle (Keyboard Emulator)", "Operating Frequency": "13.56 MHz (HF)", "Compliance": "ISO/IEC 14443 A/B, ISO/IEC 15693", "Integrated Interface": "NXP IC for efficient and reliable RF communication", "Communication Speed": "Up to 424 Kbit/s", "Read Range": "0-50 mm (0-1.97 in)", "Supported Cards": "NXP MIFARE Classic/DESFire/Plus, NTAG 21x, NTAG 4xx DNA, JCOP Java Card, ICODE SLIX", "Connectivity": "USB (HID + CDC ACM dual interface)", "Supply Voltage": "5V via USB", "Supply Current": "150 mA (operating)", "Dimensions": "Enclosure: 71 x 20 x 11 mm; OEM board: 69 x 15 x 3 mm", "Weight": "Enclosure: 26 g; OEM board: 10 g", "Firmware Tiers": "Lite (ISO14443 keyboard emulation), Standard (ISO14443 + ISO15693), Plus (DESFire authentication + keyboard emulation), VAS (Apple VAS keyboard emulation)", "Firmware Upgrades": "Premium upgrades: Lite to Standard/Plus/VAS (field-upgradeable, same hardware)", "Configuration": "Free JustID Configuration Tool — customize UID format, LED RGB colors, prefix/suffix", "Warranty": "2-year standard (3 or 5-year options)"},
     detailSections: [
       {
@@ -2062,6 +3911,48 @@ export const products: Product[] = [
       "NFC card emulation research — PN512 host card emulation mode enables development of NFC-based mobile payment and credential terminal prototypes",
       "ESP32 IoT integration — connect via UART to ESP32 for Wi-Fi/BLE-connected NFC reader nodes in distributed IoT sensing networks"
     ],
+    visualComparison: {
+      eyebrow: "NFC Integrino N512 vs µFR XL OEM — How To Choose",
+      title: "Arduino / ESP32 module or full kiosk OEM board? Pick by product scale",
+      intro: "Both are NFC reader modules for embedding into custom hardware, but target fundamentally different integration scales. Integrino N512 is a small module with Arduino-compatible headers for IoT prototyping and MCU integration. µFR XL OEM is a complete full-size OEM board with extended antenna for production kiosks and furniture integration.",
+      options: [
+        {
+          label: "NFC Integrino N512 (this product — Arduino module)",
+          image: "/images/products/nfc-integrino-n512-web.webp",
+          alt: "RFIDAK NFC Integrino N512 — Arduino-compatible NFC module with header pins for ESP32 / STM32 / Arduino MCU integration in IoT prototyping",
+          tagline: "Arduino-compat, ESP32 / MCU",
+          specs: [
+            { label: "Form factor", value: "Module 22 × 42 mm" },
+            { label: "Read range", value: "2-5 cm (NFC standard)" },
+            { label: "Integration", value: "SPI / I2C / UART headers" },
+            { label: "Unit price (MOQ 100)", value: "$22 – 48" },
+          ],
+          bestFor: [
+            "IoT device prototyping (ESP32, STM32)",
+            "Smart-home product development",
+            "Small-batch custom MCU integration",
+          ],
+        },
+        {
+          label: "µFR XL OEM Long-Range (sibling — kiosk board)",
+          image: "/images/products/ufr-xl-oem-front.webp",
+          alt: "RFIDAK µFR XL OEM NFC reader — full-size OEM board with extended antenna for kiosk, self-service terminal, and furniture integration",
+          tagline: "Full OEM, kiosk-ready long-range",
+          specs: [
+            { label: "Form factor", value: "Full board 60 × 100 mm" },
+            { label: "Read range", value: "10-15 cm extended" },
+            { label: "Integration", value: "USB + UART + host software" },
+            { label: "Unit price (MOQ 100)", value: "$85 – 185" },
+          ],
+          bestFor: [
+            "Self-service terminal / vending machine",
+            "Reception desk / concierge kiosks",
+            "Conference room check-in furniture",
+          ],
+        },
+      ],
+      decisionTip: "For IoT prototyping or MCU projects where you're building on ESP32 / STM32 / Arduino, Integrino N512 (Option A) at 1/4 the cost drops directly onto the breadboard with standard header pins. For production kiosks and furniture needing 10-15 cm extended antenna reach, µFR XL OEM (Option B) is the complete OEM-ready board.",
+    },
     specifications: {"Product Name": "NFC Integrino N512 (Arduino-Compatible NFC Module)", "MCU": "ATmega32U", "NFC Transceiver": "NXP PN512", "Design": "Pin-to-pin compatible with Arduino Nano", "Operating Frequency": "13.56 MHz (HF)", "Compliance": "ISO/IEC 14443 A/B, ISO 18092 (NFC)", "Communication Speed": "Up to 424 Kbit/s", "Read Range": "Up to 50 mm (0-1.97 in)", "Supported Tags": "MIFARE Mini, MIFARE Classic (1K/4K/EV1), MIFARE Ultralight/Ultralight C, MIFARE Plus (2K/4K/S/X/EV1), MIFARE DESFire (Light/2K/4K/8K/EV1/EV2), NTAG 21x (210/213/215/216/Tag Tamper), NTAG 4xx DNA (413/424), JCOP Java Card (J3A040/J3A081/J3H145/JC30M48CR), Jewel, FeliCa", "NFC Modes": "Read/Write, Card Emulation, Peer-to-Peer, APDU commands", "Connectivity": "USB", "Supply Voltage": "5V", "Supply Current": "150 mA (operating)", "Dimensions": "51.3 x 23.9 x 20 mm", "Weight": "26 g (device), 110 g (commercial set)", "Arduino Library": "MFRC522_PN512 (via Arduino Library Manager or GitHub)", "Software Examples": "GetCardInfo, GetCardUID, LEDCard, SendCardInfoToUSB, SendCardUIDToUSB", "Supported Platforms": "Windows, Linux, macOS, Android, iOS, Arduino, ESP32", "Warranty": "2-year standard"},
     detailSections: [
       {
@@ -2109,6 +4000,48 @@ export const products: Product[] = [
       "Home automation triggers — ring tap activates smart locks, lighting scenes, or NFC-enabled devices via HomeKit, Home Assistant, or SmartThings",
       "Corporate event check-in and cashless payment — branded rings issued to attendees for zone access, session tracking, and on-site purchases"
     ],
+    visualComparison: {
+      eyebrow: "Ceramic Ring vs Silicone Ring — How To Choose",
+      title: "Premium ceramic or active-lifestyle silicone? Trade-off by daily wear",
+      intro: "Both formats use NFC for tap-to-pay, tap-to-unlock, and smart-home triggers. The physical difference is hardness and scratch tolerance: ceramic for premium look + scratch resistance, silicone for gym / swim / active outdoor use. Pick by the wearer's daily activity profile, not aesthetics alone.",
+      options: [
+        {
+          label: "Ceramic NFC Ring (this product — premium)",
+          image: "/images/products/nfc-ceramic-ring-main.jpg",
+          alt: "RFIDAK NFC ceramic smart ring — zirconia ceramic with NTAG chip, scratch-resistant, premium finish for fashion and tech professional users",
+          tagline: "Scratch-resistant zirconia, premium finish",
+          specs: [
+            { label: "Material", value: "Zirconia ceramic" },
+            { label: "Hardness", value: "8-9 Mohs (scratch-resistant)" },
+            { label: "Water resistance", value: "IPX7 (splash + brief submerge)" },
+            { label: "Unit price (MOQ 500)", value: "$12 – 28" },
+          ],
+          bestFor: [
+            "Tech professionals daily office wear",
+            "Fashion / jewelry market with NFC function",
+            "Desk-bound roles avoiding gym impact",
+          ],
+        },
+        {
+          label: "Silicone NFC Ring (sibling — active sport)",
+          image: "/images/products/silicone-nfc-ring-main.jpg",
+          alt: "RFIDAK silicone NFC ring — flexible food-grade silicone band with embedded NTAG chip, IP68 for gym, swimming, construction PPE environments",
+          tagline: "Flexible, IP68, gym / swim / PPE safe",
+          specs: [
+            { label: "Material", value: "Food-grade silicone" },
+            { label: "Hardness", value: "Flexible (no shatter risk)" },
+            { label: "Water resistance", value: "IP68 (pool / sauna)" },
+            { label: "Unit price (MOQ 500)", value: "$4 – 9" },
+          ],
+          bestFor: [
+            "Gym members (no finger-pinch risk under weight)",
+            "Swimming, cycling, skiing, outdoor sports",
+            "Construction / PPE-compatible workplace access",
+          ],
+        },
+      ],
+      decisionTip: "If the ring is for a premium brand / office / fashion context, ceramic (Option A) at $12-28 delivers the tactile prestige. If the ring is for gym / pool / construction / active-lifestyle daily wear, silicone (Option B) at 1/3 the cost is safer (no shatter, no pinch) and submerge-safe. Many programs offer both tiers on the same NFC backend.",
+    },
     detailSections: [
       {
         title: "Ceramic Body Construction",
@@ -2150,6 +4083,48 @@ export const products: Product[] = [
       "Valet and service center workflows — ring-based handoff to service staff without surrendering primary phone or wallet credentials",
       "Weatherproof outdoor lifestyle — drivers engaged in swimming, cycling, skiing who cannot keep a phone on their person during activity"
     ],
+    visualComparison: {
+      eyebrow: "Tesla Smart Ring vs Multi-Color PVD Ring — How To Choose",
+      title: "Single-purpose Tesla key or fashion NFC ring? Pick by primary use",
+      intro: "Tesla Smart Ring is pre-programmed as a Model 3 / Model Y key replacement — optimized for one specific automotive NFC workflow. Multi-Color PVD Ring is a general-purpose NFC ring for varied tap workflows (office access, smart home, payment). Different buyer archetypes, different price points.",
+      options: [
+        {
+          label: "Tesla Smart Ring (this product — automotive key)",
+          image: "/images/products/tesla-smart-ring-main.webp",
+          alt: "RFIDAK Tesla-compatible smart ring — NFC key replacement for Model 3 and Model Y with ceramic housing, swimming-safe, dedicated automotive NFC protocol",
+          tagline: "Tesla Model 3 / Y key replacement",
+          specs: [
+            { label: "Primary use", value: "Tesla unlock + drive auth" },
+            { label: "NFC compatibility", value: "Tesla Model 3 / Y / (Model S via workshop)" },
+            { label: "Material", value: "Zirconia ceramic" },
+            { label: "Unit price (MOQ 500)", value: "$18 – 35" },
+          ],
+          bestFor: [
+            "Tesla owners replacing phone-key dependency",
+            "Aftermarket accessory retailers / dealers",
+            "Outdoor / sport / swim lifestyles + Tesla ownership",
+          ],
+        },
+        {
+          label: "Multi-Color PVD Ring (sibling — general NFC)",
+          image: "/images/products/nfc-pattern-ring-main.jpg",
+          alt: "RFIDAK multi-color PVD coated NFC ring — stainless steel with rose-gold / black / blue / rainbow PVD finishes, general-purpose NTAG for office / home / payment",
+          tagline: "PVD coated stainless, general NFC",
+          specs: [
+            { label: "Primary use", value: "Office access + smart home + payment" },
+            { label: "NFC compatibility", value: "All iPhone / Android NFC, NTAG213/215/216" },
+            { label: "Material", value: "316L stainless + PVD" },
+            { label: "Unit price (MOQ 500)", value: "$8 – 16" },
+          ],
+          bestFor: [
+            "Office / campus access + smart home automation",
+            "Fashion-forward NFC ring lifestyle",
+            "Corporate gift programs with color-tier branding",
+          ],
+        },
+      ],
+      decisionTip: "If the buyer is a Tesla owner specifically wanting to replace phone-key dependency, Tesla Smart Ring (Option A) is the dedicated product. For any other NFC workflow (office, home, events, payment, loyalty), general PVD Ring (Option B) at ~half the price covers the use case. Hybrid: Tesla owners who also want office / home NFC often buy both.",
+    },
     detailSections: [
       {
         title: "IP68 Waterproof and Drop Tested",
@@ -2189,6 +4164,48 @@ export const products: Product[] = [
       "Construction site worker attendance — non-conductive ring safe near energized equipment, replaces cards that snag on PPE",
       "Festival and concert cashless payment — colorful branded rings for RFID-enabled entry, zone access, and bar-and-merchandise payment"
     ],
+    visualComparison: {
+      eyebrow: "Silicone NFC Ring vs NFC Wristband — How To Choose",
+      title: "Finger ring or wrist band? Pick by sport type and wearability",
+      intro: "Both are wearable NFC credentials for active lifestyles — pool, gym, festival, outdoor. Rings live on one finger and are invisible during most activities but can slip off under impact. Wristbands wrap around the wrist for higher retention but are more visible and may interfere with watch wear or sleeves.",
+      options: [
+        {
+          label: "Silicone NFC Ring (this product — finger)",
+          image: "/images/products/silicone-nfc-ring-main.jpg",
+          alt: "RFIDAK silicone NFC ring — flexible food-grade silicone band for finger wear, IP68 waterproof for swim / gym / cycling, no snag on PPE",
+          tagline: "Finger-worn, IP68, PPE-safe",
+          specs: [
+            { label: "Format", value: "Ring (Ø 15-22 mm inner)" },
+            { label: "Retention", value: "Sized to fit, can slip under impact" },
+            { label: "Visibility", value: "Low (hidden by hand activity)" },
+            { label: "Unit price (MOQ 500)", value: "$4 – 9" },
+          ],
+          bestFor: [
+            "Gym members (no wrist-band interference under weights)",
+            "Cyclists (no wristband moving under gloves)",
+            "Workers with PPE covering wrists",
+          ],
+        },
+        {
+          label: "Silicone NFC Wristband (sibling — wrist)",
+          image: "/images/products/RFID-SIlicone-wristbands-006.webp",
+          alt: "RFIDAK silicone NFC wristband — flexible food-grade silicone wrist band for water parks, fitness clubs, festivals, and hospital patient ID",
+          tagline: "Wrist-worn, high retention, visible ID",
+          specs: [
+            { label: "Format", value: "Wristband (Ø 45-72 mm)" },
+            { label: "Retention", value: "High — closed loop or adjustable" },
+            { label: "Visibility", value: "High (public identity marker)" },
+            { label: "Unit price (MOQ 500)", value: "$0.65 – 1.45" },
+          ],
+          bestFor: [
+            "Water parks / swimming pool / cruise ships",
+            "Festival multi-day wear with visible access tier",
+            "Hospital patient ID requiring visible band",
+          ],
+        },
+      ],
+      decisionTip: "For gym, cycling, or PPE-heavy workplaces where wrist bands would interfere, ring (Option A) delivers invisible NFC without snag risk at 3-5× per-unit cost. For water parks, multi-day festivals, cruise ships, and hospital patient ID where high retention and visible identity tier matters, wristband (Option B) at lower cost is the standard format. Both can be combined: rings for premium / VIP members, wristbands for general access.",
+    },
     detailSections: [
       {
         title: "Silicone Material and Durability",
@@ -2228,6 +4245,48 @@ export const products: Product[] = [
       "Wedding and event favors — matching pairs (rose gold and gunmetal, or rainbow duo) preloaded with photo album URL or RSVP link",
       "Office access control with a style upgrade — employees choose color preference from a set of corporate-approved PVD finishes for daily access"
     ],
+    visualComparison: {
+      eyebrow: "PVD Pattern Ring vs Ceramic NFC Ring — How To Choose",
+      title: "PVD-coated stainless fashion or zirconia ceramic premium? Pick by daily wear style",
+      intro: "Both are premium NFC rings for professional / fashion daily wear. PVD-coated stainless offers color variety (rose gold / black / blue / rainbow patterns) at mid-premium price. Zirconia ceramic delivers top-tier scratch resistance and gem-like finish at premium price. Both work identically for NFC tap; the choice is aesthetic and durability.",
+      options: [
+        {
+          label: "Multi-Color PVD Ring (this product — fashion stainless)",
+          image: "/images/products/nfc-pattern-ring-main.jpg",
+          alt: "RFIDAK multi-color PVD NFC ring — 316L stainless steel with rose gold, black, blue, or rainbow PVD finish for fashion-forward daily NFC wear",
+          tagline: "316L + PVD, color variety, fashion-forward",
+          specs: [
+            { label: "Material", value: "316L stainless + PVD" },
+            { label: "Hardness", value: "7 Mohs (scratch resistant)" },
+            { label: "Color options", value: "Rose gold / black / blue / rainbow" },
+            { label: "Unit price (MOQ 500)", value: "$8 – 16" },
+          ],
+          bestFor: [
+            "Corporate gift programs with color-tier branding",
+            "Fashion-forward office + smart home + payment",
+            "Mid-premium wholesale fashion retail",
+          ],
+        },
+        {
+          label: "Ceramic NFC Ring (sibling — premium zirconia)",
+          image: "/images/products/nfc-ceramic-ring-main.jpg",
+          alt: "RFIDAK NFC ceramic smart ring — zirconia ceramic with NTAG chip, 8-9 Mohs hardness, premium gem-like finish for executive and luxury market",
+          tagline: "Zirconia ceramic, 8-9 Mohs, luxury",
+          specs: [
+            { label: "Material", value: "Zirconia ceramic" },
+            { label: "Hardness", value: "8-9 Mohs (near-diamond)" },
+            { label: "Color options", value: "Black / white (polished)" },
+            { label: "Unit price (MOQ 500)", value: "$12 – 28" },
+          ],
+          bestFor: [
+            "Executive / C-suite corporate gift programs",
+            "Luxury retail NFC ring collections",
+            "Tech-premium professional daily wear",
+          ],
+        },
+      ],
+      decisionTip: "For mid-premium programs where color variety matters (rose gold / black / blue / rainbow for team differentiation or fashion inventory), PVD (Option A) at half the ceramic price hits the right price-variety balance. For executive / luxury tier where scratch-free premium finish justifies premium pricing, ceramic (Option B) delivers gem-like durability. Many corporate gift programs stock both tiers with PVD as general-team gift and ceramic as executive top-tier.",
+    },
     detailSections: [
       {
         title: "PVD Color Finishes",
@@ -2268,6 +4327,48 @@ export const products: Product[] = [
       "Parking lot barrier access — vehicle-mounted or hand-carried fobs for monthly parker authentication at garage gates",
       "Event and temporary access — low-cost disposable credentials for multi-day conferences, trade shows, and short-term projects"
     ],
+    visualComparison: {
+      eyebrow: "ABS Keyfob vs Silicone Keyfob — How To Choose",
+      title: "Cost-optimized ABS or waterproof silicone? Pick by environment",
+      intro: "ABS is the default keyfob material for 70% of B2B programs — cheap, durable, 9 stock colors, 15+ mold shapes. Silicone costs 1.6-2× more but survives water / chemicals / autoclave. Pick silicone only if the fob actually encounters those environments; otherwise ABS delivers the volume-economy value.",
+      options: [
+        {
+          label: "ABS Keyfob (this product — cost-optimized default)",
+          image: "/images/products/rfid-abs-keyfob-main.jpg",
+          alt: "RFIDAK ABS RFID keyfob — hard plastic injection-molded with 9 stock colors and 15+ mold shapes, cost-effective for apartment, fitness, and office access at scale",
+          tagline: "IP65, 9 colors, 15+ molds, mass-market",
+          specs: [
+            { label: "IP rating", value: "IP65 (no submersion)" },
+            { label: "Colors available", value: "9 stock + custom Pantone" },
+            { label: "Chemistry", value: "Not tolerant to solvents / bleach" },
+            { label: "Unit price (MOQ 5K)", value: "$0.45 – 0.85" },
+          ],
+          bestFor: [
+            "Apartment complex access (majority of B2B market)",
+            "Fitness club, parking, office badging",
+            "High-volume programs with cost discipline",
+          ],
+        },
+        {
+          label: "Silicone Keyfob (sibling — specialty waterproof)",
+          image: "/images/products/rfid-silicone-keyfob-main.jpg",
+          alt: "RFIDAK silicone RFID keyfob — food-grade medical silicone IP68 for water park, hospital, marine, and autoclave environments",
+          tagline: "IP68, autoclave-compatible, specialty",
+          specs: [
+            { label: "IP rating", value: "IP68 (1.5 m submerged)" },
+            { label: "Colors available", value: "Full Pantone + multi-color mold" },
+            { label: "Chemistry", value: "Solvent + bleach + autoclave OK" },
+            { label: "Unit price (MOQ 5K)", value: "$0.85 – 1.45" },
+          ],
+          bestFor: [
+            "Water park / aquatic center staff",
+            "Hospital / medical autoclave reprocessing",
+            "Marine / offshore / chemical plant",
+          ],
+        },
+      ],
+      decisionTip: "For 70%+ of B2B keyfob deployments (apartment, gym, office, parking), ABS (Option A) at $0.45-0.85 delivers the volume-economy default. Upgrade to silicone (Option B) only when the fob will actually encounter water submersion, chemical exposure, or autoclave sterilization — paying the 60-100% material premium for capability you won't use is waste.",
+    },
     detailSections: [
       {
         title: "Should I choose the ABS keyfob for my access program?",
@@ -2385,6 +4486,48 @@ export const products: Product[] = [
       "Marine vessel crew access — saltwater-tolerant credentials for yacht, cruise, and commercial marine crew management systems",
       "Festival and outdoor event wristband alternative — premium reusable credential for multi-day events with ticketing and cashless payment"
     ],
+    visualComparison: {
+      eyebrow: "Silicone Keyfob vs ABS Keyfob — How To Choose",
+      title: "Waterproof pool fob or dry-office default? 30-second decision",
+      intro: "Same chip family, same reader compatibility, same keyring geometry. The meaningful difference is material — silicone for wet/pool/chemical environments at 2-3× the unit cost of standard ABS for typical office/apartment access. Pick by where the fob will live, not by what looks nicer.",
+      options: [
+        {
+          label: "Silicone Keyfob (this product — food-grade LSR)",
+          image: "/images/products/rfid-silicone-keyfob-main.jpg",
+          alt: "RFIDAK silicone RFID keyfob — food-grade medical silicone, IP68 waterproof, autoclave 134°C option, for water park, fitness, medical, marine environments",
+          tagline: "IP68, autoclave-compatible, chemical-resistant",
+          specs: [
+            { label: "IP rating", value: "IP68 (1.5 m submerged)" },
+            { label: "Temperature", value: "-40 to +200 °C" },
+            { label: "Autoclave 134 °C", value: "Yes (PPS variant)" },
+            { label: "Unit price (MOQ 5K)", value: "$0.85 – 1.45" },
+          ],
+          bestFor: [
+            "Water park, swimming pool, aquatic center staff",
+            "Hospital / autoclave-reprocessed credentials",
+            "Marine / construction / chemical plant",
+          ],
+        },
+        {
+          label: "ABS Keyfob (sibling — dry-environment default)",
+          image: "/images/products/rfid-abs-keyfob-main.jpg",
+          alt: "RFIDAK ABS RFID keyfob — hard plastic injection-molded with 9 stock colors and 15+ mold shapes, cost-effective for apartment, fitness, and office access at scale",
+          tagline: "IP65, 9 stock colors, 15+ mold shapes",
+          specs: [
+            { label: "IP rating", value: "IP65 (no submersion)" },
+            { label: "Temperature", value: "-20 to +60 °C" },
+            { label: "Autoclave 134 °C", value: "No (softens at 105°C)" },
+            { label: "Unit price (MOQ 5K)", value: "$0.45 – 0.85" },
+          ],
+          bestFor: [
+            "Apartment and residential access control",
+            "Fitness club member credentials",
+            "Office badging, school ID, parking",
+          ],
+        },
+      ],
+      decisionTip: "If the fob will be submerged in water, exposed to chemicals, or autoclave-sterilized, silicone (Option A) is worth the 40-60% unit cost premium — ABS would fail within weeks. For typical dry-environment apartment / office / fitness / parking deployment, ABS (Option B) is the volume-economy default that 70% of B2B keyfob programs specify.",
+    },
     detailSections: [
       {
         title: "Should I choose the silicone keyfob for my wet / outdoor / medical program?",
@@ -2484,6 +4627,48 @@ export const products: Product[] = [
       "Airport lounge and loyalty program credentials — premium tier member recognition replacing printed cards at business lounge entrances",
       "Conference and event VIP credentials — leather fobs for sponsors, speakers, and premium-tier attendees with NFC session check-in"
     ],
+    visualComparison: {
+      eyebrow: "Leather Keyfob vs Epoxy Keyfob — How To Choose",
+      title: "Premium tactile or transparent tech-look? Both are premium, different vibes",
+      intro: "Both cost 3-5× standard ABS and both target premium programs. The aesthetic difference drives the decision: leather delivers luxury / hospitality / executive warmth, epoxy delivers modern / tech / design-studio crisp. Pick by the brand personality you're issuing the credential under.",
+      options: [
+        {
+          label: "Leather Keyfob (this product — luxury tactile)",
+          image: "/images/products/rfid-leather-keyfob-main.jpg",
+          alt: "RFIDAK leather RFID keyfob — genuine or PU leather with stitched edge and gold/silver hot-stamp option, premium tactile finish for hospitality and corporate gifts",
+          tagline: "Stitched leather, gold-stamp branding",
+          specs: [
+            { label: "Material", value: "Genuine / PU leather" },
+            { label: "Branding", value: "Hot-stamp gold / silver, debossed" },
+            { label: "Style", value: "Warm, premium, traditional luxury" },
+            { label: "Unit price (MOQ 1K)", value: "$1.85 – 4.50" },
+          ],
+          bestFor: [
+            "Luxury hotel guest welcome programs",
+            "Automotive dealerships, premium car rental",
+            "Executive corporate gift sets, board-level",
+          ],
+        },
+        {
+          label: "Epoxy Keyfob (sibling — visible chip)",
+          image: "/images/products/rfid-epoxy-keyfob-main.jpg",
+          alt: "RFIDAK epoxy RFID keyfob — clear resin dome over full-color printed artwork with visible chip, modern tech-forward finish for brand campaigns and conferences",
+          tagline: "Clear dome, visible chip, modern tech",
+          specs: [
+            { label: "Material", value: "Epoxy resin + PU backing" },
+            { label: "Branding", value: "Full CMYK under dome" },
+            { label: "Style", value: "Cool, modern, tech-forward" },
+            { label: "Unit price (MOQ 1K)", value: "$0.95 – 1.85" },
+          ],
+          bestFor: [
+            "Tech brand loyalty programs, SaaS companies",
+            "Hackerspaces, university / campus programs",
+            "Conference / trade show premium VIP credentials",
+          ],
+        },
+      ],
+      decisionTip: "If the credential accompanies luxury / hospitality / executive-tier brand (Marriott Luxury Collection, Porsche, Louis Vuitton), leather (Option A) is the expected material. If the credential accompanies modern tech / design / startup culture, epoxy (Option B) at half the cost communicates the right brand voice. Industry data: hospitality buys 70%+ leather; tech / SaaS buys 80%+ epoxy.",
+    },
     detailSections: [
       {
         title: "Should I choose the leather keyfob for my hospitality / luxury / corporate gift program?",
@@ -2591,6 +4776,48 @@ export const products: Product[] = [
       "Industrial equipment asset tagging — epoxy-sealed for light industrial exposure while keeping UID visually verifiable on inspection",
       "Developer and OEM prototyping — reference hardware for RFID system integrators and firmware developers testing chip communication"
     ],
+    visualComparison: {
+      eyebrow: "Epoxy Keyfob vs Leather Keyfob — How To Choose",
+      title: "Tech-forward visible chip or traditional luxury leather? Pick by brand voice",
+      intro: "Both are premium keyfobs at 3-5× ABS cost, but target opposite brand personalities. Epoxy shows the chip through clear resin — modern, tech, SaaS / startup culture. Leather hides everything behind traditional luxury — hospitality, executive, automotive dealership. The brand voice determines the material.",
+      options: [
+        {
+          label: "Epoxy Keyfob (this product — transparent tech)",
+          image: "/images/products/rfid-epoxy-keyfob-main.jpg",
+          alt: "RFIDAK epoxy RFID keyfob — clear dome over full-color printed artwork with visible chip for tech-forward brand campaigns and conferences",
+          tagline: "Clear dome, visible chip, modern",
+          specs: [
+            { label: "Material", value: "Epoxy resin + PU backing" },
+            { label: "Branding", value: "Full CMYK under dome" },
+            { label: "Style", value: "Modern, tech-forward" },
+            { label: "Unit price (MOQ 1K)", value: "$0.95 – 1.85" },
+          ],
+          bestFor: [
+            "Tech / SaaS brand loyalty programs",
+            "Hackerspaces, university campuses",
+            "Developer / OEM reference hardware",
+          ],
+        },
+        {
+          label: "Leather Keyfob (sibling — luxury traditional)",
+          image: "/images/products/rfid-leather-keyfob-main.jpg",
+          alt: "RFIDAK leather RFID keyfob — stitched genuine or PU leather with gold / silver hot-stamp for luxury hospitality and executive corporate gifts",
+          tagline: "Stitched leather, gold-stamp luxury",
+          specs: [
+            { label: "Material", value: "Genuine / PU leather" },
+            { label: "Branding", value: "Hot-stamp, debossed" },
+            { label: "Style", value: "Warm, traditional luxury" },
+            { label: "Unit price (MOQ 1K)", value: "$1.85 – 4.50" },
+          ],
+          bestFor: [
+            "Luxury hotel guest credentials",
+            "Automotive dealership / premium rental",
+            "Executive corporate gift sets",
+          ],
+        },
+      ],
+      decisionTip: "If the brand is tech / startup / modern (SaaS, conference, university), epoxy (Option A) at half the cost of leather speaks the right voice. If the brand is luxury / hospitality / executive (Marriott Luxury, Porsche, private banking), leather (Option B) is the expected premium material.",
+    },
     detailSections: [
       {
         title: "Should I choose the epoxy keyfob for my tech-promo / brand-activation program?",
@@ -2682,6 +4909,48 @@ export const products: Product[] = [
       "Food processing and bakery floor ID — autoclave-tolerant credentials compliant with hygiene rotation and sterilization SOPs",
       "Power plant and refinery asset tagging — long-range UHF variant for turbine, pump, and pipe-run inventory in 100+ °C steam environments"
     ],
+    visualComparison: {
+      eyebrow: "PPS Keyfob vs FR4 Glassfiber Keyfob — How To Choose",
+      title: "Autoclave / chemical industrial or slim flame-retardant? Pick by hazard type",
+      intro: "Both are specialty industrial fob materials for hazard-specific environments — different hazards call for different materials. PPS handles chemistry, autoclave, and high temperatures. FR4 handles flame, slim wallet-fit, and electromagnetic interference. Non-interchangeable; verify the primary hazard before specifying.",
+      options: [
+        {
+          label: "PPS Keyfob (this product — chemical / autoclave)",
+          image: "/images/products/rfid-pps-keyfob-main.jpg",
+          alt: "RFIDAK PPS RFID keyfob — polyphenylene sulfide thermoplastic for chemical plant, autoclave, industrial laundry, 134°C steam environments",
+          tagline: "PPS thermoplastic, 134 °C autoclave",
+          specs: [
+            { label: "Material", value: "Polyphenylene sulfide (PPS)" },
+            { label: "Autoclave 134 °C", value: "Yes — 500+ cycles" },
+            { label: "Chemistry", value: "Acid / base / solvent tolerant" },
+            { label: "Unit price (MOQ 1K)", value: "$1.45 – 2.75" },
+          ],
+          bestFor: [
+            "Chemical plants, refineries, pharmaceutical",
+            "Industrial laundry and autoclave-reprocessed",
+            "Power plant steam environments",
+          ],
+        },
+        {
+          label: "FR4 Glassfiber Keyfob (sibling — flame-retardant slim)",
+          image: "/images/products/rfid-fr4-keyfob-main.jpg",
+          alt: "RFIDAK FR4 glassfiber RFID keyfob — 1.2mm slim fiberglass PCB with UL94 V-0 flame retardant rating, for data centers and defense",
+          tagline: "1.2 mm slim, UL94 V-0 flame retardant",
+          specs: [
+            { label: "Material", value: "FR4 glassfiber (flame-retardant)" },
+            { label: "UL94 rating", value: "V-0 (self-extinguishing)" },
+            { label: "Thickness", value: "1.2 mm (slim, wallet-fit)" },
+            { label: "Unit price (MOQ 1K)", value: "$0.75 – 1.45" },
+          ],
+          bestFor: [
+            "Data centers (fire-suppression code compliance)",
+            "Defense / military / avionics",
+            "Cold-chain logistics, slim wallet carry",
+          ],
+        },
+      ],
+      decisionTip: "If the fob is in a chemical / autoclave / high-temperature steam environment, PPS (Option A) is the only option that survives. If the fob is in a fire-code-regulated environment (data center, aircraft) or must slim-fit in a wallet alongside credit cards, FR4 (Option B) at half the cost is the right material. For merely rugged / outdoor environment without extreme hazards, <a href=\"/product/rfid-silicone-keyfob\">silicone</a> or <a href=\"/product/rfid-abs-keyfob\">ABS</a> cover the baseline at further cost savings.",
+    },
     detailSections: [
       {
         title: "Should I choose the PPS keyfob for my industrial / chemical / autoclave program?",
@@ -2780,6 +5049,48 @@ export const products: Product[] = [
       "Outdoor utility worker and field service — weather-tolerant credential for linemen, meter readers, and field technicians",
       "High-security research lab access — laser-engraved sequential UIDs match chip UID for tamper-resistant audit trails"
     ],
+    visualComparison: {
+      eyebrow: "FR4 Glassfiber vs PPS Keyfob — How To Choose",
+      title: "Flame-retardant slim or chemical autoclave? Pick by hazard class",
+      intro: "Both are specialty industrial keyfob materials for hazard-specific deployments. FR4 glassfiber targets flame-safety code compliance (data centers, aviation, defense). PPS thermoplastic targets chemical / autoclave exposure (pharma, refinery, hospital). Non-interchangeable — verify which hazard dominates before specifying.",
+      options: [
+        {
+          label: "FR4 Glassfiber Keyfob (this product — flame-retardant)",
+          image: "/images/products/rfid-fr4-keyfob-main.jpg",
+          alt: "RFIDAK FR4 glassfiber RFID keyfob — 1.2mm slim fiberglass PCB with UL94 V-0 flame retardant rating, for data centers, avionics, and defense applications",
+          tagline: "FR4, UL94 V-0, 1.2 mm slim wallet-fit",
+          specs: [
+            { label: "Primary hazard", value: "Flame-retardant (UL94 V-0)" },
+            { label: "Thickness", value: "1.2 mm (slim, wallet-compatible)" },
+            { label: "Chemistry", value: "Moderate (better than ABS)" },
+            { label: "Unit price (MOQ 1K)", value: "$0.75 – 1.45" },
+          ],
+          bestFor: [
+            "Data center (fire suppression code)",
+            "Aviation / avionics / defense",
+            "Cold-chain logistics with wallet carry",
+          ],
+        },
+        {
+          label: "PPS Keyfob (sibling — chemical + autoclave)",
+          image: "/images/products/rfid-pps-keyfob-main.jpg",
+          alt: "RFIDAK PPS RFID keyfob — polyphenylene sulfide thermoplastic for chemical, autoclave 134°C, and high-temperature industrial applications",
+          tagline: "PPS thermoplastic, 134 °C autoclave",
+          specs: [
+            { label: "Primary hazard", value: "Chemical + high-temp autoclave" },
+            { label: "Thickness", value: "3-5 mm (rigid industrial)" },
+            { label: "Chemistry", value: "Acid / base / solvent tolerant" },
+            { label: "Unit price (MOQ 1K)", value: "$1.45 – 2.75" },
+          ],
+          bestFor: [
+            "Chemical plants, refineries, pharma",
+            "Hospital autoclave-reprocessed credentials",
+            "Power plant / steam environments",
+          ],
+        },
+      ],
+      decisionTip: "If the primary workplace hazard is fire / flame code compliance (data centers, aviation, defense), FR4 (Option A) with UL94 V-0 rating meets the code at half the PPS price. If the hazard is chemical exposure or autoclave sterilization, PPS (Option B) is the only option that survives the chemistry. Both materials are specialty — for merely rugged / outdoor / wet environments, <a href=\"/product/rfid-abs-keyfob\">ABS</a> or <a href=\"/product/rfid-silicone-keyfob\">silicone</a> cover the baseline at 1/2 to 1/4 the cost.",
+    },
     detailSections: [
       {
         title: "Should I choose the FR4 keyfob for my data center / defense / cold-chain program?",
@@ -2875,6 +5186,48 @@ export const products: Product[] = [
       "Brand mascot promotional giveaways — corporate brand character molded into soft PVC for trade show swag that attendees keep long-term",
       "Veterinary and animal hospital pet ID tags — cartoon pet-themed credentials worn on collars, linking to pet medical record and owner contact"
     ],
+    visualComparison: {
+      eyebrow: "Soft PVC Keyfob vs ABS Keyfob — How To Choose",
+      title: "Flexible 3D PVC or hard 2D ABS? Pick by visual branding creativity",
+      intro: "Both are cost-effective keyfob materials at similar price points. The meaningful difference is form creativity: soft PVC can be molded into 3D character shapes, cartoons, product silhouettes with full-color gradient; ABS is a flat injection-molded plastic with silkscreen surface print. Pick by whether brand creativity matters more than volume economics.",
+      options: [
+        {
+          label: "Soft PVC Keyfob (this product — 3D character)",
+          image: "/images/products/rfid-pvc-keyfob-main.jpg",
+          alt: "RFIDAK soft PVC RFID keyfob — flexible 3D-molded character shape with full-color gradient for promotional campaigns and branded merchandise",
+          tagline: "3D shape, full-color gradient, character-molded",
+          specs: [
+            { label: "Shape freedom", value: "3D molded (any character / product silhouette)" },
+            { label: "Color", value: "Full-color gradient with multi-tone" },
+            { label: "Feel", value: "Soft, flexible, squeezable" },
+            { label: "Unit price (MOQ 2K)", value: "$0.85 – 1.85" },
+          ],
+          bestFor: [
+            "Theme park / mascot / cartoon merchandise",
+            "Veterinary / pet ID with animal-themed design",
+            "Promotional giveaways with 3D branded creativity",
+          ],
+        },
+        {
+          label: "ABS Keyfob (sibling — hard flat)",
+          image: "/images/products/rfid-abs-keyfob-main.jpg",
+          alt: "RFIDAK ABS RFID keyfob — hard plastic with 2D silkscreen surface print for cost-optimized apartment, fitness, and office access",
+          tagline: "Hard flat, silkscreen print, cost-default",
+          specs: [
+            { label: "Shape freedom", value: "2D injection-molded (15+ stock shapes)" },
+            { label: "Color", value: "Solid color body + silkscreen logo" },
+            { label: "Feel", value: "Hard, rigid, daily-carry durable" },
+            { label: "Unit price (MOQ 5K)", value: "$0.45 – 0.85" },
+          ],
+          bestFor: [
+            "Access control, gym membership, parking",
+            "B2B functional credential (brand secondary)",
+            "High-volume cost-sensitive programs",
+          ],
+        },
+      ],
+      decisionTip: "If the keyfob is a branded / promotional object where the visual creativity IS the product (character shapes, mascots, themed merchandise), soft PVC (Option A) at $0.85-1.85 delivers 3D creativity ABS can't match. For functional access control where the chip matters more than the aesthetic, ABS (Option B) at half the cost is the volume-economy default.",
+    },
     detailSections: [
       {
         title: "OEM Custom Mold Development",
@@ -2951,6 +5304,48 @@ export const products: Product[] = [
       "Conference and trade show single-day registration — pre-encoded with attendee profile URL for booth staff quick-lookup",
       "Water park and aquatic event — moisture-tolerant synthetic paper survives pool, shower, and sprinkler exposure without disintegration"
     ],
+    visualComparison: {
+      eyebrow: "Paper Wristband vs Fabric Wristband — How To Choose",
+      title: "Single-day disposable or multi-day festival? Cost tier vs durability",
+      intro: "Both are single-use event wristbands but target very different cost-durability points. Paper wristbands at $0.08-0.22 per unit suit day passes and hospital visitor tagging. Fabric woven wristbands at $0.38-0.65 suit 3-5 day festivals where attendees need cashless payment and multi-day wear.",
+      options: [
+        {
+          label: "Paper Wristband (this product — ultra-low cost)",
+          image: "/images/products/rfid-paper-wristband-ntag213.jpg",
+          alt: "RFIDAK RFID paper wristband — Tyvek-class synthetic paper, adhesive-seal closure, recyclable, single-day event or hospital visitor credential",
+          tagline: "Disposable, recyclable, hours-to-one-day",
+          specs: [
+            { label: "Wear duration", value: "Hours to 1 day" },
+            { label: "Water resistance", value: "Splash (Tyvek variant)" },
+            { label: "Closure", value: "Adhesive seal (tamper-evident)" },
+            { label: "Unit price (MOQ 10K)", value: "$0.08 – 0.22" },
+          ],
+          bestFor: [
+            "Hospital visitor badges with daily re-issue",
+            "Single-day events, concerts, theme park day passes",
+            "Short-duration access / trial memberships",
+          ],
+        },
+        {
+          label: "Fabric Woven Wristband (sibling — multi-day event)",
+          image: "/images/products/rfid-fabric-wristband-conference.jpg",
+          alt: "RFIDAK RFID fabric woven wristband — polyester woven band with plastic snap closure, 3-5 day wear, cashless payment ready for festivals and music events",
+          tagline: "3-5 day wear, cashless-payment ready",
+          specs: [
+            { label: "Wear duration", value: "3 – 5 days" },
+            { label: "Water resistance", value: "IPX4 (rain / shower)" },
+            { label: "Closure", value: "One-way plastic snap" },
+            { label: "Unit price (MOQ 10K)", value: "$0.38 – 0.65" },
+          ],
+          bestFor: [
+            "Music festivals (Coachella, Tomorrowland scale)",
+            "Multi-day conferences with cashless payment",
+            "Sports event packages with credential-based access",
+          ],
+        },
+      ],
+      decisionTip: "If the wristband needs to last only hours and unit cost is the #1 driver (visitor management, day passes, mass-market events), paper (Option A) delivers the lowest-cost credential at $0.08-0.22. If the wristband is worn 3+ days with cashless spending, printed branding, and multi-zone entry, fabric woven (Option B) is the industry default at 3-5× the cost but also 10-50× the per-guest revenue potential.",
+    },
     detailSections: [
       {
         title: "Should I choose the RFID paper wristband for my event?",
@@ -3061,6 +5456,48 @@ export const products: Product[] = [
       "Cruise ship and resort all-inclusive — guest wristband for cabin access, dining, spa, and shore excursion check-in",
       "Marathon and endurance event finisher credentials — branded wristband given at finish line as commemorative + NFC photo gallery link"
     ],
+    visualComparison: {
+      eyebrow: "Fabric Woven vs Nylon Wristband — How To Choose",
+      title: "Polyester woven or cinch-lock nylon? Pick by closure and feel",
+      intro: "Both are reusable-multi-day wristband formats for events, hospitality, and festivals. Fabric (polyester) offers softer feel with one-way plastic snap — single-use per attendee. Nylon uses an adjustable cinch-lock closure — multi-event reusable across different attendees. Different closures fit different workflows.",
+      options: [
+        {
+          label: "Fabric Woven Wristband (this product — one-way snap)",
+          image: "/images/products/rfid-fabric-wristband-conference.jpg",
+          alt: "RFIDAK RFID fabric woven wristband — polyester woven band with one-way plastic snap closure, tamper-evident single-use for multi-day festivals",
+          tagline: "Polyester woven, one-way snap, tamper-evident",
+          specs: [
+            { label: "Material", value: "Polyester woven" },
+            { label: "Closure", value: "One-way plastic snap (tamper-evident)" },
+            { label: "Reusable", value: "No — cut to remove" },
+            { label: "Unit price (MOQ 10K)", value: "$0.38 – 0.65" },
+          ],
+          bestFor: [
+            "Music festivals (3-5 day continuous wear)",
+            "Trade shows and conferences with security",
+            "Hospital patient ID (must not be transferred)",
+          ],
+        },
+        {
+          label: "Nylon Wristband (sibling — cinch lock)",
+          image: "/images/products/rfid-nylon-wristband-main.jpg",
+          alt: "RFIDAK RFID nylon wristband — adjustable cinch-lock closure for multi-event reuse across different attendees, premium feel for corporate events",
+          tagline: "Nylon webbing, adjustable cinch-lock, reusable",
+          specs: [
+            { label: "Material", value: "Nylon webbing" },
+            { label: "Closure", value: "Adjustable cinch-lock" },
+            { label: "Reusable", value: "Yes — unlock to remove" },
+            { label: "Unit price (MOQ 10K)", value: "$0.65 – 1.35" },
+          ],
+          bestFor: [
+            "Corporate team-building retreats (multi-event)",
+            "Rental / loaner programs with wristband return",
+            "Premium outdoor events (hiking, adventure)",
+          ],
+        },
+      ],
+      decisionTip: "If the wristband is issued to attendees who keep it through the event then discard (festival, hospital visitor), fabric woven (Option A) delivers tamper-evident security at lower cost. If the wristband is reused across multiple events with different wearers (team-building, rental fleet), nylon (Option B) adjusts to any wrist and reuses cleanly — premium price reflects reuse economics.",
+    },
     detailSections: [
       {
         title: "Should I choose the fabric woven wristband for my event?",
@@ -3168,6 +5605,48 @@ export const products: Product[] = [
       "Corporate wellness program — employee badge for fitness-for-employee programs with gym check-in + meal plan",
       "Water park season passes and cruise shipboard — stretch-fit credentials that withstand pool and shower wear"
     ],
+    visualComparison: {
+      eyebrow: "Elastic Stretch vs PVC Wristband — How To Choose",
+      title: "Elastic stretch-fit or soft PVC band? Pick by durability and daily feel",
+      intro: "Both are reusable multi-month wristband formats for season passes, club memberships, and ongoing access programs. Elastic stretches over the hand with no closure at all — simplest to issue. PVC has a snap or velcro closure for adjustable fit. Different material feel and replacement economics.",
+      options: [
+        {
+          label: "Elastic Wristband (this product — stretch-on)",
+          image: "/images/products/rfid-elastic-wristband-main.jpg",
+          alt: "RFIDAK RFID elastic stretch wristband — fabric-woven elastic band stretches over hand with no closure, pool and shower safe for long-term season pass use",
+          tagline: "Stretch-on, closureless, pool-safe",
+          specs: [
+            { label: "Material", value: "Elastic fabric (polyester + rubber)" },
+            { label: "Closure", value: "None (stretch-fit)" },
+            { label: "Reusable", value: "Yes — stretch off to remove" },
+            { label: "Unit price (MOQ 1K)", value: "$1.25 – 2.65" },
+          ],
+          bestFor: [
+            "Water park season passes (stays on through pool)",
+            "Fitness club membership credentials",
+            "Cruise shipboard access for 7-14 day cruises",
+          ],
+        },
+        {
+          label: "Soft PVC Wristband (sibling — closure band)",
+          image: "/images/products/rfid-pvc-wristband-main.jpg",
+          alt: "RFIDAK RFID soft PVC wristband — premium reusable band with adjustable snap or velcro closure for theme park season passes and gym membership",
+          tagline: "Soft PVC, adjustable snap / velcro",
+          specs: [
+            { label: "Material", value: "Soft PVC (phthalate-free)" },
+            { label: "Closure", value: "Adjustable snap or velcro" },
+            { label: "Reusable", value: "Yes — unbuckle to remove" },
+            { label: "Unit price (MOQ 1K)", value: "$0.95 – 1.95" },
+          ],
+          bestFor: [
+            "Theme park season pass premium tier",
+            "Gym / spa regular access credentials",
+            "Hospital long-term patient (multi-week stay)",
+          ],
+        },
+      ],
+      decisionTip: "If the wristband must stay on through pool / shower / exercise without worrying about closure failure, elastic (Option A) has no closure to break but costs 30-50% more. If adjustable fit matters (kids-to-adult programs, arm-size variety) and cost is a factor, soft PVC (Option B) is the lower-cost reusable default.",
+    },
     detailSections: [
       {
         title: "Stretch-to-Fit Design",
@@ -3207,6 +5686,48 @@ export const products: Product[] = [
       "Youth camp and wilderness education — durable wristbands for multi-week camp programs with activity tracking",
       "Corporate team-building retreats and outdoor corporate events — branded nylon wristbands with event logo"
     ],
+    visualComparison: {
+      eyebrow: "Nylon Wristband vs Fabric Woven — How To Choose",
+      title: "Adjustable cinch or one-way snap? Pick by reuse economics",
+      intro: "Both are multi-day wristbands for events and corporate programs at similar price. Nylon uses an adjustable cinch-lock — reusable across different attendees (rental fleet, multi-event). Fabric woven uses one-way plastic snap — single-use per attendee with tamper-evident security. Pick by whether the wristband is reused or discarded.",
+      options: [
+        {
+          label: "Nylon Wristband (this product — cinch-lock reusable)",
+          image: "/images/products/rfid-nylon-wristband-main.jpg",
+          alt: "RFIDAK RFID nylon wristband — adjustable cinch-lock closure for multi-event reuse, premium feel for corporate team-building and outdoor retreats",
+          tagline: "Nylon webbing, cinch-lock, multi-event",
+          specs: [
+            { label: "Closure", value: "Adjustable cinch-lock (reusable)" },
+            { label: "Feel", value: "Premium nylon webbing" },
+            { label: "Retention", value: "Medium (unlock to remove)" },
+            { label: "Unit price (MOQ 10K)", value: "$0.65 – 1.35" },
+          ],
+          bestFor: [
+            "Corporate team-building retreat series",
+            "Rental / loaner program with wristband return",
+            "Premium outdoor events with multi-event reuse",
+          ],
+        },
+        {
+          label: "Fabric Woven Wristband (sibling — one-way snap)",
+          image: "/images/products/rfid-fabric-wristband-conference.jpg",
+          alt: "RFIDAK RFID fabric woven wristband — polyester woven band with one-way plastic snap closure, tamper-evident single-use for multi-day festivals and hospital patient ID",
+          tagline: "Polyester woven, one-way snap, tamper-evident",
+          specs: [
+            { label: "Closure", value: "One-way plastic snap (tamper-evident)" },
+            { label: "Feel", value: "Soft polyester weave" },
+            { label: "Retention", value: "High (cut to remove)" },
+            { label: "Unit price (MOQ 10K)", value: "$0.38 – 0.65" },
+          ],
+          bestFor: [
+            "Music festivals (3-5 day continuous wear)",
+            "Hospital patient ID (non-transferable)",
+            "Trade show tamper-evident security",
+          ],
+        },
+      ],
+      decisionTip: "If the wristband cycles across multiple events / wearers (corporate retreat fleet, rental program), nylon cinch-lock (Option A) adjusts to any wrist and reuses cleanly — the extra unit cost is justified by 5-10× reuse cycles. If the wristband is single-use with tamper security mattering (festival, hospital, trade show), fabric woven (Option B) at 40-50% lower cost is the operational standard.",
+    },
     detailSections: [
       {
         title: "Closure Options — Plastic, Metal, Velcro",
@@ -3280,6 +5801,48 @@ export const products: Product[] = [
       "Country club and private membership access — ongoing member credentials for golf, dining, and facility access with embossed club logo",
       "Theme park season pass premium tier — reusable upgrade to paper wristbands for annual pass holders and VIP visitors"
     ],
+    visualComparison: {
+      eyebrow: "Soft PVC Wristband vs Elastic Wristband — How To Choose",
+      title: "Adjustable snap-lock or stretch-on? Pick by closure reliability",
+      intro: "Both are reusable multi-month wristband formats at similar price. Soft PVC uses an adjustable snap or velcro closure — fits any wrist size, easy to remove for break. Elastic stretches on with no closure at all — simpler issuance but sized to fit specific wrist dimension. Pick by whether closure matters or wrist sizing matters.",
+      options: [
+        {
+          label: "Soft PVC Wristband (this product — snap closure)",
+          image: "/images/products/rfid-pvc-wristband-main.jpg",
+          alt: "RFIDAK RFID soft PVC wristband — premium reusable band with adjustable snap or velcro closure for theme park season passes and gym membership",
+          tagline: "Soft PVC, adjustable closure",
+          specs: [
+            { label: "Material", value: "Soft PVC (phthalate-free)" },
+            { label: "Closure", value: "Adjustable snap / velcro" },
+            { label: "Sizing", value: "Fits all wrists (adjustable)" },
+            { label: "Unit price (MOQ 1K)", value: "$0.95 – 1.95" },
+          ],
+          bestFor: [
+            "Theme park season pass premium tier",
+            "Gym / spa long-term access credentials",
+            "Hospital multi-week patient stay",
+          ],
+        },
+        {
+          label: "Elastic Wristband (sibling — stretch-on)",
+          image: "/images/products/rfid-elastic-wristband-main.jpg",
+          alt: "RFIDAK RFID elastic stretch wristband — fabric-woven elastic band that stretches over hand with no closure, pool and shower safe",
+          tagline: "Stretch-on, no closure, pool-safe",
+          specs: [
+            { label: "Material", value: "Elastic fabric (polyester + rubber)" },
+            { label: "Closure", value: "None (stretch-fit)" },
+            { label: "Sizing", value: "Sized per SKU (child / teen / adult)" },
+            { label: "Unit price (MOQ 1K)", value: "$1.25 – 2.65" },
+          ],
+          bestFor: [
+            "Water parks (stays on through pool)",
+            "Fitness clubs where closure could fail",
+            "Cruise 7-14 day aquatic environments",
+          ],
+        },
+      ],
+      decisionTip: "If adjustable fit matters (kids-to-adult programs, single SKU across all wrist sizes), soft PVC (Option A) with snap / velcro is the volume-economy default. If the wristband must stay on through pool / shower / exercise without risking closure failure, elastic (Option B) has no closure to break at 30-50% higher cost.",
+    },
     detailSections: [
       {
         title: "Embossed Decorative Patterns",
@@ -3315,6 +5878,48 @@ export const products: Product[] = [
       "Marathon and timed sporting events — UHF variant supports 3-6 m gateless timing zones at start, split, and finish",
       "Conference and trade-show single-day badges — pre-encoded with attendee profile URL for booth-staff fast-lookup"
     ],
+    visualComparison: {
+      eyebrow: "PVC Disposable vs Fabric Woven — How To Choose",
+      title: "Plastic disposable or fabric commemorative? Pick by after-event keepsake",
+      intro: "Both are single-event wristband formats but differ in whether attendees want to keep them. PVC disposable is designed to be cut off and thrown away — clinical, hygienic, zero attachment value. Fabric woven with stylish print becomes a commemorative keepsake attendees keep after the event — important for festival branding longevity.",
+      options: [
+        {
+          label: "PVC Disposable Wristband (this product — clinical)",
+          image: "/images/products/rfid-pvc-disposable-wristband-medical.jpg",
+          alt: "RFIDAK RFID PVC disposable wristband — smooth plastic band with clinical look for hospital visitors, conference single-day badges, security applications",
+          tagline: "Clean plastic, disposable, 1-day",
+          specs: [
+            { label: "Material", value: "Smooth PVC plastic" },
+            { label: "Feel", value: "Clinical, impersonal" },
+            { label: "Closure", value: "Adhesive tamper-evident seal" },
+            { label: "Unit price (MOQ 10K)", value: "$0.15 – 0.38" },
+          ],
+          bestFor: [
+            "Hospital visitor credentials (sanitary)",
+            "Security / government facility daily badges",
+            "Trade show single-day booth entry",
+          ],
+        },
+        {
+          label: "Fabric Woven Wristband (sibling — keepsake)",
+          image: "/images/products/rfid-fabric-wristband-conference.jpg",
+          alt: "RFIDAK RFID fabric woven wristband — soft polyester weave with branded print for festivals and concerts where attendees keep the band as event memorabilia",
+          tagline: "Soft woven, brand keepsake",
+          specs: [
+            { label: "Material", value: "Polyester woven" },
+            { label: "Feel", value: "Soft, fabric-like, wearable" },
+            { label: "Closure", value: "One-way plastic snap" },
+            { label: "Unit price (MOQ 10K)", value: "$0.38 – 0.65" },
+          ],
+          bestFor: [
+            "Music festivals (Coachella, Tomorrowland style)",
+            "Concerts with branded commemorative merchandise",
+            "Marathon / sports events where attendees want to keep",
+          ],
+        },
+      ],
+      decisionTip: "If the wristband is issued for hygienic / clinical / security reasons where attendee attachment is not wanted (hospital visitor, government facility), PVC disposable (Option A) at $0.15-0.38 is the clean choice. If the wristband is part of an experiential event where attendees keep it as memorabilia (festival, concert, marathon), fabric woven (Option B) at 2-3× the price delivers post-event brand exposure that the disposable can't.",
+    },
     detailSections: [
       {
         title: "Tamper-Evident Single-Use Snap Closure",
